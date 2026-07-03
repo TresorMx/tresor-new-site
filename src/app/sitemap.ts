@@ -1,13 +1,20 @@
 import type { MetadataRoute } from 'next';
 import { getActivePlazasAsync } from '@/lib/data';
+import { allDevelopmentRouteSlugs } from '@/lib/developments';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://quattroplaza.mx';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tresor.mx';
 
 export const dynamic = 'force-dynamic';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const plazas = await getActivePlazasAsync();
+  // Todos los desarrollos con ficha real bajo /desarrollos/ (Tresor + Sales
+  // Partner) — no solo los que tienen Plaza en Sanity. Si el sitemap solo
+  // trae Tresor, Google nunca descubre las fichas de Sales Partner.
+  const plazaSlugs = new Set(plazas.map((p) => p.slug));
+  const devSlugs = new Set(allDevelopmentRouteSlugs());
+  const allSlugs = Array.from(new Set([...plazaSlugs, ...devSlugs]));
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE,                 lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
@@ -22,15 +29,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/en/brokers`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
   ];
 
-  const plazaRoutes: MetadataRoute.Sitemap = plazas.flatMap((p) => [
+  const plazaRoutes: MetadataRoute.Sitemap = allSlugs.flatMap((slug) => [
     {
-      url: `${SITE}/desarrollos/${p.slug}`,
+      url: `${SITE}/desarrollos/${slug}`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.95,
     },
     {
-      url: `${SITE}/en/desarrollos/${p.slug}`,
+      url: `${SITE}/en/desarrollos/${slug}`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.75,
