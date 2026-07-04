@@ -30,9 +30,14 @@ function getClient(): SanityClient {
 
 // Proxy para que `sanityClient.fetch(...)`, `sanityClient.create(...)`, etc.
 // sigan funcionando sin tocar los call sites existentes, pero sin crear el
-// cliente real hasta el primer uso.
+// cliente real hasta el primer uso. Los métodos se bindean al cliente real
+// (no al receiver/Proxy) porque el SDK de Sanity usa campos privados de
+// clase (#a) que solo existen en la instancia real — invocarlos con `this`
+// apuntando al Proxy revienta con "Cannot read private member".
 export const sanityClient = new Proxy({} as SanityClient, {
-  get(_target, prop, receiver) {
-    return Reflect.get(getClient(), prop, receiver);
+  get(_target, prop) {
+    const client = getClient();
+    const value = Reflect.get(client, prop);
+    return typeof value === 'function' ? value.bind(client) : value;
   },
 });
