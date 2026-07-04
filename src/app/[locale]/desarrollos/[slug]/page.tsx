@@ -1,4 +1,5 @@
 import { notFound } from 'next/navigation';
+import type { CSSProperties } from 'react';
 import Image from 'next/image';
 import { Link } from '@/navigation';
 import type { Metadata } from 'next';
@@ -106,9 +107,12 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   // Precio: Tresor lo calcula del inventario en vivo; Sales Partner usa el
   // priceLabel ya formateado del card (no tiene unidades que consultar).
   const minPrice = plaza ? getMinAvailablePrice(plaza) : null;
+  // El home card sí dice "Desde $X MXN" (dev.priceLabel tal cual). En la
+  // ficha es redundante — la etiqueta "Precio base" de abajo ya lo aclara —
+  // así que se quita el prefijo solo aquí, sin tocar el campo compartido.
   const priceCell = plaza
     ? (minPrice ? `${formatMXN(minPrice)} MXN` : '—')
-    : (dev.priceLabel ?? '—');
+    : (dev.priceLabel?.replace(/^desde\s+/i, '') ?? '—');
 
   // Galería: Sanity (plaza) → modelo unificado (dev) → fallback local legado
   // (solo para los dos Quattro históricos que aún no tienen `gallery` cargada).
@@ -254,12 +258,15 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
               alt={dev.name}
               width={800}
               height={280}
-              className="w-auto drop-shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
+              className="h-[var(--logo-h-mobile)] w-auto drop-shadow-[0_12px_40px_rgba(0,0,0,0.4)] md:h-[var(--logo-h-desktop)]"
               style={{
                 // Tamaño base original (Quattro); escalado por desarrollo vía
-                // `heroLogoScale` (1 = sin cambio) — independiente del logo del card.
-                height: `clamp(${(140 * (dev.heroLogoScale ?? 1)).toFixed(0)}px, ${(26 * (dev.heroLogoScale ?? 1)).toFixed(1)}vh, ${(260 * (dev.heroLogoScale ?? 1)).toFixed(0)}px)`,
-              }}
+                // `heroLogoScale` (1 = sin cambio) — independiente del logo del
+                // card. En mobile se aplica un 30% adicional de reducción
+                // (el logo se veía sobredimensionado frente al ancho de pantalla).
+                ['--logo-h-desktop' as string]: `clamp(${(140 * (dev.heroLogoScale ?? 1)).toFixed(0)}px, ${(26 * (dev.heroLogoScale ?? 1)).toFixed(1)}vh, ${(260 * (dev.heroLogoScale ?? 1)).toFixed(0)}px)`,
+                ['--logo-h-mobile' as string]: `clamp(${(140 * (dev.heroLogoScale ?? 1) * 0.7).toFixed(0)}px, ${(26 * (dev.heroLogoScale ?? 1) * 0.7).toFixed(1)}vh, ${(260 * (dev.heroLogoScale ?? 1) * 0.7).toFixed(0)}px)`,
+              } as CSSProperties}
               priority
             />
           ) : (
