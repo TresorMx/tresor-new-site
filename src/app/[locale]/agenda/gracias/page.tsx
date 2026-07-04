@@ -2,9 +2,31 @@
 
 import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/navigation';
 import { CheckCircle2, ArrowRight, CalendarDays, MessageCircle } from 'lucide-react';
+
+// Google Calendar interpreta las fechas del template link en la zona horaria
+// pasada por `ctz` — fijamos America/Cancun (Q. Roo no observa horario de
+// verano) para que la hora agendada no dependa del huso del navegador.
+function googleCalendarUrl({
+  title, date, time, details, location,
+}: { title: string; date: string; time: string; details: string; location: string }) {
+  const [y, m, d] = date.split('-').map(Number);
+  const [h, min] = time.split(':').map(Number);
+  const pad = (n: number) => String(n).padStart(2, '0');
+  const start = `${y}${pad(m)}${pad(d)}T${pad(h)}${pad(min)}00`;
+  const end = `${y}${pad(m)}${pad(d)}T${pad(h + 1)}${pad(min)}00`;
+  const params = new URLSearchParams({
+    action: 'TEMPLATE',
+    text: title,
+    dates: `${start}/${end}`,
+    details,
+    location,
+    ctz: 'America/Cancun',
+  });
+  return `https://calendar.google.com/calendar/render?${params.toString()}`;
+}
 
 function formatDate(dateStr: string, locale: string) {
   if (!dateStr) return '';
@@ -23,13 +45,27 @@ function formatTime(t: string) {
 
 function AgendaGraciasContent() {
   const t = useTranslations('agenda');
+  const locale = useLocale();
   const sp = useSearchParams();
-  const mode  = sp.get('mode') ?? 'presencial';
-  const date  = sp.get('date') ?? '';
-  const time  = sp.get('time') ?? '';
-  const name  = sp.get('name') ?? '';
-  const plaza = sp.get('plaza') ?? '';
+  const mode    = sp.get('mode') ?? 'presencial';
+  const date    = sp.get('date') ?? '';
+  const time    = sp.get('time') ?? '';
+  const name    = sp.get('name') ?? '';
+  const plaza   = sp.get('plaza') ?? '';
+  const devName = sp.get('devName') || plaza;
   const isZoom = mode === 'zoom';
+
+  const gcalUrl = date && time
+    ? googleCalendarUrl({
+        title: locale === 'en' ? `Visit — ${devName}` : `Visita — ${devName}`,
+        date,
+        time,
+        details: locale === 'en'
+          ? `${isZoom ? 'Zoom video call' : 'In-person visit'} scheduled with Tresor Real Estate.`
+          : `${isZoom ? 'Videollamada Zoom' : 'Visita presencial'} agendada con Tresor Real Estate.`,
+        location: isZoom ? 'Zoom' : (devName || 'Tresor Real Estate'),
+      })
+    : null;
 
   return (
     <main className="min-h-screen bg-bg pb-20">
@@ -42,8 +78,8 @@ function AgendaGraciasContent() {
 
           <span className="eyebrow eyebrow-accent">{t('thankEyebrow')}</span>
 
-          <h1 className="mx-auto mt-4 max-w-3xl font-serif text-[clamp(40px,5.5vw,72px)] font-light italic leading-[1.05]">
-            {name ? `¡Listo, ${name}!` : t('thankTitle', { name: '' })}<br />
+          <h1 className="mx-auto mt-4 max-w-3xl h-display text-[clamp(36px,5vw,64px)]">
+            {t('thankTitle', { name: name ? `, ${name}` : '' })}<br />
             <span style={{ color: '#FAB413' }}>{t('thankHighlight')}</span>
           </h1>
 
@@ -55,7 +91,7 @@ function AgendaGraciasContent() {
               {date && (
                 <div className="flex items-center gap-2 text-[13px]">
                   <CalendarDays size={15} strokeWidth={1.6} className="text-accent" />
-                  <span className="font-medium capitalize">{formatDate(date, 'es')}</span>
+                  <span className="font-medium capitalize">{formatDate(date, locale)}</span>
                 </div>
               )}
               {time && (
@@ -81,12 +117,20 @@ function AgendaGraciasContent() {
             <CalendarDays size={20} strokeWidth={1.6} />
           </div>
           <div>
-            <h3 className="font-serif text-3xl font-light italic">{t('calendarTitle')}</h3>
+            <h3 className="h-display text-2xl">{t('calendarTitle')}</h3>
             <p className="mt-2 text-[14px] text-ink-3">{t('calendarDesc')}</p>
           </div>
-          <span className="mt-auto inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-caps text-ink-3">
-            {t('calendarPending')}
-          </span>
+          {gcalUrl && (
+            <a
+              href={gcalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-auto inline-flex items-center gap-2 rounded-full px-5 py-3 text-[11px] font-bold uppercase tracking-caps"
+              style={{ background: '#0E0E0E', color: '#fff' }}
+            >
+              {t('addToCalendar')} <ArrowRight size={14} strokeWidth={1.6} />
+            </a>
+          )}
         </div>
 
         {/* WhatsApp */}
@@ -101,7 +145,7 @@ function AgendaGraciasContent() {
             <MessageCircle size={20} strokeWidth={1.6} />
           </div>
           <div>
-            <h3 className="font-serif text-3xl font-light italic">{t('whatsappTitle')}</h3>
+            <h3 className="h-display text-2xl">{t('whatsappTitle')}</h3>
             <p className="mt-2 text-[14px] text-ink-3">{t('whatsappDesc')}</p>
           </div>
           <span
@@ -117,9 +161,9 @@ function AgendaGraciasContent() {
       <section className="container-wrap mt-20">
         <div className="rounded-xl bg-ink p-10 text-bg md:p-16">
           <span className="eyebrow" style={{ color: '#FAB413' }}>{t('stepsEyebrow')}</span>
-          <h2 className="mt-4 font-sans text-[clamp(32px,4vw,56px)] font-extralight tracking-tight">
+          <h2 className="mt-4 h-display text-[clamp(28px,3.6vw,48px)]">
             {t('stepsTitle')}<br />
-            <span className="font-serif italic font-light" style={{ color: '#FAB413' }}>{t('stepsHighlight')}</span>
+            <span style={{ color: '#FAB413' }}>{t('stepsHighlight')}</span>
           </h2>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             <Step n={t('step01n')} title={t('step01t')} desc={t('step01d')} />
@@ -151,7 +195,7 @@ function Step({ n, title, desc }: { n: string; title: string; desc: string }) {
   return (
     <div>
       <div className="font-mono text-[11px] uppercase tracking-caps text-accent">{n}</div>
-      <h4 className="mt-3 font-serif text-2xl font-light italic">{title}</h4>
+      <h4 className="mt-3 h-display text-xl">{title}</h4>
       <p className="mt-2 text-[14px] leading-relaxed text-white/70">{desc}</p>
     </div>
   );

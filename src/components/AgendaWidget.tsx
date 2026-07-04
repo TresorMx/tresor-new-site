@@ -27,9 +27,10 @@ function minDate() {
 
 interface AgendaWidgetProps {
   devSlug: string;
+  devName?: string;
 }
 
-export default function AgendaWidget({ devSlug }: AgendaWidgetProps) {
+export default function AgendaWidget({ devSlug, devName }: AgendaWidgetProps) {
   const t = useTranslations('agenda');
   const router = useRouter();
 
@@ -66,7 +67,7 @@ export default function AgendaWidget({ devSlug }: AgendaWidgetProps) {
       const { id } = await res.json();
       pixel.lead({ content_name: 'Agenda Visita', content_category: devSlug });
       router.push(
-        `/agenda/gracias?id=${id}&mode=${form.mode}&date=${form.date}&time=${form.time}&name=${encodeURIComponent(form.firstName)}&plaza=${devSlug}`
+        `/agenda/gracias?id=${id}&mode=${form.mode}&date=${form.date}&time=${form.time}&name=${encodeURIComponent(form.firstName)}&plaza=${devSlug}&devName=${encodeURIComponent(devName ?? devSlug)}`
       );
     } catch (e: any) {
       setErr(e.message || t('errorMsg'));

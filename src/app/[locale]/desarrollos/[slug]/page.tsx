@@ -477,7 +477,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           )}
         </div>
         {showAgendaWidget ? (
-          <AgendaWidget devSlug={slug} />
+          <AgendaWidget devSlug={slug} devName={dev.name} />
         ) : plaza ? (
           <QuoteWizard plaza={plaza} />
         ) : (
