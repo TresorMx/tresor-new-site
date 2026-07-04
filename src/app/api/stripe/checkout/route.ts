@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getStripe, RESERVATION_AMOUNT_MXN } from '@/lib/stripe';
-import { quoteStore } from '@/lib/leadStore';
+import { getQuoteFromSanity } from '@/lib/sanity/quoteStore';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
   const parsed = Schema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: 'Invalid payload' }, { status: 400 });
 
-  const quote = quoteStore.get(parsed.data.quoteId);
+  const quote = await getQuoteFromSanity(parsed.data.quoteId);
   if (!quote) return NextResponse.json({ error: 'Quote not found' }, { status: 404 });
 
   try {

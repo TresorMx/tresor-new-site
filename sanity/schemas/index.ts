@@ -3,5 +3,6 @@ import unit from './unit';
 import lead from './lead';
 import brokerDoc from './brokerDoc';
 import siteSettings from './siteSettings';
+import quote from './quote';
 
-export const schemaTypes = [plaza, unit, lead, brokerDoc, siteSettings];
+export const schemaTypes = [plaza, unit, lead, brokerDoc, siteSettings, quote];

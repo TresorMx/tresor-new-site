@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import type Stripe from 'stripe';
 import { getStripe } from '@/lib/stripe';
-import { quoteStore } from '@/lib/leadStore';
+import { updateQuoteStatus } from '@/lib/sanity/quoteStore';
 import { sendLeadToGHL } from '@/lib/ghl';
 
 export const runtime = 'nodejs';
@@ -25,11 +25,8 @@ export async function POST(req: Request) {
     const session = event.data.object as Stripe.Checkout.Session;
     const quoteId = session.metadata?.quoteId;
     if (quoteId) {
-      const quote = quoteStore.get(quoteId);
+      const quote = await updateQuoteStatus(quoteId, 'reserved');
       if (quote) {
-        quote.status = 'reserved';
-        quoteStore.set(quoteId, quote);
-
         // TODO: actualizar el local en Sanity → status: "apartado"
         // sanityClient.patch(unitDoc._id).set({ status: 'apartado' }).commit()
 

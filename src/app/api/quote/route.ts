@@ -4,7 +4,7 @@ import { Resend } from 'resend';
 import { getPlazaBySlugAsync } from '@/lib/data';
 import { saveLeadToSanity } from '@/lib/sanity/saveLead';
 import { computeQuote, type QuoteCalc } from '@/lib/quote';
-import { quoteStore } from '@/lib/leadStore';
+import { saveQuoteToSanity } from '@/lib/sanity/quoteStore';
 import { sendLeadToGHL, plazaToDesarrollo } from '@/lib/ghl';
 import { getAvailablePlans } from '@/lib/quote';
 
@@ -52,8 +52,8 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: String(e) }, { status: 400 });
   }
 
-  // Persistir (in-memory; reemplazar por Sanity en producción)
-  quoteStore.set(quoteId, {
+  // Persistir en Sanity (sobrevive entre funciones serverless distintas)
+  await saveQuoteToSanity({
     quoteId,
     createdAt: new Date().toISOString(),
     contact,

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { renderToStream } from '@react-pdf/renderer';
-import { quoteStore } from '@/lib/leadStore';
+import { getQuoteFromSanity } from '@/lib/sanity/quoteStore';
 import { QuotePDF } from '@/lib/pdf/QuotePDF';
 
 export const runtime = 'nodejs';
@@ -8,7 +8,7 @@ export const dynamic = 'force-dynamic';
 
 export async function GET(_req: Request, { params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const stored = quoteStore.get(id);
+  const stored = await getQuoteFromSanity(id);
   if (!stored) return NextResponse.json({ error: 'Quote not found' }, { status: 404 });
 
   const stream = await renderToStream(
