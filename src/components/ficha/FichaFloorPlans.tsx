@@ -105,13 +105,13 @@ export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaL
               {current.virtualTourUrl && (
                 <button
                   onClick={() => setTourOpen(current.virtualTourUrl!)}
-                  className="btn w-full border-0 bg-accent text-ink hover:brightness-95"
+                  className="btn btn-outline w-full font-semibold"
                 >
                   <Orbit size={15} strokeWidth={1.8} />
                   {tourLabel}
                 </button>
               )}
-              <Link href="#aparta" className="btn btn-outline w-full font-semibold">
+              <Link href="#aparta" className="btn w-full border-0 bg-accent text-ink hover:brightness-95">
                 <Calendar size={15} strokeWidth={1.8} />
                 {scheduleLabel}
               </Link>
