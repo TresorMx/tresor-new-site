@@ -22,9 +22,22 @@ export default function HeroVideoSequence() {
     const active = refs[0].current;
     const next = refs[1].current;
     if (!active || !next) return;
+
+    // En un refresh en frío (sobre todo mobile / red lenta) el video aún no
+    // tiene suficiente data cuando llamamos .play() justo después de
+    // .load() — la promesa falla silenciosa y el video nunca arranca (se
+    // queda solo la foto de respaldo). Reintenta en cuanto el propio video
+    // avisa que ya puede reproducirse, en vez de asumir que .play() gana la
+    // carrera contra la descarga.
+    const tryPlay = (video: HTMLVideoElement) => {
+      const attempt = () => video.play().catch(() => {});
+      if (video.readyState >= 2) attempt();
+      else video.addEventListener('canplay', attempt, { once: true });
+    };
+
     active.src = SEQUENCE[0];
     active.load();
-    active.play().catch(() => {});
+    tryPlay(active);
     next.src = SEQUENCE[1];
     next.load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
