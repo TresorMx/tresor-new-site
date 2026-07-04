@@ -99,7 +99,14 @@ export async function getActivePlazasAsync(): Promise<Plaza[]> {
 }
 
 export async function getSiteSettings() {
-  const fallback = { showAgendaWidget: false, agendaEyebrow: '— Agenda tu visita', agendaTitle1: 'Agenda', agendaTitle2: 'tu visita', agendaDesc: 'Elige fecha, hora y modalidad. Te confirmamos en menos de 24 hrs.' };
+  const fallback = {
+    showAgendaWidget: false,
+    agendaEyebrow: '— Agenda tu visita', agendaEyebrowEn: '— Schedule your visit',
+    agendaTitle1: 'Agenda', agendaTitle1En: 'Schedule',
+    agendaTitle2: 'tu visita', agendaTitle2En: 'your visit',
+    agendaDesc: 'Elige fecha, hora y modalidad. Te confirmamos en menos de 24 hrs.',
+    agendaDescEn: 'Choose a date, time and format. We’ll confirm within 24 hours.',
+  };
   if (!USE_SANITY) return fallback;
   try {
     const { fetchSiteSettings } = await import('./sanity/queries');

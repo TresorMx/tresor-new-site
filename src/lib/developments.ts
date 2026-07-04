@@ -154,7 +154,7 @@ export interface Development {
                                      // (1 = base). Independiente de `logoScale`
                                      // (esa es para el card). Ajustable por
                                      // desarrollo — en Sanity será un campo.
-  highlights?: { label: string; labelEn?: string; value: string }[]; // barra de detalle
+  highlights?: { label: string; labelEn?: string; value: string; valueEn?: string }[]; // barra de detalle
   tagline?: I18nText;              // subtítulo corto
   projectTitle?: I18nText;         // título de la sección "El Proyecto" (parte sólida)
   projectTitleMuted?: I18nText;    // remate del título en gris (patrón del home:
@@ -380,9 +380,9 @@ export const developments: Development[] = [
     heroLogoScale: 0.65,
     tagline: { es: 'Vive frente al paseo Lausana y el campo de golf' },
     highlights: [
-      { label: 'Ubicación', value: 'Lausana Residencial' },
-      { label: 'Tipología', value: 'Departamentos' },
-      { label: 'Superficie', value: 'Desde 76 m²' },
+      { label: 'Ubicación', labelEn: 'Location', value: 'Lausana Residencial' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 76 m²', valueEn: 'From 76 m²' },
     ],
     gallery: [
       '/desarrollos/olivia/5.-Fachada-frontal.jpg',

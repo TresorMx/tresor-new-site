@@ -88,7 +88,7 @@ export async function generateMetadata({
 
 export default async function PlazaPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
   const { slug, locale } = await params;
-  const [dev, plaza, { showAgendaWidget, agendaEyebrow, agendaTitle1, agendaTitle2, agendaDesc }] = await Promise.all([
+  const [dev, plaza, siteSettings] = await Promise.all([
     getDevelopment(slug), // modelo unificado — fuente primaria, requerido
     getPlazaBySlugAsync(slug), // solo existe para Tresor; opcional (Sales Partner no lo tiene)
     getSiteSettings(),
@@ -103,6 +103,11 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   // Sales Partner como "Olivia Wow Condos"), el nombre queda intacto.
   const displayName = dev.name.replace(/\s*Plaza Center\s*/, ' ').replace(/\s+/g, ' ').trim();
   const isEs = locale !== 'en';
+  const { showAgendaWidget } = siteSettings;
+  const agendaEyebrow = isEs ? siteSettings.agendaEyebrow : siteSettings.agendaEyebrowEn;
+  const agendaTitle1  = isEs ? siteSettings.agendaTitle1  : siteSettings.agendaTitle1En;
+  const agendaTitle2  = isEs ? siteSettings.agendaTitle2  : siteSettings.agendaTitle2En;
+  const agendaDesc    = isEs ? siteSettings.agendaDesc    : siteSettings.agendaDescEn;
 
   // Precio: Tresor lo calcula del inventario en vivo; Sales Partner usa el
   // priceLabel ya formateado del card (no tiene unidades que consultar).
@@ -291,7 +296,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
                 style={{ borderColor: '#e2e2e1' }}
               >
                 <div className="truncate text-[clamp(17px,1.4vw,20px)] font-normal leading-tight tracking-tight">
-                  {h.value}
+                  {isEs ? h.value : (h.valueEn ?? h.value)}
                 </div>
                 <div className="mt-1.5 truncate text-[10px] font-semibold uppercase tracking-[0.22em] text-ink-3">
                   {isEs ? h.label : (h.labelEn ?? h.label)}

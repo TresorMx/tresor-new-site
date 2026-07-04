@@ -120,22 +120,40 @@ export async function fetchPlazaBySlug(slug: string): Promise<Plaza | null> {
 export interface SiteSettings {
   showAgendaWidget: boolean;
   agendaEyebrow: string;
+  agendaEyebrowEn: string;
   agendaTitle1: string;
+  agendaTitle1En: string;
   agendaTitle2: string;
+  agendaTitle2En: string;
   agendaDesc: string;
+  agendaDescEn: string;
 }
 
 export async function fetchSiteSettings(): Promise<SiteSettings> {
   const raw = await sanityClient.fetch(
-    `*[_type == "siteSettings" && _id == "siteSettings"][0]{ showAgendaWidget, agendaEyebrow, agendaTitle1, agendaTitle2, agendaDesc }`,
+    `*[_type == "siteSettings" && _id == "siteSettings"][0]{
+      showAgendaWidget,
+      agendaEyebrow, agendaEyebrowEn,
+      agendaTitle1, agendaTitle1En,
+      agendaTitle2, agendaTitle2En,
+      agendaDesc, agendaDescEn
+    }`,
     {},
     { cache: 'no-store' }
   );
+  const agendaEyebrow = raw?.agendaEyebrow ?? '— Agenda tu visita';
+  const agendaTitle1  = raw?.agendaTitle1  ?? 'Agenda';
+  const agendaTitle2  = raw?.agendaTitle2  ?? 'tu visita';
+  const agendaDesc    = raw?.agendaDesc    ?? 'Elige fecha, hora y modalidad. Te confirmamos en menos de 24 hrs.';
   return {
     showAgendaWidget: raw?.showAgendaWidget ?? false,
-    agendaEyebrow:    raw?.agendaEyebrow    ?? '— Agenda tu visita',
-    agendaTitle1:     raw?.agendaTitle1     ?? 'Agenda',
-    agendaTitle2:     raw?.agendaTitle2     ?? 'tu visita',
-    agendaDesc:       raw?.agendaDesc       ?? 'Elige fecha, hora y modalidad. Te confirmamos en menos de 24 hrs.',
+    agendaEyebrow,
+    agendaEyebrowEn: raw?.agendaEyebrowEn || agendaEyebrow,
+    agendaTitle1,
+    agendaTitle1En: raw?.agendaTitle1En || agendaTitle1,
+    agendaTitle2,
+    agendaTitle2En: raw?.agendaTitle2En || agendaTitle2,
+    agendaDesc,
+    agendaDescEn: raw?.agendaDescEn || agendaDesc,
   };
 }

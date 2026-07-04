@@ -2,10 +2,11 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { CalendarDays, Video, MapPin, ArrowRight, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { pixel } from '@/lib/pixel';
+import DatePicker from '@/components/ui/DatePicker';
 
 const TIME_SLOTS = [
   '09:00', '10:00', '11:00', '12:00',
@@ -32,6 +33,7 @@ interface AgendaWidgetProps {
 
 export default function AgendaWidget({ devSlug, devName }: AgendaWidgetProps) {
   const t = useTranslations('agenda');
+  const locale = useLocale();
   const router = useRouter();
 
   const [form, setForm] = useState({
@@ -89,12 +91,12 @@ export default function AgendaWidget({ devSlug, devName }: AgendaWidgetProps) {
         <div className="grid gap-6 sm:grid-cols-2">
           <label className="field">
             <span className="field-label">{t('firstName')}</span>
-            <input required type="text" className="field-input" placeholder="Tu nombre"
+            <input required type="text" className="field-input" placeholder={t('firstNamePlaceholder')}
               value={form.firstName} onChange={(e) => set('firstName', e.target.value)} />
           </label>
           <label className="field">
             <span className="field-label">{t('lastName')}</span>
-            <input required type="text" className="field-input" placeholder="Tu apellido"
+            <input required type="text" className="field-input" placeholder={t('lastNamePlaceholder')}
               value={form.lastName} onChange={(e) => set('lastName', e.target.value)} />
           </label>
         </div>
@@ -103,12 +105,12 @@ export default function AgendaWidget({ devSlug, devName }: AgendaWidgetProps) {
         <div className="mt-6 grid gap-6 sm:grid-cols-2">
           <label className="field">
             <span className="field-label">{t('email')}</span>
-            <input required type="email" className="field-input" placeholder="tu@correo.com"
+            <input required type="email" className="field-input" placeholder={t('emailPlaceholder')}
               value={form.email} onChange={(e) => set('email', e.target.value)} />
           </label>
           <label className="field">
             <span className="field-label">{t('phone')}</span>
-            <input required type="tel" className="field-input" placeholder="+52 998 404 5602"
+            <input required type="tel" className="field-input" placeholder={t('phonePlaceholder')}
               value={form.phone} onChange={(e) => set('phone', e.target.value)} />
           </label>
         </div>
@@ -150,8 +152,12 @@ export default function AgendaWidget({ devSlug, devName }: AgendaWidgetProps) {
             <span className="field-label flex items-center gap-1.5">
               <CalendarDays size={11} strokeWidth={2} /> {t('dateLabel')}
             </span>
-            <input required type="date" min={minDate()} className="field-input cursor-pointer"
-              value={form.date} onChange={(e) => set('date', e.target.value)} />
+            <DatePicker
+              value={form.date}
+              onChange={(v) => set('date', v)}
+              minDate={minDate()}
+              locale={locale}
+            />
           </label>
         </div>
 
