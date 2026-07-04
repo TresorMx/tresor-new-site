@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef, useId, useEffect, CSSProperties } from 'react';
+import { useRef, useId, useEffect, useState, CSSProperties } from 'react';
 import { animate, useMotionValue, AnimationPlaybackControls } from 'framer-motion';
 
 interface AnimationConfig {
@@ -39,10 +39,24 @@ export function EtherealShadow({
 }: EtherealShadowProps) {
   const rawId = useId();
   const id = `shadowoverlay-${rawId.replace(/:/g, '')}`;
-  const animationEnabled = animation && animation.scale > 0;
   const feColorMatrixRef = useRef<SVGFEColorMatrixElement>(null);
   const hueRotateMotionValue = useMotionValue(180);
   const hueRotateAnimation = useRef<AnimationPlaybackControls | null>(null);
+
+  // El filtro SVG (feTurbulence + feDisplacementMap) animado cuadro a cuadro
+  // es carísimo de recalcular — en iOS Safari corre por CPU, no por GPU, y
+  // compite por el hilo principal con el scroll (causa parpadeos y jank
+  // cuando este componente vive dentro de un contenedor `sticky`, como el
+  // hero). Se desactiva en mobile y con `prefers-reduced-motion`; el
+  // fallback (sin filtro, solo color + noise) ya existía en el componente.
+  const [effectsEnabled, setEffectsEnabled] = useState(false);
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 769px)').matches;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setEffectsEnabled(desktop && !reduced);
+  }, []);
+
+  const animationEnabled = animation && animation.scale > 0 && effectsEnabled;
 
   const displacementScale = animation ? mapRange(animation.scale, 1, 100, 20, 100) : 0;
   const animationDuration = animation ? mapRange(animation.speed, 1, 100, 1000, 50) : 1;
