@@ -28,6 +28,7 @@ function AgendaGraciasContent() {
   const date  = sp.get('date') ?? '';
   const time  = sp.get('time') ?? '';
   const name  = sp.get('name') ?? '';
+  const plaza = sp.get('plaza') ?? '';
   const isZoom = mode === 'zoom';
 
   return (
@@ -134,9 +135,11 @@ function AgendaGraciasContent() {
             <Link href="/" className="btn btn-lg" style={{ background: '#FAB413', color: '#0E0E0E' }}>
               {t('backHome')}
             </Link>
-            <Link href="/desarrollos/long-island" className="btn btn-lg btn-ghost-light">
-              {t('viewLongIsland')} <ArrowRight size={14} strokeWidth={1.6} />
-            </Link>
+            {plaza && (
+              <Link href={`/desarrollos/${plaza}`} className="btn btn-lg btn-ghost-light">
+                {t('viewDevelopment')} <ArrowRight size={14} strokeWidth={1.6} />
+              </Link>
+            )}
           </div>
         </div>
       </section>

@@ -438,7 +438,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
       {/* ═════ 6. COTIZADOR / AGENDA (Tresor) — RESERVA RÁPIDA (Sales Partner) ═════ */}
       <section className={stripe.cta ? 'bg-[#FAFAFA]' : 'bg-white'} id="aparta">
         <div className="container-wrap pb-0 pt-20 text-center md:pt-28">
-          {plaza && showAgendaWidget ? (
+          {showAgendaWidget ? (
             <>
               <span className="eyebrow eyebrow-accent font-bold">{agendaEyebrow}</span>
               <h2 className="mx-auto mt-5 h-display max-w-5xl text-[clamp(24px,3.2vw,48px)]">
@@ -464,20 +464,22 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
             </>
           ) : (
             <>
-              <span className="eyebrow eyebrow-accent font-bold">{agendaEyebrow}</span>
+              <span className="eyebrow eyebrow-accent font-bold">{t('reservaEyebrow')}</span>
               <h2 className="mx-auto mt-5 h-display max-w-5xl text-[clamp(24px,3.2vw,48px)]">
-                <span className="text-ink-3">{agendaTitle1}</span>
+                <span className="text-ink-3">{t('reservaTitle1')}</span>
                 <br />
-                {agendaTitle2} {displayName}
+                {displayName}
               </h2>
               <p className="mx-auto mt-5 max-w-xl text-[15px] font-light text-ink-3">
-                {agendaDesc}
+                {t('reservaDesc')}
               </p>
             </>
           )}
         </div>
-        {plaza ? (
-          showAgendaWidget ? <AgendaWidget plaza={plaza} /> : <QuoteWizard plaza={plaza} />
+        {showAgendaWidget ? (
+          <AgendaWidget devSlug={slug} />
+        ) : plaza ? (
+          <QuoteWizard plaza={plaza} />
         ) : (
           <ReservaRapidaForm
             devSlug={slug}

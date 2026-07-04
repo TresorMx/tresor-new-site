@@ -95,7 +95,10 @@
     "apartaDesc": "Secure payment via Stripe (card · OXXO · SPEI). Legal advice included. Quote, download the PDF and reserve in one session.",
     "agendaTitle1": "Schedule",
     "agendaTitle2": "your visit",
-    "agendaDesc": "Choose a date, time and format. We'll confirm within 24 hours."
+    "agendaDesc": "Choose a date, time and format. We'll confirm within 24 hours.",
+    "reservaEyebrow": "— Reserve your spot",
+    "reservaTitle1": "Reserve your spot at",
+    "reservaDesc": "Leave us your details and an advisor will reach out with all the information."
   },
   "quote": {
     "title": "Quote your unit",
@@ -192,8 +195,8 @@
   },
   "agenda": {
     "eyebrow": "— Schedule a visit",
-    "title": "Meet Quattro in person",
-    "desc": "Book your appointment and an advisor will show you the available units, answer your questions and hand you all the commercial information you need.",
+    "title": "Schedule your visit in person",
+    "desc": "Book your appointment and an advisor will show you the available options, answer your questions and hand you all the commercial information you need.",
     "firstName": "First name *",
     "lastName": "Last name *",
     "email": "Email *",
@@ -207,7 +210,7 @@
     "plazaAmbosDesc": "I want to learn about both options",
     "modalityLabel": "Visit format *",
     "presencial": "In-person visit",
-    "presencialDesc": "At the plaza site. We'll show you the available units live.",
+    "presencialDesc": "At the development site. We'll show you the available options live.",
     "zoom": "Zoom video call",
     "zoomDesc": "From anywhere. Virtual tour + live commercial presentation.",
     "dateLabel": "Preferred date *",
@@ -234,7 +237,7 @@
     "step01d": "An advisor will contact you within 2 hours to confirm your appointment and send you the details.",
     "step02nPresencial": "02",
     "step02tPresencial": "Site visit",
-    "step02dPresencial": "We'll be waiting at the plaza. A dedicated advisor will walk you through all available units.",
+    "step02dPresencial": "We'll be waiting at the development. A dedicated advisor will walk you through all available options.",
     "step02nZoom": "02",
     "step02tZoom": "Video call",
     "step02dZoom": "You'll receive the Zoom link in advance. Virtual tour + live commercial presentation.",
@@ -242,7 +245,7 @@
     "step03t": "Your proposal",
     "step03d": "After the visit we'll hand you full commercial information: prices, floor plans and payment plan.",
     "backHome": "Back to home",
-    "viewLongIsland": "View Long Island",
+    "viewDevelopment": "View development",
     "modePresencial": "In-person",
     "modeZoom": "Zoom"
   },

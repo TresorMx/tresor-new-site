@@ -7,14 +7,22 @@
  * Por ahora el adaptador hace fallback silencioso a un log + email.
  */
 
-/** Mapea slug de plaza al valor exacto del campo GHL desarrollo_de_inters */
+/**
+ * Mapea slug de desarrollo al valor exacto del campo GHL desarrollo_de_inters.
+ * Ese custom field es un picklist de GHL con opciones predefinidas — hoy solo
+ * tiene las de Quattro. Para un desarrollo sin opción configurada ahí, cae al
+ * slug crudo (en vez de mentir con "proyectos_quattro"); GHL simplemente no
+ * lo mostrará en ese picklist hasta que se agregue la opción manualmente en
+ * el CRM. El enrutamiento real por desarrollo debe hacerse vía `tags`
+ * (string libre, sin este límite), no vía este custom field.
+ */
 export function plazaToDesarrollo(plaza: string): string {
   const map: Record<string, string> = {
     'gardens':     'quattro_plaza_gardens',
     'long-island': 'quattro_plaza_long_island',
     'ambos':       'proyectos_quattro',
   };
-  return map[plaza] ?? 'proyectos_quattro';
+  return map[plaza] ?? plaza;
 }
 
 export interface GHLLead {

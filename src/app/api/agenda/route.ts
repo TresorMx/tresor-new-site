@@ -59,7 +59,7 @@ export async function POST(req: NextRequest) {
       email,
       phone,
       source: 'agenda',
-      tags: ['Ads Quattro', 'Cita Quattro'],
+      tags: ['cita', plaza],
       customFields: {
         'desarrollo_de_inters': plazaToDesarrollo(plaza),
         'fuente_de_contacto': 'digital',

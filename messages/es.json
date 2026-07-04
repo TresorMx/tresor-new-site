@@ -95,7 +95,10 @@
     "apartaDesc": "Pago seguro con Stripe (tarjeta · OXXO · SPEI). Asesoría legal incluida. Cotiza, descarga el PDF y aparta en una sola sesión.",
     "agendaTitle1": "Agenda",
     "agendaTitle2": "tu visita",
-    "agendaDesc": "Elige fecha, hora y modalidad. Te confirmamos en menos de 24 hrs."
+    "agendaDesc": "Elige fecha, hora y modalidad. Te confirmamos en menos de 24 hrs.",
+    "reservaEyebrow": "— Reserva tu lugar",
+    "reservaTitle1": "Reserva tu lugar en",
+    "reservaDesc": "Déjanos tus datos y un asesor te contactará con toda la información."
   },
   "quote": {
     "title": "Cotiza tu local",
@@ -192,8 +195,8 @@
   },
   "agenda": {
     "eyebrow": "— Agenda tu visita",
-    "title": "Conoce Quattro en persona",
-    "desc": "Reserva tu cita y un asesor te mostrará los locales disponibles, responderá tus dudas y te entregará la información comercial que necesitas.",
+    "title": "Agenda tu visita en persona",
+    "desc": "Reserva tu cita y un asesor te mostrará las opciones disponibles, responderá tus dudas y te entregará la información comercial que necesitas.",
     "firstName": "Nombre *",
     "lastName": "Apellido *",
     "email": "Email *",
@@ -207,7 +210,7 @@
     "plazaAmbosDesc": "Quiero conocer las dos opciones",
     "modalityLabel": "Modalidad de la visita *",
     "presencial": "Visita presencial",
-    "presencialDesc": "En el sitio de la plaza. Te mostramos los locales en vivo.",
+    "presencialDesc": "En el sitio del desarrollo. Te mostramos las opciones disponibles en vivo.",
     "zoom": "Videollamada Zoom",
     "zoomDesc": "Desde donde estés. Recorrido virtual + presentación comercial.",
     "dateLabel": "Fecha preferida *",
@@ -234,7 +237,7 @@
     "step01d": "Un asesor te contacta en menos de 2 horas para confirmar tu cita y enviarte los detalles.",
     "step02nPresencial": "02",
     "step02tPresencial": "Visita al sitio",
-    "step02dPresencial": "Te esperamos en la plaza. Recorrido por los locales disponibles con tu asesor dedicado.",
+    "step02dPresencial": "Te esperamos en el desarrollo. Recorrido por las opciones disponibles con tu asesor dedicado.",
     "step02nZoom": "02",
     "step02tZoom": "Videollamada",
     "step02dZoom": "Recibirás el enlace de Zoom con anticipación. Recorrido virtual + presentación comercial en vivo.",
@@ -242,7 +245,7 @@
     "step03t": "Tu propuesta",
     "step03d": "Al final de la visita te entregamos información comercial completa: precios, floor plans y plan de pagos.",
     "backHome": "Volver al inicio",
-    "viewLongIsland": "Ver Long Island",
+    "viewDevelopment": "Ver desarrollo",
     "modePresencial": "Presencial",
     "modeZoom": "Zoom"
   },

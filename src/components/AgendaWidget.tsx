@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 import { CalendarDays, Video, MapPin, ArrowRight, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { pixel } from '@/lib/pixel';
-import type { Plaza } from '@/lib/types';
 
 const TIME_SLOTS = [
   '09:00', '10:00', '11:00', '12:00',
@@ -27,10 +26,10 @@ function minDate() {
 }
 
 interface AgendaWidgetProps {
-  plaza: Plaza;
+  devSlug: string;
 }
 
-export default function AgendaWidget({ plaza }: AgendaWidgetProps) {
+export default function AgendaWidget({ devSlug }: AgendaWidgetProps) {
   const t = useTranslations('agenda');
   const router = useRouter();
 
@@ -61,13 +60,13 @@ export default function AgendaWidget({ plaza }: AgendaWidgetProps) {
       const res = await fetch('/api/agenda', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, plaza: plaza.slug }),
+        body: JSON.stringify({ ...form, plaza: devSlug }),
       });
       if (!res.ok) throw new Error(t('errorMsg'));
       const { id } = await res.json();
-      pixel.lead({ content_name: 'Agenda Visita', content_category: plaza.slug });
+      pixel.lead({ content_name: 'Agenda Visita', content_category: devSlug });
       router.push(
-        `/agenda/gracias?id=${id}&mode=${form.mode}&date=${form.date}&time=${form.time}&name=${encodeURIComponent(form.firstName)}&plaza=${plaza.slug}`
+        `/agenda/gracias?id=${id}&mode=${form.mode}&date=${form.date}&time=${form.time}&name=${encodeURIComponent(form.firstName)}&plaza=${devSlug}`
       );
     } catch (e: any) {
       setErr(e.message || t('errorMsg'));
