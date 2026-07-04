@@ -4,5 +4,6 @@ import lead from './lead';
 import brokerDoc from './brokerDoc';
 import siteSettings from './siteSettings';
 import quote from './quote';
+import reservation from './reservation';
 
-export const schemaTypes = [plaza, unit, lead, brokerDoc, siteSettings, quote];
+export const schemaTypes = [plaza, unit, lead, brokerDoc, siteSettings, quote, reservation];

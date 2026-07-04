@@ -5,7 +5,7 @@ export default defineType({
   title: 'Lead',
   type: 'document',
   fields: [
-    defineField({ name: 'source', title: 'Origen', type: 'string', options: { list: ['form', 'chatbot', 'broker', 'cotizacion'] } }),
+    defineField({ name: 'source', title: 'Origen', type: 'string', options: { list: ['form', 'chatbot', 'broker', 'cotizacion', 'agenda', 'rewards', 'reservation'] } }),
     defineField({ name: 'fullName', title: 'Nombre', type: 'string' }),
     defineField({ name: 'email', title: 'Email', type: 'string' }),
     defineField({ name: 'phone', title: 'Teléfono', type: 'string' }),

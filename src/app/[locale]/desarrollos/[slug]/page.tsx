@@ -14,12 +14,13 @@ import FloorPlans from '@/components/FloorPlans';
 import LocationMap from '@/components/LocationMap';
 import QuoteWizard from '@/components/QuoteWizard';
 import AgendaWidget from '@/components/AgendaWidget';
+import AgendaReservaTabs from '@/components/AgendaReservaTabs';
 import PixelViewContent from '@/components/PixelViewContent';
 import FichaDeveloper from '@/components/ficha/FichaDeveloper';
 import FichaAmenities from '@/components/ficha/FichaAmenities';
 import FichaFloorPlans from '@/components/ficha/FichaFloorPlans';
 import ReservaRapidaForm from '@/components/ficha/ReservaRapidaForm';
-import { getDevelopment, developers, allDevelopmentRouteSlugs } from '@/lib/developments';
+import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount } from '@/lib/developments';
 
 export async function generateStaticParams() {
   // Tresor (con ficha en Sanity) + Sales Partner (solo developments.ts) —
@@ -373,9 +374,21 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
                     </Link>
                   )}
                 </>
+              ) : dev.reservationEnabled ? (
+                <>
+                  <Link href="#aparta" className="btn btn-outline font-semibold">
+                    {isEs ? 'Agendar una visita' : 'Schedule a visit'}
+                  </Link>
+                  <Link href="#reservar" className="btn border-0 bg-accent text-ink hover:brightness-95">
+                    {isEs
+                      ? `Aparta ahora con ${formatMXN(getReservationAmount(dev))} MXN`
+                      : `Reserve now with ${formatMXN(getReservationAmount(dev))} MXN`}
+                    <ArrowRight size={14} strokeWidth={1.6} />
+                  </Link>
+                </>
               ) : (
                 <Link href="#aparta" className="btn border-0 bg-accent text-ink hover:brightness-95">
-                  {(isEs ? dev.ctaLabels?.reserve?.es : dev.ctaLabels?.reserve?.en ?? dev.ctaLabels?.reserve?.es) ?? 'Reservar mi lugar'}
+                  {isEs ? 'Agendar una visita' : 'Schedule a visit'}
                   <ArrowRight size={14} strokeWidth={1.6} />
                 </Link>
               )}
@@ -449,61 +462,76 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
         />
       )}
 
-      {/* ═════ 6. COTIZADOR / AGENDA (Tresor) — RESERVA RÁPIDA (Sales Partner) ═════ */}
+      {/* ═════ 6. APARTADO EN LÍNEA (tabs Agenda/Aparta) — COTIZADOR / AGENDA
+              (Tresor) — RESERVA RÁPIDA (Sales Partner sin apartado) ═════ */}
       <section className={stripe.cta ? 'bg-[#FAFAFA]' : 'bg-white'} id="aparta">
-        <div className="container-wrap pb-0 pt-20 text-center md:pt-28">
-          {showAgendaWidget ? (
-            <>
-              <span className="eyebrow eyebrow-accent font-bold">{agendaEyebrow}</span>
-              <h2 className="mx-auto mt-5 h-display max-w-5xl text-[clamp(24px,3.2vw,48px)]">
-                <span className="text-ink-3">{agendaTitle1}</span>
-                <br />
-                {agendaTitle2} {displayName}
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl text-[15px] font-light text-ink-3">
-                {agendaDesc}
-              </p>
-            </>
-          ) : plaza ? (
-            <>
-              <span className="eyebrow eyebrow-accent font-bold">{t('apartaEyebrow')}</span>
-              <h2 className="mx-auto mt-5 h-display max-w-3xl text-[clamp(24px,3.2vw,48px)]">
-                <span className="text-ink-3">{t('apartaTitle1')}</span>
-                <br />
-                {t('apartaTitle2')}
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl text-[15px] font-light text-ink-3">
-                {t('apartaDesc')}
-              </p>
-            </>
-          ) : (
-            <>
-              <span className="eyebrow eyebrow-accent font-bold">{t('reservaEyebrow')}</span>
-              <h2 className="mx-auto mt-5 h-display max-w-5xl text-[clamp(24px,3.2vw,48px)]">
-                <span className="text-ink-3">{t('reservaTitle1')}</span>
-                <br />
-                {displayName}
-              </h2>
-              <p className="mx-auto mt-5 max-w-xl text-[15px] font-light text-ink-3">
-                {t('reservaDesc')}
-              </p>
-            </>
-          )}
-        </div>
-        {showAgendaWidget ? (
-          <AgendaWidget devSlug={slug} devName={dev.name} />
-        ) : plaza ? (
-          <QuoteWizard plaza={plaza} />
-        ) : (
-          <ReservaRapidaForm
+        {dev.reservationEnabled ? (
+          <AgendaReservaTabs
             devSlug={slug}
             devName={dev.name}
-            developerName={developer.name}
-            submitLabel={
-              (isEs ? dev.ctaLabels?.reserve?.es : dev.ctaLabels?.reserve?.en ?? dev.ctaLabels?.reserve?.es) ??
-              (isEs ? 'Reservar mi lugar' : 'Reserve my spot')
-            }
+            reservationAmount={getReservationAmount(dev)}
+            agendaTitle1={agendaTitle1}
+            agendaTitle2={agendaTitle2}
+            agendaDesc={agendaDesc}
+            displayName={displayName}
           />
+        ) : (
+          <>
+            <div className="container-wrap pb-0 pt-20 text-center md:pt-28">
+              {showAgendaWidget ? (
+                <>
+                  <span className="eyebrow eyebrow-accent font-bold">{agendaEyebrow}</span>
+                  <h2 className="mx-auto mt-5 h-display max-w-5xl text-[clamp(24px,3.2vw,48px)]">
+                    <span className="text-ink-3">{agendaTitle1}</span>
+                    <br />
+                    {agendaTitle2} {displayName}
+                  </h2>
+                  <p className="mx-auto mt-5 max-w-xl text-[15px] font-light text-ink-3">
+                    {agendaDesc}
+                  </p>
+                </>
+              ) : plaza ? (
+                <>
+                  <span className="eyebrow eyebrow-accent font-bold">{t('apartaEyebrow')}</span>
+                  <h2 className="mx-auto mt-5 h-display max-w-3xl text-[clamp(24px,3.2vw,48px)]">
+                    <span className="text-ink-3">{t('apartaTitle1')}</span>
+                    <br />
+                    {t('apartaTitle2')}
+                  </h2>
+                  <p className="mx-auto mt-5 max-w-xl text-[15px] font-light text-ink-3">
+                    {t('apartaDesc')}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <span className="eyebrow eyebrow-accent font-bold">{t('reservaEyebrow')}</span>
+                  <h2 className="mx-auto mt-5 h-display max-w-5xl text-[clamp(24px,3.2vw,48px)]">
+                    <span className="text-ink-3">{t('reservaTitle1')}</span>
+                    <br />
+                    {displayName}
+                  </h2>
+                  <p className="mx-auto mt-5 max-w-xl text-[15px] font-light text-ink-3">
+                    {t('reservaDesc')}
+                  </p>
+                </>
+              )}
+            </div>
+            {showAgendaWidget ? (
+              <AgendaWidget devSlug={slug} devName={dev.name} />
+            ) : plaza ? (
+              <QuoteWizard plaza={plaza} />
+            ) : (
+              <ReservaRapidaForm
+                devSlug={slug}
+                devName={dev.name}
+                developerName={developer.name}
+                submitLabel={
+                  (isEs ? dev.ctaLabels?.reserve?.es : dev.ctaLabels?.reserve?.en ?? dev.ctaLabels?.reserve?.es) ??
+                  (isEs ? 'Reservar mi lugar' : 'Reserve my spot')
+                }
+              />
+            )}
+          </>
         )}
       </section>
     </>

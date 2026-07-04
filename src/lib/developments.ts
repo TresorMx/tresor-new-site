@@ -183,7 +183,8 @@ export interface Development {
 
   // ─── Toggles explícitos (el dato existe pero la feature puede estar apagada) ──
   quoterEnabled?: boolean;         // el cotizador está listo (hoy = showAgendaWidget invertido)
-  reservationEnabled?: boolean;    // apartado en línea disponible
+  reservationEnabled?: boolean;    // apartado en línea disponible (enciende el tab "Aparta ahora")
+  reservationAmount?: number;      // monto del apartado en MXN. Si no se define, ver getReservationAmount()
 
   // ─── Textos de CTA — override opcional con default sensato. La mayoría de
   // desarrollos nunca llena esto; existe para cuando un botón necesita decir
@@ -375,6 +376,9 @@ export const developments: Development[] = [
     priceLabel: 'Desde $2,613,000 MXN',
     description:
       'Preventa de departamentos desde 76 m² con vistas espectaculares al paseo Lausana y al campo de golf, en un entorno residencial de excepción en Cancún.',
+    // ── Apartado en línea (piloto Sales Partner) ──
+    reservationEnabled: true,
+    reservationAmount: 25000,
     // ── Capa de ficha (piloto Sales Partner) ──
     heroRender: '/desarrollos/olivia/10.-Parque-urbano.jpg', // panorámica real (1920x1037)
     heroLogoScale: 0.65,
@@ -835,6 +839,20 @@ export async function withLivePrice(dev: Development): Promise<Development> {
 
 export async function withLivePrices(devs: Development[]): Promise<Development[]> {
   return Promise.all(devs.map(withLivePrice));
+}
+
+// Monto del apartado (MXN). Se resuelve así, en orden:
+//   1) `reservationAmount` explícito del desarrollo (override)
+//   2) $50,000 si es un desarrollo propio de Tresor (relationship 'develop')
+//   3) $25,000 para todo lo demás (Sales Partner)
+// IMPORTANTE: el monto SIEMPRE se calcula server-side desde este helper — el
+// cliente nunca lo envía. Si se confiara en un monto enviado por el navegador,
+// alguien podría apartar por $1.
+export function getReservationAmount(dev: Development): number {
+  if (typeof dev.reservationAmount === 'number' && dev.reservationAmount > 0) {
+    return dev.reservationAmount;
+  }
+  return dev.relationship === 'develop' ? 50000 : 25000;
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
