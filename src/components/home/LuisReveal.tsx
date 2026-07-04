@@ -53,7 +53,7 @@ export default function LuisReveal() {
         }}
       >
         <Image
-          src="/luissection.png"
+          src="/luissection.jpg"
           alt="Luis Castillo, Director Comercial — Tresor Real Estate"
           width={760}
           height={900}

@@ -648,8 +648,7 @@ export const developments: Development[] = [
   },
 
   // ── SALES PARTNER · Urban Homes ──
-  // Placeholders: foto reutilizada; precio y descripción pendientes. Valmira sin
-  // logo (carpeta vacía). Logos .avif/.png: verificar que se vean sobre la foto.
+  // Placeholders: foto reutilizada; precio y descripción pendientes.
   {
     slug: 'blume-urban',
     name: 'Blume',
@@ -743,10 +742,10 @@ export const developments: Development[] = [
     type: 'Residencial',
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
-    image: '/desarrollos/valmira/portadaValmira.jpg',
+    image: '/desarrollos/Valmira/portadaValmira.jpg',
     href: '#',
     featured: true,
-    logo: '/desarrollos/valmira/logovalmira.svg',
+    logo: '/desarrollos/Valmira/logovalmira.svg',
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
     priceLabel: 'Desde $2,595,000 MXN',
