@@ -38,7 +38,10 @@ export default async function HomePage() {
 /* ════════════════════════════ HERO ════════════════════════════ */
 function Hero() {
   return (
-    <section className="sticky top-0 z-0 -mt-[104px] flex h-[100svh] flex-col justify-center overflow-hidden bg-bg-deep pt-[104px] text-bg">
+    <section
+      className="sticky top-0 z-0 -mt-[104px] flex h-[100svh] flex-col justify-center overflow-hidden bg-bg-deep pt-[104px] text-bg"
+      style={{ transform: 'translateZ(0)', WebkitBackfaceVisibility: 'hidden' }}
+    >
       {/* Capa 1: fondo animado ethereal */}
       <div className="absolute inset-0">
         <EtherealShadow
