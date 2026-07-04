@@ -57,13 +57,6 @@ export function EtherealShadow({
   }, []);
 
   const animationEnabled = animation && animation.scale > 0 && effectsEnabled;
-
-  // En mobile (o antes de confirmar que estamos en desktop) no se renderiza
-  // nada de este fondo decorativo — ni el filtro animado ni el respaldo
-  // estático. Es puramente decorativo; el hero ya tiene su propio color de
-  // fondo, el video y el gradiente encima.
-  if (!effectsEnabled) return null;
-
   const displacementScale = animation ? mapRange(animation.scale, 1, 100, 20, 100) : 0;
   const animationDuration = animation ? mapRange(animation.speed, 1, 100, 1000, 50) : 1;
 
@@ -87,6 +80,15 @@ export function EtherealShadow({
       return () => { hueRotateAnimation.current?.stop(); };
     }
   }, [animationEnabled, animationDuration, hueRotateMotionValue]);
+
+  // En mobile (o antes de confirmar que estamos en desktop) no se renderiza
+  // nada de este fondo decorativo — ni el filtro animado ni el respaldo
+  // estático. Es puramente decorativo; el hero ya tiene su propio color de
+  // fondo, el video y el gradiente encima. IMPORTANTE: este return debe ir
+  // después de TODOS los hooks (Rules of Hooks) — ponerlo antes causaba que
+  // React llamara un hook distinto entre renders y tronara en desktop en
+  // cuanto `effectsEnabled` pasaba de false a true.
+  if (!effectsEnabled) return null;
 
   return (
     <div
