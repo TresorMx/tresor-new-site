@@ -315,7 +315,9 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
                   {priceCell}
                 </div>
                 <div className="mt-1.5 text-[10px] font-semibold uppercase tracking-[0.22em] text-ink/70">
-                  {plaza ? 'Precio base + IVA' : 'Precio base'}
+                  {plaza
+                    ? (isEs ? 'Precio base + IVA' : 'Base price + VAT')
+                    : (isEs ? 'Precio base' : 'Base price')}
                 </div>
               </div>
             </div>
@@ -499,7 +501,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
             developerName={developer.name}
             submitLabel={
               (isEs ? dev.ctaLabels?.reserve?.es : dev.ctaLabels?.reserve?.en ?? dev.ctaLabels?.reserve?.es) ??
-              'Reservar mi lugar'
+              (isEs ? 'Reservar mi lugar' : 'Reserve my spot')
             }
           />
         )}
