@@ -496,7 +496,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
                     <br />
                     {agendaTitle2} {displayName}
                   </h2>
-                  <p className="mx-auto mt-5 max-w-xl text-[15px] font-light text-ink-3">
+                  <p className="mx-auto mt-6 max-w-xl text-[17px] font-normal text-ink">
                     {agendaDesc}
                   </p>
                 </>
