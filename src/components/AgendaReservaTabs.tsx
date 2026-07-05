@@ -71,12 +71,14 @@ export default function AgendaReservaTabs({
           />
         </div>
 
-        <p className="mx-auto mt-6 max-w-xl text-[17px] font-semibold text-ink">
+        <p className={`mx-auto mt-6 max-w-xl text-[17px] text-ink ${tab === 0 ? 'font-semibold' : 'font-normal'}`}>
           {tab === 0
             ? agendaDesc
             : t.rich('apartaIntro', {
                 devName: displayName,
-                yellow: (chunks) => <span className="whitespace-nowrap text-accent">{chunks}</span>,
+                yellow: (chunks) => (
+                  <span className="whitespace-nowrap text-[1.5em] font-semibold text-accent">{chunks}</span>
+                ),
               })}
         </p>
       </div>
