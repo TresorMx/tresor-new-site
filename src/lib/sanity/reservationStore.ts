@@ -9,6 +9,7 @@ export interface StoredReservation {
   contactName: string;
   contactEmail: string;
   contactPhone: string;
+  unitType?: string;
   stripeSessionId?: string;
   createdAt: string;
   paidAt?: string;

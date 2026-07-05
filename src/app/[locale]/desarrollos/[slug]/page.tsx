@@ -20,7 +20,8 @@ import FichaDeveloper from '@/components/ficha/FichaDeveloper';
 import FichaAmenities from '@/components/ficha/FichaAmenities';
 import FichaFloorPlans from '@/components/ficha/FichaFloorPlans';
 import ReservaRapidaForm from '@/components/ficha/ReservaRapidaForm';
-import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount } from '@/lib/developments';
+import RelatedDevelopments from '@/components/ficha/RelatedDevelopments';
+import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount, developments } from '@/lib/developments';
 
 export async function generateStaticParams() {
   // Tresor (con ficha en Sanity) + Sales Partner (solo developments.ts) —
@@ -136,6 +137,9 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   const heroImg = dev.heroRender ?? dev.image;
   const location = dev.location ?? plaza?.location;
   const developer = developers[dev.developer] ?? developers.Tresor;
+  const relatedDevelopments = developments.filter(
+    (d) => d.developer === dev.developer && d.slug !== dev.slug && !d.comingSoon
+  );
 
   // JSON-LD — RealEstateListing siempre; FAQPage solo para fichas Tresor
   // (el copy de "apartado reembolsable de $50,000" etc. es específico de
@@ -220,7 +224,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   const hasAmenities = (dev.amenities?.length ?? 0) > 0;
   const hasSalesPartnerFloorPlans = !plaza && (dev.floorPlans?.length ?? 0) > 0;
   const sectionOrder = [
-    'developer', 'project', 'location', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta',
+    'developer', 'project', 'location', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta', 'related',
   ] as const;
   const sectionActive: Record<(typeof sectionOrder)[number], boolean> = {
     developer: true,
@@ -231,6 +235,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
     floorPlans: Boolean(plaza) || hasSalesPartnerFloorPlans,
     masterPlan: Boolean(plaza),
     cta: true,
+    related: relatedDevelopments.length > 0,
   };
   const stripe: Partial<Record<(typeof sectionOrder)[number], boolean>> = {};
   {
@@ -465,15 +470,20 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
       {/* ═════ 6. APARTADO EN LÍNEA (tabs Agenda/Aparta) — COTIZADOR / AGENDA
               (Tresor) — RESERVA RÁPIDA (Sales Partner sin apartado) ═════ */}
       <section className={stripe.cta ? 'bg-[#FAFAFA]' : 'bg-white'} id="aparta">
-        {dev.reservationEnabled ? (
+        {/* !plaza: el apartado sin inventario (tabs Agenda/Aparta) es solo para
+            Sales Partner. Un desarrollo Tresor con `plaza` sigue el flujo
+            cotizador-primero → apartar unidad ya seleccionada (QuoteWizard),
+            aunque algún día tuviera reservationEnabled activado. */}
+        {!plaza && dev.reservationEnabled ? (
           <AgendaReservaTabs
             devSlug={slug}
             devName={dev.name}
-            reservationAmount={getReservationAmount(dev)}
+            floorPlans={dev.floorPlans}
             agendaTitle1={agendaTitle1}
             agendaTitle2={agendaTitle2}
             agendaDesc={agendaDesc}
             displayName={displayName}
+            locale={locale}
           />
         ) : (
           <>
@@ -534,6 +544,9 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           </>
         )}
       </section>
+
+      {/* ═════ 7. TAMBIÉN TE PUEDE INTERESAR — mismo developer ═════ */}
+      <RelatedDevelopments items={relatedDevelopments} gray={stripe.related} />
     </>
   );
 }

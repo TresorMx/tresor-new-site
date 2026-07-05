@@ -98,7 +98,10 @@
     "agendaDesc": "Choose a date, time and format. We'll confirm within 24 hours.",
     "reservaEyebrow": "— Reserve your spot",
     "reservaTitle1": "Reserve your spot at",
-    "reservaDesc": "Leave us your details and an advisor will reach out with all the information."
+    "reservaDesc": "Leave us your details and an advisor will reach out with all the information.",
+    "relatedEyebrow": "— You may also like",
+    "relatedTitle": "Other developments",
+    "relatedAllCities": "All cities"
   },
   "quote": {
     "title": "Quote your unit",
@@ -280,7 +283,10 @@
     "graciasWhatsappTitle": "Message us on WhatsApp",
     "graciasWhatsappDesc": "Questions about your reservation? Our team replies instantly.",
     "graciasWhatsappBtn": "Open WhatsApp",
-    "graciasHome": "Back to home"
+    "graciasHome": "Back to home",
+    "apartaIntro": "Quickly reserve and secure your unit at {devName}. 100% Refundable.",
+    "unitLabel": "Unit of interest *",
+    "unitPlaceholder": "Select an option"
   },
   "mobileBar": {
     "visit": "Schedule visit",

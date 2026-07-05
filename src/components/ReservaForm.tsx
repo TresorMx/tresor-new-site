@@ -4,23 +4,28 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
 import { pixel } from '@/lib/pixel';
+import type { FloorPlanTypology } from '@/lib/developments';
 
 interface ReservaFormProps {
   devSlug: string;
+  floorPlans?: FloorPlanTypology[];
+  locale: string;
 }
 
 // Formulario de apartado en línea → Stripe Checkout hospedado. No cobra aquí:
 // junta el contacto, pide al server la sesión de pago (el monto lo fija el
 // server) y redirige a la página segura de Stripe.
-export default function ReservaForm({ devSlug }: ReservaFormProps) {
+export default function ReservaForm({ devSlug, floorPlans, locale }: ReservaFormProps) {
   const t = useTranslations('reserva');
+  const isEs = locale !== 'en';
+  const hasTypologies = (floorPlans?.length ?? 0) > 0;
 
-  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '' });
+  const [form, setForm] = useState({ firstName: '', lastName: '', email: '', phone: '', unitType: '' });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
-  const valid = form.firstName && form.lastName && form.email && form.phone;
+  const valid = form.firstName && form.lastName && form.email && form.phone && (!hasTypologies || form.unitType);
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,6 +41,7 @@ export default function ReservaForm({ devSlug }: ReservaFormProps) {
           fullName: `${form.firstName} ${form.lastName}`.trim(),
           email: form.email,
           phone: form.phone,
+          unitType: form.unitType || undefined,
         }),
       });
       if (!res.ok) throw new Error(t('errorMsg'));
@@ -78,6 +84,27 @@ export default function ReservaForm({ devSlug }: ReservaFormProps) {
               value={form.phone} onChange={(e) => set('phone', e.target.value)} />
           </label>
         </div>
+
+        {hasTypologies && (
+          <div className="mt-6">
+            <label className="field">
+              <span className="field-label">{t('unitLabel')}</span>
+              <select
+                required
+                className="field-input"
+                value={form.unitType}
+                onChange={(e) => set('unitType', e.target.value)}
+              >
+                <option value="" disabled>{t('unitPlaceholder')}</option>
+                {floorPlans!.map((fp) => (
+                  <option key={fp.slug} value={fp.slug}>
+                    {isEs ? fp.label.es : fp.label.en ?? fp.label.es}
+                  </option>
+                ))}
+              </select>
+            </label>
+          </div>
+        )}
 
         {err && (
           <div className="mt-6 rounded bg-red-50 px-4 py-3 text-[13px] text-red-700">{err}</div>

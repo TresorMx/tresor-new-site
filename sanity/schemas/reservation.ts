@@ -26,6 +26,7 @@ export default defineType({
     defineField({ name: 'contactName', title: 'Cliente', type: 'string' }),
     defineField({ name: 'contactEmail', title: 'Email', type: 'string' }),
     defineField({ name: 'contactPhone', title: 'Teléfono', type: 'string' }),
+    defineField({ name: 'unitType', title: 'Unidad de interés', type: 'string' }),
     defineField({ name: 'stripeSessionId', title: 'Stripe session', type: 'string' }),
     defineField({ name: 'createdAt', title: 'Creado', type: 'datetime' }),
     defineField({ name: 'paidAt', title: 'Pagado', type: 'datetime' }),

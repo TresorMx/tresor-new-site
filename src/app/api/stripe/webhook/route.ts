@@ -104,7 +104,7 @@ async function handleReservationPaid(folio: string, session: Stripe.Checkout.Ses
     phone: r.contactPhone,
     source: 'reservation',
     tags: ['apartado-pagado', r.devSlug],
-    notes: `Apartado PAGADO — ${r.devName} · Folio ${folio} · $${r.amount.toLocaleString('es-MX')} MXN`,
+    notes: `Apartado PAGADO — ${r.devName}${r.unitType ? ` · ${r.unitType}` : ''} · Folio ${folio} · $${r.amount.toLocaleString('es-MX')} MXN`,
     customFields: { folio, stripeSessionId: session.id },
   });
 
@@ -124,6 +124,7 @@ async function handleReservationPaid(folio: string, session: Stripe.Checkout.Ses
             </div>
             <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
               <tr><td style="padding: 8px 0; color: #6B6863;">Desarrollo</td><td style="text-align: right; font-weight: 600;">${r.devName}</td></tr>
+              ${r.unitType ? `<tr><td style="padding: 8px 0; color: #6B6863;">Unidad de interés</td><td style="text-align: right; font-weight: 600;">${r.unitType}</td></tr>` : ''}
               <tr><td style="padding: 8px 0; color: #6B6863;">Monto</td><td style="text-align: right; font-weight: 600;">$${r.amount.toLocaleString('es-MX')} MXN</td></tr>
               <tr style="border-top: 1px solid #EEEAE1;"><td style="padding: 12px 0 8px; color: #6B6863;">Cliente</td><td style="text-align: right; font-weight: 600;">${r.contactName}</td></tr>
               <tr><td style="padding: 8px 0; color: #6B6863;">Email</td><td style="text-align: right;"><a href="mailto:${r.contactEmail}">${r.contactEmail}</a></td></tr>

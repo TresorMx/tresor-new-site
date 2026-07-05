@@ -19,6 +19,7 @@ const Schema = z.object({
   fullName: z.string().min(2),
   email: z.string().email(),
   phone: z.string().min(7),
+  unitType: z.string().optional(), // slug de la tipología (dev.floorPlans[].slug)
 });
 
 function folioFor(devSlug: string): string {
@@ -32,7 +33,7 @@ export async function POST(req: NextRequest) {
   if (!parsed.success) {
     return NextResponse.json({ error: 'Invalid payload', issues: parsed.error.issues }, { status: 400 });
   }
-  const { devSlug, fullName, email, phone } = parsed.data;
+  const { devSlug, fullName, email, phone, unitType } = parsed.data;
 
   // El apartado solo procede si el desarrollo lo tiene habilitado.
   const dev = await getDevelopment(devSlug);
@@ -43,6 +44,8 @@ export async function POST(req: NextRequest) {
   const amount = getReservationAmount(dev); // MXN, SERVER-SIDE
   const folio = folioFor(devSlug);
   const createdAt = new Date().toISOString();
+  const unitLabel = dev.floorPlans?.find((fp) => fp.slug === unitType)?.label.es ?? unitType;
+  const unitSuffix = unitLabel ? ` · ${unitLabel}` : '';
 
   // 1) Persistir el apartado en estado 'pending' (el webhook lo marca 'paid').
   await saveReservation({
@@ -54,6 +57,7 @@ export async function POST(req: NextRequest) {
     contactName: fullName,
     contactEmail: email,
     contactPhone: phone,
+    unitType: unitLabel,
     createdAt,
   });
 
@@ -64,7 +68,7 @@ export async function POST(req: NextRequest) {
     email,
     phone,
     plazaSlug: devSlug,
-    message: `Apartado iniciado — ${dev.name} · ${folio} · $${amount.toLocaleString('es-MX')} MXN`,
+    message: `Apartado iniciado — ${dev.name}${unitSuffix} · ${folio} · $${amount.toLocaleString('es-MX')} MXN`,
   });
   const [firstName, ...rest] = fullName.trim().split(' ');
   await sendLeadToGHL({
@@ -74,7 +78,7 @@ export async function POST(req: NextRequest) {
     phone,
     source: 'reservation',
     tags: ['apartado-iniciado', devSlug],
-    notes: `Apartado iniciado — ${dev.name} · Folio ${folio} · $${amount.toLocaleString('es-MX')} MXN`,
+    notes: `Apartado iniciado — ${dev.name}${unitSuffix} · Folio ${folio} · $${amount.toLocaleString('es-MX')} MXN`,
   });
 
   // 3) Sesión de Stripe Checkout (hospedada). Solo tarjeta: OXXO tiene tope
@@ -92,7 +96,7 @@ export async function POST(req: NextRequest) {
             currency: 'mxn',
             unit_amount: amount * 100, // centavos
             product_data: {
-              name: `Apartado · ${dev.name}`,
+              name: `Apartado · ${dev.name}${unitSuffix}`,
               description: `Folio ${folio}. Apartado reembolsable.`,
             },
           },

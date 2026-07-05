@@ -98,7 +98,10 @@
     "agendaDesc": "Elige fecha, hora y modalidad. Te confirmamos en menos de 24 hrs.",
     "reservaEyebrow": "— Reserva tu lugar",
     "reservaTitle1": "Reserva tu lugar en",
-    "reservaDesc": "Déjanos tus datos y un asesor te contactará con toda la información."
+    "reservaDesc": "Déjanos tus datos y un asesor te contactará con toda la información.",
+    "relatedEyebrow": "— También te puede interesar",
+    "relatedTitle": "Otros desarrollos",
+    "relatedAllCities": "Todas las ciudades"
   },
   "quote": {
     "title": "Cotiza tu local",
@@ -280,7 +283,10 @@
     "graciasWhatsappTitle": "Escríbenos por WhatsApp",
     "graciasWhatsappDesc": "¿Tienes preguntas sobre tu apartado? Nuestro equipo responde al instante.",
     "graciasWhatsappBtn": "Abrir WhatsApp",
-    "graciasHome": "Volver al inicio"
+    "graciasHome": "Volver al inicio",
+    "apartaIntro": "Reserva rápidamente y asegura tu unidad en {devName}. 100% Reembolsable.",
+    "unitLabel": "Unidad de interés *",
+    "unitPlaceholder": "Selecciona una opción"
   },
   "mobileBar": {
     "visit": "Agendar visita",
