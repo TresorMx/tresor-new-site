@@ -59,6 +59,7 @@ export default function AgendaReservaTabs({
               { key: 'agenda', label: t('tabAgenda') },
               { key: 'aparta', label: t('tabAparta') },
             ]}
+            indicatorClassName="bg-accent"
           />
         </div>
 

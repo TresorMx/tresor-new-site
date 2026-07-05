@@ -11,9 +11,10 @@ interface SlidingTabsProps {
   onChange: (index: number) => void;
   items: { key: string | number; label: ReactNode }[];
   className?: string;
+  indicatorClassName?: string; // override del color del pill (default: blanco)
 }
 
-export default function SlidingTabs({ activeIndex, onChange, items, className }: SlidingTabsProps) {
+export default function SlidingTabs({ activeIndex, onChange, items, className, indicatorClassName }: SlidingTabsProps) {
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
 
@@ -31,7 +32,10 @@ export default function SlidingTabs({ activeIndex, onChange, items, className }:
     <div className={cn('relative flex items-center gap-1 rounded-full bg-ink/[0.06] p-1', className)}>
       <span
         aria-hidden
-        className="absolute bottom-1 top-1 rounded-full bg-white shadow-sm transition-all duration-[450ms] ease-[cubic-bezier(0.76,0,0.24,1)]"
+        className={cn(
+          'absolute bottom-1 top-1 rounded-full shadow-sm transition-all duration-[450ms] ease-[cubic-bezier(0.76,0,0.24,1)]',
+          indicatorClassName ?? 'bg-white',
+        )}
         style={{ left: indicator.left, width: indicator.width }}
       />
       {items.map((item, i) => (
