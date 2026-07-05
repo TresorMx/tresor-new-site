@@ -284,7 +284,7 @@
     "graciasWhatsappDesc": "¿Tienes preguntas sobre tu apartado? Nuestro equipo responde al instante.",
     "graciasWhatsappBtn": "Abrir WhatsApp",
     "graciasHome": "Volver al inicio",
-    "apartaIntro": "Reserva rápidamente y asegura tu unidad en {devName}. 100% Reembolsable.",
+    "apartaIntro": "Reserva rápidamente y asegura tu unidad en {devName}. <yellow>100% Reembolsable.</yellow>",
     "unitLabel": "Unidad de interés *",
     "unitPlaceholder": "Selecciona una opción"
   },
