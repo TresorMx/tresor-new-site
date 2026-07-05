@@ -590,11 +590,12 @@ export const developments: Development[] = [
       'Departamentos de 1, 2 y 3 recámaras con diseño exclusivo y amenidades de lujo, en la zona residencial de mayor crecimiento y proyección de Cancún.',
     // ── Capa de ficha (contenido tomado de koatowers.com) ──
     heroRender: '/desarrollos/koa/Copia-de-FF_01.jpg', // misma foto que el card
-    tagline: { es: 'Departamentos de 2 y 3 recámaras con amenidades exclusivas' },
+    heroLogoScale: 0.6,
+    tagline: { es: 'Departamentos de 1, 2 y 3 recámaras con amenidades exclusivas' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Zona Huayacán' },
       { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
-      { label: 'Recámaras', labelEn: 'Bedrooms', value: '2 y 3', valueEn: '2 & 3' },
+      { label: 'Recámaras', labelEn: 'Bedrooms', value: '1, 2 y 3', valueEn: '1, 2 & 3' },
     ],
     gallery: [
       '/desarrollos/koa/AEREO_01.jpg',
@@ -616,8 +617,8 @@ export const developments: Development[] = [
     projectTitleMuted: { es: 'con entrega garantizada en 2025', en: 'with delivery guaranteed in 2025' },
     projectBody: [
       {
-        es: 'son departamentos de 2 y 3 recámaras en Av. Prolongación La Luna, a un costado de Areka Towers, diseñados para un alto potencial de plusvalía con escrituración garantizada.',
-        en: 'is a collection of 2 and 3-bedroom apartments on Av. Prolongación La Luna, next to Areka Towers, designed for high appreciation potential with guaranteed title deed delivery.',
+        es: 'son departamentos de 1, 2 y 3 recámaras en Av. Prolongación La Luna, a un costado de Areka Towers, diseñados para un alto potencial de plusvalía con escrituración garantizada.',
+        en: 'is a collection of 1, 2 and 3-bedroom apartments on Av. Prolongación La Luna, next to Areka Towers, designed for high appreciation potential with guaranteed title deed delivery.',
       },
       {
         es: 'Alberca infinity, asadores en rooftop, gimnasio climatizado y cancha de pádel — amenidades pensadas para vivir e invertir en una de las zonas de mayor crecimiento de Cancún.',
@@ -640,32 +641,58 @@ export const developments: Development[] = [
     ],
     floorPlans: [
       {
-        slug: '2rec',
-        label: { es: '2 Recámaras', en: '2 Bedrooms' },
-        image: '/desarrollos/koa/Copia-de-FINAL_TIPOLOGIAS_MASTER_01.jpg',
+        slug: '1rec-studio',
+        label: { es: '1 Recámara + 1 Studio', en: '1 Bedroom + 1 Studio' },
+        image: '/desarrollos/koa/floor-plans/1RecStudio.jpg',
         specs: [
-          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
+          { key: 'regular', label: { es: 'Regular', en: 'Regular' }, value: '79 m²' },
+          { key: 'garden', label: { es: 'Garden', en: 'Garden' }, value: '94 m²' },
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '1 + Studio' },
           { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '1' },
+          { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: 'Sí' },
+          { key: 'lavado', label: { es: 'Área de lavado', en: 'Laundry area' }, value: 'Sí' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '1 cajón' },
+        ],
+      },
+      {
+        slug: '2rec-out',
+        label: { es: '2 Recámaras Out', en: '2 Bedrooms Out' },
+        image: '/desarrollos/koa/floor-plans/2RecOut.jpg',
+        specs: [
+          { key: 'regular', label: { es: 'Regular', en: 'Regular' }, value: '111 m²' },
+          { key: 'garden', label: { es: 'Garden', en: 'Garden' }, value: '176 m²' },
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
+          { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '2' },
+          { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: 'Sí' },
+          { key: 'lavado', label: { es: 'Área de lavado', en: 'Laundry area' }, value: 'Sí' },
           { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
         ],
       },
       {
-        slug: '2rec-bis',
-        label: { es: '2 Recámaras BIS', en: '2 Bedrooms BIS' },
-        image: '/desarrollos/koa/Copia-de-FINAL_TIPOLOGIAS_MASTER_01.jpg',
+        slug: '2rec-in',
+        label: { es: '2 Recámaras IN', en: '2 Bedrooms IN' },
+        image: '/desarrollos/koa/floor-plans/2RecIN.jpg',
         specs: [
+          { key: 'regular', label: { es: 'Regular', en: 'Regular' }, value: '119 m²' },
+          { key: 'garden', label: { es: 'Garden', en: 'Garden' }, value: '175 m²' },
           { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
-          { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '1' },
+          { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '2' },
+          { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: 'Sí' },
+          { key: 'lavado', label: { es: 'Área de lavado', en: 'Laundry area' }, value: 'Sí' },
           { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
         ],
       },
       {
         slug: '3rec',
         label: { es: '3 Recámaras', en: '3 Bedrooms' },
-        image: '/desarrollos/koa/Copia-de-FINAL_TIPOLOGIAS_MASTER_01.jpg',
+        image: '/desarrollos/koa/floor-plans/3Rec.jpg',
         specs: [
+          { key: 'regular', label: { es: 'Regular', en: 'Regular' }, value: '143 m²' },
+          { key: 'garden', label: { es: 'Garden', en: 'Garden' }, value: '195 m²' },
           { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '3' },
           { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '2.5' },
+          { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: 'Sí' },
+          { key: 'lavado', label: { es: 'Área de lavado', en: 'Laundry area' }, value: 'Sí' },
           { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
         ],
       },
