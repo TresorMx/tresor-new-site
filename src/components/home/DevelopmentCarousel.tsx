@@ -71,7 +71,7 @@ export default function DevelopmentCarousel({ developments }: { developments: De
       ? (wrapperRef.current!.offsetWidth - cardWidth) / 2 - active * (cardWidth + GAP)
       : 0;
 
-  // ── Swipe táctil (móvil) ──
+  // ── Swipe táctil (móvil) + arrastre con mouse/trackpad (desktop) ──
   const [drag, setDrag] = useState(0);
   const [dragging, setDragging] = useState(false);
   const startX = useRef(0);
@@ -79,16 +79,16 @@ export default function DevelopmentCarousel({ developments }: { developments: De
   const dragRef = useRef(0);
   const axis = useRef<'x' | 'y' | null>(null);
 
-  function onTouchStart(e: React.TouchEvent) {
-    startX.current = e.touches[0].clientX;
-    startY.current = e.touches[0].clientY;
+  function dragStart(x: number, y: number) {
+    startX.current = x;
+    startY.current = y;
     dragRef.current = 0;
     axis.current = null;
     setDragging(true);
   }
-  function onTouchMove(e: React.TouchEvent) {
-    const dx = e.touches[0].clientX - startX.current;
-    const dy = e.touches[0].clientY - startY.current;
+  function dragMove(x: number, y: number) {
+    const dx = x - startX.current;
+    const dy = y - startY.current;
     // Decide el eje en el primer movimiento significativo: si es vertical,
     // dejamos que la página haga scroll y no arrastramos la card.
     if (axis.current === null && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
@@ -99,7 +99,7 @@ export default function DevelopmentCarousel({ developments }: { developments: De
       setDrag(dx);
     }
   }
-  function onTouchEnd() {
+  function dragEnd() {
     setDragging(false);
     const d = dragRef.current;
     const threshold = Math.max(40, cardWidth * 0.18);
@@ -110,6 +110,54 @@ export default function DevelopmentCarousel({ developments }: { developments: De
     });
     dragRef.current = 0;
     setDrag(0);
+  }
+
+  function onTouchStart(e: React.TouchEvent) {
+    dragStart(e.touches[0].clientX, e.touches[0].clientY);
+  }
+  function onTouchMove(e: React.TouchEvent) {
+    dragMove(e.touches[0].clientX, e.touches[0].clientY);
+  }
+  function onTouchEnd() {
+    dragEnd();
+  }
+
+  // Click y arrastra con el mouse. Escucha en window (no solo en el track)
+  // para no perder el gesto si el cursor sale del área mientras arrastra.
+  function onMouseDown(e: React.MouseEvent) {
+    if (e.button !== 0) return;
+    dragStart(e.clientX, e.clientY);
+    const handleMove = (ev: MouseEvent) => dragMove(ev.clientX, ev.clientY);
+    const handleUp = () => {
+      dragEnd();
+      window.removeEventListener('mousemove', handleMove);
+      window.removeEventListener('mouseup', handleUp);
+    };
+    window.addEventListener('mousemove', handleMove);
+    window.addEventListener('mouseup', handleUp);
+  }
+
+  // Gesto de dos dedos en trackpad (Mac): el navegador lo entrega como wheel
+  // con deltaX horizontal. Solo se activa si el gesto es predominantemente
+  // horizontal, para no robarle el scroll vertical de la página.
+  const wheelAccum = useRef(0);
+  const wheelTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  function onWheel(e: React.WheelEvent) {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+    e.preventDefault();
+    wheelAccum.current += e.deltaX;
+    if (wheelTimeout.current) clearTimeout(wheelTimeout.current);
+    const threshold = Math.max(40, cardWidth * 0.18);
+    if (Math.abs(wheelAccum.current) > threshold) {
+      const dir = wheelAccum.current > 0 ? 1 : -1;
+      setActive((a) => Math.min(slides.length - 1, Math.max(0, a + dir)));
+      wheelAccum.current = 0;
+      return;
+    }
+    // Si el gesto se detiene sin cruzar el umbral, reinicia el acumulador.
+    wheelTimeout.current = setTimeout(() => {
+      wheelAccum.current = 0;
+    }, 200);
   }
 
   return (
@@ -146,7 +194,11 @@ export default function DevelopmentCarousel({ developments }: { developments: De
         onTouchStart={onTouchStart}
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
-        className="relative left-1/2 right-1/2 -mx-[50vw] w-screen touch-pan-y overflow-hidden"
+        onMouseDown={onMouseDown}
+        onWheel={onWheel}
+        className={`relative left-1/2 right-1/2 -mx-[50vw] w-screen touch-pan-y overflow-hidden select-none ${
+          dragging ? 'cursor-grabbing' : 'cursor-grab'
+        }`}
       >
         <div
           className={`flex ${dragging ? '' : 'transition-transform duration-[850ms] ease-[cubic-bezier(0.76,0,0.24,1)]'}`}
@@ -172,6 +224,7 @@ export default function DevelopmentCarousel({ developments }: { developments: De
                     sizes="480px"
                     className={`object-cover ${s.comingSoon ? 'scale-110 blur-md' : ''}`}
                     priority={i === 0}
+                    draggable={false}
                   />
                   {/* Overlay oscuro sobre la foto */}
                   <div className="absolute inset-0 bg-black/40" />
@@ -191,6 +244,7 @@ export default function DevelopmentCarousel({ developments }: { developments: De
                     width={300}
                     height={88}
                     className="absolute left-1/2 top-1/2 z-10 h-[154px] w-auto -translate-x-1/2 -translate-y-1/2"
+                    draggable={false}
                   />
                 </div>
 
