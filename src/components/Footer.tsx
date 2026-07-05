@@ -7,7 +7,7 @@ export default async function Footer() {
   const t = await getTranslations('footer');
 
   return (
-    <footer className="relative z-10 -mt-10 overflow-hidden rounded-t-[2.5rem] bg-bg-deep pt-24 text-bg">
+    <footer data-nav="dark" className="relative z-10 -mt-10 overflow-hidden rounded-t-[2.5rem] bg-bg-deep pt-24 text-bg">
       <div className="container-wrap">
         <div className="grid grid-cols-2 gap-x-6 gap-y-12 pb-20 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:gap-[60px]">
 
