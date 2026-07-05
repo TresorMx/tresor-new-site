@@ -578,7 +578,7 @@ export const developments: Development[] = [
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
     image: '/desarrollos/koa/Copia-de-FF_01.jpg',
-    href: '#',
+    href: '/desarrollos/koa-onix',
     featured: true,
     logo: '/desarrollos/koa/KOALogo.svg',
     badge: 'Entrega inmediata',
@@ -586,6 +586,88 @@ export const developments: Development[] = [
     priceLabel: 'Desde $3,500,000 MXN',
     description:
       'Departamentos de 1, 2 y 3 recámaras con diseño exclusivo y amenidades de lujo, en la zona residencial de mayor crecimiento y proyección de Cancún.',
+    // ── Capa de ficha (contenido tomado de koatowers.com) ──
+    heroRender: '/desarrollos/koa/Copia-de-FF_01.jpg', // misma foto que el card
+    tagline: { es: 'Departamentos de 2 y 3 recámaras con amenidades exclusivas' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Zona Huayacán' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Recámaras', labelEn: 'Bedrooms', value: '2 y 3', valueEn: '2 & 3' },
+    ],
+    gallery: [
+      '/desarrollos/koa/AEREO_01.jpg',
+      '/desarrollos/koa/AEREO_02.jpg',
+      '/desarrollos/koa/Copia-de-FACHADA_ZOOM_01.jpg',
+      '/desarrollos/koa/Sala_balcón.jpg',
+      '/desarrollos/koa/comedor_cocina.jpg',
+      '/desarrollos/koa/habitación.jpg',
+      '/desarrollos/koa/sala_comedor.jpg',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/koa/Copia-de-ALBERCA_01.jpg',
+      '/desarrollos/koa/Copia-de-GYM_01.jpg',
+      '/desarrollos/koa/Copia-de-LUDOTECA_01.jpg',
+      '/desarrollos/koa/Copia-de-ROOFTOP_01.jpg',
+      '/desarrollos/koa/Copia-de-JUEGOS_INF_01.jpg',
+    ],
+    projectTitle: { es: 'Invierte en Cancún', en: 'Invest in Cancún' },
+    projectTitleMuted: { es: 'con entrega garantizada en 2025', en: 'with delivery guaranteed in 2025' },
+    projectBody: [
+      {
+        es: 'son departamentos de 2 y 3 recámaras en Av. Prolongación La Luna, a un costado de Areka Towers, diseñados para un alto potencial de plusvalía con escrituración garantizada.',
+        en: 'is a collection of 2 and 3-bedroom apartments on Av. Prolongación La Luna, next to Areka Towers, designed for high appreciation potential with guaranteed title deed delivery.',
+      },
+      {
+        es: 'Alberca infinity, asadores en rooftop, gimnasio climatizado y cancha de pádel — amenidades pensadas para vivir e invertir en una de las zonas de mayor crecimiento de Cancún.',
+        en: 'Infinity pool, rooftop grills, climate-controlled gym and padel court — amenities built for living and investing in one of Cancún\'s fastest-growing areas.',
+      },
+    ],
+    locationBullets: [
+      { es: 'A un costado de Areka Towers', en: 'Right next to Areka Towers' },
+      { es: 'Escrituración garantizada en 2025', en: 'Title deed delivery guaranteed in 2025' },
+      { es: 'Alto potencial de plusvalía', en: 'High appreciation potential' },
+    ],
+    amenities: [
+      { key: 'alberca-infinity' },
+      { key: 'asadores', labelOverride: 'Asadores en rooftop' },
+      { key: 'gym', labelOverride: 'Gimnasio climatizado' },
+      { key: 'cancha-padel' },
+      { key: 'ludoteca' },
+      { key: 'zona-yoga' },
+      { key: 'area-infantil' },
+    ],
+    floorPlans: [
+      {
+        slug: '2rec',
+        label: { es: '2 Recámaras', en: '2 Bedrooms' },
+        image: '/desarrollos/koa/Copia-de-FINAL_TIPOLOGIAS_MASTER_01.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
+          { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '1' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
+        ],
+      },
+      {
+        slug: '2rec-bis',
+        label: { es: '2 Recámaras BIS', en: '2 Bedrooms BIS' },
+        image: '/desarrollos/koa/Copia-de-FINAL_TIPOLOGIAS_MASTER_01.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
+          { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '1' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
+        ],
+      },
+      {
+        slug: '3rec',
+        label: { es: '3 Recámaras', en: '3 Bedrooms' },
+        image: '/desarrollos/koa/Copia-de-FINAL_TIPOLOGIAS_MASTER_01.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '3' },
+          { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '2.5' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
+        ],
+      },
+    ],
   },
   {
     slug: 'villalta-onix',
@@ -641,7 +723,7 @@ export const developments: Development[] = [
     intent: ['invertir'],
     status: 'Preventa',
     image: '/desarrollos/zienna/portadazienna.jpg',
-    href: '#',
+    href: '/desarrollos/zienna-onix',
     featured: true,
     logo: '/desarrollos/zienna/ZiennaLogo.svg',
     badge: 'Preventa',
@@ -649,6 +731,69 @@ export const developments: Development[] = [
     priceLabel: 'Desde $1,750,000 MXN',
     description:
       'Comunidad residencial sobre Av. Huayacán con 604 lotes unifamiliares, casa club y áreas deportivas, en una de las zonas de mayor plusvalía de Cancún.',
+    // ── Capa de ficha (contenido tomado de zienna.mx) ──
+    heroRender: '/desarrollos/zienna/portadazienna.jpg', // misma foto que el card
+    tagline: { es: 'La mejor ubicación con conectividad estratégica' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Av. Huayacán' },
+      { label: 'Lotes', labelEn: 'Lots', value: '200 a 444 m²', valueEn: '200 to 444 sqm' },
+      { label: 'Extensión', labelEn: 'Total area', value: '27 hectáreas', valueEn: '27 hectares' },
+    ],
+    gallery: [
+      '/desarrollos/zienna/Acceso-01.jpg',
+      '/desarrollos/zienna/Acceso-02.jpg',
+      '/desarrollos/zienna/Andador-ppl-01.jpg',
+      '/desarrollos/zienna/Áreas-comunes-01.jpg',
+      '/desarrollos/zienna/Calle.jpg',
+      '/desarrollos/zienna/Parque-01.jpg',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/zienna/Alberca.jpg',
+      '/desarrollos/zienna/Casa-club-general.jpg',
+      '/desarrollos/zienna/Co-work.jpg',
+      '/desarrollos/zienna/Gym.jpg',
+      '/desarrollos/zienna/Kidsclub.jpg',
+      '/desarrollos/zienna/Multicancha.jpg',
+    ],
+    projectTitle: { es: 'La mejor ubicación', en: 'The best location' },
+    projectTitleMuted: { es: 'con conectividad estratégica', en: 'with strategic connectivity' },
+    projectBody: [
+      {
+        es: 'es una comunidad de 604 lotes unifamiliares sobre la Av. Huayacán, con una superficie promedio de 227 m² (desde 200 hasta 444 m²), en 27 hectáreas con casa club y áreas deportivas.',
+        en: 'is a community of 604 single-family lots on Av. Huayacán, with an average size of 227 sqm (from 200 to 444 sqm), across 27 hectares with a clubhouse and sports areas.',
+      },
+      {
+        es: 'A 10 minutos del aeropuerto y 15 del Tren Maya, con doble acceso, servicios subterráneos a pie de lote y 40% de áreas verdes naturales — la conectividad que buscas, sin salir de Cancún.',
+        en: '10 minutes from the airport and 15 from the Tren Maya, with double access, underground utilities at each lot, and 40% natural green areas — the connectivity you\'re looking for, without leaving Cancún.',
+      },
+    ],
+    locationBullets: [
+      { es: 'A 10 minutos del aeropuerto de Cancún', en: '10 minutes from Cancún airport' },
+      { es: '40% de áreas verdes naturales', en: '40% natural green areas' },
+      { es: 'Doble acceso y servicios subterráneos a pie de lote', en: 'Double access with underground utilities at each lot' },
+    ],
+    amenities: [
+      { key: 'areas-verdes', labelOverride: '40% áreas verdes naturales' },
+      { key: 'alberca-recreativa' },
+      { key: 'casa-club' },
+      { key: 'coworking' },
+      { key: 'cancha-padel', labelOverride: '2 canchas de pádel' },
+      { key: 'cancha-usos-multiples', labelOverride: 'Multicancha' },
+      { key: 'gym' },
+      { key: 'area-infantil' },
+      { key: 'pet-park' },
+    ],
+    floorPlans: [
+      {
+        slug: 'lote-residencial',
+        label: { es: 'Lote residencial', en: 'Residential lot' },
+        specs: [
+          { key: 'superficie', label: { es: 'Superficie', en: 'Size' }, value: '200 – 444 m²' },
+          { key: 'promedio', label: { es: 'Promedio', en: 'Average' }, value: '227 m²' },
+          { key: 'medidas', label: { es: 'Medidas típicas', en: 'Typical dimensions' }, value: '10 m × 22.7 m' },
+        ],
+      },
+    ],
   },
 
   // ── SALES PARTNER · Urban Homes ──
@@ -664,7 +809,7 @@ export const developments: Development[] = [
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
     image: '/desarrollos/Blume/BLUME-Arquitectura-1.jpg',
-    href: '#',
+    href: '/desarrollos/blume-urban',
     featured: true,
     logo: '/desarrollos/Blume/logo.png',
     badge: 'Entrega inmediata',
@@ -672,6 +817,82 @@ export const developments: Development[] = [
     priceLabel: 'Desde $19,256,000 MXN',
     description:
       'Condominios de lujo de 2 y 3 recámaras en Puerto Cancún, con marina propia y amenidades únicas, en el enclave residencial más exclusivo de Cancún.',
+    // ── Capa de ficha (contenido tomado de blumeboutiquecondos.com) ──
+    heroRender: '/desarrollos/Blume/BLUME-Arquitectura-1.jpg', // misma foto que el card
+    tagline: { es: 'Un lugar donde el lujo se fusiona con la belleza natural de Cancún' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Marina Puerto Cancún', valueEn: 'Puerto Cancún Marina' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Deptos y Penthouses', valueEn: 'Condos & Penthouses' },
+      { label: 'Unidades', labelEn: 'Units', value: '113 (109 + 4 PH)' },
+    ],
+    gallery: [
+      '/desarrollos/Blume/BLUME-Drone-1.jpg',
+      '/desarrollos/Blume/BLUME-Drone-3.jpg',
+      '/desarrollos/Blume/BLUME-Arquitectura-5.jpg',
+      '/desarrollos/Blume/BLUME-Arquitectura-10.jpg',
+      '/desarrollos/Blume/BLUME-Arquitectura-15.jpg',
+      '/desarrollos/Blume/Sala y comedor.jpg',
+      '/desarrollos/Blume/Recamara Secundaria.jpg',
+      '/desarrollos/Blume/foto-habitacion-blume.jpg',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/Blume/ALBERCA AEREA 1.jpg',
+      '/desarrollos/Blume/AREA CONVIVENCIA.jpg',
+    ],
+    projectTitle: { es: 'Vistas al mar Caribe', en: 'Caribbean Sea views' },
+    projectTitleMuted: { es: 'en la Marina de Puerto Cancún', en: 'at the Puerto Cancún Marina' },
+    projectBody: [
+      {
+        es: 'son 113 residencias de lujo —109 condominios y 4 penthouses— de 2 y 3 recámaras en la Marina de Puerto Cancún, con vistas al mar Caribe y a la laguna Nichupté.',
+        en: 'is a collection of 113 luxury residences —109 condominiums and 4 penthouses— with 2 and 3 bedrooms at the Puerto Cancún Marina, with views of the Caribbean Sea and the Nichupté Lagoon.',
+      },
+      {
+        es: 'Muelle propio, alberca infinity, business center, spa y vigilancia 24/7, desarrollado por Urban Homes en asociación con Cadu Inmobiliaria.',
+        en: 'Private dock, infinity pool, business center, spa and 24/7 security, developed by Urban Homes in partnership with Cadu Inmobiliaria.',
+      },
+    ],
+    locationBullets: [
+      { es: 'Muelle propio en la Marina de Puerto Cancún', en: 'Private dock at the Puerto Cancún Marina' },
+      { es: 'Vistas al mar Caribe y a la laguna Nichupté', en: 'Caribbean Sea and Nichupté Lagoon views' },
+      { es: '113 residencias: 109 condominios + 4 penthouses', en: '113 residences: 109 condos + 4 penthouses' },
+    ],
+    amenities: [
+      { key: 'muelle' },
+      { key: 'lounge-bar' },
+      { key: 'alberca-infinity' },
+      { key: 'alberca-familiar' },
+      { key: 'cancha-padel' },
+      { key: 'gym' },
+      { key: 'seguridad-24-7', labelOverride: 'Vigilancia 24/7' },
+      { key: 'area-infantil', labelOverride: 'Kids Club' },
+      { key: 'terraza-bar' },
+    ],
+    floorPlans: [
+      {
+        slug: '2rec',
+        label: { es: '2 Recámaras', en: '2 Bedrooms' },
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
+          { key: 'vista', label: { es: 'Vista', en: 'View' }, value: 'Mar Caribe o laguna Nichupté' },
+        ],
+      },
+      {
+        slug: '3rec',
+        label: { es: '3 Recámaras', en: '3 Bedrooms' },
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '3' },
+          { key: 'vista', label: { es: 'Vista', en: 'View' }, value: 'Mar Caribe o laguna Nichupté' },
+        ],
+      },
+      {
+        slug: 'penthouse',
+        label: { es: 'Penthouse', en: 'Penthouse' },
+        specs: [
+          { key: 'unidades', label: { es: 'Unidades', en: 'Units' }, value: '4' },
+          { key: 'vista', label: { es: 'Vista', en: 'View' }, value: 'Mar Caribe y laguna Nichupté' },
+        ],
+      },
+    ],
   },
   {
     slug: 'favorite-urban',
