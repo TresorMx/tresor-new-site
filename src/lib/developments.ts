@@ -120,7 +120,9 @@ export interface FloorPlanSpec {
 
 export interface FloorPlanTypology {
   slug: string;               // key estable para tabs/React, ej. 'estudio'
-  label: I18nText;            // "Estudio", "2 PH + Terraza"…
+  label: I18nText;            // "Estudio", "2 PH + Terraza"… (título completo de la ficha técnica)
+  shortLabel?: I18nText;      // versión corta para el tab/pill (ej. "1 Rec. + Studio" en vez de
+                               // "1 Recámara + 1 Studio"). Si no se define, el tab usa `label`.
   image?: string;
   specs: FloorPlanSpec[];     // flexible por tipología — cada una trae lo que aplica
   virtualTourUrl?: string;    // si existe, se muestra el botón "Tour virtual"
@@ -651,6 +653,7 @@ export const developments: Development[] = [
       {
         slug: '1rec-studio',
         label: { es: '1 Recámara + 1 Studio', en: '1 Bedroom + 1 Studio' },
+        shortLabel: { es: '1 Rec. + Studio', en: '1 Bed. + Studio' },
         image: '/desarrollos/koa/floor-plans/1RecStudio.jpg',
         specs: [
           { key: 'regular', label: { es: 'Regular', en: 'Regular' }, value: '79 m²' },
@@ -665,6 +668,7 @@ export const developments: Development[] = [
       {
         slug: '2rec-out',
         label: { es: '2 Recámaras Out', en: '2 Bedrooms Out' },
+        shortLabel: { es: '2 Rec. Out', en: '2 Bed. Out' },
         image: '/desarrollos/koa/floor-plans/2RecOut.jpg',
         specs: [
           { key: 'regular', label: { es: 'Regular', en: 'Regular' }, value: '111 m²' },
@@ -679,6 +683,7 @@ export const developments: Development[] = [
       {
         slug: '2rec-in',
         label: { es: '2 Recámaras IN', en: '2 Bedrooms IN' },
+        shortLabel: { es: '2 Rec. IN', en: '2 Bed. IN' },
         image: '/desarrollos/koa/floor-plans/2RecIN.jpg',
         specs: [
           { key: 'regular', label: { es: 'Regular', en: 'Regular' }, value: '119 m²' },
@@ -693,6 +698,7 @@ export const developments: Development[] = [
       {
         slug: '3rec',
         label: { es: '3 Recámaras', en: '3 Bedrooms' },
+        shortLabel: { es: '3 Rec.', en: '3 Bed.' },
         image: '/desarrollos/koa/floor-plans/3Rec.jpg',
         specs: [
           { key: 'regular', label: { es: 'Regular', en: 'Regular' }, value: '143 m²' },

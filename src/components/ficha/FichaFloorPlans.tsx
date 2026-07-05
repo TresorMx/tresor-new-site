@@ -6,7 +6,13 @@ import { Orbit, Calendar } from 'lucide-react';
 import { Link } from '@/navigation';
 import { cn } from '@/lib/utils';
 import VirtualTourModal from '@/components/ficha/VirtualTourModal';
+import SlidingTabs from '@/components/ui/SlidingTabs';
 import type { FloorPlanTypology, I18nText } from '@/lib/developments';
+
+// Con pocas tipologías (≤5) el pill deslizante de Quattro se ve mejor y cabe
+// en una sola fila. Con más (ej. Olivia y sus 10) el pill se corta, así que
+// se usan chips que envuelven en varias filas — se ven todas de un vistazo.
+const PILL_MAX_ITEMS = 5;
 
 interface FichaFloorPlansProps {
   floorPlans: FloorPlanTypology[];
@@ -43,25 +49,40 @@ export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaL
           </h2>
         </div>
 
-        {/* Chips que envuelven en varias filas — con 8-10 tipologías, un tab
-            deslizante de una sola fila se corta o requiere scroll oculto.
-            Aquí se ven todas las opciones de un vistazo, sin cortar nada. */}
         {floorPlans.length > 1 && (
-          <div className="mb-8 flex flex-wrap gap-2">
-            {floorPlans.map((fp, i) => (
-              <button
-                key={fp.slug}
-                onClick={() => setActive(i)}
-                className={cn(
-                  'rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] transition-all duration-200',
-                  active === i
-                    ? 'bg-ink text-white'
-                    : 'bg-ink/[0.06] text-ink/50 hover:bg-ink/[0.10] hover:text-ink',
-                )}
-              >
-                {isEs ? fp.label.es : fp.label.en ?? fp.label.es}
-              </button>
-            ))}
+          <div className="mb-8">
+            {floorPlans.length <= PILL_MAX_ITEMS ? (
+              <SlidingTabs
+                activeIndex={active}
+                onChange={setActive}
+                items={floorPlans.map((fp) => ({
+                  key: fp.slug,
+                  label: isEs
+                    ? fp.shortLabel?.es ?? fp.label.es
+                    : fp.shortLabel?.en ?? fp.label.en ?? fp.shortLabel?.es ?? fp.label.es,
+                }))}
+              />
+            ) : (
+              // Chips que envuelven en varias filas — con 8-10 tipologías, un tab
+              // deslizante de una sola fila se corta o requiere scroll oculto.
+              // Aquí se ven todas las opciones de un vistazo, sin cortar nada.
+              <div className="flex flex-wrap gap-2">
+                {floorPlans.map((fp, i) => (
+                  <button
+                    key={fp.slug}
+                    onClick={() => setActive(i)}
+                    className={cn(
+                      'rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] transition-all duration-200',
+                      active === i
+                        ? 'bg-ink text-white'
+                        : 'bg-ink/[0.06] text-ink/50 hover:bg-ink/[0.10] hover:text-ink',
+                    )}
+                  >
+                    {isEs ? fp.shortLabel?.es ?? fp.label.es : fp.shortLabel?.en ?? fp.label.en ?? fp.label.es}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
