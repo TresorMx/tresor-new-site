@@ -224,7 +224,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   const hasAmenities = (dev.amenities?.length ?? 0) > 0;
   const hasSalesPartnerFloorPlans = !plaza && (dev.floorPlans?.length ?? 0) > 0;
   const sectionOrder = [
-    'developer', 'project', 'location', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta', 'related',
+    'developer', 'project', 'location', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta',
   ] as const;
   const sectionActive: Record<(typeof sectionOrder)[number], boolean> = {
     developer: true,
@@ -235,7 +235,6 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
     floorPlans: Boolean(plaza) || hasSalesPartnerFloorPlans,
     masterPlan: Boolean(plaza),
     cta: true,
-    related: relatedDevelopments.length > 0,
   };
   const stripe: Partial<Record<(typeof sectionOrder)[number], boolean>> = {};
   {
@@ -546,7 +545,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
       </section>
 
       {/* ═════ 7. TAMBIÉN TE PUEDE INTERESAR — mismo developer ═════ */}
-      <RelatedDevelopments items={relatedDevelopments} gray={stripe.related} />
+      <RelatedDevelopments items={relatedDevelopments} />
     </>
   );
 }

@@ -8,13 +8,15 @@ import type { Development } from '@/lib/developments';
 
 interface RelatedDevelopmentsProps {
   items: Development[]; // ya filtrados por mismo `developer`, sin el actual
-  gray?: boolean;
 }
 
 // Franja de cierre de ficha: otros desarrollos del mismo developer, con
 // filtro opcional por ciudad (solo se muestra si hay más de una ciudad entre
 // los candidatos — si todos son de la misma ciudad, el filtro sería inútil).
-export default function RelatedDevelopments({ items, gray = false }: RelatedDevelopmentsProps) {
+// Fondo siempre gris (no participa de la intercalación blanco/gris del resto
+// de la ficha) — un gris más marcado que el #FAFAFA estándar, para que se
+// sienta como cierre.
+export default function RelatedDevelopments({ items }: RelatedDevelopmentsProps) {
   const t = useTranslations('plaza');
   const cities = useMemo(() => Array.from(new Set(items.map((d) => d.city))), [items]);
   const [cityIndex, setCityIndex] = useState(0); // 0 = todas las ciudades
@@ -25,7 +27,7 @@ export default function RelatedDevelopments({ items, gray = false }: RelatedDeve
   const visible = (activeCity ? items.filter((d) => d.city === activeCity) : items).slice(0, 3);
 
   return (
-    <section className={`${gray ? 'bg-[#FAFAFA]' : 'bg-white'} py-20 md:py-28`}>
+    <section className="bg-[#F0F0EF] py-20 md:py-28">
       <div className="container-wrap">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
