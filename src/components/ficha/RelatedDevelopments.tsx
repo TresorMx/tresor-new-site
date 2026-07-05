@@ -13,9 +13,10 @@ interface RelatedDevelopmentsProps {
 // Franja de cierre de ficha: otros desarrollos del mismo developer, con
 // filtro opcional por ciudad (solo se muestra si hay más de una ciudad entre
 // los candidatos — si todos son de la misma ciudad, el filtro sería inútil).
-// Fondo siempre gris (no participa de la intercalación blanco/gris del resto
-// de la ficha) — un gris más marcado que el #FAFAFA estándar, para que se
-// sienta como cierre.
+// Fondo negro fijo (mismo tono que el footer/sección LUIS del home), no
+// participa de la intercalación blanco/gris del resto de la ficha — se
+// siente como cierre. data-nav="dark" para que el Header se ponga oscuro al
+// pasar por aquí (mismo fix que el footer).
 export default function RelatedDevelopments({ items }: RelatedDevelopmentsProps) {
   const t = useTranslations('plaza');
   const cities = useMemo(() => Array.from(new Set(items.map((d) => d.city))), [items]);
@@ -27,12 +28,12 @@ export default function RelatedDevelopments({ items }: RelatedDevelopmentsProps)
   const visible = (activeCity ? items.filter((d) => d.city === activeCity) : items).slice(0, 3);
 
   return (
-    <section className="bg-[#F0F0EF] py-20 md:py-28">
+    <section data-nav="dark" className="bg-black py-20 text-bg md:py-28">
       <div className="container-wrap">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <span className="eyebrow eyebrow-accent font-bold">{t('relatedEyebrow')}</span>
-            <h2 className="mt-3 h-display text-[clamp(24px,3.2vw,40px)]">{t('relatedTitle')}</h2>
+            <h2 className="mt-3 h-display text-[clamp(24px,3.2vw,40px)] text-white">{t('relatedTitle')}</h2>
           </div>
           {cities.length > 1 && (
             <SlidingTabs
@@ -42,13 +43,17 @@ export default function RelatedDevelopments({ items }: RelatedDevelopmentsProps)
                 { key: 'all', label: t('relatedAllCities') },
                 ...cities.map((c) => ({ key: c, label: c })),
               ]}
+              className="bg-white/10"
+              indicatorClassName="bg-white"
+              activeTextClassName="text-ink"
+              inactiveTextClassName="text-white/50 hover:text-white"
             />
           )}
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((d) => (
-            <DevelopmentCard key={d.slug} dev={d} />
+            <DevelopmentCard key={d.slug} dev={d} dark />
           ))}
         </div>
       </div>

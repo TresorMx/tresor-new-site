@@ -12,7 +12,7 @@ const PROPERTY_ICONS: Record<PropertyType, LucideIcon> = {
   'Local Comercial': Store,
 };
 
-export default function DevelopmentCard({ dev }: { dev: Development }) {
+export default function DevelopmentCard({ dev, dark = false }: { dev: Development; dark?: boolean }) {
   const price = dev.priceLabel ?? formatPrice(dev);
   const badge = dev.badge ?? dev.status;
   const location = dev.phases ?? `${dev.zone ? `${dev.zone}, ` : ''}${dev.city}`;
@@ -26,7 +26,9 @@ export default function DevelopmentCard({ dev }: { dev: Development }) {
   return (
     // Mismo formato que el card de WE DEVELOP (apilado): card blanco enmarcado,
     // imagen arriba (con overlay, badge, ícono y logo centrado) y contenido abajo.
-    <div className="grid grid-cols-1 gap-3 rounded-[28px] bg-white p-3">
+    // `dark` invierte el card a fondo negro (footer) para secciones oscuras
+    // (ej. "También te puede interesar") sin tocar el uso normal (home, claro).
+    <div className={`grid grid-cols-1 gap-3 rounded-[28px] p-3 ${dark ? 'bg-bg-deep' : 'bg-white'}`}>
       {/* Imagen con marco */}
       <div className="relative aspect-[4/3] overflow-hidden rounded-[20px]">
         <Image
@@ -64,7 +66,7 @@ export default function DevelopmentCard({ dev }: { dev: Development }) {
 
       {/* Contenido */}
       <div className="flex flex-col px-5 py-6">
-        <div className="flex items-center justify-between gap-3 text-[9px] font-bold uppercase tracking-[0.12em] text-ink-3/60">
+        <div className={`flex items-center justify-between gap-3 text-[9px] font-bold uppercase tracking-[0.12em] ${dark ? 'text-white/50' : 'text-ink-3/60'}`}>
           <span className="whitespace-nowrap">{dev.brand ?? 'Tresor Real Estate'}</span>
           <span className="flex items-center gap-1 whitespace-nowrap">
             <MapPin size={11} strokeWidth={2} style={{ display: 'inline' }} />
@@ -73,7 +75,7 @@ export default function DevelopmentCard({ dev }: { dev: Development }) {
         </div>
 
         <div className="mt-6">
-          <h3 className="font-sans text-[clamp(18px,1.8vw,28px)] font-medium leading-[1.15] text-ink">
+          <h3 className={`font-sans text-[clamp(18px,1.8vw,28px)] font-medium leading-[1.15] ${dark ? 'text-white' : 'text-ink'}`}>
             {dev.name}
           </h3>
           {price && (
@@ -89,7 +91,7 @@ export default function DevelopmentCard({ dev }: { dev: Development }) {
             </span>
           )}
           {dev.description && (
-            <p className="mt-2 text-[13px] font-light leading-relaxed text-ink-2">
+            <p className={`mt-2 text-[13px] font-light leading-relaxed ${dark ? 'text-white/70' : 'text-ink-2'}`}>
               {dev.description}
             </p>
           )}
@@ -97,7 +99,9 @@ export default function DevelopmentCard({ dev }: { dev: Development }) {
             {dev.comingSoon ? (
               <span
                 aria-disabled="true"
-                className="inline-flex cursor-not-allowed items-center gap-2.5 rounded-full bg-ink/[0.08] px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-ink/40"
+                className={`inline-flex cursor-not-allowed items-center gap-2.5 rounded-full px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] ${
+                  dark ? 'bg-white/10 text-white/40' : 'bg-ink/[0.08] text-ink/40'
+                }`}
               >
                 Muy pronto
               </span>

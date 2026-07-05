@@ -12,9 +12,19 @@ interface SlidingTabsProps {
   items: { key: string | number; label: ReactNode }[];
   className?: string;
   indicatorClassName?: string; // override del color del pill (default: blanco)
+  activeTextClassName?: string; // override del texto activo (default: text-ink)
+  inactiveTextClassName?: string; // override del texto inactivo (default: text-ink-3)
 }
 
-export default function SlidingTabs({ activeIndex, onChange, items, className, indicatorClassName }: SlidingTabsProps) {
+export default function SlidingTabs({
+  activeIndex,
+  onChange,
+  items,
+  className,
+  indicatorClassName,
+  activeTextClassName,
+  inactiveTextClassName,
+}: SlidingTabsProps) {
   const tabsRef = useRef<(HTMLButtonElement | null)[]>([]);
   const [indicator, setIndicator] = useState({ left: 0, width: 0 });
 
@@ -47,7 +57,9 @@ export default function SlidingTabs({ activeIndex, onChange, items, className, i
           onClick={() => onChange(i)}
           className={cn(
             'relative z-10 whitespace-nowrap rounded-full px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] transition-colors duration-300',
-            activeIndex === i ? 'text-ink' : 'text-ink-3 hover:text-ink',
+            activeIndex === i
+              ? (activeTextClassName ?? 'text-ink')
+              : (inactiveTextClassName ?? 'text-ink-3 hover:text-ink'),
           )}
         >
           {item.label}
