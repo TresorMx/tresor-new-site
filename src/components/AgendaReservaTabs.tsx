@@ -71,7 +71,7 @@ export default function AgendaReservaTabs({
           />
         </div>
 
-        <p className={`mx-auto mt-6 max-w-xl text-[17px] text-ink ${tab === 0 ? 'font-semibold' : 'font-normal'}`}>
+        <p className="mx-auto mt-6 max-w-xl text-[17px] font-normal text-ink">
           {tab === 0
             ? agendaDesc
             : t.rich('apartaIntro', {
