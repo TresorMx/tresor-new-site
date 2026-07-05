@@ -76,12 +76,20 @@ export const developers: Record<DeveloperId, DeveloperEntity> = {
     name: 'Onix Living',
     logoDark: '/logos-desarrolladores/Onix.svg',
     blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
+    credentials: {
+      es: 'Más de 1,000 unidades vendidas y entregadas respaldan a Onix Living, una desarrolladora enfocada en comunidades residenciales modernas, bien planeadas y en armonía con su entorno — diseño contemporáneo, ubicación estratégica y una apuesta clara por la plusvalía a largo plazo.',
+      en: 'More than 1,000 units sold and delivered stand behind Onix Living, a developer focused on modern, thoughtfully planned residential communities in harmony with their surroundings — contemporary design, strategic locations and a clear commitment to long-term value.',
+    },
   },
   'Urban Homes': {
     id: 'Urban Homes',
     name: 'Urban Homes',
     logoDark: '/logos-desarrolladores/urbanhomes.avif',
     blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
+    credentials: {
+      es: 'Más de 18 años de experiencia en Quintana Roo, 22 desarrollos y más de 5,000 viviendas entregadas en Puerto Cancún, Playa del Carmen y Tulum respaldan a Urban Homes como referente del estándar de vida de lujo en la zona más exclusiva de Cancún.',
+      en: 'More than 18 years of experience in Quintana Roo, 22 developments and over 5,000 homes delivered in Puerto Cancún, Playa del Carmen and Tulum position Urban Homes as the benchmark for luxury living in Cancún\'s most exclusive area.',
+    },
   },
 };
 
