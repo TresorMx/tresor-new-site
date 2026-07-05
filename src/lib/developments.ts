@@ -164,8 +164,16 @@ export interface Development {
   heroRender?: string;              // foto grande del hero de la ficha
   heroLogoScale?: number;           // factor de escala del logo del hero de FICHA
                                      // (1 = base). Independiente de `logoScale`
-                                     // (esa es para el card). Ajustable por
-                                     // desarrollo — en Sanity será un campo.
+                                     // (esa es para el card). Aplica a desktop; en
+                                     // mobile se reduce 30% automático salvo que
+                                     // `heroLogoScaleMobile` lo especifique distinto.
+                                     // Ajustable por desarrollo — en Sanity será un campo.
+  heroLogoScaleMobile?: number;     // override manual del logo del hero SOLO en mobile
+                                     // (si no se define, cae al heurístico heroLogoScale*0.7)
+  heroImagePosition?: {             // encuadre de la foto del hero por dispositivo
+    mobile?: 'top' | 'center' | 'bottom';   // default: 'center'
+    desktop?: 'top' | 'center' | 'bottom';  // default: 'center'
+  };
   highlights?: { label: string; labelEn?: string; value: string; valueEn?: string }[]; // barra de detalle
   tagline?: I18nText;              // subtítulo corto
   projectTitle?: I18nText;         // título de la sección "El Proyecto" (parte sólida)
@@ -601,6 +609,7 @@ export const developments: Development[] = [
     // ── Capa de ficha (contenido tomado de koatowers.com) ──
     heroRender: '/desarrollos/koa/Copia-de-FF_01.jpg', // misma foto que el card
     heroLogoScale: 0.6,
+    heroImagePosition: { mobile: 'bottom', desktop: 'bottom' },
     tagline: { es: 'Departamentos de 1, 2 y 3 recámaras con amenidades exclusivas' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Zona Huayacán' },

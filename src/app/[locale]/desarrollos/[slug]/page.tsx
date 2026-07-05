@@ -7,7 +7,7 @@ import { ArrowRight, Building2, Layers, MapPin } from 'lucide-react';
 import { getTranslations } from 'next-intl/server';
 
 import { getActivePlazasAsync, getPlazaBySlugAsync, getMinAvailablePrice, getSiteSettings } from '@/lib/data';
-import { formatMXN } from '@/lib/utils';
+import { formatMXN, cn } from '@/lib/utils';
 import MasterPlan from '@/components/MasterPlan';
 import Gallery from '@/components/Gallery';
 import FloorPlans from '@/components/FloorPlans';
@@ -87,6 +87,21 @@ export async function generateMetadata({
     },
   };
 }
+
+// Encuadre de la foto del hero — `heroImagePosition` por dispositivo. Con
+// fotos que no son perfectamente centradas (ej. un edificio donde lo
+// importante está abajo) el default 'center' recorta mal en pantallas
+// angostas; este mapa deja elegir el encuadre por breakpoint sin CSS a mano.
+const OBJECT_POSITION_MOBILE: Record<'top' | 'center' | 'bottom', string> = {
+  top: 'object-top',
+  center: 'object-center',
+  bottom: 'object-bottom',
+};
+const OBJECT_POSITION_DESKTOP: Record<'top' | 'center' | 'bottom', string> = {
+  top: 'md:object-top',
+  center: 'md:object-center',
+  bottom: 'md:object-bottom',
+};
 
 export default async function PlazaPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
   const { slug, locale } = await params;
@@ -257,7 +272,18 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
       {/* ═════ HERO — logo centrado (modelo unificado) ═════ */}
       <section data-nav="dark" className="relative -mt-[72px] overflow-hidden bg-bg-deep text-bg" style={{ height: 'calc(100svh - 104px - 72px)', minHeight: '480px' }}>
         <div className="absolute inset-0 animate-hero-zoom">
-          <Image src={heroImg} alt={dev.name} fill priority sizes="100vw" className="object-cover scale-105" />
+          <Image
+            src={heroImg}
+            alt={dev.name}
+            fill
+            priority
+            sizes="100vw"
+            className={cn(
+              'object-cover scale-105',
+              OBJECT_POSITION_MOBILE[dev.heroImagePosition?.mobile ?? 'center'],
+              OBJECT_POSITION_DESKTOP[dev.heroImagePosition?.desktop ?? 'center'],
+            )}
+          />
         </div>
         <div className="absolute inset-0 bg-black/50" />
 
@@ -272,10 +298,11 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
               style={{
                 // Tamaño base original (Quattro); escalado por desarrollo vía
                 // `heroLogoScale` (1 = sin cambio) — independiente del logo del
-                // card. En mobile se aplica un 30% adicional de reducción
-                // (el logo se veía sobredimensionado frente al ancho de pantalla).
+                // card. En mobile cae a heroLogoScaleMobile si se define, o si no,
+                // a un 30% adicional de reducción automático (el logo se ve
+                // sobredimensionado frente al ancho de pantalla si no se achica).
                 ['--logo-h-desktop' as string]: `clamp(${(140 * (dev.heroLogoScale ?? 1)).toFixed(0)}px, ${(26 * (dev.heroLogoScale ?? 1)).toFixed(1)}vh, ${(260 * (dev.heroLogoScale ?? 1)).toFixed(0)}px)`,
-                ['--logo-h-mobile' as string]: `clamp(${(140 * (dev.heroLogoScale ?? 1) * 0.7).toFixed(0)}px, ${(26 * (dev.heroLogoScale ?? 1) * 0.7).toFixed(1)}vh, ${(260 * (dev.heroLogoScale ?? 1) * 0.7).toFixed(0)}px)`,
+                ['--logo-h-mobile' as string]: `clamp(${(140 * (dev.heroLogoScaleMobile ?? (dev.heroLogoScale ?? 1) * 0.7)).toFixed(0)}px, ${(26 * (dev.heroLogoScaleMobile ?? (dev.heroLogoScale ?? 1) * 0.7)).toFixed(1)}vh, ${(260 * (dev.heroLogoScaleMobile ?? (dev.heroLogoScale ?? 1) * 0.7)).toFixed(0)}px)`,
               } as CSSProperties}
               priority
             />
