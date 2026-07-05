@@ -468,7 +468,10 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
 
       {/* ═════ 6. APARTADO EN LÍNEA (tabs Agenda/Aparta) — COTIZADOR / AGENDA
               (Tresor) — RESERVA RÁPIDA (Sales Partner sin apartado) ═════ */}
-      <section className={stripe.cta ? 'bg-[#FAFAFA]' : 'bg-white'} id="aparta">
+      <section
+        className={`relative z-10 -mb-10 overflow-hidden rounded-b-[2.5rem] ${stripe.cta ? 'bg-[#FAFAFA]' : 'bg-white'}`}
+        id="aparta"
+      >
         {/* !plaza: el apartado sin inventario (tabs Agenda/Aparta) es solo para
             Sales Partner. Un desarrollo Tresor con `plaza` sigue el flujo
             cotizador-primero → apartar unidad ya seleccionada (QuoteWizard),

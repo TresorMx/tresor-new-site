@@ -28,7 +28,7 @@ export default function RelatedDevelopments({ items }: RelatedDevelopmentsProps)
   const visible = (activeCity ? items.filter((d) => d.city === activeCity) : items).slice(0, 3);
 
   return (
-    <section data-nav="dark" className="relative z-10 -mt-10 overflow-hidden rounded-t-[2.5rem] bg-black py-20 text-bg md:py-28">
+    <section data-nav="dark" className="bg-black py-20 text-bg md:py-28">
       <div className="container-wrap">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
