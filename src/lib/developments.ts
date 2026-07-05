@@ -429,10 +429,12 @@ export const developments: Development[] = [
     projectTitleMuted: { es: 'en Cancún' },
     projectBody: [
       {
-        es: 'es un desarrollo de Live Desarrollos ubicado dentro de Lausana Residencial, una de las comunidades privadas de mayor plusvalía de Cancún, con vistas abiertas al paseo Lausana y al campo de golf.',
+        es: 'es un desarrollo de Live Desarrollos ubicado dentro de **Lausana Residencial**, una de las comunidades privadas de mayor plusvalía de Cancún, con vistas abiertas al paseo Lausana y al campo de golf.',
+        en: 'is a development by Live Desarrollos located within **Lausana Residencial**, one of Cancún\'s highest-value private communities, with open views of the Lausana promenade and the golf course.',
       },
       {
-        es: 'Departamentos desde 76 m², pensados para quienes buscan vivir o invertir en un entorno residencial de excepción, con amenidades de primer nivel y a minutos de las zonas de mayor crecimiento de la ciudad.',
+        es: 'Departamentos desde **76 m²**, pensados para quienes buscan vivir o invertir en un entorno residencial de excepción, con amenidades de primer nivel y a minutos de las zonas de mayor crecimiento de la ciudad.',
+        en: 'Apartments from **76 sqm**, designed for those looking to live or invest in an exceptional residential setting, with first-class amenities minutes from the city\'s fastest-growing areas.',
       },
     ],
     locationBullets: [
@@ -636,12 +638,12 @@ export const developments: Development[] = [
     projectTitleMuted: { es: 'con entrega garantizada en 2025', en: 'with delivery guaranteed in 2025' },
     projectBody: [
       {
-        es: 'son departamentos de 1, 2 y 3 recámaras en Av. Prolongación La Luna, a un costado de Areka Towers, diseñados para un alto potencial de plusvalía con escrituración garantizada.',
-        en: 'is a collection of 1, 2 and 3-bedroom apartments on Av. Prolongación La Luna, next to Areka Towers, designed for high appreciation potential with guaranteed title deed delivery.',
+        es: 'son departamentos de 1, 2 y 3 recámaras en Av. Prolongación La Luna, a un costado de Areka Towers, diseñados para un alto potencial de plusvalía con **escrituración garantizada**.',
+        en: 'is a collection of 1, 2 and 3-bedroom apartments on Av. Prolongación La Luna, next to Areka Towers, designed for high appreciation potential with **guaranteed title deed delivery**.',
       },
       {
-        es: 'Alberca infinity, asadores en rooftop, gimnasio climatizado y cancha de pádel — amenidades pensadas para vivir e invertir en una de las zonas de mayor crecimiento de Cancún.',
-        en: 'Infinity pool, rooftop grills, climate-controlled gym and padel court — amenities built for living and investing in one of Cancún\'s fastest-growing areas.',
+        es: '**Alberca infinity**, asadores en rooftop, gimnasio climatizado y cancha de pádel — amenidades pensadas para vivir e invertir en una de las zonas de mayor crecimiento de Cancún.',
+        en: '**Infinity pool**, rooftop grills, climate-controlled gym and padel court — amenities built for living and investing in one of Cancún\'s fastest-growing areas.',
       },
     ],
     locationBullets: [
@@ -811,12 +813,12 @@ export const developments: Development[] = [
     projectTitleMuted: { es: 'con conectividad estratégica', en: 'with strategic connectivity' },
     projectBody: [
       {
-        es: 'es una comunidad de 604 lotes unifamiliares sobre la Av. Huayacán, con una superficie promedio de 227 m² (desde 200 hasta 444 m²), en 27 hectáreas con casa club y áreas deportivas.',
-        en: 'is a community of 604 single-family lots on Av. Huayacán, with an average size of 227 sqm (from 200 to 444 sqm), across 27 hectares with a clubhouse and sports areas.',
+        es: 'es una comunidad de **604 lotes** unifamiliares sobre la Av. Huayacán, con una superficie promedio de 227 m² (desde 200 hasta 444 m²), en 27 hectáreas con casa club y áreas deportivas.',
+        en: 'is a community of **604 single-family lots** on Av. Huayacán, with an average size of 227 sqm (from 200 to 444 sqm), across 27 hectares with a clubhouse and sports areas.',
       },
       {
-        es: 'A 10 minutos del aeropuerto y 15 del Tren Maya, con doble acceso, servicios subterráneos a pie de lote y 40% de áreas verdes naturales — la conectividad que buscas, sin salir de Cancún.',
-        en: '10 minutes from the airport and 15 from the Tren Maya, with double access, underground utilities at each lot, and 40% natural green areas — the connectivity you\'re looking for, without leaving Cancún.',
+        es: 'A 10 minutos del aeropuerto y 15 del Tren Maya, con doble acceso, servicios subterráneos a pie de lote y **40% de áreas verdes naturales** — la conectividad que buscas, sin salir de Cancún.',
+        en: '10 minutes from the airport and 15 from the Tren Maya, with double access, underground utilities at each lot, and **40% natural green areas** — the connectivity you\'re looking for, without leaving Cancún.',
       },
     ],
     locationBullets: [
@@ -895,12 +897,12 @@ export const developments: Development[] = [
     projectTitleMuted: { es: 'en la Marina de Puerto Cancún', en: 'at the Puerto Cancún Marina' },
     projectBody: [
       {
-        es: 'son 113 residencias de lujo —109 condominios y 4 penthouses— de 2 y 3 recámaras en la Marina de Puerto Cancún, con vistas al mar Caribe y a la laguna Nichupté.',
-        en: 'is a collection of 113 luxury residences —109 condominiums and 4 penthouses— with 2 and 3 bedrooms at the Puerto Cancún Marina, with views of the Caribbean Sea and the Nichupté Lagoon.',
+        es: 'son **113 residencias de lujo** —109 condominios y 4 penthouses— de 2 y 3 recámaras en la Marina de Puerto Cancún, con vistas al mar Caribe y a la laguna Nichupté.',
+        en: 'is a collection of **113 luxury residences** —109 condominiums and 4 penthouses— with 2 and 3 bedrooms at the Puerto Cancún Marina, with views of the Caribbean Sea and the Nichupté Lagoon.',
       },
       {
-        es: 'Muelle propio, alberca infinity, business center, spa y vigilancia 24/7, desarrollado por Urban Homes en asociación con Cadu Inmobiliaria.',
-        en: 'Private dock, infinity pool, business center, spa and 24/7 security, developed by Urban Homes in partnership with Cadu Inmobiliaria.',
+        es: '**Muelle propio**, alberca infinity, business center, spa y vigilancia 24/7, desarrollado por Urban Homes en asociación con Cadu Inmobiliaria.',
+        en: '**Private dock**, infinity pool, business center, spa and 24/7 security, developed by Urban Homes in partnership with Cadu Inmobiliaria.',
       },
     ],
     locationBullets: [

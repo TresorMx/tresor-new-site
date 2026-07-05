@@ -8,6 +8,7 @@ import { getTranslations } from 'next-intl/server';
 
 import { getActivePlazasAsync, getPlazaBySlugAsync, getMinAvailablePrice, getSiteSettings } from '@/lib/data';
 import { formatMXN, cn } from '@/lib/utils';
+import { renderEditorial } from '@/lib/richText';
 import MasterPlan from '@/components/MasterPlan';
 import Gallery from '@/components/Gallery';
 import FloorPlans from '@/components/FloorPlans';
@@ -386,10 +387,15 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           </div>
           <div className="text-[17px] font-light leading-[1.7] text-ink-2">
             <p>
-              {dev.name} {(isEs ? dev.projectBody?.[0]?.es : dev.projectBody?.[0]?.en ?? dev.projectBody?.[0]?.es) ?? t('projectBody1')}
+              {dev.name}{' '}
+              {renderEditorial(
+                (isEs ? dev.projectBody?.[0]?.es : dev.projectBody?.[0]?.en ?? dev.projectBody?.[0]?.es) ?? t('projectBody1')
+              )}
             </p>
             <p className="mt-4">
-              {(isEs ? dev.projectBody?.[1]?.es : dev.projectBody?.[1]?.en ?? dev.projectBody?.[1]?.es) ?? t('projectBody2')}
+              {renderEditorial(
+                (isEs ? dev.projectBody?.[1]?.es : dev.projectBody?.[1]?.en ?? dev.projectBody?.[1]?.es) ?? t('projectBody2')
+              )}
             </p>
 
             <div className="mt-8 flex flex-wrap items-center gap-4">
