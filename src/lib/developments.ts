@@ -74,11 +74,13 @@ export const developers: Record<DeveloperId, DeveloperEntity> = {
   Onix: {
     id: 'Onix',
     name: 'Onix Living',
+    logoDark: '/logos-desarrolladores/Onix.svg',
     blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
   },
   'Urban Homes': {
     id: 'Urban Homes',
     name: 'Urban Homes',
+    logoDark: '/logos-desarrolladores/urbanhomes.avif',
     blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
   },
 };
