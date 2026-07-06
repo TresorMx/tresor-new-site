@@ -27,6 +27,15 @@ import {
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+// Mismos presets que sanity/schemas/development.ts (LOGO_SIZE_PRESETS) — el
+// Studio ya no acepta cualquier decimal, así que al migrar redondeamos al
+// preset más cercano en vez de escribir el número crudo de developments.ts.
+const LOGO_SIZE_PRESETS = [0.5, 0.7, 1, 1.3, 1.6];
+function nearestLogoPreset(n: number | undefined): number | undefined {
+  if (n == null) return undefined;
+  return LOGO_SIZE_PRESETS.reduce((best, p) => (Math.abs(p - n) < Math.abs(best - n) ? p : best));
+}
+
 const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID ?? 'hg48pwsi',
   dataset: process.env.NEXT_PUBLIC_SANITY_DATASET ?? 'production',
@@ -203,9 +212,9 @@ async function migrateDevelopment(dev: Development, devDocId: string) {
       : undefined,
     priceLabel: dev.priceLabel,
     description: dev.description,
-    logoScale: dev.logoScale,
-    heroLogoScale: dev.heroLogoScale,
-    heroLogoScaleMobile: dev.heroLogoScaleMobile,
+    logoScale: nearestLogoPreset(dev.logoScale),
+    heroLogoScale: nearestLogoPreset(dev.heroLogoScale),
+    heroLogoScaleMobile: nearestLogoPreset(dev.heroLogoScaleMobile),
     tagline: dev.tagline?.es,
     taglineEn: dev.tagline?.en,
     projectTitle: dev.projectTitle?.es,

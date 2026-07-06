@@ -1,6 +1,17 @@
 import { defineField, defineType } from 'sanity';
 import { amenityOptions } from '../../src/lib/amenities';
 
+// Presets de tamaño de logo — el número que se guarda es el mismo factor de
+// escala que ya usa el código (1 = normal), pero el editor nunca ve el
+// número: elige un botón con nombre. Nada de "súbelo a 1.2, bájalo a 0.7".
+const LOGO_SIZE_PRESETS = [
+  { title: 'Muy chico', value: 0.5 },
+  { title: 'Chico', value: 0.7 },
+  { title: 'Normal', value: 1 },
+  { title: 'Grande', value: 1.3 },
+  { title: 'Muy grande', value: 1.6 },
+];
+
 // Ficha de un desarrollo — hoy pensado para Sales Partner (Olivia, Koa,
 // Zienna, Blume…), pero el mismo tipo sirve para cualquier desarrollo que no
 // necesite inventario por unidad. Los desarrollos Tresor con cotizador real
@@ -85,7 +96,7 @@ export default defineType({
     defineField({ name: 'zone', title: 'Zona / colonia', type: 'string', group: 'basic', description: 'Ej: "Zona Huayacán". Aparece junto a la ciudad si no hay dirección completa en Ubicación.' }),
     defineField({
       name: 'location', title: 'Coordenadas y dirección', type: 'object', group: 'basic',
-      description: 'Opcional. Si NO tienes coordenadas exactas, deja todo vacío — la ficha muestra Zona + Ciudad en texto sin mapa, en vez de arriesgar un pin mal puesto.',
+      description: 'Opcional. Si NO tienes coordenadas exactas, deja todo vacío — la ficha muestra Zona + Ciudad en texto sin mapa, en vez de arriesgar un pin mal puesto. Para sacarlas: abre Google Maps, click derecho sobre la ubicación exacta, y copia los dos números que aparecen arriba del menú (el primero es Latitud, el segundo Longitud).',
       fields: [
         { name: 'lat', type: 'number', title: 'Latitud' },
         { name: 'lng', type: 'number', title: 'Longitud' },
@@ -98,10 +109,24 @@ export default defineType({
     // ── HERO Y LOGO ──────────────────────────────────────────────
     defineField({ name: 'image', title: 'Foto del card (home)', type: 'image', group: 'hero', options: { hotspot: true }, description: 'La que se ve en el card del home. Arrastra el círculo sobre lo importante de la foto — así se recorta bien en cualquier pantalla.' }),
     defineField({ name: 'logo', title: 'Logo del card (home)', type: 'image', group: 'hero' }),
-    defineField({ name: 'logoScale', title: 'Tamaño del logo del card', type: 'number', group: 'hero', initialValue: 1, description: '1 = tamaño normal. Súbelo un poco (ej. 1.2) si el logo se ve chico; bájalo (ej. 0.7) si se ve gigante.' }),
+    defineField({
+      name: 'logoScale', title: 'Tamaño del logo del card', type: 'number', group: 'hero',
+      initialValue: 1,
+      options: { list: LOGO_SIZE_PRESETS, layout: 'radio' },
+      description: '¿Cómo se ve el logo sobre la foto del card? Elige un tamaño.',
+    }),
     defineField({ name: 'heroRender', title: 'Foto grande del hero (ficha)', type: 'image', group: 'hero', options: { hotspot: true }, description: 'La foto de pantalla completa al entrar a la ficha. Si la dejas vacía, se usa la misma foto del card.' }),
-    defineField({ name: 'heroLogoScale', title: 'Tamaño del logo del hero (desktop)', type: 'number', group: 'hero', initialValue: 1, description: '1 = tamaño normal.' }),
-    defineField({ name: 'heroLogoScaleMobile', title: 'Tamaño del logo del hero (mobile)', type: 'number', group: 'hero', description: 'Opcional. Si lo dejas vacío, mobile usa automáticamente 70% del tamaño de desktop.' }),
+    defineField({
+      name: 'heroLogoScale', title: 'Tamaño del logo del hero — desktop', type: 'number', group: 'hero',
+      initialValue: 1,
+      options: { list: LOGO_SIZE_PRESETS, layout: 'radio' },
+      description: '¿Cómo se ve el logo grande al entrar a la ficha, en computadora?',
+    }),
+    defineField({
+      name: 'heroLogoScaleMobile', title: 'Tamaño del logo del hero — celular', type: 'number', group: 'hero',
+      options: { list: LOGO_SIZE_PRESETS, layout: 'radio' },
+      description: 'Solo si en el celular se ve muy grande o muy chico comparado con la computadora. Si no eliges nada, el celular usa automáticamente un tamaño más chico que el de arriba.',
+    }),
 
     // ── CONTENIDO ────────────────────────────────────────────────
     defineField({ name: 'tagline', title: 'Tagline / eslogan (ES)', type: 'string', group: 'texts', description: 'Frase corta de marca. No se ve en pantalla, se usa para SEO/redes si no llenas Meta Description.' }),
