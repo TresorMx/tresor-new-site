@@ -928,15 +928,6 @@ export const developments: Development[] = [
     ],
     floorPlans: [
       {
-        slug: '2rec',
-        label: { es: '2 Recámaras', en: '2 Bedrooms' },
-        shortLabel: { es: '2 Rec.', en: '2 Bed.' },
-        specs: [
-          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
-          { key: 'vista', label: { es: 'Vista', en: 'View' }, value: 'Mar Caribe o laguna Nichupté' },
-        ],
-      },
-      {
         slug: '3rec-c',
         label: { es: '3 Recámaras - C', en: '3 Bedrooms - C' },
         shortLabel: { es: '3 Rec. C', en: '3 Bed. C' },
@@ -958,14 +949,6 @@ export const developments: Development[] = [
           { key: 'interior', label: { es: 'Interior', en: 'Interior' }, value: '219.56 m²' },
           { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: '23.53 m²' },
           { key: 'vista', label: { es: 'Vista', en: 'View' }, value: 'Mar Caribe o laguna Nichupté' },
-        ],
-      },
-      {
-        slug: 'penthouse',
-        label: { es: 'Penthouse', en: 'Penthouse' },
-        specs: [
-          { key: 'unidades', label: { es: 'Unidades', en: 'Units' }, value: '4' },
-          { key: 'vista', label: { es: 'Vista', en: 'View' }, value: 'Mar Caribe y laguna Nichupté' },
         ],
       },
     ],
