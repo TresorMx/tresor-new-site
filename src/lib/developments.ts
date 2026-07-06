@@ -129,6 +129,23 @@ export interface FloorPlanTypology {
   order?: number;
 }
 
+// Módulo editorial genérico — eyebrow + título + descripción + imagen
+// opcional. Para historias que no encajan en ningún módulo fijo de la ficha
+// (ej. "conectividad", "sustentabilidad", "el entorno"). Un desarrollo puede
+// tener varios; cada uno se intercala blanco/gris igual que el resto.
+export interface ContentBlock {
+  eyebrow?: I18nText;
+  title: I18nText;
+  titleMuted?: I18nText;       // parte del título en gris (mismo patrón lead+muted del resto)
+  description: I18nText;
+  image?: string;
+  // 'side-by-side' (2 columnas, imagen a un lado) si hay imagen; si no hay
+  // imagen siempre es efectivamente texto centrado. 'stacked' = imagen abajo,
+  // tamaño de la galería (ancho completo, aspect 16/7). Default: side-by-side.
+  layout?: 'stacked' | 'side-by-side';
+  imagePosition?: 'left' | 'right';  // solo aplica en 'side-by-side'. Default: 'right'.
+}
+
 export interface Development {
   slug: string;
   name: string;
@@ -174,6 +191,7 @@ export interface Development {
     mobile?: 'top' | 'center' | 'bottom';   // default: 'center'
     desktop?: 'top' | 'center' | 'bottom';  // default: 'center'
   };
+  contentBlocks?: ContentBlock[];   // módulo(s) editorial(es) genérico(s), ver arriba
   highlights?: { label: string; labelEn?: string; value: string; valueEn?: string }[]; // barra de detalle
   tagline?: I18nText;              // subtítulo corto
   projectTitle?: I18nText;         // título de la sección "El Proyecto" (parte sólida)
@@ -791,6 +809,18 @@ export const developments: Development[] = [
     // queda hasta abajo — bottom evita que el crop se coma la escena real.
     heroImagePosition: { mobile: 'bottom', desktop: 'bottom' },
     tagline: { es: 'La mejor ubicación con conectividad estratégica' },
+    contentBlocks: [
+      {
+        eyebrow: { es: '— Casa club', en: '— Clubhouse' },
+        title: { es: 'Diseño en conexión', en: 'Design in connection' },
+        titleMuted: { es: 'con la naturaleza', en: 'with nature' },
+        description: {
+          es: 'La casa club de Zienna combina materiales naturales, vegetación integrada y una arquitectura abierta que difumina el límite entre interior y exterior — el mismo principio de diseño que define **cada rincón** de la comunidad.',
+          en: 'Zienna\'s clubhouse combines natural materials, integrated greenery and an open architecture that blurs the line between indoors and outdoors — the same design principle that defines **every corner** of the community.',
+        },
+        image: '/desarrollos/zienna/Casa_club.jpg',
+      },
+    ],
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Av. Huayacán' },
       { label: 'Lotes', labelEn: 'Lots', value: '200 a 444 m²', valueEn: '200 to 444 sqm' },

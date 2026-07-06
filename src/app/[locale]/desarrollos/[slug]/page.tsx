@@ -22,6 +22,7 @@ import FichaAmenities from '@/components/ficha/FichaAmenities';
 import FichaFloorPlans from '@/components/ficha/FichaFloorPlans';
 import ReservaRapidaForm from '@/components/ficha/ReservaRapidaForm';
 import RelatedDevelopments from '@/components/ficha/RelatedDevelopments';
+import FichaContentBlock from '@/components/ficha/FichaContentBlock';
 import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount, developments } from '@/lib/developments';
 
 export async function generateStaticParams() {
@@ -239,12 +240,14 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   const hasGallery = galleryImages.length > 0;
   const hasAmenities = (dev.amenities?.length ?? 0) > 0;
   const hasSalesPartnerFloorPlans = !plaza && (dev.floorPlans?.length ?? 0) > 0;
+  const hasContentBlocks = (dev.contentBlocks?.length ?? 0) > 0;
   const sectionOrder = [
-    'developer', 'project', 'location', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta',
+    'developer', 'project', 'contentBlocks', 'location', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta',
   ] as const;
   const sectionActive: Record<(typeof sectionOrder)[number], boolean> = {
     developer: true,
     project: true,
+    contentBlocks: hasContentBlocks,
     location: true,
     gallery: hasGallery,
     amenities: hasAmenities,
@@ -433,6 +436,16 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           </div>
         </div>
       </section>
+
+      {/* ═════ 1b. CONTENT BLOCKS — módulo(s) editorial(es) genérico(s) ═════ */}
+      {dev.contentBlocks?.map((block, i) => (
+        <FichaContentBlock
+          key={i}
+          block={block}
+          locale={locale}
+          gray={stripe.contentBlocks !== undefined ? (i % 2 === 0 ? stripe.contentBlocks : !stripe.contentBlocks) : false}
+        />
+      ))}
 
       {/* ═════ 2. UBICACIÓN — sin mapa (sin lat/lng) el texto toma el ancho completo ═════ */}
       <section className={`${stripe.location ? 'bg-[#FAFAFA]' : 'bg-bg'} py-20 md:py-28`}>
