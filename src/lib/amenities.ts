@@ -48,7 +48,9 @@ export type AmenityKey =
   // el usuario si se quedan en el catálogo maestro o se quitan. ──
   | 'coworking'
   | 'seguridad-24-7'
-  | 'estacionamiento-visitas';
+  | 'estacionamiento-visitas'
+  | 'camastros'
+  | 'sauna';
 
 export const AMENITY_CATALOG: Record<AmenityKey, { label: I18nText; icon: LucideIcon }> = {
   'areas-verdes':          { label: { es: 'Áreas verdes' },              icon: Trees },
@@ -84,6 +86,8 @@ export const AMENITY_CATALOG: Record<AmenityKey, { label: I18nText; icon: Lucide
   'coworking':             { label: { es: 'Área de coworking' },         icon: Laptop },
   'seguridad-24-7':        { label: { es: 'Seguridad 24/7' },            icon: ShieldCheck },
   'estacionamiento-visitas': { label: { es: 'Estacionamiento para visitas' }, icon: ParkingCircle },
+  'camastros':             { label: { es: 'Camastros' },                 icon: Sofa },
+  'sauna':                 { label: { es: 'Sauna' },                     icon: Flame },
 };
 
 // Lista para poblar un <select>/multi-select (Sanity: options.list de un

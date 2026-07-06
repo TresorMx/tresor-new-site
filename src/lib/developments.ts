@@ -787,6 +787,9 @@ export const developments: Development[] = [
       'Comunidad residencial sobre Av. Huayacán con 604 lotes unifamiliares, casa club y áreas deportivas, en una de las zonas de mayor plusvalía de Cancún.',
     // ── Capa de ficha (contenido tomado de zienna.mx) ──
     heroRender: '/desarrollos/zienna/portadazienna.jpg', // misma foto que el card
+    // La foto tiene mucho cielo vacío arriba; el acceso/portada (lo importante)
+    // queda hasta abajo — bottom evita que el crop se coma la escena real.
+    heroImagePosition: { mobile: 'bottom', desktop: 'bottom' },
     tagline: { es: 'La mejor ubicación con conectividad estratégica' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Av. Huayacán' },
@@ -799,13 +802,13 @@ export const developments: Development[] = [
       '/desarrollos/zienna/Andador-ppl-01.jpg',
       '/desarrollos/zienna/Áreas-comunes-01.jpg',
       '/desarrollos/zienna/Calle.jpg',
-      '/desarrollos/zienna/Parque-01.jpg',
+      '/desarrollos/zienna/Casa-club-general.jpg',
     ],
     amenitiesGallery: [
       '/desarrollos/zienna/Alberca.jpg',
-      '/desarrollos/zienna/Casa-club-general.jpg',
-      '/desarrollos/zienna/Co-work.jpg',
       '/desarrollos/zienna/Gym.jpg',
+      '/desarrollos/zienna/Parque-01.jpg',
+      '/desarrollos/zienna/Alberca-gym-01.jpg',
       '/desarrollos/zienna/Kidsclub.jpg',
       '/desarrollos/zienna/Multicancha.jpg',
     ],
@@ -827,24 +830,26 @@ export const developments: Development[] = [
       { es: 'Doble acceso y servicios subterráneos a pie de lote', en: 'Double access with underground utilities at each lot' },
     ],
     amenities: [
-      { key: 'areas-verdes', labelOverride: '40% áreas verdes naturales' },
-      { key: 'alberca-recreativa' },
-      { key: 'casa-club' },
-      { key: 'coworking' },
-      { key: 'cancha-padel', labelOverride: '2 canchas de pádel' },
-      { key: 'cancha-usos-multiples', labelOverride: 'Multicancha' },
+      { key: 'alberca-recreativa', labelOverride: 'Alberca' },
       { key: 'gym' },
+      { key: 'areas-verdes', labelOverride: 'Áreas naturales' },
+      { key: 'camastros' },
+      { key: 'restaurante-terraza', labelOverride: 'Restaurante' },
       { key: 'area-infantil' },
-      { key: 'pet-park' },
+      { key: 'sauna' },
+      { key: 'cancha-padel', labelOverride: 'Canchas de pádel' },
     ],
     floorPlans: [
       {
         slug: 'lote-residencial',
         label: { es: 'Lote residencial', en: 'Residential lot' },
+        image: '/desarrollos/zienna/floor-plans/Captura-de-pantalla-2026-02-10-a-las-5.42.39 p.m.png',
         specs: [
-          { key: 'superficie', label: { es: 'Superficie', en: 'Size' }, value: '200 – 444 m²' },
-          { key: 'promedio', label: { es: 'Promedio', en: 'Average' }, value: '227 m²' },
-          { key: 'medidas', label: { es: 'Medidas típicas', en: 'Typical dimensions' }, value: '10 m × 22.7 m' },
+          { key: 'superficie', label: { es: 'Lote desde', en: 'Lot from' }, value: '204 m²' },
+          { key: 'desplante', label: { es: 'Desplante', en: 'Footprint' }, value: '108.12 m²' },
+          { key: 'construccionMax', label: { es: 'Construcción máx.', en: 'Max. construction' }, value: '306 m²' },
+          { key: 'construccionMin', label: { es: 'Construcción mín.', en: 'Min. construction' }, value: '108.12 m²' },
+          { key: 'alturaMax', label: { es: 'Altura máx.', en: 'Max. height' }, value: '3 niveles' },
         ],
       },
     ],
@@ -925,16 +930,33 @@ export const developments: Development[] = [
       {
         slug: '2rec',
         label: { es: '2 Recámaras', en: '2 Bedrooms' },
+        shortLabel: { es: '2 Rec.', en: '2 Bed.' },
         specs: [
           { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
           { key: 'vista', label: { es: 'Vista', en: 'View' }, value: 'Mar Caribe o laguna Nichupté' },
         ],
       },
       {
-        slug: '3rec',
-        label: { es: '3 Recámaras', en: '3 Bedrooms' },
+        slug: '3rec-c',
+        label: { es: '3 Recámaras - C', en: '3 Bedrooms - C' },
+        shortLabel: { es: '3 Rec. C', en: '3 Bed. C' },
+        image: '/desarrollos/Blume/floor-plans/3rec-C.jpg',
         specs: [
           { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '3' },
+          { key: 'interior', label: { es: 'Interior', en: 'Interior' }, value: '233.45 m²' },
+          { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: '23.16 m²' },
+          { key: 'vista', label: { es: 'Vista', en: 'View' }, value: 'Mar Caribe o laguna Nichupté' },
+        ],
+      },
+      {
+        slug: '3rec-d',
+        label: { es: '3 Recámaras - D', en: '3 Bedrooms - D' },
+        shortLabel: { es: '3 Rec. D', en: '3 Bed. D' },
+        image: '/desarrollos/Blume/floor-plans/3rec-D.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '3' },
+          { key: 'interior', label: { es: 'Interior', en: 'Interior' }, value: '219.56 m²' },
+          { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: '23.53 m²' },
           { key: 'vista', label: { es: 'Vista', en: 'View' }, value: 'Mar Caribe o laguna Nichupté' },
         ],
       },
