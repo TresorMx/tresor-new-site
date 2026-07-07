@@ -480,7 +480,7 @@ export const developments: Development[] = [
     intent: ['vivir', 'invertir'],
     status: 'Preventa',
     image: '/desarrollos/ximena/12.-Vista-Principal.jpg',
-    href: '#',
+    href: '/desarrollos/ximena-wow-condos',
     featured: true,
     logo: '/desarrollos/ximena/Ximena.png',
     logoScale: 0.8,
@@ -489,6 +489,121 @@ export const developments: Development[] = [
     priceLabel: 'Desde $3,500,000 MXN',
     description:
       'Uno de los desarrollos más exclusivos de Cancún: departamentos de lujo de 1, 2 y 3 recámaras en Vía Cumbres, con diseño y amenidades de primer nivel.',
+    // ── Capa de ficha ──
+    heroRender: '/desarrollos/ximena/2.-Fachada-de-Noche.jpg',
+    heroLogoScale: 0.7,
+    tagline: { es: 'Diseño contemporáneo dentro de Vía Cumbres' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Vía Cumbres' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 63 m²', valueEn: 'From 63 sqm' },
+    ],
+    gallery: [
+      '/desarrollos/ximena/2.-Sala---Comedor_.jpg',
+      '/desarrollos/ximena/3.-Cocina.jpg',
+      '/desarrollos/ximena/1.-Recámara-Principal.jpg',
+      '/desarrollos/ximena/4.-Recámara-Doble.jpg',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/ximena/5.-Alberca.jpg',
+      '/desarrollos/ximena/10.-Kids-Club.jpg',
+      '/desarrollos/ximena/8.-Coworking.jpg',
+      '/desarrollos/ximena/9.-Yoga-Site.jpg',
+    ],
+    projectTitle: { es: 'Departamentos de 1 a 3 recámaras' },
+    projectTitleMuted: { es: 'y Garden Houses en Vía Cumbres' },
+    projectBody: [
+      {
+        es: 'Ximena es un desarrollo de Live Desarrollos que integra **diseño contemporáneo** y entorno natural dentro de Vía Cumbres, una de las zonas de mayor crecimiento y plusvalía de Cancún.',
+        en: 'Ximena is a development by Live Desarrollos that blends **contemporary design** with natural surroundings inside Vía Cumbres, one of Cancún\'s fastest-growing and highest-value areas.',
+      },
+      {
+        es: 'Departamentos de 1 a 3 recámaras, además de **Garden Houses y Penthouses**, pensados para brindar amplitud, iluminación natural y una distribución eficiente de cada espacio — para quienes buscan vivir o invertir con tranquilidad, seguridad y conectividad.',
+        en: 'Apartments from 1 to 3 bedrooms, plus **Garden Houses and Penthouses**, designed for spaciousness, natural light and an efficient layout in every unit — for those looking to live or invest with peace of mind, security and connectivity.',
+      },
+    ],
+    locationBullets: [
+      { es: 'Sobre avenida Huayacán, dentro de Vía Cumbres' },
+      { es: 'A 10 minutos del aeropuerto de Cancún' },
+      { es: 'A 15 minutos de la Zona Hotelera' },
+    ],
+    amenities: [
+      { key: 'alberca-recreativa', labelOverride: 'Alberca' },
+      { key: 'zona-yoga', labelOverride: 'Yoga Site' },
+      { key: 'gym' },
+      { key: 'coworking' },
+      { key: 'ludoteca', labelOverride: 'Kids Club' },
+      { key: 'asadores', labelOverride: 'Área pergolada con asadores' },
+      { key: 'lobby' },
+      { key: 'seguridad-24-7' },
+    ],
+    contentBlocks: [
+      {
+        eyebrow: { es: '— Conoce el desarrollo' },
+        title: { es: 'Parte de Vía Cumbres' },
+        titleMuted: { es: 'un desarrollo urbano de gran escala' },
+        description: {
+          es: 'Ximena está ubicado dentro de Vía Cumbres, un innovador desarrollo habitacional en una de las mejores zonas de Cancún, resultado de una **colaboración entre la iniciativa privada y el gobierno** que sienta precedente en desarrollo urbano responsable y sostenible en la región. Fue inaugurado oficialmente a finales de **noviembre de 2024** por la gobernadora Mara Lezama.',
+          en: 'Ximena sits inside Vía Cumbres, an innovative residential development in one of Cancún\'s best areas, the result of a **partnership between private investment and government** that sets a precedent for responsible, sustainable urban development in the region. It was officially inaugurated in **November 2024** by governor Mara Lezama.',
+        },
+        image: '/desarrollos/ximena/4.-Fachada-Áreas-Comunes.jpg',
+        layout: 'side-by-side',
+        imagePosition: 'right',
+      },
+    ],
+    floorPlans: [
+      {
+        slug: '1rec',
+        label: { es: '1 Recámara' },
+        image: '/desarrollos/ximena/floor-plans/1Rec.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '58 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '5 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '63 m²' },
+        ],
+      },
+      {
+        slug: '2rec',
+        label: { es: '2 Recámaras' },
+        image: '/desarrollos/ximena/floor-plans/2rec.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '78 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '5 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '83 m²' },
+        ],
+      },
+      {
+        slug: 'garden-2rec',
+        label: { es: 'Garden 2 Recámaras' },
+        shortLabel: { es: 'Garden 2 Rec.' },
+        image: '/desarrollos/ximena/floor-plans/Garden2Rec.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '78 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '20 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '98 m²' },
+        ],
+      },
+      {
+        slug: '3rec',
+        label: { es: '3 Recámaras' },
+        image: '/desarrollos/ximena/floor-plans/3rec.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '97 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '5 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '102 m²' },
+        ],
+      },
+      {
+        slug: 'ph-3rec',
+        label: { es: 'PH 3 Recámaras' },
+        image: '/desarrollos/ximena/floor-plans/ph.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '133 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '27 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '160 m²' },
+        ],
+      },
+    ],
   },
   {
     slug: 'loreta-wow-condos',
