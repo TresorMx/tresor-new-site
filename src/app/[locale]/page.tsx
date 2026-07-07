@@ -7,13 +7,22 @@ import RivieraCTA from '@/components/home/RivieraCTA';
 import SalesPartnerGrid from '@/components/home/SalesPartnerGrid';
 import LuisReveal from '@/components/home/LuisReveal';
 import HeroVideoSequence from '@/components/home/HeroVideoSequence';
-import { salesPartnerDevelopments, developDevelopments, withLivePrices, type Development } from '@/lib/developments';
+import {
+  getSalesPartnerDevelopmentsAsync,
+  getDevelopDevelopmentsAsync,
+  withLivePrices,
+  type Development,
+} from '@/lib/developments';
 import { EtherealShadow } from '@/components/ui/ethereal-shadow';
 
 export default async function HomePage() {
+  const [develop, salesPartner] = await Promise.all([
+    getDevelopDevelopmentsAsync(),
+    getSalesPartnerDevelopmentsAsync(),
+  ]);
   // Precio en vivo: para los desarrollos Tresor con ficha e inventario en
   // Sanity, el precio del card SIEMPRE refleja el mínimo disponible real.
-  const liveDevelopDevelopments = await withLivePrices(developDevelopments);
+  const liveDevelopDevelopments = await withLivePrices(develop);
 
   return (
     <>
@@ -28,7 +37,7 @@ export default async function HomePage() {
         <div aria-hidden className="absolute inset-x-0 bottom-0 top-16 -z-10 bg-bg" />
         <Intent developments={liveDevelopDevelopments} />
         <RivieraCTA />
-        <Portfolio />
+        <Portfolio developments={salesPartner} />
         <Positioning />
       </div>
     </>
@@ -148,7 +157,7 @@ function Intent({ developments }: { developments: Development[] }) {
 }
 
 /* ════════════════════════════ PORTFOLIO ════════════════════════════ */
-function Portfolio() {
+function Portfolio({ developments }: { developments: Development[] }) {
   return (
     <section
       id="portafolio"
@@ -160,7 +169,7 @@ function Portfolio() {
       }}
     >
       <div className="container-wrap">
-        <SalesPartnerGrid developments={salesPartnerDevelopments} showDeveloperFilter={true}>
+        <SalesPartnerGrid developments={developments} showDeveloperFilter={true}>
           <div>
             <span className="eyebrow eyebrow-accent font-bold">Sales Partner</span>
             <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">

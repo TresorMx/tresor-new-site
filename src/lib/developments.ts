@@ -1089,11 +1089,122 @@ export const developments: Development[] = [
   },
 ];
 
-// ── Selectores por relación (cada sección del home filtra de aquí) ──
-export const developDevelopments = developments.filter((d) => d.relationship === 'develop');
-export const salesPartnerDevelopments = developments.filter((d) => d.relationship === 'sales-partner');
+// ─────────────────────────────────────────────────────────────────────────────
+// Sanity: fusión con el `type: development` de Sanity Studio.
+// Mismo patrón que src/lib/data.ts (Plaza): USE_SANITY + cache en memoria con
+// TTL + fallback silencioso al estático. Un `development` de Sanity con el
+// mismo `slug` REEMPLAZA la entrada estática (Studio gana); slugs que solo
+// existen en Sanity se agregan al catálogo. Si Sanity no está configurado o
+// falla, todo sigue funcionando exactamente igual que antes (100% estático).
+// ─────────────────────────────────────────────────────────────────────────────
+import { cache } from 'react';
 
-export const featuredDevelopments = developments.filter((d) => d.featured);
+const USE_SANITY_DEV = !!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+
+function developerDocId(id: DeveloperId): string {
+  return `developer-${id.toLowerCase().replace(/\s+/g, '-')}`;
+}
+
+function developerIdFromDocId(docId: string | undefined): DeveloperId | undefined {
+  if (!docId) return undefined;
+  return (Object.keys(developers) as DeveloperId[]).find((id) => developerDocId(id) === docId);
+}
+
+let _mergedDevCache: Development[] | null = null;
+let _mergedDevCacheTs = 0;
+const DEV_CACHE_TTL = 60_000; // 1 minuto
+
+async function loadMergedDevelopments(): Promise<Development[]> {
+  if (!USE_SANITY_DEV) return developments;
+
+  const now = Date.now();
+  if (_mergedDevCache && now - _mergedDevCacheTs < DEV_CACHE_TTL) return _mergedDevCache;
+
+  try {
+    const { fetchAllSanityDevelopments, fetchAllSanityDevelopers } = await import('./sanity/developments');
+    const [sanityDevs, sanityDevelopers] = await Promise.all([
+      fetchAllSanityDevelopments(),
+      fetchAllSanityDevelopers(),
+    ]);
+
+    // Créditos de desarrollador: si el Studio trae datos para un id conocido,
+    // sobreescriben el registro estático `developers` (edición sin deploy).
+    for (const sd of sanityDevelopers) {
+      const id = developerIdFromDocId(sd.docId);
+      if (!id) continue;
+      developers[id] = {
+        ...developers[id],
+        name: sd.name || developers[id].name,
+        logoDark: sd.logoDark ?? developers[id].logoDark,
+        blockLabel: sd.blockLabel ? { es: sd.blockLabel, en: sd.blockLabelEn || sd.blockLabel } : developers[id].blockLabel,
+        credentials: sd.credentials ? { es: sd.credentials, en: sd.credentialsEn || sd.credentials } : developers[id].credentials,
+      };
+    }
+
+    const bySlug = new Map(developments.map((d) => [d.slug, d]));
+    for (const sd of sanityDevs) {
+      const { developerDocId: docId, ...devFields } = sd as Development & { developerDocId?: string };
+      const developerId = developerIdFromDocId(docId) ?? bySlug.get(sd.slug)?.developer ?? 'Tresor';
+      bySlug.set(sd.slug, { ...devFields, developer: developerId });
+    }
+
+    _mergedDevCache = Array.from(bySlug.values());
+    _mergedDevCacheTs = now;
+    return _mergedDevCache;
+  } catch (e) {
+    console.error('[developments] Sanity fetch failed, falling back to static', e);
+    return developments;
+  }
+}
+
+// API sincrónica — retorna el cache ya calentado (ver getMergedDevelopmentsAsync,
+// llamado en layout.tsx) o el estático puro si aún no se ha calentado. Mismo
+// truco que getStaticOrCached() en data.ts: los Server Components pueden usar
+// la versión async, los Client Components (ej. Header.tsx) siguen leyendo
+// sincrónicamente pero ya con datos frescos una vez que el layout resolvió.
+function getStaticOrCachedDevelopments(): Development[] {
+  return _mergedDevCache ?? developments;
+}
+
+// API async deduplicada con React.cache() — una sola llamada real por request
+// aunque layout/página/componentes la pidan en paralelo.
+export const getMergedDevelopmentsAsync = cache((): Promise<Development[]> => loadMergedDevelopments());
+
+export async function getDevelopDevelopmentsAsync(): Promise<Development[]> {
+  return (await getMergedDevelopmentsAsync()).filter((d) => d.relationship === 'develop');
+}
+
+export async function getSalesPartnerDevelopmentsAsync(): Promise<Development[]> {
+  return (await getMergedDevelopmentsAsync()).filter((d) => d.relationship === 'sales-partner');
+}
+
+export async function getFeaturedDevelopmentsAsync(): Promise<Development[]> {
+  return (await getMergedDevelopmentsAsync()).filter((d) => d.featured);
+}
+
+export async function getAllDevelopmentRouteSlugsAsync(): Promise<string[]> {
+  const merged = await getMergedDevelopmentsAsync();
+  return merged.filter((d) => !d.comingSoon).map((d) => plazaSlugFromHref(d.href)).filter((s): s is string => Boolean(s));
+}
+
+// ── Selectores por relación (cada sección del home filtra de aquí) ──
+// Sincrónicos, sobre el cache ya calentado por el layout (ver arriba). Son
+// FUNCIONES (no arrays precalculados) a propósito: si fueran `const`, se
+// evaluarían una sola vez al cargar el módulo —antes de que exista cualquier
+// request— y quedarían congelados con el catálogo 100% estático para
+// siempre. Como función, cada llamada relee el cache ya tibio del layout.
+// Se mantienen por compatibilidad con Client Components como Header.tsx.
+export function getDevelopDevelopments(): Development[] {
+  return getStaticOrCachedDevelopments().filter((d) => d.relationship === 'develop');
+}
+
+export function getSalesPartnerDevelopments(): Development[] {
+  return getStaticOrCachedDevelopments().filter((d) => d.relationship === 'sales-partner');
+}
+
+export function getFeaturedDevelopments(): Development[] {
+  return getStaticOrCachedDevelopments().filter((d) => d.featured);
+}
 
 export const cities: { name: City; tagline: string }[] = [
   { name: 'Cancún', tagline: 'Plusvalía y vida urbana frente al Caribe' },
@@ -1102,7 +1213,7 @@ export const cities: { name: City; tagline: string }[] = [
 ];
 
 export function countByCity(city: City): number {
-  return developments.filter((d) => d.city === city).length;
+  return getStaticOrCachedDevelopments().filter((d) => d.city === city).length;
 }
 
 export function formatPrice(d: Development): string | null {
@@ -1174,11 +1285,15 @@ export function getReservationAmount(dev: Development): number {
 // `routeSlug` es el slug de la URL (ej. 'long-island'), no el slug interno.
 // ─────────────────────────────────────────────────────────────────────────────
 export async function getDevelopment(routeSlug: string): Promise<Development | undefined> {
-  const base = developments.find((d) => plazaSlugFromHref(d.href) === routeSlug);
+  // `base` sale del catálogo fusionado (estático + Sanity `development`) —
+  // si el Studio tiene un doc para este slug, GANA sobre developments.ts.
+  const catalog = await getMergedDevelopmentsAsync();
+  const base = catalog.find((d) => plazaSlugFromHref(d.href) === routeSlug);
   if (!base) return undefined;
 
-  // Data rica de ficha (hoy Plaza/plazas.json; mañana Sanity). Si no existe
-  // (ej. un Sales Partner sin ficha aún), regresamos solo la capa de card.
+  // Data rica de ficha Tresor (hoy Plaza/plazas.json, ya Sanity vía queries.ts).
+  // Si no existe (Sales Partner: su ficha completa ya vive en `base` arriba,
+  // estática o Sanity), regresamos solo la capa de card+ficha ya resuelta.
   const plaza = await getPlazaBySlugAsync(routeSlug);
   if (!plaza) return base;
 

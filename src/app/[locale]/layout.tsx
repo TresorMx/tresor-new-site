@@ -14,6 +14,7 @@ import MetaPixel from '@/components/MetaPixel';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { locales, type Locale } from '@/i18n';
 import { getPlazasAsync } from '@/lib/data';
+import { getMergedDevelopmentsAsync } from '@/lib/developments';
 import '@/styles/globals.css';
 
 // force-dynamic: cada visita hace un fetch fresco a Sanity.
@@ -149,6 +150,9 @@ export default async function LocaleLayout({
 
   // Carga plazas desde Sanity (deduplicado con React.cache — una sola llamada por request)
   await getPlazasAsync();
+  // Ídem para desarrollos (Sales Partner): calienta el cache que Header.tsx
+  // (Client Component) lee sincrónicamente vía getDevelopDevelopments()/countByCity().
+  await getMergedDevelopmentsAsync();
 
   const messages = await getMessages();
 

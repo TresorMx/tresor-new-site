@@ -23,7 +23,7 @@ import FichaFloorPlans from '@/components/ficha/FichaFloorPlans';
 import ReservaRapidaForm from '@/components/ficha/ReservaRapidaForm';
 import RelatedDevelopments from '@/components/ficha/RelatedDevelopments';
 import FichaContentBlock from '@/components/ficha/FichaContentBlock';
-import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount, developments } from '@/lib/developments';
+import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount, getMergedDevelopmentsAsync } from '@/lib/developments';
 
 export async function generateStaticParams() {
   // Tresor (con ficha en Sanity) + Sales Partner (solo developments.ts) —
@@ -154,7 +154,8 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   const heroImg = dev.heroRender ?? dev.image;
   const location = dev.location ?? plaza?.location;
   const developer = developers[dev.developer] ?? developers.Tresor;
-  const relatedDevelopments = developments.filter(
+  const allDevelopments = await getMergedDevelopmentsAsync();
+  const relatedDevelopments = allDevelopments.filter(
     (d) => d.developer === dev.developer && d.slug !== dev.slug && !d.comingSoon
   );
 

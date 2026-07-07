@@ -7,7 +7,7 @@ import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/navigation';
 import { ChevronDown, ArrowUpRight, ArrowRight, Building2, LandPlot, Store, MapPin, Phone, Mail } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { developDevelopments, countByCity, type City } from '@/lib/developments';
+import { getDevelopDevelopments, countByCity, type City } from '@/lib/developments';
 
 const corporate = [
   { href: '#', label: 'Desarrollo' },
@@ -303,7 +303,7 @@ export default function Header() {
 /* ════════════════ Mega-menú Propiedades ════════════════ */
 function PropiedadesMenu() {
   // Destacados: solo desarrollos propios (WE DEVELOP), sin los "próximamente", máx. 2.
-  const destacados = developDevelopments.filter((d) => !d.comingSoon).slice(0, 2);
+  const destacados = getDevelopDevelopments().filter((d) => !d.comingSoon).slice(0, 2);
   // Ciudades: solo las que tienen desarrollos activos.
   const activeCities = cityList.filter((c) => countByCity(c) > 0);
 

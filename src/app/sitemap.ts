@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getActivePlazasAsync } from '@/lib/data';
-import { allDevelopmentRouteSlugs } from '@/lib/developments';
+import { getAllDevelopmentRouteSlugsAsync } from '@/lib/developments';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tresor.mx';
 
@@ -13,7 +13,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Partner) — no solo los que tienen Plaza en Sanity. Si el sitemap solo
   // trae Tresor, Google nunca descubre las fichas de Sales Partner.
   const plazaSlugs = new Set(plazas.map((p) => p.slug));
-  const devSlugs = new Set(allDevelopmentRouteSlugs());
+  const devSlugs = new Set(await getAllDevelopmentRouteSlugsAsync());
   const allSlugs = Array.from(new Set([...plazaSlugs, ...devSlugs]));
 
   const staticRoutes: MetadataRoute.Sitemap = [
