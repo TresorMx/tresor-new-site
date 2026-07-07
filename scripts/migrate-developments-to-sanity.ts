@@ -84,6 +84,13 @@ function developerDocId(id: DeveloperId) {
   return `developer-${id.toLowerCase().replace(/\s+/g, '-')}`;
 }
 
+// --force: sin esto, el script NUNCA pisa un documento que ya existe en
+// Sanity — solo crea los que faltan. Por defecto es de un solo uso por
+// slug/documento: una vez migrado, la Studio es la fuente de verdad y
+// developments.ts deja de sincronizarse automáticamente hacia Sanity. Ver
+// nota larga en migrateDevelopment() sobre POR QUÉ existe esta protección.
+const FORCE = process.argv.includes('--force');
+
 async function migrateDevelopers(): Promise<Record<DeveloperId, string>> {
   console.log('📇 Desarrolladores');
   const ids = Object.keys(developers) as DeveloperId[];
@@ -92,8 +99,14 @@ async function migrateDevelopers(): Promise<Record<DeveloperId, string>> {
   for (const id of ids) {
     const dev = developers[id];
     const docId = developerDocId(id);
-    const logoDark = await uploadImage(dev.logoDark);
+    map[id] = docId;
 
+    if (!FORCE && (await client.getDocument(docId))) {
+      console.log(`  ⏭️  ${dev.name} ya existe en Sanity, se omite (usa --force para sobreescribir)`);
+      continue;
+    }
+
+    const logoDark = await uploadImage(dev.logoDark);
     const doc: Record<string, unknown> = {
       _id: docId,
       _type: 'developer',
@@ -107,7 +120,6 @@ async function migrateDevelopers(): Promise<Record<DeveloperId, string>> {
     stripUndefined(doc);
 
     await client.createOrReplace(doc);
-    map[id] = docId;
     console.log(`  ✅ ${dev.name}`);
   }
   return map;
@@ -115,6 +127,21 @@ async function migrateDevelopers(): Promise<Record<DeveloperId, string>> {
 
 async function migrateDevelopment(dev: Development, devDocId: string) {
   console.log(`\n🏗️  ${dev.name} (${dev.slug})`);
+
+  // PROTECCIÓN CRÍTICA: una vez que un desarrollo vive en Sanity, la Studio
+  // es la fuente de verdad — el usuario edita ahí directo (ubicación, fotos
+  // de amenidades extra, etc.) sin volver a tocar developments.ts. Si este
+  // script corriera createOrReplace() sobre un doc que YA existe, borra
+  // TODO lo que se haya editado en Studio y no exista en el TS estático
+  // (pasó de verdad: se perdieron coordenadas y una foto de amenidades de
+  // Esther/Blume por re-correr esto al migrar Ximena). Por default se omite
+  // cualquier documento ya existente; usa --force solo si de verdad quieres
+  // pisar Studio con el estático (raro, y avisa al usuario antes).
+  const docId = `development-${dev.slug}`;
+  if (!FORCE && (await client.getDocument(docId))) {
+    console.log('  ⏭️  Ya existe en Sanity, se omite (usa --force para sobreescribir)');
+    return;
+  }
 
   const image = await uploadImage(dev.image);
   const logo = await uploadImage(dev.logo);
