@@ -50,7 +50,8 @@ export type AmenityKey =
   | 'seguridad-24-7'
   | 'estacionamiento-visitas'
   | 'camastros'
-  | 'sauna';
+  | 'sauna'
+  | 'lobby';
 
 export const AMENITY_CATALOG: Record<AmenityKey, { label: I18nText; icon: LucideIcon }> = {
   'areas-verdes':          { label: { es: 'Áreas verdes' },              icon: Trees },
@@ -88,6 +89,7 @@ export const AMENITY_CATALOG: Record<AmenityKey, { label: I18nText; icon: Lucide
   'estacionamiento-visitas': { label: { es: 'Estacionamiento para visitas' }, icon: ParkingCircle },
   'camastros':             { label: { es: 'Camastros' },                 icon: Sofa },
   'sauna':                 { label: { es: 'Sauna' },                     icon: Flame },
+  'lobby':                 { label: { es: 'Lobby' },                     icon: Home },
 };
 
 // Lista para poblar un <select>/multi-select (Sanity: options.list de un

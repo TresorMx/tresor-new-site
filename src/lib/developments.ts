@@ -339,7 +339,7 @@ export const developments: Development[] = [
     intent: ['vivir', 'invertir'],
     status: 'Preventa',
     image: '/desarrollos/esther/Fachada-frontal.jpg',
-    href: '#',
+    href: '/desarrollos/esther-wow-condos',
     featured: true,
     logo: '/desarrollos/esther/Esther.svg',
     logoScale: 0.8,
@@ -348,6 +348,125 @@ export const developments: Development[] = [
     priceLabel: 'Desde $3,500,000 MXN',
     description:
       'Departamentos en preventa de 1, 2 y 3 recámaras en Vía Cumbres, la zona de mayor crecimiento y plusvalía de Cancún, con amenidades de primer nivel.',
+    // ── Capa de ficha ──
+    heroRender: '/desarrollos/esther/Vista-dron.jpg',
+    heroLogoScale: 0.7,
+    tagline: { es: 'Vive sobre avenida Huayacán, dentro de Vía Cumbres' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Vía Cumbres' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 67 m²', valueEn: 'From 67 sqm' },
+    ],
+    gallery: [
+      '/desarrollos/esther/Sala-comedor.jpg',
+      '/desarrollos/esther/27.-Cocina.jpg',
+      '/desarrollos/esther/Recámara-principal.jpg',
+      '/desarrollos/esther/Recámara-secundaria.jpg',
+    ],
+    projectTitle: { es: 'Departamentos de 1 a 3 recámaras' },
+    projectTitleMuted: { es: 'en Vía Cumbres' },
+    projectBody: [
+      {
+        es: 'Esther es un desarrollo de Live Desarrollos ubicado sobre **avenida Huayacán**, dentro de Vía Cumbres, una de las zonas de mayor crecimiento y plusvalía de Cancún.',
+        en: 'Esther is a development by Live Desarrollos located on **Avenida Huayacán**, inside Vía Cumbres, one of Cancún\'s fastest-growing and highest-value areas.',
+      },
+      {
+        es: 'Departamentos desde **67 m²**, con opciones de 1, 2 y 3 recámaras y penthouses con rooftop propio, pensados para quienes buscan vivir o invertir a minutos del aeropuerto y de la Zona Hotelera.',
+        en: 'Apartments from **67 sqm**, with 1, 2 and 3-bedroom options plus penthouses with private rooftops, designed for those looking to live or invest minutes from the airport and the Hotel Zone.',
+      },
+    ],
+    locationBullets: [
+      { es: 'Sobre avenida Huayacán, dentro de Vía Cumbres' },
+      { es: 'A 10 minutos del aeropuerto de Cancún' },
+      { es: 'A 15 minutos de la Zona Hotelera' },
+    ],
+    amenities: [
+      { key: 'alberca-recreativa', labelOverride: 'Alberca' },
+      { key: 'area-lounge', labelOverride: 'Media Room' },
+      { key: 'lobby' },
+      { key: 'asadores', labelOverride: 'Área pergolada con asadores' },
+      { key: 'seguridad-24-7' },
+    ],
+    floorPlans: [
+      {
+        slug: '1rec',
+        label: { es: '1 Recámara' },
+        image: '/desarrollos/esther/floor plans/1Rec.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '1' },
+          { key: 'banos', label: { es: 'Baños' }, value: '1' },
+          { key: 'balcon', label: { es: 'Balcón' }, value: 'Sí' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '67 m²' },
+        ],
+      },
+      {
+        slug: '2rec',
+        label: { es: '2 Recámaras' },
+        image: '/desarrollos/esther/floor plans/2Rec.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '2' },
+          { key: 'banos', label: { es: 'Baños' }, value: '2' },
+          { key: 'balcon', label: { es: 'Balcón' }, value: 'Sí' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '80 m²' },
+        ],
+      },
+      {
+        slug: 'garden-house-2rec',
+        label: { es: 'Garden House | 2 Recámaras' },
+        shortLabel: { es: 'Garden House 2 Rec.' },
+        image: '/desarrollos/esther/floor plans/GardenHouse-2Rec.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '2' },
+          { key: 'banos', label: { es: 'Baños' }, value: '2' },
+          { key: 'balcon', label: { es: 'Balcón' }, value: 'Sí' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '96 m²' },
+        ],
+      },
+      {
+        slug: '3rec',
+        label: { es: '3 Recámaras' },
+        image: '/desarrollos/esther/floor plans/3Rec.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '3' },
+          { key: 'banos', label: { es: 'Baños' }, value: '2' },
+          { key: 'balcon', label: { es: 'Balcón' }, value: 'Sí' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '163 m²' },
+        ],
+      },
+      {
+        slug: 'ph-1rec',
+        label: { es: 'PH 1 Recámara' },
+        image: '/desarrollos/esther/floor plans/PH1Rec.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '1' },
+          { key: 'banos', label: { es: 'Baños' }, value: '1' },
+          { key: 'balcon', label: { es: 'Balcón + Rooftop' }, value: 'Sí' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '96 m²' },
+        ],
+      },
+      {
+        slug: 'ph-2rec',
+        label: { es: 'PH 2 Recámaras' },
+        image: '/desarrollos/esther/floor plans/PH2Rec.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '2' },
+          { key: 'banos', label: { es: 'Baños' }, value: '2' },
+          { key: 'balcon', label: { es: 'Balcón + Rooftop' }, value: 'Sí' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '109 m²' },
+        ],
+      },
+      {
+        slug: 'ph-3rec',
+        label: { es: 'PH 3 Recámaras' },
+        image: '/desarrollos/esther/floor plans/PH3Rec-1.jpg',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '3' },
+          { key: 'banos', label: { es: 'Baños' }, value: '2' },
+          { key: 'balcon', label: { es: 'Balcón' }, value: 'Sí' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '192 m²' },
+        ],
+      },
+    ],
   },
   {
     slug: 'ximena-wow-condos',
