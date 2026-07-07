@@ -294,12 +294,16 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
 
         <div className="relative z-10 flex h-full items-center justify-center pt-[72px]">
           {dev.logo ? (
-            <Image
-              src={dev.logo}
-              alt={dev.name}
-              width={800}
-              height={280}
-              className="h-[var(--logo-h-mobile)] w-auto drop-shadow-[0_12px_40px_rgba(0,0,0,0.4)] md:h-[var(--logo-h-desktop)]"
+            // `fill` + `object-contain` (en vez de width/height fijos tipo
+            // 800x280) — con width/height fijos el navegador usa ESA
+            // proporción para calcular el ancho automático, sin importar la
+            // proporción real del archivo. Un logo angosto y ancho (ej.
+            // Ximena, 706x133 ≈ 5.3:1) se aplastaba para forzarlo a la
+            // proporción de Quattro (2.86:1) y se veía deformado/gigante
+            // pase lo que pase con `heroLogoScale`. `object-contain` respeta
+            // SIEMPRE la proporción real de cada logo, sea cual sea.
+            <div
+              className="relative h-[var(--logo-h-mobile)] w-[min(78vw,420px)] md:h-[var(--logo-h-desktop)] md:w-[min(60vw,640px)]"
               style={{
                 // Tamaño base original (Quattro); escalado por desarrollo vía
                 // `heroLogoScale` (1 = sin cambio) — independiente del logo del
@@ -309,8 +313,15 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
                 ['--logo-h-desktop' as string]: `clamp(${(140 * (dev.heroLogoScale ?? 1)).toFixed(0)}px, ${(26 * (dev.heroLogoScale ?? 1)).toFixed(1)}vh, ${(260 * (dev.heroLogoScale ?? 1)).toFixed(0)}px)`,
                 ['--logo-h-mobile' as string]: `clamp(${(140 * (dev.heroLogoScaleMobile ?? (dev.heroLogoScale ?? 1) * 0.7)).toFixed(0)}px, ${(26 * (dev.heroLogoScaleMobile ?? (dev.heroLogoScale ?? 1) * 0.7)).toFixed(1)}vh, ${(260 * (dev.heroLogoScaleMobile ?? (dev.heroLogoScale ?? 1) * 0.7)).toFixed(0)}px)`,
               } as CSSProperties}
-              priority
-            />
+            >
+              <Image
+                src={dev.logo}
+                alt={dev.name}
+                fill
+                className="object-contain drop-shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
+                priority
+              />
+            </div>
           ) : (
             <h1 className="h-display text-center text-[clamp(56px,10vw,160px)] text-white">{dev.name}</h1>
           )}
