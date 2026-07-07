@@ -40,7 +40,7 @@ const config: Config = {
       },
       fontFamily: {
         serif: ['var(--font-cormorant)', 'Cormorant Garamond', 'serif'],
-        sans: ['Switzer', 'var(--font-manrope)', 'Manrope', 'system-ui', 'sans-serif'],
+        sans: ['var(--font-manrope)', 'Manrope', 'system-ui', 'sans-serif'],
         mono: ['var(--font-jetbrains)', 'JetBrains Mono', 'monospace'],
         display: ['var(--font-montserrat)', 'Montserrat', 'sans-serif'],
       },
