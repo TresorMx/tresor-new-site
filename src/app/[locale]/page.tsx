@@ -6,7 +6,6 @@ import DevelopmentCarousel from '@/components/home/DevelopmentCarousel';
 import RivieraCTA from '@/components/home/RivieraCTA';
 import SalesPartnerGrid from '@/components/home/SalesPartnerGrid';
 import LuisReveal from '@/components/home/LuisReveal';
-import HeroVideoSequence from '@/components/home/HeroVideoSequence';
 import {
   getSalesPartnerDevelopmentsAsync,
   getDevelopDevelopmentsAsync,
@@ -61,10 +60,20 @@ function Hero() {
           style={{ width: '100%', height: '100%' }}
         />
       </div>
-      {/* Capa 2: foto de respaldo + secuencia de video A→B→C, ambas a un
-          único 0.7 de opacidad (el video vive dentro del mismo contenedor
-          para no sumar transparencias con la foto y evitar doble exposición). */}
-      <HeroVideoSequence />
+      {/* Capa 2: foto estática con zoom lento (Ken Burns, CSS puro — sin JS,
+          sin video, cero contención de ancho de banda con el LCP). El video
+          se quitó porque competía por banda ancha con esta misma foto y
+          disparaba el LCP a +10s en móvil; vuelve como carrusel de fotos. */}
+      <div className="absolute inset-0 overflow-hidden opacity-70">
+        <Image
+          src="/renders/long-island/WEB.jpg"
+          alt="Tresor Real Estate — Riviera Maya"
+          fill
+          priority
+          sizes="100vw"
+          className="animate-hero-zoom object-cover"
+        />
+      </div>
       {/* Capa 3: gradiente oscuro para legibilidad */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70" />
 
