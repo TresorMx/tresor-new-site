@@ -78,17 +78,22 @@ function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70" />
 
       <div className="container-wrap relative z-10 w-full pb-20 md:pb-24">
-        <RevealOnScroll>
-          <h1
-            className="mt-6 w-full text-center text-[clamp(22px,4vw,58px)] leading-[0.95] tracking-tight"
-            style={{ fontFamily: 'Javacom, serif' }}
-          >
-            The Art of Luxury Living
-          </h1>
-          <p className="mt-7 w-full text-center text-[clamp(11px,1.1vw,16px)] font-bold uppercase tracking-[0.2em] text-white">
-            We develop · We manage · We are your Sales Partner
-          </p>
-        </RevealOnScroll>
+        {/* SIN RevealOnScroll a propósito: es el candidato a LCP del hero (ya
+            está en el viewport al cargar). RevealOnScroll arranca en
+            opacity:0 y depende de hidratar JS + IntersectionObserver +
+            transición de 1s para hacerse visible — eso retrasaba el LCP
+            +10s en móvil aunque la foto de fondo cargara rápido. El fade al
+            hacer scroll tiene sentido para contenido debajo del fold, no
+            para lo primero que se pinta. */}
+        <h1
+          className="mt-6 w-full text-center text-[clamp(22px,4vw,58px)] leading-[0.95] tracking-tight"
+          style={{ fontFamily: 'Javacom, serif' }}
+        >
+          The Art of Luxury Living
+        </h1>
+        <p className="mt-7 w-full text-center text-[clamp(11px,1.1vw,16px)] font-bold uppercase tracking-[0.2em] text-white">
+          We develop · We manage · We are your Sales Partner
+        </p>
 
         {/* Fuera de RevealOnScroll a propósito: su fade de opacidad se
             multiplicaba con la transparencia propia del botón glass y se
