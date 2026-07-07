@@ -12,7 +12,6 @@ import {
   withLivePrices,
   type Development,
 } from '@/lib/developments';
-import { EtherealShadow } from '@/components/ui/ethereal-shadow';
 
 export default async function HomePage() {
   const [develop, salesPartner] = await Promise.all([
@@ -50,17 +49,7 @@ function Hero() {
       className="sticky top-0 z-0 -mt-[104px] flex h-[100svh] flex-col justify-center overflow-hidden bg-bg-deep pt-[104px] text-bg"
       style={{ transform: 'translateZ(0)', WebkitBackfaceVisibility: 'hidden' }}
     >
-      {/* Capa 1: fondo animado ethereal */}
-      <div className="absolute inset-0">
-        <EtherealShadow
-          color="rgba(250, 180, 19, 0.9)"
-          animation={{ scale: 80, speed: 85 }}
-          noise={{ opacity: 0.4, scale: 1.2 }}
-          sizing="fill"
-          style={{ width: '100%', height: '100%' }}
-        />
-      </div>
-      {/* Capa 2: foto estática con zoom lento (Ken Burns, CSS puro — sin JS,
+      {/* Capa 1: foto estática con zoom lento (Ken Burns, CSS puro — sin JS,
           sin video, cero contención de ancho de banda con el LCP). El video
           se quitó porque competía por banda ancha con esta misma foto y
           disparaba el LCP a +10s en móvil; vuelve como carrusel de fotos. */}
@@ -74,7 +63,7 @@ function Hero() {
           className="animate-hero-zoom object-cover"
         />
       </div>
-      {/* Capa 3: gradiente oscuro para legibilidad */}
+      {/* Capa 2: gradiente oscuro para legibilidad */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/70" />
 
       <div className="container-wrap relative z-10 w-full pb-20 md:pb-24">
