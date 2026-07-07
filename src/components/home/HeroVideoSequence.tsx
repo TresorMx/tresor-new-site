@@ -35,13 +35,42 @@ export default function HeroVideoSequence() {
       else video.addEventListener('canplay', attempt, { once: true });
     };
 
-    active.src = SEQUENCE[0];
-    active.load();
-    tryPlay(active);
+    // La foto de respaldo (`priority`) es el candidato a LCP del hero — DEBE
+    // pintar primero. Si arrancamos las descargas de los 2 videos (~3.5MB)
+    // en el mismo tick que el mount, compiten por ancho de banda con esa
+    // foto en conexiones lentas y el LCP se dispara varios segundos (medido:
+    // FCP 1.1s pero LCP 11s tras quitar el @import bloqueante — el cuello de
+    // botella pasó a ser esto). Se difiere el arranque del video activo a
+    // cuando el navegador esté libre, y el clip "siguiente" ni se toca hasta
+    // que el activo ya esté reproduciendo (nunca 2 descargas grandes a la vez).
+    const startActive = () => {
+      active.src = SEQUENCE[0];
+      active.load();
+      tryPlay(active);
+    };
+    const hasIdleCallback = typeof window.requestIdleCallback === 'function';
+    const idleId = hasIdleCallback
+      ? window.requestIdleCallback(startActive, { timeout: 1500 })
+      : window.setTimeout(startActive, 200);
+
+    return () => {
+      if (hasIdleCallback) window.cancelIdleCallback(idleId as number);
+      else window.clearTimeout(idleId as number);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // El clip "siguiente" solo se precarga una vez que el activo ya está
+  // reproduciendo — así nunca hay 2 descargas de video grandes compitiendo
+  // por ancho de banda al mismo tiempo.
+  useEffect(() => {
+    if (!ready) return;
+    const next = refs[1].current;
+    if (!next || next.src) return;
     next.src = SEQUENCE[1];
     next.load();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [ready]);
 
   function handleEnded(slot: 0 | 1) {
     if (slot !== activeSlot) return; // el slot en espera no dispara nada
