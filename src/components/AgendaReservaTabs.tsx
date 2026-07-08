@@ -74,15 +74,28 @@ export default function AgendaReservaTabs({
           />
         </div>
 
-        <p className="mx-auto mt-6 max-w-xl text-[17px] font-normal text-ink">
+        <p
+          className={`mx-auto mt-6 text-[17px] font-normal text-ink ${
+            tab === 0 ? 'max-w-xl' : 'max-w-xl md:max-w-3xl'
+          }`}
+        >
           {tab === 0
             ? agendaDesc
             : t.rich('apartaIntro', {
                 devName: displayName,
                 amount: `${formatMXN(reservationAmount)} MXN`,
                 bold: (chunks) => <span className="font-semibold text-ink">{chunks}</span>,
+                // `block` fuerza el salto de línea SIEMPRE antes de "100%
+                // Reembolsable", sin importar el ancho — antes solo tenía
+                // whitespace-nowrap, así que si sobraba espacio en la línea
+                // anterior, el final de la oración (ej. "Wow Condos") se
+                // metía en la misma línea que el "100%". El md:max-w-3xl de
+                // arriba evita que esa oración se corte a la mitad en
+                // desktop; en mobile sigue envolviendo en varias líneas.
                 yellow: (chunks) => (
-                  <span className="whitespace-nowrap text-[1.5em] font-semibold text-accent">{chunks}</span>
+                  <span className="mt-1 block whitespace-nowrap text-[1.5em] font-semibold text-accent">
+                    {chunks}
+                  </span>
                 ),
               })}
         </p>
