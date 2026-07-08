@@ -5,7 +5,7 @@ import { Link } from '@/navigation';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/navigation';
-import { ChevronDown, ArrowUpRight, ArrowRight, Building2, LandPlot, Store, MapPin, Phone, Mail } from 'lucide-react';
+import { ChevronDown, ArrowUpRight, ArrowRight, Building2, LandPlot, Store, MapPin, Phone, Mail, Globe } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getDevelopDevelopments, countByCity, type City } from '@/lib/developments';
 
@@ -36,6 +36,11 @@ export default function Header() {
   const [theme, setTheme] = useState<'dark' | 'light'>(isHome ? 'dark' : 'light');
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
+  // Acordeón del panel móvil — independiente de `openMenu` (ese es hover-driven
+  // para desktop; este es tap-driven). Cuando lleguemos a más items de nav con
+  // submenú, cada uno se agrega aquí como una fila de acordeón más — el panel
+  // ya está armado para escalar sin rediseñarlo de nuevo.
+  const [mobileSection, setMobileSection] = useState<string | null>(null);
   const [hovered, setHovered] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -88,13 +93,15 @@ export default function Header() {
   useEffect(() => {
     setMobileOpen(false);
     setOpenMenu(null);
+    setMobileSection(null);
   }, [pathname]);
 
   const scrolled = scrollY > 8;
   const menuActive = openMenu !== null;
   // Transparente/oscura sobre secciones oscuras; clara sobre secciones claras
-  // (o cuando el mega-menú está abierto, para contrastar con el panel blanco).
-  const dark = theme === 'dark' && !menuActive && !hovered;
+  // (o cuando el mega-menú o el panel móvil están abiertos, para contrastar
+  // con el panel blanco).
+  const dark = theme === 'dark' && !menuActive && !hovered && !mobileOpen;
 
   function openNow(id: string) {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -246,7 +253,7 @@ export default function Header() {
             </div>
           </div>
 
-          {/* ─── Mega-menú ─── */}
+          {/* ─── Mega-menú (desktop) ─── */}
           <div
             className={cn(
               'pointer-events-none absolute inset-x-0 top-full hidden px-[max(14px,4vw)] transition-all duration-300 ease-soft md:block',
@@ -261,42 +268,120 @@ export default function Header() {
               {openMenu === 'propiedades' && <PropiedadesMenu />}
             </div>
           </div>
+
+          {/* ─── Panel móvil (acordeón) — mismo lenguaje visual que el
+              mega-menú desktop (panel blanco flotante, no un takeover negro
+              de pantalla completa). Cada item de nav con submenú es una fila
+              de acordeón; hoy solo "Propiedades", pero agregar el siguiente
+              (ej. "Nosotros", "Desarrollos") es solo otro <MobileAccordionRow>
+              más en esta misma lista — el patrón ya escala. ─── */}
+          <div
+            className={cn(
+              'absolute inset-x-0 top-full px-[max(14px,4vw)] transition-all duration-300 ease-soft md:hidden',
+              mobileOpen ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0',
+            )}
+          >
+            <div className="mx-auto max-w-wrap pt-3">
+              <div className="max-h-[calc(100svh-140px)] overflow-y-auto overscroll-contain rounded-[26px] bg-white text-ink shadow-[0_30px_80px_rgba(0,0,0,0.18)] ring-1 ring-black/[0.04]">
+                <MobileAccordionRow
+                  label="Propiedades"
+                  open={mobileSection === 'propiedades'}
+                  onToggle={() => setMobileSection((v) => (v === 'propiedades' ? null : 'propiedades'))}
+                >
+                  <PropiedadesMenuMobile />
+                </MobileAccordionRow>
+
+                <Link
+                  href="/brokers"
+                  className="flex items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
+                >
+                  Brokers
+                  <ArrowUpRight size={16} strokeWidth={1.8} className="text-ink-3" />
+                </Link>
+
+                {/* Idioma — antes solo existía en desktop (sm:inline-flex),
+                    en mobile no había forma de cambiarlo. */}
+                <div className="flex items-center justify-between border-t border-line px-6 py-5">
+                  <span className="flex items-center gap-2 text-[13px] font-medium text-ink-3">
+                    <Globe size={16} strokeWidth={1.6} />
+                    Idioma
+                  </span>
+                  <div className="inline-flex items-center gap-px rounded-full bg-black/[0.05] p-[3px]" role="group" aria-label="Idioma">
+                    {(['es', 'en'] as const).map((lng) => (
+                      <button
+                        key={lng}
+                        onClick={() => switchLocale(lng)}
+                        aria-pressed={locale === lng}
+                        className={cn(
+                          'rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] transition-colors',
+                          locale === lng ? 'bg-accent text-ink' : 'text-ink-3 hover:text-ink',
+                        )}
+                      >
+                        {lng}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="border-t border-line p-6">
+                  <Link
+                    href="/agenda"
+                    className="flex w-full items-center justify-center rounded-full bg-accent px-6 py-3.5 text-[11px] font-bold uppercase tracking-caps text-ink"
+                  >
+                    Asesoría sin costo
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </header>
 
-      {/* ─── Overlay con blur del fondo ─── */}
+      {/* ─── Overlay con blur del fondo (mega-menú desktop + panel móvil) ─── */}
       <div
         aria-hidden
         onMouseEnter={scheduleClose}
+        onClick={() => setMobileOpen(false)}
         className={cn(
           'fixed inset-0 z-40 bg-black/15 backdrop-blur-md transition-opacity duration-300',
-          menuActive ? 'opacity-100' : 'pointer-events-none opacity-0',
+          menuActive || mobileOpen ? 'opacity-100' : 'pointer-events-none opacity-0',
         )}
       />
-
-      {/* ─── Menú móvil ─── */}
-      {mobileOpen && (
-        <div className="fixed inset-0 top-[60px] z-40 flex flex-col bg-bg-deep p-8 text-bg md:hidden">
-          <Link href="/#portafolio" className="border-b border-white/10 py-5 font-serif text-3xl font-light italic">
-            Propiedades
-          </Link>
-          {corporate.map((l) => (
-            <Link key={l.label} href={l.href} className="border-b border-white/10 py-5 font-serif text-3xl font-light italic">
-              {l.label}
-            </Link>
-          ))}
-          <Link href="/brokers" className="border-b border-white/10 py-5 font-serif text-3xl font-light italic text-accent">
-            Brokers
-          </Link>
-          <Link
-            href="/agenda"
-            className="mt-8 inline-flex w-fit items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-[11px] font-bold uppercase tracking-caps text-ink"
-          >
-            Asesoría sin costo
-          </Link>
-        </div>
-      )}
     </>
+  );
+}
+
+/* ════════════════ Fila de acordeón (panel móvil) ════════════════ */
+function MobileAccordionRow({
+  label,
+  open,
+  onToggle,
+  children,
+}: {
+  label: string;
+  open: boolean;
+  onToggle: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <div>
+      <button
+        onClick={onToggle}
+        aria-expanded={open}
+        className="flex w-full items-center justify-between px-6 py-5 text-[15px] font-semibold"
+      >
+        {label}
+        <ChevronDown size={16} strokeWidth={2} className={cn('text-ink-3 transition-transform duration-300', open && 'rotate-180')} />
+      </button>
+      <div
+        className={cn(
+          'grid transition-all duration-300 ease-soft',
+          open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]',
+        )}
+      >
+        <div className="overflow-hidden">{children}</div>
+      </div>
+    </div>
   );
 }
 
@@ -371,6 +456,69 @@ function PropiedadesMenu() {
           <ArrowRight size={14} strokeWidth={1.8} />
         </Link>
       </div>
+    </div>
+  );
+}
+
+/* ════════════════ Propiedades — contenido del acordeón móvil ════════════════
+   Misma data que PropiedadesMenu (desktop), apilada en 1 columna en vez de
+   3 — el patrón a seguir cuando lleguen más secciones de nav con submenú. */
+function PropiedadesMenuMobile() {
+  const destacados = getDevelopDevelopments().filter((d) => !d.comingSoon).slice(0, 2);
+  const activeCities = cityList.filter((c) => countByCity(c) > 0);
+
+  return (
+    <div className="flex flex-col gap-7 px-6 pb-7">
+      {/* Por tipo de propiedad */}
+      <div>
+        <span className="eyebrow eyebrow-accent font-bold">Por tipo de propiedad</span>
+        <div className="mt-3 flex flex-col gap-1">
+          {propertyTypes.map((it) => (
+            <Link key={it.title} href={it.href} className="flex items-center gap-3.5 rounded-xl py-2.5">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-soft text-ink">
+                <it.icon size={17} strokeWidth={1.5} />
+              </span>
+              <span className="text-[14px] font-medium">{it.title}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Por ciudad */}
+      <div>
+        <span className="eyebrow eyebrow-accent font-bold">Por ciudad</span>
+        <div className="mt-3 flex flex-col">
+          {activeCities.map((c) => (
+            <Link key={c} href="/#portafolio" className="flex items-center justify-between border-b border-line py-3 last:border-0">
+              <span className="flex items-center gap-2.5 text-[14px] font-medium">
+                <MapPin size={14} strokeWidth={1.6} className="text-ink-3" />
+                {c}
+              </span>
+              <span className="text-[12px] text-ink-3">{countByCity(c)}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Destacados */}
+      <div>
+        <span className="eyebrow eyebrow-accent font-bold">Destacados</span>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          {destacados.map((d) => (
+            <Link key={d.slug} href={d.href} className="flex flex-col gap-2">
+              <span className="relative aspect-[4/3] overflow-hidden rounded-lg">
+                <Image src={d.image} alt={d.name} fill sizes="160px" className="object-cover" />
+              </span>
+              <span className="text-[13px] font-semibold leading-tight">{d.name}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <Link href="/#portafolio" className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-caps text-ink">
+        Ver todo el portafolio
+        <ArrowRight size={14} strokeWidth={1.8} />
+      </Link>
     </div>
   );
 }
