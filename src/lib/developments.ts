@@ -144,6 +144,9 @@ export interface ContentBlock {
   // tamaño de la galería (ancho completo, aspect 16/7). Default: side-by-side.
   layout?: 'stacked' | 'side-by-side';
   imagePosition?: 'left' | 'right';  // solo aplica en 'side-by-side'. Default: 'right'.
+  // CTA opcional (ej. "Vista Panorámica" de un masterplan/residencial) — abre
+  // `url` en el mismo modal/iframe que usa el "Tour virtual" de floor plans.
+  cta?: { label: I18nText; url: string };
 }
 
 export interface Development {
@@ -680,12 +683,16 @@ export const developments: Development[] = [
         title: { es: 'Dentro de Lausana Residencial' },
         titleMuted: { es: 'la primera Smart City de Cancún' },
         description: {
-          es: 'Lausana Residencial, al sur de Cancún, es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques. Fue reconocida internacionalmente con el Urban Design and Architecture Design Awards (Global Award Winner 2023) y el Global Future Design Awards (Silver Award Winner 2023), por su diseño **vanguardista y sustentable**.',
-          en: 'Lausana Residencial, south of Cancún, is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks. It was internationally recognized with the Urban Design and Architecture Design Awards (Global Award Winner 2023) and the Global Future Design Awards (Silver Award Winner 2023), for its **cutting-edge, sustainable design**.',
+          es: 'Lausana Residencial, al sur de Cancún, es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques.',
+          en: 'Lausana Residencial, south of Cancún, is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks.',
         },
-        image: '/desarrollos/loreta/1.-Vista-Golf_.jpg',
+        image: '/desarrollos/loreta/lausanamapa.png',
         layout: 'side-by-side',
         imagePosition: 'right',
+        cta: {
+          label: { es: 'Vista Panorámica', en: 'Panoramic View' },
+          url: 'https://s3.us-east-2.amazonaws.com/live.vt/LORETA+VT/index.htm',
+        },
       },
     ],
     floorPlans: [
@@ -828,6 +835,24 @@ export const developments: Development[] = [
       { key: 'ludoteca', labelOverride: 'Kids club' },
       { key: 'seguridad-24-7' },
       { key: 'estacionamiento-visitas' },
+    ],
+    contentBlocks: [
+      {
+        eyebrow: { es: '— Conoce el desarrollo' },
+        title: { es: 'Dentro de Lausana Residencial' },
+        titleMuted: { es: 'la primera Smart City de Cancún' },
+        description: {
+          es: 'Lausana Residencial, al sur de Cancún, es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques.',
+          en: 'Lausana Residencial, south of Cancún, is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks.',
+        },
+        image: '/desarrollos/loreta/lausanamapa.png',
+        layout: 'side-by-side',
+        imagePosition: 'right',
+        cta: {
+          label: { es: 'Vista Panorámica', en: 'Panoramic View' },
+          url: 'https://s3.us-east-2.amazonaws.com/live.vt/OVT/index.htm',
+        },
+      },
     ],
     floorPlans: [
       {

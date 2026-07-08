@@ -205,6 +205,9 @@ async function migrateDevelopment(dev: Development, devDocId: string) {
       descriptionEn: cb.description.en,
       layout: cb.layout,
       imagePosition: cb.imagePosition,
+      ctaLabel: cb.cta?.label?.es,
+      ctaLabelEn: cb.cta?.label?.en,
+      ctaUrl: cb.cta?.url,
     };
     if (img) cbDoc.image = img;
     stripUndefined(cbDoc);

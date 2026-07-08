@@ -1,6 +1,11 @@
+'use client';
+
+import { useState } from 'react';
 import Image from 'next/image';
+import { View } from 'lucide-react';
 import type { ContentBlock } from '@/lib/developments';
 import { renderEditorial } from '@/lib/richText';
+import VirtualTourModal from '@/components/ficha/VirtualTourModal';
 
 interface FichaContentBlockProps {
   block: ContentBlock;
@@ -16,6 +21,7 @@ interface FichaContentBlockProps {
 // sistema visual, no un cuadro suelto).
 export default function FichaContentBlock({ block, locale, gray = false }: FichaContentBlockProps) {
   const isEs = locale !== 'en';
+  const [tourOpen, setTourOpen] = useState<string | null>(null);
   const eyebrow = block.eyebrow ? (isEs ? block.eyebrow.es : block.eyebrow.en ?? block.eyebrow.es) : undefined;
   const title = isEs ? block.title.es : block.title.en ?? block.title.es;
   const titleMuted = block.titleMuted
@@ -24,6 +30,7 @@ export default function FichaContentBlock({ block, locale, gray = false }: Ficha
   const description = isEs ? block.description.es : block.description.en ?? block.description.es;
   const layout = block.layout ?? (block.image ? 'side-by-side' : 'stacked');
   const imageOnRight = (block.imagePosition ?? 'right') === 'right';
+  const ctaLabel = block.cta ? (isEs ? block.cta.label.es : block.cta.label.en ?? block.cta.label.es) : undefined;
 
   const textContent = (
     <div>
@@ -34,6 +41,15 @@ export default function FichaContentBlock({ block, locale, gray = false }: Ficha
       <p className="mt-5 text-[15px] font-light leading-relaxed text-ink-2">
         {renderEditorial(description)}
       </p>
+      {block.cta && (
+        <button
+          onClick={() => setTourOpen(block.cta!.url)}
+          className="btn btn-outline mt-6 font-semibold"
+        >
+          <View size={15} strokeWidth={1.8} />
+          {ctaLabel}
+        </button>
+      )}
     </div>
   );
 
@@ -62,6 +78,10 @@ export default function FichaContentBlock({ block, locale, gray = false }: Ficha
           </>
         )}
       </div>
+
+      {block.cta && (
+        <VirtualTourModal url={tourOpen} onClose={() => setTourOpen(null)} title={ctaLabel} />
+      )}
     </section>
   );
 }

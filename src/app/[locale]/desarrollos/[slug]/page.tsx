@@ -243,13 +243,13 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   const hasSalesPartnerFloorPlans = !plaza && (dev.floorPlans?.length ?? 0) > 0;
   const hasContentBlocks = (dev.contentBlocks?.length ?? 0) > 0;
   const sectionOrder = [
-    'developer', 'project', 'contentBlocks', 'location', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta',
+    'developer', 'project', 'location', 'contentBlocks', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta',
   ] as const;
   const sectionActive: Record<(typeof sectionOrder)[number], boolean> = {
     developer: true,
     project: true,
-    contentBlocks: hasContentBlocks,
     location: true,
+    contentBlocks: hasContentBlocks,
     gallery: hasGallery,
     amenities: hasAmenities,
     floorPlans: Boolean(plaza) || hasSalesPartnerFloorPlans,
@@ -449,16 +449,6 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
         </div>
       </section>
 
-      {/* ═════ 1b. CONTENT BLOCKS — módulo(s) editorial(es) genérico(s) ═════ */}
-      {dev.contentBlocks?.map((block, i) => (
-        <FichaContentBlock
-          key={i}
-          block={block}
-          locale={locale}
-          gray={stripe.contentBlocks !== undefined ? (i % 2 === 0 ? stripe.contentBlocks : !stripe.contentBlocks) : false}
-        />
-      ))}
-
       {/* ═════ 2. UBICACIÓN — sin mapa (sin lat/lng) el texto toma el ancho completo ═════ */}
       <section className={`${stripe.location ? 'bg-[#FAFAFA]' : 'bg-bg'} py-20 md:py-28`}>
         <div className={`container-wrap grid gap-10 ${location ? 'md:grid-cols-[1fr_1.6fr] md:gap-16' : 'max-w-[62ch]'}`}>
@@ -489,6 +479,16 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           )}
         </div>
       </section>
+
+      {/* ═════ 2b. CONTENT BLOCKS — módulo(s) editorial(es) genérico(s), debajo del mapa ═════ */}
+      {dev.contentBlocks?.map((block, i) => (
+        <FichaContentBlock
+          key={i}
+          block={block}
+          locale={locale}
+          gray={stripe.contentBlocks !== undefined ? (i % 2 === 0 ? stripe.contentBlocks : !stripe.contentBlocks) : false}
+        />
+      ))}
 
       {/* ═════ 3. GALERÍA (solo si hay imágenes) ═════ */}
       {galleryImages.length > 0 && <Gallery images={galleryImages} alt={dev.name} gray={stripe.gallery} />}

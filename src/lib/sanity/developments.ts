@@ -66,7 +66,8 @@ const DEVELOPMENT_FIELDS = `
     eyebrow, eyebrowEn, title, titleEn, titleMuted, titleMutedEn,
     description, descriptionEn,
     "image": image.asset->url,
-    layout, imagePosition
+    layout, imagePosition,
+    ctaLabel, ctaLabelEn, ctaUrl
   },
   reservationEnabled,
   reservationAmount,
@@ -137,6 +138,7 @@ function normalizeDevelopment(raw: any): Development & { developerDocId?: string
     image: cb.image,
     layout: cb.layout,
     imagePosition: cb.imagePosition,
+    cta: cb.ctaLabel && cb.ctaUrl ? { label: i18n(cb.ctaLabel, cb.ctaLabelEn) as I18nText, url: cb.ctaUrl } : undefined,
   }));
 
   const highlights = (raw.highlights ?? []).map((h: any) => ({

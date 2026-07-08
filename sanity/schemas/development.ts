@@ -265,6 +265,16 @@ export default defineType({
             description: 'Solo aplica en diseño "2 columnas". Default: derecha.',
             hidden: ({ parent }: any) => parent?.layout === 'stacked',
           },
+          {
+            name: 'ctaLabel', title: 'Botón — texto (ES)', type: 'string',
+            description: 'Opcional. Ej: "Vista Panorámica". Si lo dejas vacío, no aparece botón. Abre el link en una ventana emergente, igual que "Tour virtual".',
+          },
+          { name: 'ctaLabelEn', title: 'Botón — texto (EN)', type: 'string' },
+          {
+            name: 'ctaUrl', title: 'Botón — link', type: 'url',
+            description: 'La URL del tour/vista panorámica que abre el botón.',
+            hidden: ({ parent }: any) => !parent?.ctaLabel,
+          },
         ],
         preview: { select: { title: 'title', subtitle: 'eyebrow', media: 'image' } },
       }],
