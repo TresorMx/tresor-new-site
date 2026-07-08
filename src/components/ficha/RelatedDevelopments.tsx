@@ -44,8 +44,8 @@ export default function RelatedDevelopments({ items }: RelatedDevelopmentsProps)
                 ...cities.map((c) => ({ key: c, label: c })),
               ]}
               className="bg-white/10"
-              indicatorClassName="bg-white/30"
-              activeTextClassName="text-ink"
+              indicatorClassName="bg-white/15"
+              activeTextClassName="text-white"
               inactiveTextClassName="text-white/50 hover:text-white"
             />
           )}
