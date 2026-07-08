@@ -544,6 +544,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
             agendaDesc={agendaDesc}
             displayName={displayName}
             locale={locale}
+            reservationAmount={getReservationAmount(dev)}
           />
         ) : (
           <>

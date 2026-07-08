@@ -351,6 +351,9 @@ export const developments: Development[] = [
     priceLabel: 'Desde $3,500,000 MXN',
     description:
       'Departamentos en preventa de 1, 2 y 3 recámaras en Vía Cumbres, la zona de mayor crecimiento y plusvalía de Cancún, con amenidades de primer nivel.',
+    // ── Apartado en línea ──
+    reservationEnabled: true,
+    reservationAmount: 25000,
     // ── Capa de ficha ──
     heroRender: '/desarrollos/esther/Vista-dron.jpg',
     heroLogoScale: 0.7,
@@ -492,6 +495,9 @@ export const developments: Development[] = [
     priceLabel: 'Desde $3,500,000 MXN',
     description:
       'Uno de los desarrollos más exclusivos de Cancún: departamentos de lujo de 1, 2 y 3 recámaras en Vía Cumbres, con diseño y amenidades de primer nivel.',
+    // ── Apartado en línea ──
+    reservationEnabled: true,
+    reservationAmount: 25000,
     // ── Capa de ficha ──
     heroRender: '/desarrollos/ximena/2.-Fachada-de-Noche.jpg',
     heroLogoScale: 0.7,
@@ -629,6 +635,9 @@ export const developments: Development[] = [
     priceLabel: 'Desde $3,800,000 MXN',
     description:
       'Preventa de departamentos desde 76 m² con vistas abiertas al paseo Lausana y al campo de golf, dentro del exclusivo Lausana Residencial en Cancún.',
+    // ── Apartado en línea ──
+    reservationEnabled: true,
+    reservationAmount: 25000,
     // ── Capa de ficha ──
     heroRender: '/desarrollos/loreta/6.-Vista-Drone-2.jpg',
     heroLogoScale: 0.7,

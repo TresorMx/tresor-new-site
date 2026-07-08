@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import SlidingTabs from '@/components/ui/SlidingTabs';
 import AgendaWidget from '@/components/AgendaWidget';
 import ReservaForm from '@/components/ReservaForm';
+import { formatMXN } from '@/lib/utils';
 import type { FloorPlanTypology } from '@/lib/developments';
 
 interface AgendaReservaTabsProps {
@@ -17,6 +18,7 @@ interface AgendaReservaTabsProps {
   agendaDesc: string;
   displayName: string;
   locale: string;
+  reservationAmount: number;
 }
 
 // Envuelve la sección CTA cuando el desarrollo tiene apartado en línea activo:
@@ -32,6 +34,7 @@ export default function AgendaReservaTabs({
   agendaDesc,
   displayName,
   locale,
+  reservationAmount,
 }: AgendaReservaTabsProps) {
   const t = useTranslations('reserva');
   const [tab, setTab] = useState(0);
@@ -76,6 +79,8 @@ export default function AgendaReservaTabs({
             ? agendaDesc
             : t.rich('apartaIntro', {
                 devName: displayName,
+                amount: `${formatMXN(reservationAmount)} MXN`,
+                bold: (chunks) => <span className="font-semibold text-ink">{chunks}</span>,
                 yellow: (chunks) => (
                   <span className="whitespace-nowrap text-[1.5em] font-semibold text-accent">{chunks}</span>
                 ),
