@@ -67,8 +67,8 @@ export const developers: Record<DeveloperId, DeveloperEntity> = {
     logoDark: '/logos-desarrolladores/live.svg',
     blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
     credentials: {
-      es: 'En Live, el propósito va más allá de construir: **generar experiencias memorables**, cuidar el patrimonio de sus inversionistas y desarrollar proyectos con sentido en las zonas de mayor plusvalía de Cancún. Cada cliente forma parte de su comunidad, y su satisfacción es el reflejo de ese compromiso.',
-      en: 'At Live, the purpose goes beyond building: **creating memorable experiences**, protecting their investors\' wealth and developing projects with meaning in Cancún\'s highest-value areas. Every client becomes part of their community, and their satisfaction reflects that commitment.',
+      es: 'Live Desarrollos crea espacios residenciales de lujo en las zonas de mayor plusvalía de Cancún, combinando diseño contemporáneo con amenidades de primer nivel.',
+      en: 'Live Desarrollos creates luxury residential spaces in Cancún\'s highest-value areas, combining contemporary design with first-class amenities.',
     },
   },
   Onix: {
