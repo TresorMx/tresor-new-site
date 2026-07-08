@@ -67,8 +67,8 @@ export const developers: Record<DeveloperId, DeveloperEntity> = {
     logoDark: '/logos-desarrolladores/live.svg',
     blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
     credentials: {
-      es: 'Live Desarrollos crea espacios residenciales de lujo en las zonas de mayor plusvalía de Cancún, combinando diseño contemporáneo con amenidades de primer nivel.',
-      en: 'Live Desarrollos creates luxury residential spaces in Cancún\'s highest-value areas, combining contemporary design with first-class amenities.',
+      es: 'En Live, el propósito va más allá de construir: **generar experiencias memorables**, cuidar el patrimonio de sus inversionistas y desarrollar proyectos con sentido en las zonas de mayor plusvalía de Cancún. Cada cliente forma parte de su comunidad, y su satisfacción es el reflejo de ese compromiso.',
+      en: 'At Live, the purpose goes beyond building: **creating memorable experiences**, protecting their investors\' wealth and developing projects with meaning in Cancún\'s highest-value areas. Every client becomes part of their community, and their satisfaction reflects that commitment.',
     },
   },
   Onix: {
@@ -617,7 +617,7 @@ export const developments: Development[] = [
     intent: ['vivir', 'invertir'],
     status: 'Preventa',
     image: '/desarrollos/loreta/7.-Piscina-Infinity_.jpg',
-    href: '#',
+    href: '/desarrollos/loreta-wow-condos',
     featured: true,
     logo: '/desarrollos/loreta/Loreta.svg',
     logoScale: 0.8,
@@ -626,6 +626,130 @@ export const developments: Development[] = [
     priceLabel: 'Desde $3,800,000 MXN',
     description:
       'Preventa de departamentos desde 76 m² con vistas abiertas al paseo Lausana y al campo de golf, dentro del exclusivo Lausana Residencial en Cancún.',
+    // ── Capa de ficha ──
+    heroRender: '/desarrollos/loreta/6.-Vista-Drone-2.jpg',
+    heroLogoScale: 0.7,
+    tagline: { es: 'Vive dentro de la primera Smart City de Cancún' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Lausana Residencial' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 79 m²', valueEn: 'From 79 sqm' },
+    ],
+    gallery: [
+      '/desarrollos/loreta/21.-Sala-comedor---3-recámaras.jpg',
+      '/desarrollos/loreta/27.-Cocina.jpg',
+      '/desarrollos/loreta/19.-Recámara-Principal.jpg',
+      '/desarrollos/loreta/20.-Recámara-Secundaria.jpg',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/loreta/10.-Alberca---Lago.jpg',
+      '/desarrollos/loreta/12.-Gym-Wellness.jpg',
+      '/desarrollos/loreta/16.-Spa.jpg',
+      '/desarrollos/loreta/17.-Kids-Club.jpg',
+    ],
+    projectTitle: { es: 'Departamentos de 1 a 3 recámaras' },
+    projectTitleMuted: { es: 'y Garden Houses en Lausana Residencial' },
+    projectBody: [
+      {
+        es: 'Loreta es un desarrollo de Live Desarrollos dentro de **Lausana Residencial**, con vistas abiertas al paseo Lausana y al campo de golf, en una de las comunidades privadas de mayor plusvalía de Cancún.',
+        en: 'Loreta is a development by Live Desarrollos inside **Lausana Residencial**, with open views of the Lausana promenade and the golf course, in one of Cancún\'s highest-value private communities.',
+      },
+      {
+        es: 'Departamentos de 1 a 3 recámaras, además de **Garden Houses y Penthouses de doble altura**, con alberca infinity frente al lago, gimnasio, spa y kids club — pensados para quienes buscan vivir o invertir con la tranquilidad de una comunidad diseñada para todas las edades.',
+        en: 'Apartments from 1 to 3 bedrooms, plus **double-height Garden Houses and Penthouses**, with an infinity pool facing the lake, a gym, spa and kids club — designed for those looking to live or invest with the peace of mind of a community built for every age.',
+      },
+    ],
+    locationBullets: [
+      { es: 'Dentro de Lausana Residencial, primera Smart City de Cancún' },
+      { es: 'A 11 minutos del aeropuerto de Cancún' },
+      { es: 'A 25 minutos de Puerto Cancún' },
+    ],
+    amenities: [
+      { key: 'alberca-infinity', labelOverride: 'Piscina Infinity' },
+      { key: 'gym', labelOverride: 'Gym & Wellness' },
+      { key: 'sauna', labelOverride: 'Spa' },
+      { key: 'ludoteca', labelOverride: 'Kids Club' },
+      { key: 'lagos', labelOverride: 'Lago Lausana' },
+      { key: 'pet-park' },
+      { key: 'andadores-ciclovias', labelOverride: 'Ciclovía y andadores' },
+      { key: 'area-lounge', labelOverride: 'Áreas sociales' },
+    ],
+    contentBlocks: [
+      {
+        eyebrow: { es: '— Conoce el desarrollo' },
+        title: { es: 'Dentro de Lausana Residencial' },
+        titleMuted: { es: 'la primera Smart City de Cancún' },
+        description: {
+          es: 'Lausana Residencial, al sur de Cancún, es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques. Fue reconocida internacionalmente con el Urban Design and Architecture Design Awards (Global Award Winner 2023) y el Global Future Design Awards (Silver Award Winner 2023), por su diseño **vanguardista y sustentable**.',
+          en: 'Lausana Residencial, south of Cancún, is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks. It was internationally recognized with the Urban Design and Architecture Design Awards (Global Award Winner 2023) and the Global Future Design Awards (Silver Award Winner 2023), for its **cutting-edge, sustainable design**.',
+        },
+        image: '/desarrollos/loreta/1.-Vista-Golf_.jpg',
+        layout: 'side-by-side',
+        imagePosition: 'right',
+      },
+    ],
+    floorPlans: [
+      {
+        slug: '1rec',
+        label: { es: '1 Recámara' },
+        image: '/desarrollos/loreta/floor-plans/1rec.png',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '60 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '16 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '79 m²' },
+        ],
+      },
+      {
+        slug: '2rec',
+        label: { es: '2 Recámaras' },
+        image: '/desarrollos/loreta/floor-plans/2rec.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '90 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '21 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '111 m²' },
+        ],
+      },
+      {
+        slug: '3rec',
+        label: { es: '3 Recámaras' },
+        image: '/desarrollos/loreta/floor-plans/3rec.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '115 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '16 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '131 m²' },
+        ],
+      },
+      {
+        slug: '3rec-servicio',
+        label: { es: '3 Recámaras + Cuarto de Servicio' },
+        shortLabel: { es: '3 Rec. + Servicio' },
+        image: '/desarrollos/loreta/floor-plans/3recycuartodeservicio.jpg',
+        specs: [
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '221 m²' },
+        ],
+      },
+      {
+        slug: 'ph5-ph8',
+        label: { es: 'PH5 y PH8' },
+        image: '/desarrollos/loreta/floor-plans/PH5andPH8.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '177 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '27 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '204 m²' },
+        ],
+      },
+      {
+        slug: 'garden-3rec-servicio',
+        label: { es: 'Garden 3R + Cuarto de Servicio' },
+        shortLabel: { es: 'Garden 3 Rec. + Servicio' },
+        image: '/desarrollos/loreta/floor-plans/Gardern3Rec.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior' }, value: '218.75 m²' },
+          { key: 'exterior', label: { es: 'Área exterior' }, value: '28 m²' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '246.75 m²' },
+        ],
+      },
+    ],
   },
   {
     slug: 'olivia-wow-condos',
