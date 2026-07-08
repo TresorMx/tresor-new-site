@@ -81,7 +81,7 @@ function Hero() {
           The Art of Luxury Living
         </h1>
         <p className="mt-7 w-full text-center text-[clamp(11px,1.1vw,16px)] font-bold uppercase tracking-[0.2em] text-white">
-          We develop · We manage · We are your Sales Partner
+          Desarrollos inmobiliarios en Cancún y Riviera Maya
         </p>
 
         {/* Fuera de RevealOnScroll a propósito: su fade de opacidad se
