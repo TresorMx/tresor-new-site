@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Check } from 'lucide-react';
 import DevelopmentCard from '@/components/home/DevelopmentCard';
-import type { Development, City, PropertyType } from '@/lib/developments';
+import { developers, type Development, type City, type PropertyType } from '@/lib/developments';
 
 const CITY_LABELS: Record<City, string> = {
   'Cancún': 'Cancún',
@@ -136,7 +136,12 @@ export default function SalesPartnerGrid({
   const [exiting, setExiting] = useState(false);
   const [renderKey, setRenderKey] = useState(0);
 
-  const devOptions = [...new Set(developments.map((d) => d.brand ?? d.developer))];
+  // `brand` es un override opcional; el nombre real siempre sale del
+  // registro `developers` — así "Live"/"Onix" (Sanity, sin `brand`) y
+  // "Live Desarrollos"/"Onix Living" (estático, con `brand`) resuelven al
+  // MISMO nombre en vez de aparecer como opciones duplicadas en el filtro.
+  const brandName = (d: Development) => d.brand ?? developers[d.developer]?.name ?? d.developer;
+  const devOptions = [...new Set(developments.map(brandName))];
   const cityOptions = [...new Set(developments.map((d) => d.city))];
   const typeOptions = [...new Set(
     developments.map((d) => d.propertyType).filter((t): t is PropertyType => Boolean(t)),
@@ -147,7 +152,7 @@ export default function SalesPartnerGrid({
     setTimeout(() => {
       setFiltered(
         developments.filter((d) => {
-          if (next.developer && (d.brand ?? d.developer) !== next.developer) return false;
+          if (next.developer && brandName(d) !== next.developer) return false;
           if (next.city && d.city !== next.city) return false;
           if (next.propertyType && d.propertyType !== next.propertyType) return false;
           return true;

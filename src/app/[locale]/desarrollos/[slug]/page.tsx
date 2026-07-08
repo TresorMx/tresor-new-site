@@ -56,7 +56,7 @@ export async function generateMetadata({
 
   const description = isEs
     ? (plaza?.seoDescription ?? dev.seoDescription?.es ?? dev.description ??
-        `${name} en ${city}. ${dev.propertyType ?? 'Desarrollo'} por ${dev.brand ?? dev.developer}${fromText}.`)
+        `${name} en ${city}. ${dev.propertyType ?? 'Desarrollo'} por ${dev.brand ?? developers[dev.developer]?.name ?? dev.developer}${fromText}.`)
     : (plaza?.seoDescriptionEn ?? dev.seoDescription?.en ?? dev.seoDescription?.es ?? dev.description ??
         `${name} in ${city}${fromText}.`);
 

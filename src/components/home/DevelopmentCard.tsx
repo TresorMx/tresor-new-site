@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Link } from '@/navigation';
 import { MapPin, Store, Home, Building2, LandPlot, type LucideIcon } from 'lucide-react';
-import { formatPrice, type Development, type PropertyType } from '@/lib/developments';
+import { formatPrice, developers, type Development, type PropertyType } from '@/lib/developments';
 
 // Ícono por tipo de propiedad (fuente única — replicar en Sanity: al elegir el
 // tipo, este es el ícono que se muestra en el card).
@@ -14,6 +14,13 @@ const PROPERTY_ICONS: Record<PropertyType, LucideIcon> = {
 
 export default function DevelopmentCard({ dev, dark = false }: { dev: Development; dark?: boolean }) {
   const price = dev.priceLabel ?? formatPrice(dev);
+  // `brand` es un override opcional; la fuente de verdad del nombre del
+  // desarrollador es SIEMPRE el registro `developers` (resuelto por
+  // `dev.developer`) — nunca un default fijo a "Tresor Real Estate", que
+  // hacía que las fichas de Live/Onix/Urban Homes migradas a Sanity (sin
+  // `brand`, campo que no existe en el schema) mostraran "Tresor Real
+  // Estate" en el card sin importar quién las desarrolló de verdad.
+  const brandName = dev.brand ?? developers[dev.developer]?.name ?? 'Tresor Real Estate';
   const badge = dev.badge ?? dev.status;
   const location = dev.phases ?? `${dev.zone ? `${dev.zone}, ` : ''}${dev.city}`;
   // Ícono según propertyType; fallback al type amplio si aún no está definido.
@@ -67,7 +74,7 @@ export default function DevelopmentCard({ dev, dark = false }: { dev: Developmen
       {/* Contenido */}
       <div className="flex flex-col px-5 py-6">
         <div className={`flex items-center justify-between gap-3 text-[9px] font-bold uppercase tracking-[0.12em] ${dark ? 'text-white/50' : 'text-ink-3/60'}`}>
-          <span className="whitespace-nowrap">{dev.brand ?? 'Tresor Real Estate'}</span>
+          <span className="whitespace-nowrap">{brandName}</span>
           <span className="flex items-center gap-1 whitespace-nowrap">
             <MapPin size={11} strokeWidth={2} style={{ display: 'inline' }} />
             {location}

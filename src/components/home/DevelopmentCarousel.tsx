@@ -4,7 +4,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { MapPin, Store } from 'lucide-react';
 import { Link } from '@/navigation';
-import { formatPrice, type Development } from '@/lib/developments';
+import { formatPrice, developers, type Development } from '@/lib/developments';
 
 const GAP = 20;
 
@@ -17,7 +17,7 @@ export default function DevelopmentCarousel({ developments }: { developments: De
     .map((d) => ({
       id: d.slug,
       tab: d.tab ?? d.name,
-      brand: d.brand ?? 'Tresor Real Estate',
+      brand: d.brand ?? developers[d.developer]?.name ?? 'Tresor Real Estate',
       phases: d.phases ?? `${d.city}${d.zone ? ` · ${d.zone}` : ''}`,
       logo: d.logo as string,
       badge: d.badge ?? d.status,
