@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import DevelopmentCard from '@/components/home/DevelopmentCard';
 import { FilterDropdown } from '@/components/home/SalesPartnerGrid';
+import { cn } from '@/lib/utils';
 import { developers, type Development, type DeveloperId } from '@/lib/developments';
 
 // Orden fijo de las secciones — pedido explícito: Live, Urban Homes, Onix.
@@ -62,7 +63,12 @@ export default function SalesPartnerGrouped({ developments, children }: Props) {
                   alt={g.name}
                   width={160}
                   height={64}
-                  className="h-[25px] w-auto shrink-0 self-end object-contain md:h-7"
+                  className={cn(
+                    'w-auto shrink-0 self-end object-contain',
+                    // Solo el logo de Live se redujo 30% — Urban Homes y
+                    // Onix se quedan en su tamaño original.
+                    g.id === 'Live' ? 'h-[25px] md:h-7' : 'h-9 md:h-10',
+                  )}
                 />
               )}
             </div>
