@@ -5,9 +5,10 @@ import { Link } from '@/navigation';
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import { usePathname, useRouter } from '@/navigation';
-import { ChevronDown, ArrowUpRight, ArrowRight, Building2, LandPlot, Store, MapPin, Phone, Mail, Globe } from 'lucide-react';
+import { ChevronDown, ArrowUpRight, ArrowRight, Building2, LandPlot, Store, MapPin, Phone, Mail, Globe, Lock, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getDevelopDevelopments, countByCity, type City } from '@/lib/developments';
+import { useAsesor } from '@/components/asesor/context';
 
 const corporate = [
   { href: '#', label: 'Desarrollo' },
@@ -31,6 +32,7 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const isHome = pathname === '/';
+  const { isAsesor, openLogin, logout } = useAsesor();
 
   const [scrollY, setScrollY] = useState(0);
   const [theme, setTheme] = useState<'dark' | 'light'>(isHome ? 'dark' : 'light');
@@ -146,13 +148,25 @@ export default function Header() {
                 </Link>
               ))}
               <span className="h-3 w-px bg-ink/25" />
-              <Link
-                href="/brokers"
-                className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-60"
-              >
-                Brokers
-                <ArrowUpRight size={13} strokeWidth={2} />
-              </Link>
+              {/* Asesores — abre el login (o muestra estado + Salir). Brokers
+                  queda oculto por lo pronto hasta trabajar esa sección. */}
+              {isAsesor ? (
+                <span className="inline-flex items-center gap-3">
+                  <span className="inline-flex items-center gap-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-ink" />
+                    Asesor
+                  </span>
+                  <button onClick={logout} className="inline-flex items-center gap-1 transition-opacity hover:opacity-60">
+                    Salir
+                    <LogOut size={12} strokeWidth={2} />
+                  </button>
+                </span>
+              ) : (
+                <button onClick={openLogin} className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-60">
+                  Asesores
+                  <Lock size={12} strokeWidth={2} />
+                </button>
+              )}
             </div>
           </div>
         </div>
@@ -291,13 +305,24 @@ export default function Header() {
                   <PropiedadesMenuMobile />
                 </MobileAccordionRow>
 
-                <Link
-                  href="/brokers"
-                  className="flex items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
-                >
-                  Brokers
-                  <ArrowUpRight size={16} strokeWidth={1.8} className="text-ink-3" />
-                </Link>
+                {/* Asesores — login (o Salir si ya inició sesión). Brokers oculto por ahora. */}
+                {isAsesor ? (
+                  <button
+                    onClick={() => { logout(); setMobileOpen(false); }}
+                    className="flex w-full items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
+                  >
+                    Cerrar sesión de asesor
+                    <LogOut size={16} strokeWidth={1.8} className="text-ink-3" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={() => { openLogin(); setMobileOpen(false); }}
+                    className="flex w-full items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
+                  >
+                    Asesores
+                    <Lock size={15} strokeWidth={1.8} className="text-ink-3" />
+                  </button>
+                )}
 
                 {/* Idioma — antes solo existía en desktop (sm:inline-flex),
                     en mobile no había forma de cambiarlo. */}

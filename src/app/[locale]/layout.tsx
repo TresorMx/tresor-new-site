@@ -8,7 +8,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MobileBar from '@/components/MobileBar';
-import Chatbot from '@/components/Chatbot';
+import { AsesorProvider } from '@/components/asesor/AsesorProvider';
+import FloatingLayer from '@/components/asesor/FloatingLayer';
 // import ExitIntent from '@/components/ExitIntent'; // desactivado por lo pronto
 import MetaPixel from '@/components/MetaPixel';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
@@ -209,12 +210,15 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <Header />
-          <main className="min-h-screen pt-[104px]">{children}</main>
-          <Footer />
-          <MobileBar />
-          <Chatbot />
-          {/* <ExitIntent /> desactivado por lo pronto */}
+          <AsesorProvider>
+            <Header />
+            <main className="min-h-screen pt-[104px]">{children}</main>
+            <Footer />
+            <MobileBar />
+            {/* FloatingLayer = Luis, o el botón "Drive de Ventas" si eres asesor y estás en una ficha. */}
+            <FloatingLayer />
+            {/* <ExitIntent /> desactivado por lo pronto */}
+          </AsesorProvider>
         </NextIntlClientProvider>
         <MetaPixel />
         <GoogleAnalytics />

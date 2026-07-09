@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Link } from '@/navigation';
 import { MapPin, Store, Home, Building2, LandPlot, type LucideIcon } from 'lucide-react';
 import { formatPrice, developers, type Development, type PropertyType } from '@/lib/developments';
+import AsesorDriveLink from '@/components/asesor/AsesorDriveLink';
 
 // Ícono por tipo de propiedad (fuente única — replicar en Sanity: al elegir el
 // tipo, este es el ícono que se muestra en el card).
@@ -21,6 +22,9 @@ export default function DevelopmentCard({ dev, dark = false }: { dev: Developmen
   // `brand`, campo que no existe en el schema) mostraran "Tresor Real
   // Estate" en el card sin importar quién las desarrolló de verdad.
   const brandName = dev.brand ?? developers[dev.developer]?.name ?? 'Tresor Real Estate';
+  // Slug de ruta para el Drive de Ventas (mismo slug de la ficha). Los
+  // "próximamente" (href '#') no tienen drive.
+  const driveSlug = dev.href.startsWith('/desarrollos/') ? dev.href.slice('/desarrollos/'.length) : null;
   const badge = dev.badge ?? dev.status;
   const location = dev.phases ?? `${dev.zone ? `${dev.zone}, ` : ''}${dev.city}`;
   // Ícono según propertyType; fallback al type amplio si aún no está definido.
@@ -102,7 +106,7 @@ export default function DevelopmentCard({ dev, dark = false }: { dev: Developmen
               {dev.description}
             </p>
           )}
-          <div className="pt-5">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-5">
             {dev.comingSoon ? (
               <span
                 aria-disabled="true"
@@ -120,6 +124,8 @@ export default function DevelopmentCard({ dev, dark = false }: { dev: Developmen
                 Ver desarrollo
               </Link>
             )}
+            {/* Drive de Ventas — solo visible para asesores logueados; null para todos los demás. */}
+            {driveSlug && <AsesorDriveLink slug={driveSlug} />}
           </div>
         </div>
       </div>
