@@ -20,6 +20,20 @@ export default defineType({
       description: 'Cómo se muestran los desarrollos propios de Tresor en el home. "Cards" usa el mismo estilo de card que la sección Sales Partner; "Carrusel" es el slider con tabs y foto grande.',
     }),
     defineField({
+      name: 'salesPartnerLayout',
+      title: 'Estilo de la sección "Sales Partner" (home)',
+      type: 'string',
+      initialValue: 'grouped',
+      options: {
+        list: [
+          { title: 'Agrupado por desarrollador (secciones)', value: 'grouped' },
+          { title: 'Grid con filtros (el original)', value: 'grid' },
+        ],
+        layout: 'radio',
+      },
+      description: 'Cómo se muestran los desarrollos de Sales Partner en el home. "Agrupado" hace una sección por desarrollador (título + logo + sus cards); "Grid" es el listado con filtros de desarrollador/ciudad/tipo.',
+    }),
+    defineField({
       name: 'showAgendaWidget',
       title: 'Mostrar "Agenda tu visita" en lugar del cotizador',
       type: 'boolean',

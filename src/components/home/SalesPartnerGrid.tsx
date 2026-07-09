@@ -33,7 +33,9 @@ interface Props {
 }
 
 // Dropdown de filtro: muestra el label (o el valor activo) + chevron.
-function FilterDropdown<T extends string>({
+// Exportado — SalesPartnerGrouped.tsx lo reutiliza para su único filtro
+// (Desarrollador), en vez de duplicar el mismo componente.
+export function FilterDropdown<T extends string>({
   label,
   options,
   active,

@@ -6,6 +6,7 @@ import DevelopmentCarousel from '@/components/home/DevelopmentCarousel';
 import DevelopmentCard from '@/components/home/DevelopmentCard';
 import RivieraCTA from '@/components/home/RivieraCTA';
 import SalesPartnerGrid from '@/components/home/SalesPartnerGrid';
+import SalesPartnerGrouped from '@/components/home/SalesPartnerGrouped';
 import LuisReveal from '@/components/home/LuisReveal';
 import { getSiteSettings } from '@/lib/data';
 import {
@@ -38,7 +39,7 @@ export default async function HomePage() {
         <div aria-hidden className="absolute inset-x-0 bottom-0 top-16 -z-10 bg-bg" />
         <Intent developments={liveDevelopDevelopments} layout={siteSettings.weDevelopLayout} />
         <RivieraCTA />
-        <Portfolio developments={salesPartner} />
+        <Portfolio developments={salesPartner} layout={siteSettings.salesPartnerLayout} />
         <Positioning />
       </div>
     </>
@@ -171,7 +172,16 @@ function Intent({ developments, layout }: { developments: Development[]; layout:
 }
 
 /* ════════════════════════════ PORTFOLIO ════════════════════════════ */
-function Portfolio({ developments }: { developments: Development[] }) {
+function Portfolio({ developments, layout }: { developments: Development[]; layout: 'grouped' | 'grid' }) {
+  const title = (
+    <div>
+      <span className="eyebrow eyebrow-accent font-bold">Sales Partner</span>
+      <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
+        Colaboramos con los <span className="text-ink-3">más destacados<br />desarrolladores.</span>
+      </h2>
+    </div>
+  );
+
   return (
     <section
       id="portafolio"
@@ -183,14 +193,13 @@ function Portfolio({ developments }: { developments: Development[] }) {
       }}
     >
       <div className="container-wrap">
-        <SalesPartnerGrid developments={developments} showDeveloperFilter={true}>
-          <div>
-            <span className="eyebrow eyebrow-accent font-bold">Sales Partner</span>
-            <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
-              Una selección <span className="text-ink-3">exclusiva<br />de desarrollos</span>
-            </h2>
-          </div>
-        </SalesPartnerGrid>
+        {layout === 'grouped' ? (
+          <SalesPartnerGrouped developments={developments}>{title}</SalesPartnerGrouped>
+        ) : (
+          <SalesPartnerGrid developments={developments} showDeveloperFilter={true}>
+            {title}
+          </SalesPartnerGrid>
+        )}
       </div>
     </section>
   );

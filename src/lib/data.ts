@@ -101,6 +101,7 @@ export async function getActivePlazasAsync(): Promise<Plaza[]> {
 export async function getSiteSettings() {
   const fallback = {
     weDevelopLayout: 'cards' as const,
+    salesPartnerLayout: 'grouped' as const,
     showAgendaWidget: false,
     agendaEyebrow: '— Agenda tu visita', agendaEyebrowEn: '— Schedule your visit',
     agendaTitle1: 'Agenda', agendaTitle1En: 'Schedule',
