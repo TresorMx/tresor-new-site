@@ -321,7 +321,11 @@ export const developments: Development[] = [
     featured: true,
     tab: 'Selva',
     logo: '/logos/QuattroSelva.svg',
-    logoScale: 1.25,
+    // El archivo de Selva tiene mucho menos margen interno que los de Long
+    // Island/Gardens (el trazo ocupa ~99% de su viewBox vs ~89% en los
+    // otros) — a la MISMA escala numérica se ve más grande. Se compensa
+    // con un logoScale menor para que el tamaño VISUAL quede igual.
+    logoScale: 1.1,
     phases: 'Paseo de la Selva',
     description:
       'Nuestro próximo desarrollo en una de las zonas de mayor plusvalía de Cancún. Muy pronto revelaremos todos los detalles.',
