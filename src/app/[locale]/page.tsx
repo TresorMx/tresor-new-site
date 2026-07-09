@@ -145,7 +145,7 @@ function Intent({ developments, layout }: { developments: Development[]; layout:
           <div className="flex-1">
             <span className="eyebrow eyebrow-accent font-bold">WE DEVELOP</span>
             <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
-              Desarrollos <span className="text-ink-3">diseñados<br />para el futuro</span>
+              Conoce los <span className="text-ink-3">desarrollos de<br />Tresor Real Estate</span>
             </h2>
           </div>
           <Image
