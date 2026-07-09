@@ -1449,7 +1449,7 @@ export const developments: Development[] = [
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
     image: '/desarrollos/Valmira/portadaValmira.jpg',
-    href: '#',
+    href: '/desarrollos/valmira-urban',
     featured: true,
     logo: '/desarrollos/Valmira/logovalmira.svg',
     badge: 'Entrega inmediata',
@@ -1457,6 +1457,77 @@ export const developments: Development[] = [
     priceLabel: 'Desde $2,595,000 MXN',
     description:
       'Departamentos de lujo de 2 y 3 recámaras sobre Av. Huayacán, dentro de la exclusiva comunidad Gran Vía, en una zona de alta plusvalía de Cancún.',
+    // ── Capa de ficha ──
+    heroRender: '/desarrollos/Valmira/galeria-valmira/VistaDesarrollo.jpg',
+    heroLogoScale: 0.7,
+    tagline: { es: 'Departamentos con entrega inmediata en Gran Vía' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Av. Huayacán' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 87 m²', valueEn: 'From 87 sqm' },
+    ],
+    gallery: [
+      '/desarrollos/Valmira/galeria-valmira/Sala.jpg',
+      '/desarrollos/Valmira/galeria-valmira/Cocina.jpg',
+      '/desarrollos/Valmira/galeria-valmira/Hab..jpg',
+      '/desarrollos/Valmira/galeria-valmira/Comedor.jpg',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/Valmira/galeria-valmira/Gym.jpg',
+      '/desarrollos/Valmira/galeria-valmira/cancha-futbol.jpg',
+      '/desarrollos/Valmira/galeria-valmira/pet-park.jpg',
+      '/desarrollos/Valmira/galeria-valmira/Area-Niños.jpg',
+    ],
+    projectTitle: { es: 'Departamentos de 2 y 3 recámaras' },
+    projectTitleMuted: { es: 'con entrega inmediata en Gran Vía' },
+    projectBody: [
+      {
+        es: 'Valmira es un desarrollo de Urban Homes sobre **avenida Huayacán**, dentro de Gran Vía, una comunidad cerrada en una de las zonas de mayor plusvalía de Cancún — y con **entrega inmediata**, sin esperar a que termine la construcción.',
+        en: 'Valmira is a development by Urban Homes on **Avenida Huayacán**, inside Gran Vía, a gated community in one of Cancún\'s highest-value areas — with **immediate delivery**, no waiting for construction to finish.',
+      },
+      {
+        es: 'Departamentos de 2 y 3 recámaras desde **87 m²**, con cocina integral equipada, walk-in closet y **acabados premium importados** — pensados para quienes buscan vivir o invertir con la certeza de un desarrollo ya entregado.',
+        en: 'Apartments with 2 and 3 bedrooms from **87 sqm**, with a fully equipped kitchen, walk-in closet and **imported premium finishes** — designed for those looking to live or invest with the certainty of an already-delivered development.',
+      },
+    ],
+    locationBullets: [
+      { es: 'Sobre avenida Huayacán, dentro de Gran Vía' },
+      { es: 'A 12 minutos del aeropuerto de Cancún' },
+      { es: 'A 9 minutos de la estación del Tren Maya' },
+    ],
+    location: { lat: 21.0753984, lng: -86.8860978, address: 'Gran Vía, Av. Huayacán, Cancún, Q. Roo' },
+    amenities: [
+      { key: 'gym', labelOverride: 'Gym & Wellness' },
+      { key: 'pet-park', labelOverride: 'Pet Park' },
+      { key: 'cancha-padel', labelOverride: 'Cancha de Pádel' },
+      { key: 'cancha-futbol', labelOverride: 'Cancha de Fútbol' },
+      { key: 'area-infantil', labelOverride: 'Área de Niños' },
+    ],
+    floorPlans: [
+      {
+        slug: '2rec',
+        label: { es: '2 Recámaras' },
+        image: '/desarrollos/Valmira/floor-plans/2rec.webp',
+        virtualTourUrl: 'https://my.matterport.com/show/?m=nVe4hfX2hZw',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '2' },
+          { key: 'banos', label: { es: 'Baños' }, value: '2' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '87 m²' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento' }, value: '2 a 1 cajón' },
+        ],
+      },
+      {
+        slug: '3rec',
+        label: { es: '3 Recámaras' },
+        image: '/desarrollos/Valmira/floor-plans/3rec.webp',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '3' },
+          { key: 'banos', label: { es: 'Baños' }, value: '2' },
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '109 m²' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento' }, value: '2 a 1 cajones' },
+        ],
+      },
+    ],
   },
   {
     slug: 'vellmari-urban',

@@ -48,7 +48,7 @@ const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 
 // Los 4 pilotos ya armados en estático. Agregar más slugs aquí conforme se
 // vayan terminando fichas nuevas.
-const TARGET_SLUGS = ['olivia-wow-condos', 'koa-onix', 'zienna-onix', 'blume-urban', 'esther-wow-condos', 'ximena-wow-condos', 'loreta-wow-condos'];
+const TARGET_SLUGS = ['olivia-wow-condos', 'koa-onix', 'zienna-onix', 'blume-urban', 'esther-wow-condos', 'ximena-wow-condos', 'loreta-wow-condos', 'valmira-urban'];
 
 type SanityImage = { _type: 'image'; asset: { _type: 'reference'; _ref: string } };
 
