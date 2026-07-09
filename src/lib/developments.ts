@@ -266,6 +266,7 @@ export const developments: Development[] = [
     featured: true,
     tab: 'Long Island',
     logo: '/logos/QuattroLongIslandLogoWhite.svg',
+    logoScale: 1.25,
     phases: 'Long Island · RIO · Aqua',
     description:
       'Plaza comercial con locales en preventa, ubicada en una de las zonas con mayor dinamismo y crecimiento de todo Cancún.',
@@ -292,6 +293,7 @@ export const developments: Development[] = [
     featured: true,
     tab: 'Gardens',
     logo: '/logos/QuattroGardensLogoWhite.svg',
+    logoScale: 1.25,
     phases: 'Jardines · Zienna · Ciudadela',
     description:
       'Plaza comercial con locales en preventa, ubicada en una de las zonas con mayor dinamismo y crecimiento de todo Cancún.',
@@ -319,6 +321,7 @@ export const developments: Development[] = [
     featured: true,
     tab: 'Selva',
     logo: '/logos/QuattroSelva.svg',
+    logoScale: 1.25,
     phases: 'Paseo de la Selva',
     description:
       'Nuestro próximo desarrollo en una de las zonas de mayor plusvalía de Cancún. Muy pronto revelaremos todos los detalles.',
