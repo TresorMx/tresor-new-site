@@ -42,47 +42,56 @@ export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaL
   return (
     <section className={`${gray ? 'bg-[#FAFAFA]' : 'bg-bg'} py-20 md:py-28`} id="floor-plans">
       <div className="container-wrap">
-        <div className="mb-8">
-          <span className="eyebrow eyebrow-accent block font-bold">— Floor Plans</span>
-          <h2 className="mt-4 h-display text-[clamp(24px,3.2vw,48px)]">
-            {isEs ? 'Tipologías' : 'Unit'} <span className="text-ink-3">{isEs ? 'disponibles' : 'typologies'}</span>
-          </h2>
+        {/* Con pocas tipologías (pill deslizante) el tab cabe junto al título,
+            igual que en la ficha de Quattro (FloorPlans.tsx) — mismo grid
+            `1fr_auto`. Con muchas (chips que envuelven varias filas) se ve
+            apretado al lado del título, así que esas se quedan abajo. */}
+        <div
+          className={cn(
+            'mb-8',
+            floorPlans.length > 1 && floorPlans.length <= PILL_MAX_ITEMS && 'grid items-end gap-8 md:grid-cols-[1fr_auto]',
+          )}
+        >
+          <div>
+            <span className="eyebrow eyebrow-accent block font-bold">— Floor Plans</span>
+            <h2 className="mt-4 h-display text-[clamp(24px,3.2vw,48px)]">
+              {isEs ? 'Tipologías' : 'Unit'} <span className="text-ink-3">{isEs ? 'disponibles' : 'typologies'}</span>
+            </h2>
+          </div>
+
+          {floorPlans.length > 1 && floorPlans.length <= PILL_MAX_ITEMS && (
+            <SlidingTabs
+              activeIndex={active}
+              onChange={setActive}
+              items={floorPlans.map((fp) => ({
+                key: fp.slug,
+                label: isEs
+                  ? fp.shortLabel?.es ?? fp.label.es
+                  : fp.shortLabel?.en ?? fp.label.en ?? fp.shortLabel?.es ?? fp.label.es,
+              }))}
+            />
+          )}
         </div>
 
-        {floorPlans.length > 1 && (
-          <div className="mb-8">
-            {floorPlans.length <= PILL_MAX_ITEMS ? (
-              <SlidingTabs
-                activeIndex={active}
-                onChange={setActive}
-                items={floorPlans.map((fp) => ({
-                  key: fp.slug,
-                  label: isEs
-                    ? fp.shortLabel?.es ?? fp.label.es
-                    : fp.shortLabel?.en ?? fp.label.en ?? fp.shortLabel?.es ?? fp.label.es,
-                }))}
-              />
-            ) : (
-              // Chips que envuelven en varias filas — con 8-10 tipologías, un tab
-              // deslizante de una sola fila se corta o requiere scroll oculto.
-              // Aquí se ven todas las opciones de un vistazo, sin cortar nada.
-              <div className="flex flex-wrap gap-2">
-                {floorPlans.map((fp, i) => (
-                  <button
-                    key={fp.slug}
-                    onClick={() => setActive(i)}
-                    className={cn(
-                      'rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] transition-all duration-200',
-                      active === i
-                        ? 'bg-ink text-white'
-                        : 'bg-ink/[0.06] text-ink/50 hover:bg-ink/[0.10] hover:text-ink',
-                    )}
-                  >
-                    {isEs ? fp.shortLabel?.es ?? fp.label.es : fp.shortLabel?.en ?? fp.label.en ?? fp.label.es}
-                  </button>
-                ))}
-              </div>
-            )}
+        {floorPlans.length > PILL_MAX_ITEMS && (
+          // Chips que envuelven en varias filas — con 8-10 tipologías, un tab
+          // deslizante de una sola fila se corta o requiere scroll oculto.
+          // Aquí se ven todas las opciones de un vistazo, sin cortar nada.
+          <div className="mb-8 flex flex-wrap gap-2">
+            {floorPlans.map((fp, i) => (
+              <button
+                key={fp.slug}
+                onClick={() => setActive(i)}
+                className={cn(
+                  'rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.15em] transition-all duration-200',
+                  active === i
+                    ? 'bg-ink text-white'
+                    : 'bg-ink/[0.06] text-ink/50 hover:bg-ink/[0.10] hover:text-ink',
+                )}
+              >
+                {isEs ? fp.shortLabel?.es ?? fp.label.es : fp.shortLabel?.en ?? fp.label.en ?? fp.label.es}
+              </button>
+            ))}
           </div>
         )}
 
