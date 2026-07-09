@@ -6,6 +6,20 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'weDevelopLayout',
+      title: 'Estilo de la sección "We Develop" (home)',
+      type: 'string',
+      initialValue: 'cards',
+      options: {
+        list: [
+          { title: 'Cards (como Sales Partner)', value: 'cards' },
+          { title: 'Carrusel con tabs (el original)', value: 'carousel' },
+        ],
+        layout: 'radio',
+      },
+      description: 'Cómo se muestran los desarrollos propios de Tresor en el home. "Cards" usa el mismo estilo de card que la sección Sales Partner; "Carrusel" es el slider con tabs y foto grande.',
+    }),
+    defineField({
       name: 'showAgendaWidget',
       title: 'Mostrar "Agenda tu visita" en lugar del cotizador',
       type: 'boolean',

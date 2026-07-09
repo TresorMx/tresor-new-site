@@ -3,9 +3,11 @@ import { Link } from '@/navigation';
 import { ArrowRight, Building2, ShieldCheck, Handshake } from 'lucide-react';
 import RevealOnScroll from '@/components/RevealOnScroll';
 import DevelopmentCarousel from '@/components/home/DevelopmentCarousel';
+import DevelopmentCard from '@/components/home/DevelopmentCard';
 import RivieraCTA from '@/components/home/RivieraCTA';
 import SalesPartnerGrid from '@/components/home/SalesPartnerGrid';
 import LuisReveal from '@/components/home/LuisReveal';
+import { getSiteSettings } from '@/lib/data';
 import {
   getSalesPartnerDevelopmentsAsync,
   getDevelopDevelopmentsAsync,
@@ -14,9 +16,10 @@ import {
 } from '@/lib/developments';
 
 export default async function HomePage() {
-  const [develop, salesPartner] = await Promise.all([
+  const [develop, salesPartner, siteSettings] = await Promise.all([
     getDevelopDevelopmentsAsync(),
     getSalesPartnerDevelopmentsAsync(),
+    getSiteSettings(),
   ]);
   // Precio en vivo: para los desarrollos Tresor con ficha e inventario en
   // Sanity, el precio del card SIEMPRE refleja el mínimo disponible real.
@@ -33,7 +36,7 @@ export default async function HomePage() {
             blanco (no el hero sticky). Empieza bajo las esquinas superiores para no
             tapar el reveal del hero en la curva de arriba. */}
         <div aria-hidden className="absolute inset-x-0 bottom-0 top-16 -z-10 bg-bg" />
-        <Intent developments={liveDevelopDevelopments} />
+        <Intent developments={liveDevelopDevelopments} layout={siteSettings.weDevelopLayout} />
         <RivieraCTA />
         <Portfolio developments={salesPartner} />
         <Positioning />
@@ -126,7 +129,7 @@ const intents = [
   },
 ];
 
-function Intent({ developments }: { developments: Development[] }) {
+function Intent({ developments, layout }: { developments: Development[]; layout: 'cards' | 'carousel' }) {
   return (
     <section
       data-nav="light"
@@ -153,7 +156,15 @@ function Intent({ developments }: { developments: Development[] }) {
           />
         </RevealOnScroll>
 
-        <DevelopmentCarousel developments={developments} />
+        {layout === 'cards' ? (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {developments.map((dev) => (
+              <DevelopmentCard key={dev.slug} dev={dev} />
+            ))}
+          </div>
+        ) : (
+          <DevelopmentCarousel developments={developments} />
+        )}
       </div>
     </section>
   );

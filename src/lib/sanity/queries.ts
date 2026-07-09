@@ -118,6 +118,7 @@ export async function fetchPlazaBySlug(slug: string): Promise<Plaza | null> {
 }
 
 export interface SiteSettings {
+  weDevelopLayout: 'cards' | 'carousel';
   showAgendaWidget: boolean;
   agendaEyebrow: string;
   agendaEyebrowEn: string;
@@ -132,6 +133,7 @@ export interface SiteSettings {
 export async function fetchSiteSettings(): Promise<SiteSettings> {
   const raw = await sanityClient.fetch(
     `*[_type == "siteSettings" && _id == "siteSettings"][0]{
+      weDevelopLayout,
       showAgendaWidget,
       agendaEyebrow, agendaEyebrowEn,
       agendaTitle1, agendaTitle1En,
@@ -146,6 +148,7 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
   const agendaTitle2  = raw?.agendaTitle2  ?? 'tu visita';
   const agendaDesc    = raw?.agendaDesc    ?? 'Elige fecha, hora y modalidad. Te confirmamos en menos de 24 hrs.';
   return {
+    weDevelopLayout: raw?.weDevelopLayout === 'carousel' ? 'carousel' : 'cards',
     showAgendaWidget: raw?.showAgendaWidget ?? false,
     agendaEyebrow,
     agendaEyebrowEn: raw?.agendaEyebrowEn || agendaEyebrow,
