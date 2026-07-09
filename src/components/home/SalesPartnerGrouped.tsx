@@ -54,7 +54,7 @@ export default function SalesPartnerGrouped({ developments, children }: Props) {
       <div className="flex flex-col gap-16">
         {visibleGroups.map((g) => (
           <div key={g.id}>
-            <div className="mb-6 flex items-end justify-between gap-6 border-b border-line pb-4">
+            <div className="mb-6 flex items-end justify-between gap-6">
               <h3 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal tracking-tight">{g.name}</h3>
               {g.logo && (
                 <Image
@@ -62,7 +62,7 @@ export default function SalesPartnerGrouped({ developments, children }: Props) {
                   alt={g.name}
                   width={160}
                   height={64}
-                  className="h-9 w-auto shrink-0 self-end object-contain md:h-10"
+                  className="h-[25px] w-auto shrink-0 self-end object-contain md:h-7"
                 />
               )}
             </div>
