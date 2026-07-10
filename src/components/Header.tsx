@@ -27,7 +27,7 @@ const propertyTypes = [
 // desarrollos activos (countByCity > 0).
 const cityList: City[] = ['Cancún', 'Puerto Cancún', 'Puerto Morelos', 'Playa del Carmen', 'Tulum'];
 
-export default function Header() {
+export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertical' | 'horizontal' }) {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -188,16 +188,28 @@ export default function Header() {
                 : 'bg-white/80 text-ink shadow-[0_10px_40px_rgba(0,0,0,0.10)]',
             )}
           >
-            {/* Logo */}
+            {/* Logo — vertical (actual) u horizontal (el anterior), según
+                siteSettings.headerLogoStyle en Sanity. */}
             <Link href="/" aria-label="Tresor Real Estate" className="flex shrink-0 items-center">
-              <Image
-                src={dark ? '/LogoTresorVerticalWhite.svg' : '/LogoTresorVertical.svg'}
-                alt="Tresor Real Estate"
-                width={152}
-                height={32}
-                priority
-                className="h-8 w-auto"
-              />
+              {logoStyle === 'horizontal' ? (
+                <Image
+                  src={dark ? '/logos/LogoTresor.svg' : '/logos/LogoTresor-ink.svg'}
+                  alt="Tresor Real Estate"
+                  width={140}
+                  height={76}
+                  priority
+                  className="h-8 w-auto"
+                />
+              ) : (
+                <Image
+                  src={dark ? '/LogoTresorVerticalWhite.svg' : '/LogoTresorVertical.svg'}
+                  alt="Tresor Real Estate"
+                  width={152}
+                  height={32}
+                  priority
+                  className="h-8 w-auto"
+                />
+              )}
             </Link>
 
             {/* Nav — pegada a la derecha, junto al toggle de idioma */}

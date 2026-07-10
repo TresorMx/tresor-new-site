@@ -17,7 +17,7 @@ import { verifySession, ASESOR_COOKIE } from '@/lib/asesor/session';
 import MetaPixel from '@/components/MetaPixel';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { locales, type Locale } from '@/i18n';
-import { getPlazasAsync } from '@/lib/data';
+import { getPlazasAsync, getSiteSettings } from '@/lib/data';
 import { getMergedDevelopmentsAsync } from '@/lib/developments';
 import '@/styles/globals.css';
 
@@ -155,13 +155,17 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!locales.includes(locale)) notFound();
 
-  // Carga plazas + desarrollos desde Sanity en PARALELO (no en serie — cada
-  // uno es un round-trip de red aparte; en serie duplican el tiempo de espera
-  // antes de poder mandar cualquier byte de HTML). Deduplicado con
-  // React.cache — una sola llamada real por request. El segundo calienta el
-  // cache que Header.tsx (Client Component) lee sincrónicamente vía
-  // getDevelopDevelopments()/countByCity().
-  await Promise.all([getPlazasAsync(), getMergedDevelopmentsAsync()]);
+  // Carga plazas + desarrollos + configuración del sitio desde Sanity en
+  // PARALELO (no en serie — cada uno es un round-trip de red aparte; en
+  // serie duplican el tiempo de espera antes de poder mandar cualquier byte
+  // de HTML). Deduplicado con React.cache — una sola llamada real por
+  // request. El segundo calienta el cache que Header.tsx (Client Component)
+  // lee sincrónicamente vía getDevelopDevelopments()/countByCity().
+  const [, , siteSettings] = await Promise.all([
+    getPlazasAsync(),
+    getMergedDevelopmentsAsync(),
+    getSiteSettings(),
+  ]);
 
   // isAsesor se calcula SERVER-SIDE (misma cookie httpOnly que autoriza las
   // descargas) y se manda como prop inicial al provider — así el primer
@@ -225,7 +229,7 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AsesorProvider initialIsAsesor={initialIsAsesor}>
-            <Header />
+            <Header logoStyle={siteSettings.headerLogoStyle} />
             <main className="min-h-screen pt-[104px]">{children}</main>
             <Footer />
             <MobileBar />

@@ -6,6 +6,20 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'headerLogoStyle',
+      title: 'Logo del header',
+      type: 'string',
+      initialValue: 'vertical',
+      options: {
+        list: [
+          { title: 'Vertical (el actual)', value: 'vertical' },
+          { title: 'Horizontal (el anterior)', value: 'horizontal' },
+        ],
+        layout: 'radio',
+      },
+      description: 'Qué versión del logo de Tresor se muestra en el header. Ambas ya traen su variante blanca (fondo oscuro) y negra (fondo claro), se ajusta sola según la sección.',
+    }),
+    defineField({
       name: 'weDevelopLayout',
       title: 'Estilo de la sección "We Develop" (home)',
       type: 'string',

@@ -100,6 +100,7 @@ export async function getActivePlazasAsync(): Promise<Plaza[]> {
 
 export async function getSiteSettings() {
   const fallback = {
+    headerLogoStyle: 'vertical' as const,
     weDevelopLayout: 'cards' as const,
     salesPartnerLayout: 'grouped' as const,
     showAgendaWidget: false,
