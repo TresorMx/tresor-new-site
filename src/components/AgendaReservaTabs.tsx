@@ -1,60 +1,111 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
+import SlidingTabs from '@/components/ui/SlidingTabs';
+import AgendaWidget from '@/components/AgendaWidget';
 import ReservaForm from '@/components/ReservaForm';
 import { formatMXN } from '@/lib/utils';
 import type { FloorPlanTypology } from '@/lib/developments';
 
 interface AgendaReservaTabsProps {
   devSlug: string;
+  devName: string;
   floorPlans?: FloorPlanTypology[];
+  // Copy de la pestaña Agenda (viene de siteSettings, ya localizado).
+  agendaTitle1: string;
+  agendaTitle2: string;
+  agendaDesc: string;
   displayName: string;
   locale: string;
   reservationAmount: number;
 }
 
-// Sección de apartado en línea de un Sales Partner. Fase 3: se quitó el tab
-// "Agendar visita" — el apartado (cuando está activo) es el único CTA de la
-// sección, sin alternativa de agendar. `AgendaWidget`/`SlidingTabs` ya no se
-// usan aquí (el archivo se llama igual para no tocar los imports en
-// page.tsx, aunque ya no hay "tabs").
+// Envuelve la sección CTA cuando el desarrollo tiene apartado en línea activo:
+// un pill deslizante Agenda / Aparta, con título y formulario por pestaña.
+// El eyebrow se reemplaza por el pill. Si el apartado NO está activo, la ficha
+// no usa este componente (renderiza el AgendaWidget suelto con su eyebrow).
 export default function AgendaReservaTabs({
   devSlug,
+  devName,
   floorPlans,
+  agendaTitle1,
+  agendaTitle2,
+  agendaDesc,
   displayName,
   locale,
   reservationAmount,
 }: AgendaReservaTabsProps) {
   const t = useTranslations('reserva');
+  const [tab, setTab] = useState(0);
+
+  // Los botones de la sección 1 apuntan a #aparta (agenda) y #reservar
+  // (apartado). Como #reservar no es un id real, hacemos el scroll a mano.
+  useEffect(() => {
+    function syncFromHash() {
+      if (window.location.hash === '#reservar') {
+        setTab(1);
+        document.getElementById('aparta')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+    syncFromHash();
+    window.addEventListener('hashchange', syncFromHash);
+    return () => window.removeEventListener('hashchange', syncFromHash);
+  }, []);
 
   return (
     <>
       <div className="container-wrap pb-0 pt-20 text-center md:pt-28">
-        <span className="eyebrow eyebrow-accent font-bold">{t('eyebrow')}</span>
-        <h2 className="mx-auto mt-5 h-display max-w-3xl text-[clamp(24px,3.2vw,48px)]">
-          <span className="text-ink-3">{t('title1')}</span> {displayName}
+        <h2 className="mx-auto h-display max-w-5xl text-[clamp(24px,3.2vw,48px)]">
+          <span className="text-ink-3">{agendaTitle1}</span>
+          <br />
+          {agendaTitle2} {displayName}
         </h2>
 
-        <p className="mx-auto mt-6 max-w-xl text-[17px] font-normal text-ink md:max-w-3xl">
-          {t.rich('apartaIntro', {
-            devName: displayName,
-            amount: `${formatMXN(reservationAmount)} MXN`,
-            bold: (chunks) => <span className="font-semibold text-ink">{chunks}</span>,
-            // `block` fuerza el salto de línea SIEMPRE antes de "100%
-            // Reembolsable", sin importar el ancho — antes solo tenía
-            // whitespace-nowrap, así que si sobraba espacio en la línea
-            // anterior, el final de la oración (ej. "Wow Condos") se
-            // metía en la misma línea que el "100%".
-            yellow: (chunks) => (
-              <span className="mt-1 block whitespace-nowrap text-[1.5em] font-semibold text-accent">
-                {chunks}
-              </span>
-            ),
-          })}
+        <div className="mt-6 flex justify-center">
+          <SlidingTabs
+            activeIndex={tab}
+            onChange={setTab}
+            items={[
+              { key: 'agenda', label: t('tabAgenda') },
+              { key: 'aparta', label: t('tabAparta') },
+            ]}
+            indicatorClassName="bg-accent"
+          />
+        </div>
+
+        <p
+          className={`mx-auto mt-6 text-[17px] font-normal text-ink ${
+            tab === 0 ? 'max-w-xl' : 'max-w-xl md:max-w-3xl'
+          }`}
+        >
+          {tab === 0
+            ? agendaDesc
+            : t.rich('apartaIntro', {
+                devName: displayName,
+                amount: `${formatMXN(reservationAmount)} MXN`,
+                bold: (chunks) => <span className="font-semibold text-ink">{chunks}</span>,
+                // `block` fuerza el salto de línea SIEMPRE antes de "100%
+                // Reembolsable", sin importar el ancho — antes solo tenía
+                // whitespace-nowrap, así que si sobraba espacio en la línea
+                // anterior, el final de la oración (ej. "Wow Condos") se
+                // metía en la misma línea que el "100%". El md:max-w-3xl de
+                // arriba evita que esa oración se corte a la mitad en
+                // desktop; en mobile sigue envolviendo en varias líneas.
+                yellow: (chunks) => (
+                  <span className="mt-1 block whitespace-nowrap text-[1.5em] font-semibold text-accent">
+                    {chunks}
+                  </span>
+                ),
+              })}
         </p>
       </div>
 
-      <ReservaForm devSlug={devSlug} floorPlans={floorPlans} locale={locale} />
+      {tab === 0 ? (
+        <AgendaWidget devSlug={devSlug} devName={devName} />
+      ) : (
+        <ReservaForm devSlug={devSlug} floorPlans={floorPlans} locale={locale} />
+      )}
     </>
   );
 }

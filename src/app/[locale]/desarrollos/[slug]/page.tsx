@@ -16,7 +16,9 @@ import Gallery from '@/components/Gallery';
 import FloorPlans from '@/components/FloorPlans';
 import LocationMap from '@/components/LocationMap';
 import QuoteWizard from '@/components/QuoteWizard';
+import AgendaWidget from '@/components/AgendaWidget';
 import AgendaReservaTabs from '@/components/AgendaReservaTabs';
+import AsesorApartadoOnly from '@/components/asesor/AsesorApartadoOnly';
 import PixelViewContent from '@/components/PixelViewContent';
 import FichaDeveloper from '@/components/ficha/FichaDeveloper';
 import FichaAmenities from '@/components/ficha/FichaAmenities';
@@ -117,14 +119,12 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   if (!dev || dev.comingSoon) notFound();
   if (plaza?.comingSoon) notFound();
 
-  // Fase 3: el apartado en línea de Sales Partner queda SIEMPRE activo para
-  // un asesor logueado (verificado server-side, no la pista de UI) aunque el
-  // desarrollo todavía no tenga reservationEnabled — así el equipo de
-  // ventas puede usar el flujo de apartado en cualquier ficha para demos o
-  // para procesar un apartado en llamada, sin esperar a que cada desarrollo
-  // esté "listo" para el público general.
+  // Un asesor logueado (verificado server-side con la cookie httpOnly, no la
+  // pista de UI) ve una ficha "en modo venta": cotizador siempre activo en
+  // Quattro, apartado siempre activo en Sales Partner — sin "Agendar visita"
+  // en ningún caso. El público sigue viendo exactamente lo de siempre
+  // (Agenda + Aparta si el desarrollo lo tiene activado en Sanity).
   const isAsesor = verifySession(cookieStore.get(ASESOR_COOKIE)?.value);
-  const reservationActive = Boolean(dev.reservationEnabled) || isAsesor;
 
   const t = await getTranslations('plaza');
   // Nombre corto para copy tipo "conoce {displayName}" — quita el "Plaza
@@ -133,11 +133,11 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   // Sales Partner como "Olivia Wow Condos"), el nombre queda intacto.
   const displayName = dev.name.replace(/\s*Plaza Center\s*/, ' ').replace(/\s+/g, ' ').trim();
   const isEs = locale !== 'en';
-  // Sigue controlando el flujo DENTRO del Master Plan interactivo (clic en un
-  // pin → agenda vs cotizador de esa unidad) — eso no cambió en fase 3. Ya
-  // NO decide el CTA principal de la ficha (arriba ni en "aparta"): ese
-  // ahora siempre es cotizador/apartado, sin excepción.
   const { showAgendaWidget } = siteSettings;
+  const agendaEyebrow = isEs ? siteSettings.agendaEyebrow : siteSettings.agendaEyebrowEn;
+  const agendaTitle1  = isEs ? siteSettings.agendaTitle1  : siteSettings.agendaTitle1En;
+  const agendaTitle2  = isEs ? siteSettings.agendaTitle2  : siteSettings.agendaTitle2En;
+  const agendaDesc    = isEs ? siteSettings.agendaDesc    : siteSettings.agendaDescEn;
 
   // Precio: Tresor lo calcula del inventario en vivo; Sales Partner usa el
   // priceLabel ya formateado del card (no tiene unidades que consultar).
@@ -424,34 +424,58 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
               )}
             </p>
 
-            {/* Fase 3: sin botón "Agendar visita" en ningún caso. Quattro
-                (plaza) siempre muestra disponibilidad + cotizador — sí o sí,
-                sin importar el toggle de Agenda de Configuración del sitio
-                (ese toggle solo sigue afectando el flujo dentro del Master
-                Plan). Sales Partner: "Aparta ahora" si el apartado está
-                activo (real o porque eres asesor); si no, un CTA neutro que
-                lleva al formulario de contacto de la sección de abajo. */}
+            {/* Asesor logueado: cotizador siempre activo en Quattro, apartado
+                siempre activo en Sales Partner — sin "Agendar visita" en
+                ningún caso. Público: exactamente el comportamiento de
+                siempre (Agenda visible; Aparta solo si el desarrollo lo
+                tiene activado en Sanity). */}
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              {plaza ? (
+              {isAsesor ? (
+                plaza ? (
+                  <>
+                    <Link href="#master-plan" className="btn border-0 bg-accent text-ink hover:brightness-95">
+                      {t('viewAvailability')}
+                    </Link>
+                    <Link href={`/cotizar/${plaza.slug}`} className="btn btn-primary font-semibold">
+                      {t('quoteUnit')}
+                      <ArrowRight size={14} strokeWidth={1.6} />
+                    </Link>
+                  </>
+                ) : (
+                  <Link href="#aparta" className="btn border-0 bg-accent text-ink hover:brightness-95">
+                    {isEs
+                      ? `Aparta ahora con ${formatMXN(getReservationAmount(dev))} MXN`
+                      : `Reserve now with ${formatMXN(getReservationAmount(dev))} MXN`}
+                    <ArrowRight size={14} strokeWidth={1.6} />
+                  </Link>
+                )
+              ) : plaza ? (
                 <>
                   <Link href="#master-plan" className="btn border-0 bg-accent text-ink hover:brightness-95">
                     {t('viewAvailability')}
                   </Link>
-                  <Link href={`/cotizar/${plaza.slug}`} className="btn btn-primary font-semibold">
-                    {t('quoteUnit')}
+                  {!showAgendaWidget && (
+                    <Link href={`/cotizar/${plaza.slug}`} className="btn btn-primary font-semibold">
+                      {t('quoteUnit')}
+                      <ArrowRight size={14} strokeWidth={1.6} />
+                    </Link>
+                  )}
+                </>
+              ) : dev.reservationEnabled ? (
+                <>
+                  <Link href="#aparta" className="btn btn-outline font-semibold">
+                    {isEs ? 'Agendar una visita' : 'Schedule a visit'}
+                  </Link>
+                  <Link href="#reservar" className="btn border-0 bg-accent text-ink hover:brightness-95">
+                    {isEs
+                      ? `Aparta ahora con ${formatMXN(getReservationAmount(dev))} MXN`
+                      : `Reserve now with ${formatMXN(getReservationAmount(dev))} MXN`}
                     <ArrowRight size={14} strokeWidth={1.6} />
                   </Link>
                 </>
-              ) : reservationActive ? (
-                <Link href="#aparta" className="btn border-0 bg-accent text-ink hover:brightness-95">
-                  {isEs
-                    ? `Aparta ahora con ${formatMXN(getReservationAmount(dev))} MXN`
-                    : `Reserve now with ${formatMXN(getReservationAmount(dev))} MXN`}
-                  <ArrowRight size={14} strokeWidth={1.6} />
-                </Link>
               ) : (
                 <Link href="#aparta" className="btn border-0 bg-accent text-ink hover:brightness-95">
-                  {isEs ? 'Conoce este desarrollo' : 'Learn more'}
+                  {isEs ? 'Agendar una visita' : 'Schedule a visit'}
                   <ArrowRight size={14} strokeWidth={1.6} />
                 </Link>
               )}
@@ -532,27 +556,56 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           locale={locale}
           gray={stripe.floorPlans}
           ctaLabels={dev.ctaLabels}
-          reservationActive={reservationActive}
+          isAsesor={isAsesor}
         />
       )}
 
-      {/* ═════ 6. APARTADO EN LÍNEA — COTIZADOR (Tresor, sí o sí) / APARTADO
-              (Sales Partner con apartado activo) / RESERVA RÁPIDA (Sales
-              Partner sin apartado, o sea sin "Agendar visita" ya) ═════ */}
+      {/* ═════ 6. APARTADO EN LÍNEA — asesor: cotizador (Quattro) o apartado
+              (Sales Partner) siempre, sin Agenda. Público: comportamiento
+              de siempre (tabs Agenda/Aparta — Tresor cotizador/Agenda según
+              el toggle del sitio — Reserva Rápida si no hay apartado) ═════ */}
       <section
         className={`relative z-10 -mb-10 overflow-hidden rounded-b-[2.5rem] ${stripe.cta ? 'bg-[#FAFAFA]' : 'bg-white'}`}
         id="aparta"
       >
-        {/* !plaza: el apartado sin inventario es solo para Sales Partner. Un
-            desarrollo Tresor con `plaza` sigue el flujo cotizador-primero →
-            apartar unidad ya seleccionada (QuoteWizard) — SIEMPRE, ya no
-            depende del toggle "Agenda tu visita" de Configuración del sitio
-            (ese contradecía el requisito de que cotizador esté sí o sí
-            activo en Quattro). */}
-        {!plaza && reservationActive ? (
+        {isAsesor ? (
+          plaza ? (
+            <>
+              <div className="container-wrap pb-0 pt-20 text-center md:pt-28">
+                <span className="eyebrow eyebrow-accent font-bold">{t('apartaEyebrow')}</span>
+                <h2 className="mx-auto mt-5 h-display max-w-3xl text-[clamp(24px,3.2vw,48px)]">
+                  <span className="text-ink-3">{t('apartaTitle1')}</span>
+                  <br />
+                  {t('apartaTitle2')}
+                </h2>
+                <p className="mx-auto mt-5 max-w-xl text-[15px] font-light text-ink-3">
+                  {t('apartaDesc')}
+                </p>
+              </div>
+              <QuoteWizard plaza={plaza} />
+            </>
+          ) : (
+            <AsesorApartadoOnly
+              devSlug={slug}
+              floorPlans={dev.floorPlans}
+              displayName={displayName}
+              locale={locale}
+              reservationAmount={getReservationAmount(dev)}
+            />
+          )
+        ) : /* !plaza: el apartado sin inventario (tabs Agenda/Aparta) es solo
+            para Sales Partner. Un desarrollo Tresor con `plaza` sigue el
+            flujo cotizador-primero → apartar unidad ya seleccionada
+            (QuoteWizard), aunque algún día tuviera reservationEnabled
+            activado. */
+        !plaza && dev.reservationEnabled ? (
           <AgendaReservaTabs
             devSlug={slug}
+            devName={dev.name}
             floorPlans={dev.floorPlans}
+            agendaTitle1={agendaTitle1}
+            agendaTitle2={agendaTitle2}
+            agendaDesc={agendaDesc}
             displayName={displayName}
             locale={locale}
             reservationAmount={getReservationAmount(dev)}
@@ -560,7 +613,19 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
         ) : (
           <>
             <div className="container-wrap pb-0 pt-20 text-center md:pt-28">
-              {plaza ? (
+              {showAgendaWidget ? (
+                <>
+                  <span className="eyebrow eyebrow-accent font-bold">{agendaEyebrow}</span>
+                  <h2 className="mx-auto mt-5 h-display max-w-5xl text-[clamp(24px,3.2vw,48px)]">
+                    <span className="text-ink-3">{agendaTitle1}</span>
+                    <br />
+                    {agendaTitle2} {displayName}
+                  </h2>
+                  <p className="mx-auto mt-6 max-w-xl text-[17px] font-normal text-ink">
+                    {agendaDesc}
+                  </p>
+                </>
+              ) : plaza ? (
                 <>
                   <span className="eyebrow eyebrow-accent font-bold">{t('apartaEyebrow')}</span>
                   <h2 className="mx-auto mt-5 h-display max-w-3xl text-[clamp(24px,3.2vw,48px)]">
@@ -586,7 +651,9 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
                 </>
               )}
             </div>
-            {plaza ? (
+            {showAgendaWidget ? (
+              <AgendaWidget devSlug={slug} devName={dev.name} />
+            ) : plaza ? (
               <QuoteWizard plaza={plaza} />
             ) : (
               <ReservaRapidaForm
