@@ -88,7 +88,7 @@ export default async function Footer() {
           <div className="flex items-center gap-3.5">
             <span
               className="font-tresor text-[10px] normal-case tracking-[0.14em] text-white/60"
-              style={{ fontFamily: 'Javacom, var(--font-manrope), sans-serif' }}
+              style={{ fontFamily: 'Javacom, var(--font-switzer), sans-serif' }}
             >
               The Art of Luxury Living
             </span>

@@ -476,7 +476,7 @@ function PropiedadesMenu() {
 
       {/* Pie del panel */}
       <div className="flex items-center justify-between border-t border-line bg-bg-soft px-8 py-4">
-        <span className="text-[12px] tracking-[0.16em] text-ink-3" style={{ fontFamily: 'Javacom, var(--font-manrope), sans-serif' }}>
+        <span className="text-[12px] tracking-[0.16em] text-ink-3" style={{ fontFamily: 'Javacom, var(--font-switzer), sans-serif' }}>
           The Art of Luxury Living
         </span>
         <Link href="/#portafolio" className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-caps text-ink transition-colors hover:text-accent">

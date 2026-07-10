@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
-import { Cormorant_Garamond, Manrope, JetBrains_Mono, Montserrat } from 'next/font/google';
+import { Cormorant_Garamond, JetBrains_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -32,10 +33,20 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 });
 
-const manrope = Manrope({
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700'],
-  variable: '--font-manrope',
+// Switzer auto-hospedada (next/font/local, sin @import externo bloqueante)
+// — reemplaza a Manrope como font-sans. Antes se cargaba vía @import de
+// Fontshare directo en globals.css: eso bloquea el primer render de todo el
+// sitio. Los mismos 5 woff2 ahora viven en src/fonts/switzer/ y se sirven
+// self-hosted, con el mismo `display: swap` y sin el costo de red externo.
+const switzer = localFont({
+  src: [
+    { path: '../../fonts/switzer/Switzer-300.woff2', weight: '300', style: 'normal' },
+    { path: '../../fonts/switzer/Switzer-400.woff2', weight: '400', style: 'normal' },
+    { path: '../../fonts/switzer/Switzer-500.woff2', weight: '500', style: 'normal' },
+    { path: '../../fonts/switzer/Switzer-600.woff2', weight: '600', style: 'normal' },
+    { path: '../../fonts/switzer/Switzer-700.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-switzer',
   display: 'swap',
 });
 
@@ -43,13 +54,6 @@ const jetbrains = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500'],
   variable: '--font-jetbrains',
-  display: 'swap',
-});
-
-const montserrat = Montserrat({
-  subsets: ['latin'],
-  weight: ['700', '800', '900'],
-  variable: '--font-montserrat',
   display: 'swap',
 });
 
@@ -212,7 +216,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={locale}
-      className={`${cormorant.variable} ${manrope.variable} ${jetbrains.variable} ${montserrat.variable}`}
+      className={`${cormorant.variable} ${switzer.variable} ${jetbrains.variable}`}
     >
       <body>
         <script

@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Cormorant_Garamond, Manrope } from 'next/font/google';
+import { Cormorant_Garamond } from 'next/font/google';
+import localFont from 'next/font/local';
 import { ArrowLeft } from 'lucide-react';
 import '@/styles/globals.css';
 
@@ -12,16 +13,21 @@ const cormorant = Cormorant_Garamond({
   display: 'swap',
 });
 
-const manrope = Manrope({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-manrope',
+const switzer = localFont({
+  src: [
+    { path: '../fonts/switzer/Switzer-300.woff2', weight: '300', style: 'normal' },
+    { path: '../fonts/switzer/Switzer-400.woff2', weight: '400', style: 'normal' },
+    { path: '../fonts/switzer/Switzer-500.woff2', weight: '500', style: 'normal' },
+    { path: '../fonts/switzer/Switzer-600.woff2', weight: '600', style: 'normal' },
+    { path: '../fonts/switzer/Switzer-700.woff2', weight: '700', style: 'normal' },
+  ],
+  variable: '--font-switzer',
   display: 'swap',
 });
 
 export default function NotFound() {
   return (
-    <html lang="es" className={`${cormorant.variable} ${manrope.variable}`}>
+    <html lang="es" className={`${cormorant.variable} ${switzer.variable}`}>
       <body>
         <main className="relative flex min-h-screen items-center justify-center overflow-hidden">
           {/* Fondo render */}

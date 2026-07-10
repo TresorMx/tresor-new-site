@@ -96,13 +96,13 @@ function FloorPlanSVG({ width, depth, area }: { width: number; depth: number; ar
       <line x1={ox + pw - bathW} y1={oy} x2={ox + pw - bathW} y2={oy + bathH} stroke="#0E0E0E" strokeWidth="1.2" />
       <line x1={ox + pw - bathW} y1={oy + bathH} x2={ox + pw} y2={oy + bathH} stroke="#0E0E0E" strokeWidth="1.2" />
       <rect x={ox + pw - bathW + 6} y={oy + 8} width={bathW - 12} height={bathH - 16} fill="#fff" stroke="#0E0E0E" strokeWidth="0.8" rx="1" />
-      <text x={ox + pw - bathW / 2} y={oy + bathH / 2 + 4} textAnchor="middle" fontFamily="Manrope, sans-serif" fontSize="8" letterSpacing="1.5" fill="#6B6863">WC</text>
+      <text x={ox + pw - bathW / 2} y={oy + bathH / 2 + 4} textAnchor="middle" fontFamily="Switzer, sans-serif" fontSize="8" letterSpacing="1.5" fill="#6B6863">WC</text>
 
       {/* Área comercial */}
       <text x={ox + (pw - bathW) / 2} y={oy + pd / 2 - 8} textAnchor="middle" fontFamily="Cormorant Garamond, Georgia, serif" fontStyle="italic" fontSize="20" fill="#0E0E0E">
         Local comercial
       </text>
-      <text x={ox + (pw - bathW) / 2} y={oy + pd / 2 + 14} textAnchor="middle" fontFamily="Manrope, sans-serif" fontSize="10" fill="#6B6863">
+      <text x={ox + (pw - bathW) / 2} y={oy + pd / 2 + 14} textAnchor="middle" fontFamily="Switzer, sans-serif" fontSize="10" fill="#6B6863">
         {(area * 0.8).toFixed(0)} m²
       </text>
 
