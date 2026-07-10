@@ -129,10 +129,10 @@ export async function generateMetadata({
     robots: { index: true, follow: true, googleBot: { index: true, follow: true } },
     icons: {
       icon: [
-        { url: '/favicon.svg', type: 'image/svg+xml' },
-        { url: '/favicon-32.png', sizes: '32x32', type: 'image/png' },
+        { url: '/favicon2.svg', type: 'image/svg+xml' },
+        { url: '/favicon2.png', type: 'image/png' },
       ],
-      apple: '/apple-touch-icon.png',
+      apple: '/favicon2.png',
     },
   };
 }

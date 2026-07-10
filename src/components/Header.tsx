@@ -191,10 +191,10 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" aria-label="Tresor Real Estate" className="flex shrink-0 items-center">
               <Image
-                src={dark ? '/logos/LogoTresor.svg' : '/logos/LogoTresor-ink.svg'}
+                src={dark ? '/LogoTresorVerticalWhite.svg' : '/LogoTresorVertical.svg'}
                 alt="Tresor Real Estate"
-                width={140}
-                height={76}
+                width={152}
+                height={32}
                 priority
                 className="h-8 w-auto"
               />

@@ -72,7 +72,7 @@ export default function AsesorLoginModal() {
           Acceso Asesores
         </h2>
         <p className="mt-2 text-[14px] font-light leading-relaxed text-ink-3">
-          Ingresa con tu cuenta de Tresor para activar los Drives de Ventas.
+          Material exclusivo para equipo de ventas.
         </p>
 
         <form onSubmit={submit} className="mt-7 grid gap-4">
