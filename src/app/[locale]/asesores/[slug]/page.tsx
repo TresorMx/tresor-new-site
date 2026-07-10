@@ -24,6 +24,10 @@ export default async function AsesorDrivePage({ params }: { params: Promise<{ sl
     developerName: dev.brand ?? developers[dev.developer]?.name ?? dev.developer,
     logo: dev.logo,
     image: dev.heroRender ?? dev.image,
+    // Los formatos administrativos (Recibo de Pago, Apartado, etc.) solo
+    // existen para Quattro (desarrollos propios de Tresor) — Sales Partner
+    // no los tiene.
+    showAdmin: dev.relationship === 'develop',
   };
 
   return <AsesorDrive dev={driveDev} />;

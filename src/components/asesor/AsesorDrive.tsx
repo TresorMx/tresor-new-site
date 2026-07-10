@@ -13,6 +13,9 @@ export interface DriveDev {
   developerName: string;
   logo?: string;  // logo del desarrollo (blanco, va sobre fondo oscuro)
   image?: string;
+  // Formatos administrativos (Recibo de Pago, Apartado, etc.) — solo existen
+  // para desarrollos propios de Tresor (Quattro), no para Sales Partner.
+  showAdmin?: boolean;
 }
 
 export default function AsesorDrive({ dev }: { dev: DriveDev }) {
@@ -57,21 +60,23 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
           </div>
         </section>
 
-        {/* Formatos administrativos */}
-        <section className="container-wrap pt-16">
-          <div className="mb-7 flex items-end justify-between gap-4">
-            <div>
-              <span className="eyebrow eyebrow-accent block font-bold">— Administrativo</span>
-              <h2 className="mt-3 font-sans text-[clamp(20px,2.6vw,30px)] font-medium tracking-tight">Formatos administrativos</h2>
+        {/* Formatos administrativos — solo Quattro (Sales Partner no los tiene) */}
+        {dev.showAdmin && (
+          <section className="container-wrap pt-16">
+            <div className="mb-7 flex items-end justify-between gap-4">
+              <div>
+                <span className="eyebrow eyebrow-accent block font-bold">— Administrativo</span>
+                <h2 className="mt-3 font-sans text-[clamp(20px,2.6vw,30px)] font-medium tracking-tight">Formatos administrativos</h2>
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{DRIVE_ADMIN.length} formatos</span>
             </div>
-            <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{DRIVE_ADMIN.length} formatos</span>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {DRIVE_ADMIN.map((c) => (
-              <DriveTile key={c.key} card={c} slug={dev.slug} variant="admin" />
-            ))}
-          </div>
-        </section>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {DRIVE_ADMIN.map((c) => (
+                <DriveTile key={c.key} card={c} slug={dev.slug} variant="admin" />
+              ))}
+            </div>
+          </section>
+        )}
       </main>
     </AsesorGate>
   );
