@@ -1,5 +1,6 @@
 import { defineField, defineType } from 'sanity';
 import { amenityOptions } from '../../src/lib/amenities';
+import { driveFields } from './driveFields';
 
 // Presets de tamaño de logo — el número que se guarda es el mismo factor de
 // escala que ya usa el código (1 = normal), pero el editor nunca ve el
@@ -34,6 +35,7 @@ export default defineType({
     { name: 'floorplans',  title: '📐 Tipologías' },
     { name: 'content',     title: '📄 Módulos extra' },
     { name: 'reservation', title: '💳 Apartado y botones' },
+    { name: 'drive',       title: '🔒 Drive de Ventas' },
     { name: 'seo',         title: '🔍 SEO' },
   ],
   fields: [
@@ -301,6 +303,9 @@ export default defineType({
       description: 'Si lo dejas vacío, dice "Tour virtual".',
     }),
     defineField({ name: 'ctaVirtualTourEn', title: 'Texto botón "Tour virtual" (EN) — opcional', type: 'string', group: 'reservation' }),
+
+    // ── DRIVE DE VENTAS (solo asesores logueados) ──────────────────
+    ...driveFields,
 
     // ── SEO ──────────────────────────────────────────────────────
     defineField({ name: 'seoTitle', title: 'SEO Title (ES)', type: 'string', group: 'seo', description: 'Si se deja vacío usa el nombre del desarrollo. Recomendado: 50-60 caracteres.', validation: (r) => r.max(60) }),

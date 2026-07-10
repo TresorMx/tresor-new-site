@@ -1,4 +1,5 @@
 import { defineField, defineType } from 'sanity';
+import { driveFields } from './driveFields';
 
 export default defineType({
   name: 'plaza',
@@ -12,6 +13,7 @@ export default defineType({
     { name: 'specs',    title: 'Campos del local' },
     { name: 'plans',    title: 'Planes de pago' },
     { name: 'units',    title: 'Locales' },
+    { name: 'drive',    title: '🔒 Drive de Ventas' },
     { name: 'seo',      title: '🔍 SEO' },
   ],
   fields: [
@@ -248,6 +250,9 @@ export default defineType({
       type: 'array', group: 'units',
       of: [{ type: 'reference', to: [{ type: 'unit' }] }],
     }),
+
+    // ── DRIVE DE VENTAS (solo asesores logueados) ──────────────────
+    ...driveFields,
   ],
 
   preview: { select: { title: 'name', subtitle: 'tagline', media: 'heroRender' } },
