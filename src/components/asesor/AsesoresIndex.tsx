@@ -15,7 +15,9 @@ export interface DriveGroup {
 export default function AsesoresIndex({ groups }: { groups: DriveGroup[] }) {
   return (
     <AsesorGate>
-      <main className="min-h-screen bg-bg pb-24 pt-[140px]">
+      {/* Sin pt propio: el <main> del layout raíz ya trae pt-[104px] — tener
+          otro <main> anidado con SU propio padding duplicaba el espacio. */}
+      <div className="min-h-screen bg-bg pb-24 pt-9">
         <div className="container-wrap">
           <span className="eyebrow eyebrow-accent block font-bold">— Drives de Ventas</span>
           <h1 className="mt-3 font-sans text-[clamp(28px,4vw,52px)] font-normal leading-[1.05] tracking-tight">
@@ -60,7 +62,7 @@ export default function AsesoresIndex({ groups }: { groups: DriveGroup[] }) {
             ))}
           </div>
         </div>
-      </main>
+      </div>
     </AsesorGate>
   );
 }

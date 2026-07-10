@@ -1,9 +1,8 @@
 'use client';
 
 import type { CSSProperties } from 'react';
-import { Download, ArrowLeft } from 'lucide-react';
+import { Download } from 'lucide-react';
 import Image from 'next/image';
-import { Link } from '@/navigation';
 import { cn } from '@/lib/utils';
 import AsesorGate from '@/components/asesor/AsesorGate';
 import { DRIVE_MAIN, DRIVE_ADMIN, type DriveCard } from '@/lib/asesor/driveCards';
@@ -22,12 +21,18 @@ export interface DriveDev {
 export default function AsesorDrive({ dev }: { dev: DriveDev }) {
   return (
     <AsesorGate>
-      <main className="min-h-screen bg-bg pb-24 pt-[104px]">
+      {/* Sin <main> propio: el layout raíz ya envuelve todo en
+          <main className="pt-[104px]">, y anidar OTRO <main> con SU PROPIO
+          pt-[104px] duplicaba el padding (104 + 104, con -mt-[72px] solo
+          cancelando el interno) — el hero terminaba empezando ~136px abajo
+          de lo real, con el header flotando en su propio bloque en vez de
+          superponerse a la foto. Mismo patrón que usa la ficha: el hero es
+          hijo directo del <main> del layout. */}
+      <>
         {/* Encabezado — MISMO hero que las fichas (mismas clases: -mt-[72px],
             height calc(100svh - 104px - 72px), animate-hero-zoom, logo
-            centrado con el mismo tamaño clamp), solo se le agregan los
-            textos propios del drive (eyebrow + nombre a la izquierda,
-            "Todos los drives" a la derecha, en la misma línea) abajo. */}
+            centrado con el mismo tamaño clamp), solo se le agrega el texto
+            propio del drive (eyebrow + nombre) abajo. */}
         <section data-nav="dark" className="relative -mt-[72px] overflow-hidden bg-bg-deep text-bg" style={{ height: 'calc(100svh - 104px - 72px)', minHeight: '480px' }}>
           <div className="absolute inset-0 animate-hero-zoom">
             {dev.image && (
@@ -58,56 +63,49 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
             )}
           </div>
 
-          <div className="container-wrap absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 pb-8">
-            <div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
-                Drive de Ventas · {dev.developerName}
-              </span>
-              <h2 className="mt-2 font-sans text-[clamp(22px,3vw,32px)] font-medium leading-tight tracking-tight text-white">
-                {dev.name}
-              </h2>
-            </div>
-            <Link
-              href="/asesores"
-              className="mb-1 inline-flex shrink-0 items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/80 transition-colors hover:text-white"
-            >
-              <ArrowLeft size={14} strokeWidth={1.8} />
-              Todos los drives
-            </Link>
+          <div className="container-wrap absolute inset-x-0 bottom-0 z-10 pb-8">
+            <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
+              Drive de Ventas · {dev.developerName}
+            </span>
+            <h2 className="mt-2 font-sans text-[clamp(22px,3vw,32px)] font-medium leading-tight tracking-tight text-white">
+              {dev.name}
+            </h2>
           </div>
         </section>
 
-        {/* Drive principal */}
-        <section className="container-wrap pt-14">
-          <div className="mb-7 flex items-end justify-between gap-4">
-            <h2 className="font-sans text-[clamp(20px,2.6vw,30px)] font-medium tracking-tight">Drive principal</h2>
-            <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{DRIVE_MAIN.length} secciones</span>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {DRIVE_MAIN.map((c) => (
-              <DriveTile key={c.key} card={c} slug={dev.slug} />
-            ))}
-          </div>
-        </section>
-
-        {/* Formatos administrativos — solo Quattro (Sales Partner no los tiene) */}
-        {dev.showAdmin && (
-          <section className="container-wrap pt-16">
+        <div className="bg-bg pb-24">
+          {/* Drive principal */}
+          <section className="container-wrap pt-14">
             <div className="mb-7 flex items-end justify-between gap-4">
-              <div>
-                <span className="eyebrow eyebrow-accent block font-bold">— Administrativo</span>
-                <h2 className="mt-3 font-sans text-[clamp(20px,2.6vw,30px)] font-medium tracking-tight">Formatos administrativos</h2>
-              </div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{DRIVE_ADMIN.length} formatos</span>
+              <h2 className="font-sans text-[clamp(20px,2.6vw,30px)] font-medium tracking-tight">Drive principal</h2>
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{DRIVE_MAIN.length} secciones</span>
             </div>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {DRIVE_ADMIN.map((c) => (
-                <DriveTile key={c.key} card={c} slug={dev.slug} variant="admin" />
+              {DRIVE_MAIN.map((c) => (
+                <DriveTile key={c.key} card={c} slug={dev.slug} />
               ))}
             </div>
           </section>
-        )}
-      </main>
+
+          {/* Formatos administrativos — solo Quattro (Sales Partner no los tiene) */}
+          {dev.showAdmin && (
+            <section className="container-wrap pt-16">
+              <div className="mb-7 flex items-end justify-between gap-4">
+                <div>
+                  <span className="eyebrow eyebrow-accent block font-bold">— Administrativo</span>
+                  <h2 className="mt-3 font-sans text-[clamp(20px,2.6vw,30px)] font-medium tracking-tight">Formatos administrativos</h2>
+                </div>
+                <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{DRIVE_ADMIN.length} formatos</span>
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                {DRIVE_ADMIN.map((c) => (
+                  <DriveTile key={c.key} card={c} slug={dev.slug} variant="admin" />
+                ))}
+              </div>
+            </section>
+          )}
+        </div>
+      </>
     </AsesorGate>
   );
 }

@@ -12,8 +12,10 @@ export default function AsesorGate({ children }: { children: React.ReactNode }) 
   if (!ready) return null; // evita flash antes de hidratar el estado
 
   if (!isAsesor) {
+    // Sin pt-[104px] propio: el <main> del layout raíz ya trae ese padding
+    // — duplicarlo aquí empujaba esta pantalla innecesariamente más abajo.
     return (
-      <main className="flex min-h-[70vh] items-center justify-center bg-bg px-6 pt-[104px]">
+      <div className="flex min-h-[70vh] items-center justify-center bg-bg px-6">
         <div className="w-full max-w-md rounded-[26px] border border-line bg-white p-10 text-center shadow-sm">
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-ink text-white">
             <Lock size={20} strokeWidth={1.6} />
@@ -29,7 +31,7 @@ export default function AsesorGate({ children }: { children: React.ReactNode }) 
             Iniciar sesión
           </button>
         </div>
-      </main>
+      </div>
     );
   }
 
