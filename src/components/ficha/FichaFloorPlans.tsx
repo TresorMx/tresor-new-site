@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Orbit, Calendar } from 'lucide-react';
+import { Orbit, ArrowRight } from 'lucide-react';
 import { Link } from '@/navigation';
 import { cn } from '@/lib/utils';
 import VirtualTourModal from '@/components/ficha/VirtualTourModal';
@@ -19,14 +19,18 @@ interface FichaFloorPlansProps {
   locale: string;
   gray?: boolean;
   ctaLabels?: { scheduleVisit?: I18nText; virtualTour?: I18nText };
+  // Fase 3: ya no hay "Agendar visita" — este botón lleva a #aparta, que
+  // ahora siempre es apartado (real o porque eres asesor) o el formulario
+  // de contacto. El texto cambia según cuál de los dos te espera ahí.
+  reservationActive?: boolean;
 }
 
 // Módulo de tipologías para desarrollos SIN inventario propio (Sales
 // Partner) — mismo lenguaje visual que FloorPlans.tsx (Tresor), pero cada
 // tipología trae SUS PROPIOS specs (flexible, no una forma fija de área/
-// frente/fondo) y el CTA es "Tour virtual" (si existe) + "Agendar una
-// visita" en vez de "Ver disponibilidad" (no hay unidades que consultar).
-export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaLabels }: FichaFloorPlansProps) {
+// frente/fondo) y el CTA es "Tour virtual" (si existe) + el CTA de apartado/
+// contacto de la sección #aparta (nunca "Agendar visita").
+export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaLabels, reservationActive = false }: FichaFloorPlansProps) {
   const isEs = locale !== 'en';
   const [active, setActive] = useState(0);
   const [tourOpen, setTourOpen] = useState<string | null>(null);
@@ -34,7 +38,9 @@ export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaL
 
   const scheduleLabel =
     (isEs ? ctaLabels?.scheduleVisit?.es : ctaLabels?.scheduleVisit?.en ?? ctaLabels?.scheduleVisit?.es) ??
-    (isEs ? 'Agendar una visita' : 'Schedule a visit');
+    (reservationActive
+      ? (isEs ? 'Aparta ahora' : 'Reserve now')
+      : (isEs ? 'Conoce este desarrollo' : 'Learn more'));
   const tourLabel =
     (isEs ? ctaLabels?.virtualTour?.es : ctaLabels?.virtualTour?.en ?? ctaLabels?.virtualTour?.es) ??
     (isEs ? 'Tour virtual' : 'Virtual tour');
@@ -142,8 +148,8 @@ export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaL
                 </button>
               )}
               <Link href="#aparta" className="btn w-full border-0 bg-accent text-ink hover:brightness-95">
-                <Calendar size={15} strokeWidth={1.8} />
                 {scheduleLabel}
+                <ArrowRight size={15} strokeWidth={1.8} />
               </Link>
             </div>
           </div>

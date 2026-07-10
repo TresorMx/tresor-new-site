@@ -257,6 +257,8 @@
     "modeZoom": "Zoom"
   },
   "reserva": {
+    "eyebrow": "— Reserve now",
+    "title1": "Reserve your spot at",
     "tabAgenda": "Schedule a visit",
     "tabAparta": "Reserve now",
     "apartaLine2Prefix": "reserve with",
