@@ -32,7 +32,9 @@ export default function AsesorApartadoOnly({
       <div className="container-wrap pb-0 pt-20 text-center md:pt-28">
         <span className="eyebrow eyebrow-accent font-bold">{t('eyebrow')}</span>
         <h2 className="mx-auto mt-5 h-display max-w-3xl text-[clamp(24px,3.2vw,48px)]">
-          <span className="text-ink-3">{t('title1')}</span> {displayName}
+          <span className="text-ink-3">{t('title1')}</span>
+          <br />
+          {displayName}
         </h2>
 
         <p className="mx-auto mt-6 max-w-xl text-[17px] font-normal text-ink md:max-w-3xl">

@@ -10,6 +10,9 @@ export interface AsesorCtx {
   loginOpen: boolean;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => Promise<void>;
+  // true mientras se refresca el árbol server-rendered después de un login/
+  // logout (ver AsesorProvider) — úsalo para mostrar feedback de carga.
+  isPending: boolean;
 }
 
 // Contexto en su propio módulo — así el provider (que renderiza el modal) y el

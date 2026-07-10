@@ -1,13 +1,14 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Lock, X, ArrowRight } from 'lucide-react';
+import { Lock, X, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { useAsesor } from '@/components/asesor/context';
 
 export default function AsesorLoginModal() {
   const { loginOpen, closeLogin, login } = useAsesor();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
@@ -89,15 +90,25 @@ export default function AsesorLoginModal() {
           </label>
           <label className="field">
             <span className="field-label">Contraseña</span>
-            <input
-              type="password"
-              autoComplete="current-password"
-              className="field-input"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              required
-            />
+            <div className="relative">
+              <input
+                type={showPassword ? 'text' : 'password'}
+                autoComplete="current-password"
+                className="field-input pr-10"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="••••••••"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-3 transition-colors hover:text-ink"
+              >
+                {showPassword ? <EyeOff size={17} strokeWidth={1.6} /> : <Eye size={17} strokeWidth={1.6} />}
+              </button>
+            </div>
           </label>
 
           {err && (

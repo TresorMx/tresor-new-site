@@ -8,8 +8,10 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MobileBar from '@/components/MobileBar';
+import { cookies } from 'next/headers';
 import { AsesorProvider } from '@/components/asesor/AsesorProvider';
 import FloatingLayer from '@/components/asesor/FloatingLayer';
+import { verifySession, ASESOR_COOKIE } from '@/lib/asesor/session';
 // import ExitIntent from '@/components/ExitIntent'; // desactivado por lo pronto
 import MetaPixel from '@/components/MetaPixel';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
@@ -157,6 +159,14 @@ export default async function LocaleLayout({
   // getDevelopDevelopments()/countByCity().
   await Promise.all([getPlazasAsync(), getMergedDevelopmentsAsync()]);
 
+  // isAsesor se calcula SERVER-SIDE (misma cookie httpOnly que autoriza las
+  // descargas) y se manda como prop inicial al provider — así el primer
+  // render ya es correcto (sin depender de un useEffect client-side que
+  // lee la cookie después de hidratar, lo que causaba un parpadeo: el chat
+  // de Luis se alcanzaba a ver un instante incluso con sesión de asesor).
+  const cookieStore = await cookies();
+  const initialIsAsesor = verifySession(cookieStore.get(ASESOR_COOKIE)?.value);
+
   const messages = await getMessages();
 
   const orgJsonLd = {
@@ -210,7 +220,7 @@ export default async function LocaleLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }}
         />
         <NextIntlClientProvider messages={messages} locale={locale}>
-          <AsesorProvider>
+          <AsesorProvider initialIsAsesor={initialIsAsesor}>
             <Header />
             <main className="min-h-screen pt-[104px]">{children}</main>
             <Footer />

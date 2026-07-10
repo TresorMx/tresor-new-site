@@ -6,12 +6,12 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 // se materializa como una cookie httpOnly firmada con HMAC. Un solo usuario →
 // el payload firmado es constante; el token es el HMAC de ese payload con un
 // secreto de servidor. Verificar = recomputar y comparar en tiempo constante.
-// (Los NOMBRES de cookie viven en ./cookies.ts, client-safe.)
+// (El NOMBRE de cookie vive en ./cookies.ts, client-safe.)
 
 const SECRET = process.env.ASESOR_SESSION_SECRET ?? 'tresor-asesor-dev-secret-cambiar-en-prod';
 const PAYLOAD = 'asesor-v1';
 
-export { ASESOR_COOKIE, ASESOR_UI_COOKIE } from './cookies';
+export { ASESOR_COOKIE } from './cookies';
 
 export function signSession(): string {
   return createHmac('sha256', SECRET).update(PAYLOAD).digest('hex');

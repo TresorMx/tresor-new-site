@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { signSession, ASESOR_COOKIE, ASESOR_UI_COOKIE, ASESOR_EMAIL, ASESOR_PASSWORD } from '@/lib/asesor/session';
+import { signSession, ASESOR_COOKIE, ASESOR_EMAIL, ASESOR_PASSWORD } from '@/lib/asesor/session';
 
 export const runtime = 'nodejs';
 
@@ -16,10 +16,11 @@ export async function POST(req: Request) {
 
   const res = NextResponse.json({ ok: true });
   const secure = process.env.NODE_ENV === 'production';
-  const base = { path: '/', maxAge: MAX_AGE, sameSite: 'lax' as const, secure };
-  // Cookie de autorización real (httpOnly, el cliente no la puede leer).
-  res.cookies.set(ASESOR_COOKIE, signSession(), { ...base, httpOnly: true });
-  // Pista de UI para el cliente (sin secreto) — solo enciende/apaga los links.
-  res.cookies.set(ASESOR_UI_COOKIE, '1', { ...base, httpOnly: false });
+  // Única cookie: httpOnly, el cliente no la puede leer. El estado de UI ya
+  // no depende de una segunda cookie legible — se calcula server-side en el
+  // layout con esta misma cookie y se manda como prop (ver AsesorProvider).
+  res.cookies.set(ASESOR_COOKIE, signSession(), {
+    path: '/', maxAge: MAX_AGE, sameSite: 'lax', secure, httpOnly: true,
+  });
   return res;
 }

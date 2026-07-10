@@ -150,19 +150,22 @@ export default function Header() {
               <span className="h-3 w-px bg-ink/25" />
               {/* Asesores — abre el login (o muestra estado + Salir). Brokers
                   queda oculto por lo pronto hasta trabajar esa sección. */}
+              {/* `uppercase` explícito en los <button> — Tailwind Preflight
+                  resetea `text-transform: none` en botones, así que no
+                  heredan el uppercase del contenedor como sí hacen los <a>. */}
               {isAsesor ? (
                 <span className="inline-flex items-center gap-3">
-                  <span className="inline-flex items-center gap-1.5">
+                  <span className="inline-flex items-center gap-1.5 uppercase">
                     <span className="h-1.5 w-1.5 rounded-full bg-ink" />
                     Asesor
                   </span>
-                  <button onClick={logout} className="inline-flex items-center gap-1 transition-opacity hover:opacity-60">
+                  <button onClick={logout} className="inline-flex items-center gap-1 uppercase transition-opacity hover:opacity-60">
                     Salir
                     <LogOut size={12} strokeWidth={2} />
                   </button>
                 </span>
               ) : (
-                <button onClick={openLogin} className="inline-flex items-center gap-1.5 transition-opacity hover:opacity-60">
+                <button onClick={openLogin} className="inline-flex items-center gap-1.5 uppercase transition-opacity hover:opacity-60">
                   Asesores
                   <Lock size={12} strokeWidth={2} />
                 </button>
