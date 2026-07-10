@@ -8,7 +8,17 @@ import { createHmac, timingSafeEqual } from 'node:crypto';
 // secreto de servidor. Verificar = recomputar y comparar en tiempo constante.
 // (El NOMBRE de cookie vive en ./cookies.ts, client-safe.)
 
-const SECRET = process.env.ASESOR_SESSION_SECRET ?? 'tresor-asesor-dev-secret-cambiar-en-prod';
+// Sin fallback: si faltan estas env vars el módulo truena al cargar en vez
+// de correr en producción con un secret/password conocido y commiteado al
+// repo (lo que pasaba antes). Deben estar en .env.local (dev) y en Vercel
+// (prod) — ver .env.example.
+function requireEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) throw new Error(`Falta la env var ${name} — revisa .env.local / Vercel.`);
+  return value;
+}
+
+const SECRET = requireEnv('ASESOR_SESSION_SECRET');
 const PAYLOAD = 'asesor-v1';
 
 export { ASESOR_COOKIE } from './cookies';
@@ -28,8 +38,8 @@ export function verifySession(token: string | undefined | null): boolean {
   }
 }
 
-// Credenciales del único asesor. Email fijo por default; password vía env
-// (con fallback al valor que el usuario definió, para que funcione de
-// inmediato — se debe mover a env var en Vercel).
+// Credenciales del único asesor. ASESOR_EMAIL no es secreto (es el correo
+// público del sitio) — mantiene fallback. ASESOR_PASSWORD sí es secreto, sin
+// fallback: antes vivía commiteado al repo como valor por default.
 export const ASESOR_EMAIL = (process.env.ASESOR_EMAIL ?? 'hello@tresor.mx').toLowerCase();
-export const ASESOR_PASSWORD = process.env.ASESOR_PASSWORD ?? 'Tresor2026!';
+export const ASESOR_PASSWORD = requireEnv('ASESOR_PASSWORD');

@@ -1,11 +1,23 @@
 import { NextResponse } from 'next/server';
 import { signSession, ASESOR_COOKIE, ASESOR_EMAIL, ASESOR_PASSWORD } from '@/lib/asesor/session';
+import { checkLoginRateLimit } from '@/lib/asesor/rateLimit';
 
 export const runtime = 'nodejs';
 
 const MAX_AGE = 60 * 60 * 24 * 7; // 7 días
 
 export async function POST(req: Request) {
+  // Un solo usuario, sin captcha ni 2FA — sin esto el login era fuerza
+  // bruta ilimitada contra una sola contraseña.
+  const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() ?? 'unknown';
+  const rate = checkLoginRateLimit(ip);
+  if (!rate.ok) {
+    return NextResponse.json(
+      { error: 'Demasiados intentos. Intenta de nuevo en unos minutos.' },
+      { status: 429, headers: { 'Retry-After': String(rate.retryAfterSeconds) } },
+    );
+  }
+
   const body = await req.json().catch(() => ({}));
   const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
   const password = typeof body.password === 'string' ? body.password : '';
