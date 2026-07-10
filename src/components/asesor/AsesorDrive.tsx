@@ -22,27 +22,41 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
   return (
     <AsesorGate>
       <main className="min-h-screen bg-bg pb-24 pt-[104px]">
-        {/* Encabezado con la foto del desarrollo */}
-        <section className="relative overflow-hidden">
-          <div className="relative h-[240px] w-full md:h-[300px]">
+        {/* Encabezado con la foto del desarrollo — full-bleed hasta arriba
+            (detrás de la píldora del header, igual que el hero de ficha:
+            -mt-[104px] cancela el padding de <main>, data-nav="dark" pone el
+            header en modo claro-sobre-foto). El logo del desarrollo va
+            centrado, "Todos los drives" queda arriba pero por debajo de la
+            píldora gracias al pt-[104px] interno. */}
+        <section data-nav="dark" className="relative -mt-[104px] overflow-hidden">
+          <div className="relative h-[420px] w-full md:h-[520px]">
             {dev.image && (
               <Image src={dev.image} alt={dev.name} fill priority sizes="100vw" className="object-cover" />
             )}
             <div className="absolute inset-0 bg-black/55" />
-            <div className="container-wrap relative flex h-full flex-col justify-end pb-8">
+            <div className="container-wrap relative flex h-full flex-col pb-10 pt-[104px]">
               <Link
                 href="/asesores"
-                className="mb-auto mt-6 inline-flex w-fit items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/80 transition-colors hover:text-white"
+                className="inline-flex w-fit items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/80 transition-colors hover:text-white"
               >
                 <ArrowLeft size={14} strokeWidth={1.8} />
                 Todos los drives
               </Link>
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
-                Drive de Ventas · {dev.developerName}
-              </span>
-              <h1 className="mt-2 font-sans text-[clamp(28px,4vw,48px)] font-medium leading-tight tracking-tight text-white">
-                {dev.name}
-              </h1>
+              {dev.logo && (
+                <div className="relative flex flex-1 items-center justify-center">
+                  <div className="relative h-16 w-56 md:h-20 md:w-72">
+                    <Image src={dev.logo} alt={dev.name} fill className="object-contain" />
+                  </div>
+                </div>
+              )}
+              <div className={dev.logo ? '' : 'mt-auto'}>
+                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
+                  Drive de Ventas · {dev.developerName}
+                </span>
+                <h1 className="mt-2 font-sans text-[clamp(28px,4vw,48px)] font-medium leading-tight tracking-tight text-white">
+                  {dev.name}
+                </h1>
+              </div>
             </div>
           </div>
         </section>
