@@ -11,7 +11,7 @@ export const driveFields = [
   defineField({ name: 'priceList', title: 'Lista de Precios', type: 'file', group: 'drive', description: 'Precios actualizados por nivel (PDF).' }),
   defineField({ name: 'masterPlan', title: 'Master Plan', type: 'file', group: 'drive', description: 'Distribución con cotas (PDF).' }),
   defineField({ name: 'bankAccounts', title: 'Cuentas Bancarias', type: 'file', group: 'drive', description: 'Datos para depósito y SPEI (PDF). Sensible — solo asesores logueados pueden descargarlo.' }),
-  defineField({ name: 'location', title: 'Ubicación', type: 'file', group: 'drive', description: 'Coordenadas, KML o mapa del entorno.' }),
+  defineField({ name: 'locationFile', title: 'Ubicación', type: 'file', group: 'drive', description: 'Coordenadas, KML o mapa del entorno.' }),
   defineField({ name: 'marketing', title: 'Materiales de Marketing', type: 'file', group: 'drive', description: 'Posts, banners y videos (ZIP).' }),
   defineField({ name: 'developerFile', title: 'Desarrollador', type: 'file', group: 'drive', description: 'Trayectoria del desarrollador (PDF).' }),
   defineField({ name: 'renders', title: 'Renders', type: 'file', group: 'drive', description: 'Imágenes en alta resolución (ZIP).' }),
