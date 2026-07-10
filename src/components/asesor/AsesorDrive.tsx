@@ -1,5 +1,6 @@
 'use client';
 
+import type { CSSProperties } from 'react';
 import { Download, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import { Link } from '@/navigation';
@@ -22,42 +23,57 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
   return (
     <AsesorGate>
       <main className="min-h-screen bg-bg pb-24 pt-[104px]">
-        {/* Encabezado con la foto del desarrollo — full-bleed hasta arriba
-            (detrás de la píldora del header, igual que el hero de ficha:
-            -mt-[104px] cancela el padding de <main>, data-nav="dark" pone el
-            header en modo claro-sobre-foto). El logo del desarrollo va
-            centrado, "Todos los drives" queda arriba pero por debajo de la
-            píldora gracias al pt-[104px] interno. */}
-        <section data-nav="dark" className="relative -mt-[104px] overflow-hidden">
-          <div className="relative h-[420px] w-full md:h-[520px]">
+        {/* Encabezado — MISMO hero que las fichas (mismas clases: -mt-[72px],
+            height calc(100svh - 104px - 72px), animate-hero-zoom, logo
+            centrado con el mismo tamaño clamp), solo se le agregan los
+            textos propios del drive (eyebrow + nombre a la izquierda,
+            "Todos los drives" a la derecha, en la misma línea) abajo. */}
+        <section data-nav="dark" className="relative -mt-[72px] overflow-hidden bg-bg-deep text-bg" style={{ height: 'calc(100svh - 104px - 72px)', minHeight: '480px' }}>
+          <div className="absolute inset-0 animate-hero-zoom">
             {dev.image && (
-              <Image src={dev.image} alt={dev.name} fill priority sizes="100vw" className="object-cover" />
+              <Image src={dev.image} alt={dev.name} fill priority sizes="100vw" className="object-cover scale-105" />
             )}
-            <div className="absolute inset-0 bg-black/55" />
-            <div className="container-wrap relative flex h-full flex-col pb-10 pt-[104px]">
-              <Link
-                href="/asesores"
-                className="inline-flex w-fit items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/80 transition-colors hover:text-white"
+          </div>
+          <div className="absolute inset-0 bg-black/50" />
+
+          <div className="relative z-10 flex h-full items-center justify-center pt-[72px]">
+            {dev.logo ? (
+              <div
+                className="relative h-[var(--logo-h-mobile)] w-[min(78vw,420px)] md:h-[var(--logo-h-desktop)] md:w-[min(60vw,640px)]"
+                style={{
+                  ['--logo-h-desktop' as string]: 'clamp(140px, 26vh, 260px)',
+                  ['--logo-h-mobile' as string]: 'clamp(98px, 18.2vh, 182px)',
+                } as CSSProperties}
               >
-                <ArrowLeft size={14} strokeWidth={1.8} />
-                Todos los drives
-              </Link>
-              {dev.logo && (
-                <div className="relative flex flex-1 items-center justify-center">
-                  <div className="relative h-16 w-56 md:h-20 md:w-72">
-                    <Image src={dev.logo} alt={dev.name} fill className="object-contain" />
-                  </div>
-                </div>
-              )}
-              <div className={dev.logo ? '' : 'mt-auto'}>
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
-                  Drive de Ventas · {dev.developerName}
-                </span>
-                <h1 className="mt-2 font-sans text-[clamp(28px,4vw,48px)] font-medium leading-tight tracking-tight text-white">
-                  {dev.name}
-                </h1>
+                <Image
+                  src={dev.logo}
+                  alt={dev.name}
+                  fill
+                  className="object-contain drop-shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
+                  priority
+                />
               </div>
+            ) : (
+              <h1 className="h-display text-center text-[clamp(40px,7vw,100px)] text-white">{dev.name}</h1>
+            )}
+          </div>
+
+          <div className="container-wrap absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 pb-8">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
+                Drive de Ventas · {dev.developerName}
+              </span>
+              <h2 className="mt-2 font-sans text-[clamp(22px,3vw,32px)] font-medium leading-tight tracking-tight text-white">
+                {dev.name}
+              </h2>
             </div>
+            <Link
+              href="/asesores"
+              className="mb-1 inline-flex shrink-0 items-center gap-2 text-[11px] font-bold uppercase tracking-[0.16em] text-white/80 transition-colors hover:text-white"
+            >
+              <ArrowLeft size={14} strokeWidth={1.8} />
+              Todos los drives
+            </Link>
           </div>
         </section>
 
