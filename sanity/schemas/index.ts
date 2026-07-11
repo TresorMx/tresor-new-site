@@ -7,5 +7,6 @@ import quote from './quote';
 import reservation from './reservation';
 import developer from './developer';
 import development from './development';
+import driveAsset from './driveAsset';
 
-export const schemaTypes = [plaza, unit, lead, brokerDoc, siteSettings, quote, reservation, developer, development];
+export const schemaTypes = [plaza, unit, lead, brokerDoc, siteSettings, quote, reservation, developer, development, driveAsset];

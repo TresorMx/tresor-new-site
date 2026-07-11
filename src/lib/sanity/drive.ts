@@ -21,20 +21,24 @@ function sanityFieldFor(doc: string): string | null {
   return SANITY_FIELD_OVERRIDES[doc as (typeof DRIVE_DOC_KEYS)[number]] ?? doc;
 }
 
-// Busca el archivo en Sanity (plaza o development, comparten slug con la
-// ficha pública) para un desarrollo + documento del drive. `null` si el
-// campo no existe o el editor no ha subido nada ahí todavía — el caller
-// decide el fallback.
+// Busca el archivo/liga en Sanity (plaza o development, comparten slug con
+// la ficha pública) para un desarrollo + documento del drive. Cada campo es
+// tipo `driveAsset` (ver sanity/schemas/driveAsset.ts): el editor sube UN
+// archivo O pega UNA liga, nunca ambos — aquí se resuelve cuál de los dos
+// está lleno (la liga gana si por error se llenaron ambos, ya que es la más
+// barata de detectar). `null` si el editor no ha llenado nada todavía — el
+// caller decide el fallback.
 export async function fetchDriveFileUrl(devSlug: string, doc: string): Promise<string | null> {
   const field = sanityFieldFor(doc);
   if (!field) return null;
 
   const raw = await sanityClient.fetch(
     `*[(_type == "plaza" || _type == "development") && slug.current == $slug][0]{
-      "url": ${field}.asset->url
+      "fileUrl": ${field}.file.asset->url,
+      "url": ${field}.url
     }`,
     { slug: devSlug },
     { cache: 'no-store' },
   );
-  return raw?.url ?? null;
+  return raw?.url || raw?.fileUrl || null;
 }
