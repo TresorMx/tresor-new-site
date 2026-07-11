@@ -11,7 +11,7 @@ import { getDevelopDevelopments, countByCity, type City } from '@/lib/developmen
 import { useAsesor } from '@/components/asesor/context';
 
 const corporate = [
-  { href: '#', label: 'Desarrollo' },
+  { href: '/desarrollo', label: 'Desarrollo' },
   { href: '#', label: 'Gestión' },
   { href: '#', label: 'Comercialización' },
 ];
