@@ -16,16 +16,35 @@ const corporate = [
   { href: '#', label: 'Comercialización' },
 ];
 
-// Por tipo de propiedad — cada tipo con su ícono (mismo criterio que los cards).
+// Por tipo de propiedad — cada tipo con su ícono (mismo criterio que los cards),
+// apunta a su landing real (/departamentos, etc.) para SEO — antes todos
+// caían al ancla genérica /#portafolio.
 const propertyTypes = [
-  { icon: Store, title: 'Locales Comerciales', desc: 'Plazas y locales premium', href: '/#portafolio' },
-  { icon: Building2, title: 'Departamentos', desc: 'Residencias de 1, 2 y 3 recámaras', href: '/#portafolio' },
-  { icon: LandPlot, title: 'Lotes Residenciales', desc: 'Terrenos en zonas de plusvalía', href: '/#portafolio' },
+  { icon: Store, title: 'Locales Comerciales', desc: 'Plazas y locales premium', href: '/locales-comerciales' },
+  { icon: Building2, title: 'Departamentos', desc: 'Residencias de 1, 2 y 3 recámaras', href: '/departamentos' },
+  { icon: LandPlot, title: 'Lotes Residenciales', desc: 'Terrenos en zonas de plusvalía', href: '/lotes-residenciales' },
 ];
 
 // Todas las ciudades del portafolio; en el menú solo se muestran las que tienen
-// desarrollos activos (countByCity > 0).
+// desarrollos activos (countByCity > 0). El slug de ruta de cada una vive en
+// CITY_HREF — Puerto Morelos no tiene landing propia todavía (sin desarrollos
+// activos), así que countByCity ya la excluye del menú antes de necesitarlo.
 const cityList: City[] = ['Cancún', 'Puerto Cancún', 'Puerto Morelos', 'Playa del Carmen', 'Tulum'];
+const CITY_HREF: Record<City, string> = {
+  'Cancún': '/cancun',
+  'Puerto Cancún': '/puerto-cancun',
+  'Puerto Morelos': '/puerto-morelos',
+  'Playa del Carmen': '/playa-del-carmen',
+  'Tulum': '/tulum',
+};
+
+// Por desarrollador — mismo orden que aparece en el resto del sitio.
+const developerLinks = [
+  { name: 'Tresor Real Estate', href: '/tresor' },
+  { name: 'Live Desarrollos', href: '/live-desarrollos' },
+  { name: 'Onix Living', href: '/onix-living' },
+  { name: 'Urban Homes', href: '/urban-homes' },
+];
 
 export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertical' | 'horizontal' }) {
   const locale = useLocale();
@@ -434,7 +453,7 @@ function PropiedadesMenu() {
 
   return (
     <div className="overflow-hidden rounded-[26px] bg-white text-ink shadow-[0_30px_80px_rgba(0,0,0,0.18)] ring-1 ring-black/[0.04]">
-      <div className="grid gap-10 p-8 lg:grid-cols-[1.1fr_0.9fr_1.2fr]">
+      <div className="grid gap-8 p-8 lg:grid-cols-[1fr_0.8fr_0.8fr_1.1fr]">
         {/* Por tipo de propiedad */}
         <div>
           <span className="eyebrow eyebrow-accent font-bold">Por tipo de propiedad</span>
@@ -458,12 +477,24 @@ function PropiedadesMenu() {
           <span className="eyebrow eyebrow-accent font-bold">Por ciudad</span>
           <div className="mt-5 flex flex-col">
             {activeCities.map((c) => (
-              <Link key={c} href="/#portafolio" className="group flex items-center justify-between border-b border-line py-3 transition-colors last:border-0 hover:text-accent">
+              <Link key={c} href={CITY_HREF[c]} className="group flex items-center justify-between border-b border-line py-3 transition-colors last:border-0 hover:text-accent">
                 <span className="flex items-center gap-2.5 text-[15px] font-medium">
                   <MapPin size={15} strokeWidth={1.6} className="text-ink-3" />
                   {c}
                 </span>
                 <span className="text-[12px] text-ink-3">{countByCity(c)}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* Por desarrollador */}
+        <div>
+          <span className="eyebrow eyebrow-accent font-bold">Por desarrollador</span>
+          <div className="mt-5 flex flex-col">
+            {developerLinks.map((d) => (
+              <Link key={d.href} href={d.href} className="border-b border-line py-3 text-[15px] font-medium transition-colors last:border-0 hover:text-accent">
+                {d.name}
               </Link>
             ))}
           </div>
@@ -529,12 +560,24 @@ function PropiedadesMenuMobile() {
         <span className="eyebrow eyebrow-accent font-bold">Por ciudad</span>
         <div className="mt-3 flex flex-col">
           {activeCities.map((c) => (
-            <Link key={c} href="/#portafolio" className="flex items-center justify-between border-b border-line py-3 last:border-0">
+            <Link key={c} href={CITY_HREF[c]} className="flex items-center justify-between border-b border-line py-3 last:border-0">
               <span className="flex items-center gap-2.5 text-[14px] font-medium">
                 <MapPin size={14} strokeWidth={1.6} className="text-ink-3" />
                 {c}
               </span>
               <span className="text-[12px] text-ink-3">{countByCity(c)}</span>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Por desarrollador */}
+      <div>
+        <span className="eyebrow eyebrow-accent font-bold">Por desarrollador</span>
+        <div className="mt-3 flex flex-col">
+          {developerLinks.map((d) => (
+            <Link key={d.href} href={d.href} className="border-b border-line py-3 text-[14px] font-medium last:border-0">
+              {d.name}
             </Link>
           ))}
         </div>

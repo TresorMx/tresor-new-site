@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Check } from 'lucide-react';
 import DevelopmentCard from '@/components/home/DevelopmentCard';
-import { developers, type Development, type City, type PropertyType } from '@/lib/developments';
+import { developers, type Development, type City, type PropertyType, type DevStatus } from '@/lib/developments';
 
 const CITY_LABELS: Record<City, string> = {
   'Cancún': 'Cancún',
@@ -24,11 +24,20 @@ interface FilterState {
   developer: string | null;
   city: City | null;
   propertyType: PropertyType | null;
+  status: DevStatus | null;
 }
 
 interface Props {
   developments: Development[];
   showDeveloperFilter?: boolean;
+  // Las landings de categoría (por tipo/ciudad/desarrollador) ya traen el
+  // dataset pre-filtrado por esa dimensión — mostrar el dropdown de nuevo
+  // ahí sería redundante. Los 3 filtros originales del home (developer/
+  // city/type) siguen encendidos por default para no cambiar su
+  // comportamiento; status es nuevo y opt-in.
+  showCityFilter?: boolean;
+  showTypeFilter?: boolean;
+  showStatusFilter?: boolean;
   children?: React.ReactNode;
 }
 
@@ -127,12 +136,16 @@ export function FilterDropdown<T extends string>({
 export default function SalesPartnerGrid({
   developments,
   showDeveloperFilter = true,
+  showCityFilter = true,
+  showTypeFilter = true,
+  showStatusFilter = false,
   children,
 }: Props) {
   const [filters, setFilters] = useState<FilterState>({
     developer: null,
     city: null,
     propertyType: null,
+    status: null,
   });
   const [filtered, setFiltered] = useState(developments);
   const [exiting, setExiting] = useState(false);
@@ -148,6 +161,7 @@ export default function SalesPartnerGrid({
   const typeOptions = [...new Set(
     developments.map((d) => d.propertyType).filter((t): t is PropertyType => Boolean(t)),
   )];
+  const statusOptions = [...new Set(developments.map((d) => d.status))];
 
   function applyFilters(next: FilterState) {
     setExiting(true);
@@ -157,6 +171,7 @@ export default function SalesPartnerGrid({
           if (next.developer && brandName(d) !== next.developer) return false;
           if (next.city && d.city !== next.city) return false;
           if (next.propertyType && d.propertyType !== next.propertyType) return false;
+          if (next.status && d.status !== next.status) return false;
           return true;
         }),
       );
@@ -172,10 +187,10 @@ export default function SalesPartnerGrid({
   }
 
   const hasActiveFilters =
-    filters.developer !== null || filters.city !== null || filters.propertyType !== null;
+    filters.developer !== null || filters.city !== null || filters.propertyType !== null || filters.status !== null;
 
   function clearAll() {
-    const next: FilterState = { developer: null, city: null, propertyType: null };
+    const next: FilterState = { developer: null, city: null, propertyType: null, status: null };
     setFilters(next);
     applyFilters(next);
   }
@@ -195,20 +210,32 @@ export default function SalesPartnerGrid({
               onSelect={(v) => setFilter('developer', v)}
             />
           )}
-          <FilterDropdown
-            label="Ciudad"
-            options={cityOptions}
-            active={filters.city}
-            onSelect={(v) => setFilter('city', v)}
-            labelMap={CITY_LABELS}
-          />
-          <FilterDropdown
-            label="Tipo de propiedad"
-            options={typeOptions}
-            active={filters.propertyType}
-            onSelect={(v) => setFilter('propertyType', v)}
-            labelMap={TYPE_LABELS}
-          />
+          {showCityFilter && cityOptions.length >= 1 && (
+            <FilterDropdown
+              label="Ciudad"
+              options={cityOptions}
+              active={filters.city}
+              onSelect={(v) => setFilter('city', v)}
+              labelMap={CITY_LABELS}
+            />
+          )}
+          {showTypeFilter && typeOptions.length >= 1 && (
+            <FilterDropdown
+              label="Tipo de propiedad"
+              options={typeOptions}
+              active={filters.propertyType}
+              onSelect={(v) => setFilter('propertyType', v)}
+              labelMap={TYPE_LABELS}
+            />
+          )}
+          {showStatusFilter && statusOptions.length >= 1 && (
+            <FilterDropdown
+              label="Estatus"
+              options={statusOptions}
+              active={filters.status}
+              onSelect={(v) => setFilter('status', v)}
+            />
+          )}
 
           {/* Limpiar — aparece solo con filtro activo */}
           <div
