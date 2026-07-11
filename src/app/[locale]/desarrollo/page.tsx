@@ -186,7 +186,7 @@ export default function DesarrolloPage() {
         <section key={c.id} id={c.id} className={`py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'}`}>
           <div className="container-wrap">
             <h2 className="h-display text-[clamp(28px,4vw,44px)]">
-              <span className="text-accent">{c.eyebrow}</span> <span className="text-ink">| {c.location}</span>
+              {c.eyebrow} <span className="text-ink-3">| {c.location}</span>
             </h2>
             <p className="mt-6 max-w-3xl text-[17px] leading-relaxed text-ink-2">{c.intro}</p>
           </div>
@@ -195,7 +195,7 @@ export default function DesarrolloPage() {
             {c.projects.map((p) => (
               <div key={p.name} className="container-wrap grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-14">
                 <div>
-                  <h3 className="font-sans text-[clamp(22px,2.8vw,32px)] font-medium text-accent">{p.name}</h3>
+                  <h3 className="font-sans text-[clamp(22px,2.8vw,32px)] font-medium text-ink">{p.name}</h3>
                   <p className="mt-5 text-[15px] leading-relaxed text-ink-2">{p.description}</p>
                 </div>
                 <div>
