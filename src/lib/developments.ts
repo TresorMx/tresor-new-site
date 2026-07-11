@@ -992,8 +992,8 @@ export const developments: Development[] = [
     type: 'Residencial',
     intent: ['vivir', 'invertir'],
     status: 'Preventa',
-    image: '/desarrollos/xaviera/fachada-dia.jpg',
-    href: '#',
+    image: '/desarrollos/xaviera/fotos/1. Fachada de Noche.jpg',
+    href: '/desarrollos/xaviera-wow-condos',
     featured: true,
     logo: '/desarrollos/xaviera/XavieraLogo-1.svg',
     badge: 'Preventa',
@@ -1001,6 +1001,84 @@ export const developments: Development[] = [
     priceLabel: 'Desde $2,900,000 MXN',
     description:
       'En Aldea Zamá, corazón de Tulum —el destino de mayor crecimiento de México—, Xaviera ofrece exclusivos departamentos de 1 a 3 recámaras.',
+    // ── Capa de ficha ──
+    heroRender: '/desarrollos/xaviera/fotos/1. Fachada de Noche.jpg',
+    tagline: { es: 'Solo 20 condominios exclusivos en Aldea Premium, Tulum' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Aldea Premium, Tulum' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Unidades', labelEn: 'Units', value: 'Solo 20 condos', valueEn: 'Only 20 condos' },
+    ],
+    gallery: [
+      '/desarrollos/xaviera/fotos/3. Vista Frontal.jpg',
+      '/desarrollos/xaviera/fotos/2. Fachada de Día.jpg',
+      '/desarrollos/xaviera/fotos/5. Sala - Comedor.jpg',
+      '/desarrollos/xaviera/fotos/9.Andador.jpg',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/xaviera/fotos/4. Roof Garden.jpg',
+      '/desarrollos/xaviera/fotos/7. Vista Superior Frontal.jpg',
+    ],
+    projectTitle: { es: 'Solo 20 condominios' },
+    projectTitleMuted: { es: 'en el corazón de Tulum' },
+    projectBody: [
+      {
+        es: 'Xaviera son solo **20 condominios exclusivos** en Aldea Premium, la zona residencial de mayor plusvalía de Tulum — diseñados para fusionar los lujos y comodidades del primer mundo con la naturaleza característica del destino.',
+        en: 'Xaviera is a collection of just **20 exclusive condominiums** in Aldea Premium, Tulum\'s highest-value residential area — designed to blend first-world comfort and luxury with the natural surroundings that define the destination.',
+      },
+      {
+        es: 'Landscaping de **Reyes Ríos + Larraín Arquitectos** y una arquitectura que dialoga con la selva: la combinación exacta entre lo extraordinario de la naturaleza y lo emocionante del diseño contemporáneo.',
+        en: 'Landscaping by **Reyes Ríos + Larraín Arquitectos** and an architecture that speaks to the jungle: the exact combination of extraordinary nature and exciting contemporary design.',
+      },
+    ],
+    location: { lat: 20.1944504, lng: -87.4620091, address: 'Aldea Premium, Tulum, Q. Roo' },
+    locationBullets: [
+      { es: 'En Aldea Premium, la zona de mayor plusvalía de Tulum' },
+      { es: 'Landscaping de Reyes Ríos + Larraín Arquitectos' },
+      { es: 'Solo 20 condominios exclusivos' },
+    ],
+    amenities: [
+      { key: 'areas-verdes' },
+      { key: 'alberca-recreativa', labelOverride: 'Alberca en Roof Garden' },
+      { key: 'lobby', labelOverride: 'Lobby y acceso controlado' },
+      { key: 'seguridad-24-7', labelOverride: 'Vigilancia y acceso vehicular controlado' },
+      { key: 'wifi-areas-comunes' },
+      { key: 'salon-usos-multiples' },
+      { key: 'asadores', labelOverride: 'BBQ y Bar Área' },
+    ],
+    floorPlans: [
+      {
+        slug: '1rec',
+        label: { es: '1 Recámara', en: '1 Bedroom' },
+        image: '/desarrollos/xaviera/floor-plans/1Rec.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior', en: 'Interior area' }, value: '40 m²' },
+          { key: 'exterior', label: { es: 'Área exterior', en: 'Exterior area' }, value: '5 m²' },
+          { key: 'areaTotal', label: { es: 'Área total', en: 'Total area' }, value: '45 m²' },
+        ],
+      },
+      {
+        slug: '2rec',
+        label: { es: '2 Recámaras', en: '2 Bedrooms' },
+        image: '/desarrollos/xaviera/floor-plans/2rec.jpg',
+        specs: [
+          { key: 'interior', label: { es: 'Área interior', en: 'Interior area' }, value: '85 m²' },
+          { key: 'exterior', label: { es: 'Área exterior', en: 'Exterior area' }, value: '5 m²' },
+          { key: 'areaTotal', label: { es: 'Área total', en: 'Total area' }, value: '90 m²' },
+        ],
+      },
+      {
+        slug: 'ph-3rec',
+        label: { es: 'PH 3 Recámaras', en: 'PH 3 Bedrooms' },
+        shortLabel: { es: 'PH 3 Rec.', en: 'PH 3 Bed.' },
+        image: '/desarrollos/xaviera/floor-plans/PH-3rec.jpg',
+        specs: [
+          { key: 'nivel1', label: { es: 'Nivel 1', en: 'Level 1' }, value: '110 m²' },
+          { key: 'nivel2', label: { es: 'Nivel 2', en: 'Level 2' }, value: '83.55 m²' },
+          { key: 'areaTotal', label: { es: 'Área total', en: 'Total area' }, value: '193.55 m²' },
+        ],
+      },
+    ],
   },
 
   // ── SALES PARTNER · Onix Living ──
