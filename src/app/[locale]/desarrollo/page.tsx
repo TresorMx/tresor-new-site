@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import ProjectImage from '@/components/desarrollo/ProjectImage';
 
 // Página fija (sin Sanity) — trayectoria de Tresor Real Estate como
 // desarrollador. Réplica adaptada de la sección "Desarrollo" del sitio
@@ -23,7 +24,7 @@ export const metadata: Metadata = {
 interface Project {
   name: string;
   description: string;
-  image: string;
+  images: string[]; // 2+ imágenes → slider (mismo tratamiento que Allure/Blume/La Vela en el sitio anterior)
 }
 
 interface Category {
@@ -44,17 +45,17 @@ const CATEGORIES: Category[] = [
       {
         name: 'Allure Luxury Condos',
         description: 'Frente al Mar Caribe en Puerto Cancún: 96 departamentos de 2 a 4 recámaras (153–428 m²) y 8 penthouses (535–589 m²). Spa, business center, kids club, gimnasio y muelle propio. Diseño de Ancona + Ancona Arquitectos.',
-        image: '/desarrollo-corporativo/LuxuryL.jpg',
+        images: ['/desarrollo-corporativo/LuxuryL.jpg', '/desarrollo-corporativo/LuxuryG.jpg'],
       },
       {
         name: 'Blume Boutique Condos',
         description: 'En la marina de Puerto Cancún: 109 departamentos de 3 recámaras (235–265 m²) y 4 penthouses (380–430 m²). Alberca infinity frente a la marina, muelle propio, spa y gimnasio.',
-        image: '/desarrollos/Blume/BLUME-Arquitectura-1.jpg',
+        images: ['/desarrollos/Blume/BLUME-Arquitectura-1.jpg', '/desarrollos/Blume/BLUME-Drone-1.jpg'],
       },
       {
         name: 'La Vela',
         description: 'Frente a la marina de Puerto Cancún: 105 unidades de 3 y 4 recámaras (300–400 m²) y penthouses (400–500 m²), con vistas al campo de golf de Puerto Cancún.',
-        image: '/desarrollo-corporativo/LuxuryJ.jpg',
+        images: ['/desarrollo-corporativo/LuxuryJ.jpg', '/desarrollo-corporativo/LuxuryP.jpg'],
       },
     ],
   },
@@ -67,17 +68,17 @@ const CATEGORIES: Category[] = [
       {
         name: 'Vita Residenze',
         description: 'Departamentos de 2 recámaras y casas de 2 y 3 niveles en una de las zonas residenciales con mayor crecimiento de Cancún, con amenidades pensadas para el día a día.',
-        image: '/desarrollo-corporativo/ResidencialE.jpg',
+        images: ['/desarrollo-corporativo/ResidencialE.jpg'],
       },
       {
         name: 'Astoria Gated Community',
         description: '437 unidades y áreas comerciales en Av. Huayacán, combinando privadas de casas y departamentos —Tribeca, Soho, Queens, Chelsea— frente a amplias áreas comunes y jardines.',
-        image: '/desarrollo-corporativo/astoriaA.jpg',
+        images: ['/desarrollo-corporativo/astoriaA.jpg'],
       },
       {
         name: 'Long Island Community',
         description: '15 desarrollos de casas y departamentos —cerca de 1,300 unidades en clusters de 60 a 90, como Madison, Duke, Kings y York— uno de los referentes residenciales de Cancún.',
-        image: '/desarrollo-corporativo/ResidencialA.jpg',
+        images: ['/desarrollo-corporativo/ResidencialA.jpg'],
       },
     ],
   },
@@ -90,12 +91,12 @@ const CATEGORIES: Category[] = [
       {
         name: 'Quattro Plaza Center · Long Island',
         description: 'Plaza comercial en zona de alto crecimiento en Cancún, entre Av. Huayacán y Av. Chac Mool, junto a residenciales de prestigio como Aqua, Río y Long Island.',
-        image: '/renders/long-island/01.jpg',
+        images: ['/renders/long-island/01.jpg'],
       },
       {
         name: 'Quattro Plaza Center · Gardens',
         description: 'Plaza comercial en una de las zonas de mayor crecimiento de Cancún, rodeada de residenciales como Jardines del Sur VI, Ciudadela, Zienna, Terraquia y La Rioja II.',
-        image: '/renders/gardens/01.jpg',
+        images: ['/renders/gardens/01.jpg'],
       },
     ],
   },
@@ -108,12 +109,12 @@ const CATEGORIES: Category[] = [
       {
         name: 'Luna Residence',
         description: 'En Aldea Zamá: 28 departamentos de 1 recámara y locales comerciales, en conjunto con Giada Developments. Elevador, recepción y alberca infinity.',
-        image: '/desarrollo-corporativo/TulumB.jpg',
+        images: ['/desarrollo-corporativo/TulumB.jpg'],
       },
       {
         name: 'Kabana',
         description: 'En la fase 4 premium de Aldea Zamá: 16 departamentos en 3 modelos —Garden Houses, Condos y Penthouses con roof garden— de 150 a 250 m².',
-        image: '/desarrollo-corporativo/TulumC.jpg',
+        images: ['/desarrollo-corporativo/TulumC.jpg'],
       },
     ],
   },
@@ -126,7 +127,7 @@ const CATEGORIES: Category[] = [
       {
         name: 'Sanam Country Club',
         description: 'Lotes unifamiliares y macrolotes para desarrolladores en 32 hectáreas, con una reserva natural de 8 hectáreas —cenotes, área de yoga y senderos. Diseño de Sanzpont Arquitectura.',
-        image: '/desarrollos/Sanam/portada.jpg',
+        images: ['/desarrollos/Sanam/portada.jpg'],
       },
     ],
   },
@@ -162,27 +163,12 @@ export default function DesarrolloPage() {
         </div>
       </section>
 
-      {/* ═════ NAV DE CATEGORÍAS — sticky, anclas a cada sección ═════ */}
-      <nav className="sticky top-[84px] z-20 border-b border-line bg-white/90 backdrop-blur-md">
-        <div className="container-wrap flex items-center gap-2.5 overflow-x-auto py-4">
-          {CATEGORIES.map((c) => (
-            <a
-              key={c.id}
-              href={`#${c.id}`}
-              className="shrink-0 rounded-full border border-line px-4 py-2 text-[11px] font-bold uppercase tracking-[0.14em] text-ink-3 transition-colors hover:border-ink hover:text-ink"
-            >
-              {c.eyebrow}
-            </a>
-          ))}
-        </div>
-      </nav>
-
       {/* ═════ CATEGORÍAS ═════ */}
       {CATEGORIES.map((c, i) => (
         <section
           key={c.id}
           id={c.id}
-          className={`scroll-mt-[150px] py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'}`}
+          className={`py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'}`}
         >
           <div className="container-wrap">
             <span className="eyebrow eyebrow-accent block font-bold">{c.eyebrow}</span>
@@ -194,15 +180,7 @@ export default function DesarrolloPage() {
             <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {c.projects.map((p) => (
                 <div key={p.name}>
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[20px] bg-bg-soft">
-                    <Image
-                      src={p.image}
-                      alt={p.name}
-                      fill
-                      sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw"
-                      className="object-cover"
-                    />
-                  </div>
+                  <ProjectImage images={p.images} alt={p.name} />
                   <h3 className="mt-4 font-sans text-[17px] font-medium tracking-tight">{p.name}</h3>
                   <p className="mt-1.5 text-[13px] leading-relaxed text-ink-3">{p.description}</p>
                 </div>
