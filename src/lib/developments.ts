@@ -1152,7 +1152,7 @@ export const developments: Development[] = [
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
     image: '/desarrollos/villalta/portada3.jpg',
-    href: '#',
+    href: '/desarrollos/villalta-onix',
     featured: true,
     logo: '/desarrollos/villalta/LogoVillalta.svg',
     badge: 'Entrega inmediata',
@@ -1160,6 +1160,94 @@ export const developments: Development[] = [
     priceLabel: 'Desde $5,000,000 MXN',
     description:
       'Residencial de lujo que redefine el estándar de vida en la Zona Hotelera de Cancún: departamentos de 1, 2 y 3 recámaras con vistas increíbles al mar.',
+    // ── Capa de ficha ──
+    heroRender: '/desarrollos/villalta/portada2.jpg',
+    tagline: { es: 'Un oasis de tranquilidad frente a la laguna, en el corazón de la Zona Hotelera' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Zona Hotelera' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Recámaras', labelEn: 'Bedrooms', value: '1, 2 y 3', valueEn: '1, 2 & 3' },
+    ],
+    gallery: [
+      '/desarrollos/villalta/portada3.jpg',
+      '/desarrollos/villalta/1-03.jpg',
+      '/desarrollos/villalta/1-07.jpg',
+      '/desarrollos/villalta/1-01.jpg',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/villalta/VL01.jpg',
+      '/desarrollos/villalta/VL02.jpg',
+    ],
+    projectTitle: { es: 'Conoce Villalta Laguna' },
+    projectTitleMuted: { es: 'elegancia y exclusividad frente a la laguna' },
+    projectBody: [
+      {
+        es: 'Villalta Laguna es un desarrollo residencial de lujo que redefine el estándar de vida en Cancún: una **fusión entre elegancia, comodidad y exclusividad** en uno de los destinos más codiciados del Caribe mexicano.',
+        en: 'Villalta Laguna is a luxury residential development that redefines the standard of living in Cancún: a **blend of elegance, comfort and exclusivity** in one of the most sought-after destinations in the Mexican Caribbean.',
+      },
+      {
+        es: 'Departamentos de 1, 2 y 3 recámaras dentro de la Zona Hotelera, a un costado de la Laguna Nichupté — un oasis de tranquilidad con amenidades pensadas para vivir o invertir con total confianza.',
+        en: '1, 2 and 3-bedroom apartments inside the Hotel Zone, next to the Nichupté Lagoon — a haven of tranquility with amenities designed to live or invest with total confidence.',
+      },
+    ],
+    location: { lat: 21.1499493, lng: -86.8160737, address: 'Villalta Laguna, Zona Hotelera, Cancún, Q. Roo' },
+    locationBullets: [
+      { es: 'Dentro de la Zona Hotelera, junto a la Laguna Nichupté' },
+      { es: 'A minutos de la playa y de los principales centros comerciales' },
+      { es: 'Departamentos de 1, 2 y 3 recámaras' },
+    ],
+    amenities: [
+      { key: 'areas-verdes' },
+      { key: 'cancha-padel' },
+      { key: 'salon-eventos' },
+      { key: 'alberca-familiar', labelOverride: 'Albercas familiares' },
+      { key: 'gym' },
+      { key: 'camastros' },
+      { key: 'area-infantil' },
+      { key: 'seguridad-24-7' },
+    ],
+    floorPlans: [
+      {
+        slug: '1rec',
+        label: { es: '1 Recámara', en: '1 Bedroom' },
+        image: '/desarrollos/villalta/floor-plans/1Rec.jpg',
+        specs: [
+          { key: 'area', label: { es: 'Área', en: 'Area' }, value: '88 m² a 107 m²' },
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '1' },
+          { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '1.5' },
+          { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: 'Sí' },
+          { key: 'lavado', label: { es: 'Área de lavado', en: 'Laundry area' }, value: 'Sí' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
+        ],
+      },
+      {
+        slug: '2rec',
+        label: { es: '2 Recámaras', en: '2 Bedrooms' },
+        image: '/desarrollos/villalta/floor-plans/2Rec.png',
+        specs: [
+          { key: 'area', label: { es: 'Área', en: 'Area' }, value: 'Desde 131 m²' },
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
+          { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '2.5' },
+          { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: 'Sí' },
+          { key: 'lavado', label: { es: 'Área de lavado', en: 'Laundry area' }, value: 'Sí' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
+        ],
+      },
+      {
+        slug: '3rec',
+        label: { es: '3 Recámaras', en: '3 Bedrooms' },
+        image: '/desarrollos/villalta/floor-plans/3rec.jpg',
+        specs: [
+          { key: 'area', label: { es: 'Área', en: 'Area' }, value: '157 m² a 228 m²' },
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '3' },
+          { key: 'banos', label: { es: 'Baños', en: 'Bathrooms' }, value: '3.5' },
+          { key: 'servicio', label: { es: 'Cuarto de servicio', en: 'Service room' }, value: 'Sí' },
+          { key: 'terraza', label: { es: 'Terraza', en: 'Terrace' }, value: 'Sí' },
+          { key: 'lavado', label: { es: 'Área de lavado', en: 'Laundry area' }, value: 'Sí' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
+        ],
+      },
+    ],
   },
   {
     slug: 'bardenna-onix',
