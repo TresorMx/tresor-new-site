@@ -179,11 +179,13 @@ export default function DesarrolloPage() {
 
       {/* ═════ CATEGORÍAS — estructura del sitio anterior: encabezado a la
           izquierda, fila de texto+media por proyecto (texto izq., foto/
-          slider/grid der.), sin bandas de color alternadas. ═════ */}
-      {CATEGORIES.map((c) => (
-        <section key={c.id} id={c.id} className="py-16 md:py-24">
+          slider/grid der.), alternando fondo blanco/gris por sección
+          (mismo orden que el sitio anterior: Luxury blanco, Residencial
+          gris, Comercial blanco, Vacacional gris, Master Plan blanco). ═════ */}
+      {CATEGORIES.map((c, i) => (
+        <section key={c.id} id={c.id} className={`py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'}`}>
           <div className="container-wrap">
-            <h2 className="font-sans text-[clamp(28px,4vw,44px)] font-bold tracking-tight">
+            <h2 className="h-display text-[clamp(28px,4vw,44px)]">
               <span className="text-accent">{c.eyebrow}</span> <span className="text-ink">| {c.location}</span>
             </h2>
             <p className="mt-6 max-w-3xl text-[17px] leading-relaxed text-ink-2">{c.intro}</p>
@@ -193,7 +195,7 @@ export default function DesarrolloPage() {
             {c.projects.map((p) => (
               <div key={p.name} className="container-wrap grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-14">
                 <div>
-                  <h3 className="font-sans text-[clamp(22px,2.8vw,32px)] font-bold text-accent">{p.name}</h3>
+                  <h3 className="font-sans text-[clamp(22px,2.8vw,32px)] font-medium text-accent">{p.name}</h3>
                   <p className="mt-5 text-[15px] leading-relaxed text-ink-2">{p.description}</p>
                 </div>
                 <div>

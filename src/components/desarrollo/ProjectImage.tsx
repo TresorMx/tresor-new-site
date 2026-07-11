@@ -23,7 +23,7 @@ export default function ProjectImage({ images, alt }: { images: string[]; alt: s
   };
 
   return (
-    <div className="group relative aspect-[4/3] overflow-hidden rounded-[20px] bg-bg-soft">
+    <div className="group relative aspect-[16/9] overflow-hidden rounded-[20px] bg-bg-soft">
       {images.map((src, i) => (
         <Image
           key={src}
