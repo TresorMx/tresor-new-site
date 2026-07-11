@@ -3,10 +3,13 @@ import Image from 'next/image';
 import ProjectImage from '@/components/desarrollo/ProjectImage';
 
 // Página fija (sin Sanity) — trayectoria de Tresor Real Estate como
-// desarrollador. Réplica adaptada de la sección "Desarrollo" del sitio
-// anterior (tresor.mx, WordPress/Elementor), con el lenguaje visual del
-// sitio nuevo. Contenido en español únicamente, mismo criterio que las
-// páginas de blog (no hay copy en inglés en el sitio original que traducir).
+// desarrollador. Réplica de la sección "Desarrollo" del sitio anterior
+// (tresor.mx, WordPress/Elementor) MANTENIENDO su estructura real —
+// encabezado de categoría a la izquierda, fila de texto+foto por proyecto
+// (texto izquierda, media derecha) — con nuestra tipografía, esquinas
+// redondeadas en todas las fotos y nuestro propio estilo de slider en los
+// 3 proyectos que lo tenían (Allure, Blume, La Vela). Contenido en español
+// únicamente, mismo criterio que las páginas de blog.
 
 export const metadata: Metadata = {
   title: 'Desarrollo — Trayectoria de Tresor Real Estate',
@@ -24,7 +27,8 @@ export const metadata: Metadata = {
 interface Project {
   name: string;
   description: string;
-  images: string[]; // 2+ imágenes → slider (mismo tratamiento que Allure/Blume/La Vela en el sitio anterior)
+  images?: string[]; // 1 = foto estática, 2+ = slider (Allure/Blume/La Vela)
+  tiles?: string[];  // grid de sub-marcas (Astoria, Long Island Community) — reemplaza `images`
 }
 
 interface Category {
@@ -72,13 +76,23 @@ const CATEGORIES: Category[] = [
       },
       {
         name: 'Astoria Gated Community',
-        description: '437 unidades y áreas comerciales en Av. Huayacán, combinando privadas de casas y departamentos —Tribeca, Soho, Queens, Chelsea— frente a amplias áreas comunes y jardines.',
-        images: ['/desarrollo-corporativo/astoriaA.jpg'],
+        description: '437 unidades y áreas comerciales en Av. Huayacán, combinando privadas de casas y departamentos frente a amplias áreas comunes y jardines.',
+        tiles: [
+          '/desarrollo-corporativo/astoriaA.jpg', // Tribeca
+          '/desarrollo-corporativo/astoriaB.jpg', // Queens
+          '/desarrollo-corporativo/soho.jpg',     // Soho
+          '/desarrollo-corporativo/astoriaC.jpg', // York
+        ],
       },
       {
         name: 'Long Island Community',
-        description: '15 desarrollos de casas y departamentos —cerca de 1,300 unidades en clusters de 60 a 90, como Madison, Duke, Kings y York— uno de los referentes residenciales de Cancún.',
-        images: ['/desarrollo-corporativo/ResidencialA.jpg'],
+        description: '15 desarrollos de casas y departamentos —cerca de 1,300 unidades en clusters de 60 a 90— uno de los referentes residenciales de Cancún.',
+        tiles: [
+          '/desarrollo-corporativo/ResidencialA.jpg', // Kings
+          '/desarrollo-corporativo/ResidencialB.jpg', // Madison
+          '/desarrollo-corporativo/ResidencialC.jpg', // Midtown
+          '/desarrollo-corporativo/ResidencialD.jpg', // Duke
+        ],
       },
     ],
   },
@@ -163,29 +177,40 @@ export default function DesarrolloPage() {
         </div>
       </section>
 
-      {/* ═════ CATEGORÍAS ═════ */}
-      {CATEGORIES.map((c, i) => (
-        <section
-          key={c.id}
-          id={c.id}
-          className={`py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'}`}
-        >
+      {/* ═════ CATEGORÍAS — estructura del sitio anterior: encabezado a la
+          izquierda, fila de texto+media por proyecto (texto izq., foto/
+          slider/grid der.), sin bandas de color alternadas. ═════ */}
+      {CATEGORIES.map((c) => (
+        <section key={c.id} id={c.id} className="py-16 md:py-24">
           <div className="container-wrap">
-            <span className="eyebrow eyebrow-accent block font-bold">{c.eyebrow}</span>
-            <h2 className="mt-3 font-sans text-[clamp(24px,3.2vw,40px)] font-normal tracking-tight">
-              {c.eyebrow} <span className="text-ink-3">| {c.location}</span>
+            <h2 className="font-sans text-[clamp(28px,4vw,44px)] font-bold tracking-tight">
+              <span className="text-accent">{c.eyebrow}</span> <span className="text-ink">| {c.location}</span>
             </h2>
-            <p className="mt-4 max-w-2xl text-[15px] font-light leading-relaxed text-ink-3">{c.intro}</p>
+            <p className="mt-6 max-w-3xl text-[17px] leading-relaxed text-ink-2">{c.intro}</p>
+          </div>
 
-            <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-              {c.projects.map((p) => (
-                <div key={p.name}>
-                  <ProjectImage images={p.images} alt={p.name} />
-                  <h3 className="mt-4 font-sans text-[17px] font-medium tracking-tight">{p.name}</h3>
-                  <p className="mt-1.5 text-[13px] leading-relaxed text-ink-3">{p.description}</p>
+          <div className="mt-14 flex flex-col gap-20 md:gap-24">
+            {c.projects.map((p) => (
+              <div key={p.name} className="container-wrap grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-14">
+                <div>
+                  <h3 className="font-sans text-[clamp(22px,2.8vw,32px)] font-bold text-accent">{p.name}</h3>
+                  <p className="mt-5 text-[15px] leading-relaxed text-ink-2">{p.description}</p>
                 </div>
-              ))}
-            </div>
+                <div>
+                  {p.tiles ? (
+                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+                      {p.tiles.map((t) => (
+                        <div key={t} className="relative aspect-square overflow-hidden rounded-[20px] bg-bg-soft">
+                          <Image src={t} alt={p.name} fill sizes="(max-width: 640px) 50vw, 260px" className="object-cover" />
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <ProjectImage images={p.images ?? []} alt={p.name} />
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </section>
       ))}
