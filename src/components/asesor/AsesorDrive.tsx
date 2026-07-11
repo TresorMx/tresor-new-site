@@ -117,7 +117,7 @@ function DriveTile({ card, slug, variant = 'main' }: { card: DriveCard; slug: st
       href={`/api/asesor/file?dev=${slug}&doc=${card.key}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col gap-5 rounded-[18px] border border-line bg-white p-6 transition-all hover:-translate-y-1 hover:border-ink hover:shadow-md"
+      className="group flex flex-col gap-5 rounded-[18px] border border-line bg-white p-6 transition-all duration-300 ease-soft hover:-translate-y-1 hover:border-line hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)]"
     >
       <div
         className={cn(
