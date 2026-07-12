@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Desarrollo — Trayectoria de Tresor Real Estate',
     description: 'Proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate en Cancún y Tulum.',
     url: 'https://tresor.mx/desarrollo',
-    images: [{ url: '/desarrollo-corporativo/LuxuryL.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/1g-1.jpg', width: 1920, height: 992 }],
   },
 };
 
@@ -158,8 +158,8 @@ export default function DesarrolloPage() {
       >
         <div className="absolute inset-0 animate-hero-zoom">
           <Image
-            src="/desarrollo-corporativo/LuxuryL.jpg"
-            alt="Allure Luxury Condos — Puerto Cancún"
+            src="/1g-1.jpg"
+            alt="Tresor Real Estate — Desarrollo"
             fill
             priority
             sizes="100vw"
