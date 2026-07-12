@@ -185,18 +185,18 @@ export default function DesarrolloPage() {
       {CATEGORIES.map((c, i) => (
         <section key={c.id} id={c.id} className={`py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'}`}>
           <div className="container-wrap">
-            <h2 className="h-display text-[clamp(28px,4vw,44px)]">
-              {c.eyebrow} <span className="text-ink-3">| {c.location}</span>
+            <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
+              {c.eyebrow} <span className="text-ink-3">en {c.location}</span>
             </h2>
-            <p className="mt-6 max-w-3xl text-[17px] leading-relaxed text-ink-2">{c.intro}</p>
+            <p className="mt-6 max-w-3xl text-[15px] font-light leading-relaxed text-ink-2">{c.intro}</p>
           </div>
 
           <div className="mt-14 flex flex-col gap-20 md:gap-24">
             {c.projects.map((p) => (
               <div key={p.name} className="container-wrap grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-14">
                 <div>
-                  <h3 className="font-sans text-[clamp(22px,2.8vw,32px)] font-medium text-ink">{p.name}</h3>
-                  <p className="mt-5 text-[15px] leading-relaxed text-ink-2">{p.description}</p>
+                  <h3 className="font-sans text-[clamp(18px,1.8vw,28px)] font-medium leading-[1.15] text-ink">{p.name}</h3>
+                  <p className="mt-5 text-[15px] font-light leading-relaxed text-ink-2">{p.description}</p>
                 </div>
                 <div>
                   {p.tiles ? (
