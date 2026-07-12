@@ -223,10 +223,10 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                 <Image
                   src={dark ? '/LogoTresorVerticalWhite.svg' : '/LogoTresorVertical.svg'}
                   alt="Tresor Real Estate"
-                  width={152}
-                  height={32}
+                  width={175}
+                  height={37}
                   priority
-                  className="h-8 w-auto"
+                  className="h-[37px] w-auto"
                 />
               )}
             </Link>
