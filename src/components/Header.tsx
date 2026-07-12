@@ -204,7 +204,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
               'mx-auto flex max-w-wrap items-center justify-between gap-4 rounded-full py-2.5 pl-5 pr-2.5 backdrop-blur-xl transition-all duration-300 ease-soft',
               dark
                 ? 'bg-white/10 text-white'
-                : 'bg-white/80 text-ink shadow-[0_10px_40px_rgba(0,0,0,0.10)]',
+                : 'bg-white text-ink shadow-[0_10px_40px_rgba(0,0,0,0.10)]',
             )}
           >
             {/* Logo — vertical (actual) u horizontal (el anterior), según
