@@ -35,24 +35,30 @@ export default function CategoryHero({
       <div className="absolute inset-0 bg-black/55" />
 
       {logo ? (
-        // Card blanca detrás del logo — los logos de Live/Onix/Urban Homes
-        // no tienen variante blanca (su wordmark es negro), así que caerían
-        // invisibles directo sobre la foto oscura. Una tarjeta blanca los
-        // deja legibles a todos por igual, sin inventar un filtro de color
-        // que les cambie su marca real. H1 sr-only porque el logo ya cubre
-        // el rol visual del título — sin esto la página se queda sin H1.
+        // Logo forzado a blanco con filtro CSS (brightness(0) invert(1)) —
+        // Live/Onix/Urban Homes no tienen una variante blanca real (su
+        // wordmark es negro o a color), y no hay fuente vectorial editable
+        // para todos (Urban Homes es un .avif rasterizado). El filtro da un
+        // blanco sólido consistente sin necesitar un archivo "-white" nuevo
+        // por desarrollador. Mismo tamaño/drop-shadow que el logo del hero
+        // de ficha. H1 sr-only porque el logo ya cubre el rol visual del
+        // título — sin esto la página se queda sin H1.
         <div className="relative z-10 flex h-full items-center justify-center pt-[72px]">
           {title && <h1 className="sr-only">{title}</h1>}
-          <div className="flex items-center justify-center rounded-[28px] bg-white px-10 py-8 shadow-[0_20px_60px_rgba(0,0,0,0.35)] sm:px-14 sm:py-10">
-            <div
-              className="relative h-[var(--logo-h-mobile)] w-[min(60vw,320px)] md:h-[var(--logo-h-desktop)] md:w-[min(40vw,440px)]"
-              style={{
-                ['--logo-h-desktop' as string]: 'clamp(100px, 16vh, 160px)',
-                ['--logo-h-mobile' as string]: 'clamp(70px, 11.2vh, 112px)',
-              } as CSSProperties}
-            >
-              <Image src={logo} alt={logoAlt ?? imageAlt} fill className="object-contain" priority />
-            </div>
+          <div
+            className="relative h-[var(--logo-h-mobile)] w-[min(78vw,420px)] md:h-[var(--logo-h-desktop)] md:w-[min(60vw,640px)]"
+            style={{
+              ['--logo-h-desktop' as string]: 'clamp(140px, 26vh, 260px)',
+              ['--logo-h-mobile' as string]: 'clamp(98px, 18.2vh, 182px)',
+            } as CSSProperties}
+          >
+            <Image
+              src={logo}
+              alt={logoAlt ?? imageAlt}
+              fill
+              className="object-contain brightness-0 invert drop-shadow-[0_12px_40px_rgba(0,0,0,0.4)]"
+              priority
+            />
           </div>
         </div>
       ) : (
