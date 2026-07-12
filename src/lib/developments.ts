@@ -85,6 +85,7 @@ export const developers: Record<DeveloperId, DeveloperEntity> = {
     id: 'Urban Homes',
     name: 'Urban Homes',
     logoDark: '/logos-desarrolladores/urbanhomes.avif',
+    logoWhite: '/logos-desarrolladores/logowhiteurban.webp',
     blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
     credentials: {
       es: 'Más de 18 años de experiencia en Quintana Roo, 22 desarrollos y más de 5,000 viviendas entregadas en Puerto Cancún, Playa del Carmen y Tulum respaldan a Urban Homes como referente del estándar de vida de lujo en la zona más exclusiva de Cancún.',

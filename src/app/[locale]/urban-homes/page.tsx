@@ -30,8 +30,9 @@ export default async function UrbanHomesPage() {
         imageAlt={dev.name}
         eyebrow="— Desarrollador"
         title={dev.name}
-        logo={dev.logoDark}
+        logo={dev.logoWhite ?? dev.logoDark}
         logoAlt={dev.name}
+        logoIsWhite={Boolean(dev.logoWhite)}
       />
       <CategoryGridSection
         eyebrow="Desarrollador"
