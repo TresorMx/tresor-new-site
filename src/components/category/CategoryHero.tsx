@@ -66,7 +66,7 @@ export default function CategoryHero({
           <span className="eyebrow eyebrow-accent font-bold">{eyebrow}</span>
           {title && <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">{title}</h1>}
           {subtitle && (
-            <p className="mt-6 max-w-xl text-[15px] font-light leading-relaxed text-white/80">{subtitle}</p>
+            <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">{subtitle}</p>
           )}
         </div>
       )}
