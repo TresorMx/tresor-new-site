@@ -95,7 +95,7 @@ export function FilterDropdown<T extends string>({
 
       {/* Panel */}
       <div
-        className={`absolute left-0 top-[calc(100%+8px)] z-30 min-w-[200px] origin-top rounded-2xl border border-ink/10 bg-white p-1.5 shadow-xl shadow-ink/10 transition-all duration-200 ${
+        className={`absolute right-0 top-[calc(100%+8px)] z-30 min-w-[200px] origin-top-right rounded-2xl border border-ink/10 bg-white p-1.5 shadow-xl shadow-ink/10 transition-all duration-200 ${
           open
             ? 'pointer-events-auto scale-100 opacity-100'
             : 'pointer-events-none scale-95 opacity-0'
