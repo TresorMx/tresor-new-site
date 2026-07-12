@@ -24,6 +24,11 @@ export default async function AsesorDrivePage({ params }: { params: Promise<{ sl
     developerName: dev.brand ?? developers[dev.developer]?.name ?? dev.developer,
     logo: dev.logo,
     image: dev.heroRender ?? dev.image,
+    // Mismo encuadre/escala que la ficha pública — el Drive usa la misma
+    // foto y el mismo logo, no tiene sentido que se vean distinto.
+    heroImagePosition: dev.heroImagePosition,
+    heroLogoScale: dev.heroLogoScale,
+    heroLogoScaleMobile: dev.heroLogoScaleMobile,
     // Los formatos administrativos (Recibo de Pago, Apartado, etc.) solo
     // existen para Quattro (desarrollos propios de Tresor) — Sales Partner
     // no los tiene.

@@ -170,7 +170,7 @@ export default function DesarrolloPage() {
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
           <span className="eyebrow eyebrow-accent font-bold">— Desarrollo</span>
           <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">We Develop</h1>
-          <p className="mt-6 max-w-xl text-[15px] font-light leading-relaxed text-white/80">
+          <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">
             Nos enfocamos en crear lugares especiales y significativos, más allá de la simple
             construcción — proyectos que dejan una huella duradera en las ciudades donde vivimos.
           </p>
@@ -188,7 +188,7 @@ export default function DesarrolloPage() {
             <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
               {c.eyebrow} <span className="text-ink-3">en {c.location}</span>
             </h2>
-            <p className="mt-6 max-w-3xl text-[15px] font-light leading-relaxed text-ink-2">{c.intro}</p>
+            <p className="mt-6 text-[15px] font-light leading-relaxed text-ink-2">{c.intro}</p>
           </div>
 
           <div className="mt-14 flex flex-col gap-20 md:gap-24">

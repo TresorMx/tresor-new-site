@@ -1240,6 +1240,9 @@ export const developments: Development[] = [
       'Residencial de lujo que redefine el estándar de vida en la Zona Hotelera de Cancún: departamentos de 1, 2 y 3 recámaras con vistas increíbles al mar.',
     // ── Capa de ficha ──
     heroRender: '/desarrollos/villalta/portada2.jpg',
+    // El edificio y la alberca quedan hasta abajo de la foto — bottom evita
+    // que el crop se coma la escena real y se quede solo con cielo/laguna.
+    heroImagePosition: { mobile: 'bottom', desktop: 'bottom' },
     tagline: { es: 'Un oasis de tranquilidad frente a la laguna, en el corazón de la Zona Hotelera' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Zona Hotelera' },
@@ -1780,8 +1783,16 @@ async function loadMergedDevelopments(): Promise<Development[]> {
     const bySlug = new Map(developments.map((d) => [d.slug, d]));
     for (const sd of sanityDevs) {
       const { developerDocId: docId, ...devFields } = sd as Development & { developerDocId?: string };
-      const developerId = developerIdFromDocId(docId) ?? bySlug.get(sd.slug)?.developer ?? 'Tresor';
-      bySlug.set(sd.slug, { ...devFields, developer: developerId });
+      const staticEntry = bySlug.get(sd.slug);
+      const developerId = developerIdFromDocId(docId) ?? staticEntry?.developer ?? 'Tresor';
+      // Merge, no reemplazo — campos que solo existen en el estático (ej.
+      // heroImagePosition/heroLogoScale, que ni siquiera son un field de
+      // Sanity) se perdían por completo en cuanto un dev tenía CUALQUIER
+      // presencia en Sanity, porque esto antes sobreescribía el objeto
+      // entero. `devFields` con un valor explícito (incluido `null`, si un
+      // editor limpió el campo en Studio) sigue ganando; solo lo que Sanity
+      // nunca preguntó (undefined) cae de vuelta al default estático.
+      bySlug.set(sd.slug, { ...staticEntry, ...devFields, developer: developerId });
     }
 
     _mergedDevCache = Array.from(bySlug.values());

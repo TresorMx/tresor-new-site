@@ -27,6 +27,7 @@ import ReservaRapidaForm from '@/components/ficha/ReservaRapidaForm';
 import RelatedDevelopments from '@/components/ficha/RelatedDevelopments';
 import FichaContentBlock from '@/components/ficha/FichaContentBlock';
 import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount, getMergedDevelopmentsAsync } from '@/lib/developments';
+import { OBJECT_POSITION_MOBILE, OBJECT_POSITION_DESKTOP } from '@/lib/heroImagePosition';
 
 export async function generateStaticParams() {
   // Tresor (con ficha en Sanity) + Sales Partner (solo developments.ts) —
@@ -92,21 +93,6 @@ export async function generateMetadata({
     },
   };
 }
-
-// Encuadre de la foto del hero — `heroImagePosition` por dispositivo. Con
-// fotos que no son perfectamente centradas (ej. un edificio donde lo
-// importante está abajo) el default 'center' recorta mal en pantallas
-// angostas; este mapa deja elegir el encuadre por breakpoint sin CSS a mano.
-const OBJECT_POSITION_MOBILE: Record<'top' | 'center' | 'bottom', string> = {
-  top: 'object-top',
-  center: 'object-center',
-  bottom: 'object-bottom',
-};
-const OBJECT_POSITION_DESKTOP: Record<'top' | 'center' | 'bottom', string> = {
-  top: 'md:object-top',
-  center: 'md:object-center',
-  bottom: 'md:object-bottom',
-};
 
 export default async function PlazaPage({ params }: { params: Promise<{ slug: string; locale: string }> }) {
   const { slug, locale } = await params;

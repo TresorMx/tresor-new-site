@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import AsesorGate from '@/components/asesor/AsesorGate';
 import { DRIVE_MAIN, DRIVE_ADMIN, type DriveCard } from '@/lib/asesor/driveCards';
+import { OBJECT_POSITION_MOBILE, OBJECT_POSITION_DESKTOP } from '@/lib/heroImagePosition';
 
 export interface DriveDev {
   slug: string;   // slug de ruta (mismo de la ficha)
@@ -13,6 +14,12 @@ export interface DriveDev {
   developerName: string;
   logo?: string;  // logo del desarrollo (blanco, va sobre fondo oscuro)
   image?: string;
+  // Mismo encuadre/escala que usa el hero de la ficha pública (ver
+  // Development en developments.ts) — el Drive comparte foto y logo con la
+  // ficha, así que debe verse igual, no con el crop/tamaño default.
+  heroImagePosition?: { mobile?: 'top' | 'center' | 'bottom'; desktop?: 'top' | 'center' | 'bottom' };
+  heroLogoScale?: number;
+  heroLogoScaleMobile?: number;
   // Formatos administrativos (Recibo de Pago, Apartado, etc.) — solo existen
   // para desarrollos propios de Tresor (Quattro), no para Sales Partner.
   showAdmin?: boolean;
@@ -36,7 +43,18 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
         <section data-nav="dark" className="relative -mt-[72px] overflow-hidden bg-bg-deep text-bg" style={{ height: 'calc(100svh - 104px - 72px)', minHeight: '480px' }}>
           <div className="absolute inset-0 animate-hero-zoom">
             {dev.image && (
-              <Image src={dev.image} alt={dev.name} fill priority sizes="100vw" className="object-cover scale-105" />
+              <Image
+                src={dev.image}
+                alt={dev.name}
+                fill
+                priority
+                sizes="100vw"
+                className={cn(
+                  'scale-105 object-cover',
+                  OBJECT_POSITION_MOBILE[dev.heroImagePosition?.mobile ?? 'center'],
+                  OBJECT_POSITION_DESKTOP[dev.heroImagePosition?.desktop ?? 'center'],
+                )}
+              />
             )}
           </div>
           <div className="absolute inset-0 bg-black/50" />
@@ -46,8 +64,8 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
               <div
                 className="relative h-[var(--logo-h-mobile)] w-[min(78vw,420px)] md:h-[var(--logo-h-desktop)] md:w-[min(60vw,640px)]"
                 style={{
-                  ['--logo-h-desktop' as string]: 'clamp(140px, 26vh, 260px)',
-                  ['--logo-h-mobile' as string]: 'clamp(98px, 18.2vh, 182px)',
+                  ['--logo-h-desktop' as string]: `clamp(${(140 * (dev.heroLogoScale ?? 1)).toFixed(0)}px, ${(26 * (dev.heroLogoScale ?? 1)).toFixed(1)}vh, ${(260 * (dev.heroLogoScale ?? 1)).toFixed(0)}px)`,
+                  ['--logo-h-mobile' as string]: `clamp(${(140 * (dev.heroLogoScaleMobile ?? (dev.heroLogoScale ?? 1) * 0.7)).toFixed(0)}px, ${(26 * (dev.heroLogoScaleMobile ?? (dev.heroLogoScale ?? 1) * 0.7)).toFixed(1)}vh, ${(260 * (dev.heroLogoScaleMobile ?? (dev.heroLogoScale ?? 1) * 0.7)).toFixed(0)}px)`,
                 } as CSSProperties}
               >
                 <Image
