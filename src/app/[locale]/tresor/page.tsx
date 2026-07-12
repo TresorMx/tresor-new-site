@@ -8,11 +8,11 @@ export const dynamic = 'force-dynamic';
 const dev = developers.Tresor;
 
 export const metadata: Metadata = {
-  title: `Desarrollos de ${dev.name}`,
+  title: 'Nuestros Desarrollos',
   description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
   alternates: { canonical: 'https://tresor.mx/tresor' },
   openGraph: {
-    title: `Desarrollos de ${dev.name}`,
+    title: 'Nuestros Desarrollos',
     description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
     url: 'https://tresor.mx/tresor',
     images: [{ url: '/renders/gardens/01.jpg', width: 1920, height: 992 }],

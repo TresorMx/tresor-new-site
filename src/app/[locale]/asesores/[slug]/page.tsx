@@ -3,13 +3,18 @@ import { notFound } from 'next/navigation';
 import AsesorDrive, { type DriveDev } from '@/components/asesor/AsesorDrive';
 import { getMergedDevelopmentsAsync, developers } from '@/lib/developments';
 
-export const metadata: Metadata = {
-  title: 'Drive de Ventas · Asesores',
-  robots: { index: false, follow: false },
-};
-
 function routeSlug(href: string): string | null {
   return href.startsWith('/desarrollos/') ? href.slice('/desarrollos/'.length) : null;
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const all = await getMergedDevelopmentsAsync();
+  const dev = all.find((d) => routeSlug(d.href) === slug);
+  return {
+    title: dev ? `Drive de Ventas · ${dev.name}` : 'Drive de Ventas · Asesores',
+    robots: { index: false, follow: false },
+  };
 }
 
 export default async function AsesorDrivePage({ params }: { params: Promise<{ slug: string }> }) {

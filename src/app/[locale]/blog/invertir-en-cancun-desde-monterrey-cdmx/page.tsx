@@ -16,13 +16,13 @@ export const metadata: Metadata = {
     'invertir en cancun sin vivir ahi',
   ],
   alternates: {
-    canonical: 'https://www.quattroplaza.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
+    canonical: 'https://tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
   },
   openGraph: {
     title: 'Por Qué Invertir en Cancún desde Monterrey, CDMX o Guadalajara',
     description: 'Cancún ofrece mayor rendimiento y menor precio de entrada que Monterrey, CDMX o GDL. Todo lo que necesitas saber para invertir sin vivir allá.',
-    url: 'https://www.quattroplaza.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
-    images: [{ url: 'https://www.quattroplaza.mx/blog/AdobeStock_841077811.jpeg', width: 1200, height: 630 }],
+    url: 'https://tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
+    images: [{ url: 'https://tresor.mx/blog/AdobeStock_841077811.jpeg', width: 1200, height: 630 }],
   },
 };
 
@@ -32,14 +32,14 @@ const jsonLd = {
   headline: 'Por Qué Invertir en Cancún desde Monterrey, CDMX o Guadalajara',
   datePublished: '2026-06-23',
   dateModified: '2026-06-23',
-  author: { '@type': 'Organization', name: 'Quattro Plaza Center' },
+  author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',
-    name: 'Quattro Plaza Center',
-    logo: 'https://www.quattroplaza.mx/logos/logo-quattro.svg',
+    name: 'Tresor Real Estate',
+    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://www.quattroplaza.mx/blog/AdobeStock_841077811.jpeg',
-  mainEntityOfPage: 'https://www.quattroplaza.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
+  image: 'https://tresor.mx/blog/AdobeStock_841077811.jpeg',
+  mainEntityOfPage: 'https://tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
 };
 
 const comparativa = [

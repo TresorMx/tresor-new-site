@@ -12,12 +12,12 @@ import ProjectImage from '@/components/desarrollo/ProjectImage';
 // únicamente, mismo criterio que las páginas de blog.
 
 export const metadata: Metadata = {
-  title: 'Desarrollo — Trayectoria de Tresor Real Estate',
+  title: 'Desarrollo — Nuestra Trayectoria',
   description:
     'Más de 3,000 unidades entregadas en Cancún y Tulum. Conoce los proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate.',
   alternates: { canonical: 'https://tresor.mx/desarrollo' },
   openGraph: {
-    title: 'Desarrollo — Trayectoria de Tresor Real Estate',
+    title: 'Desarrollo — Nuestra Trayectoria',
     description: 'Proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate en Cancún y Tulum.',
     url: 'https://tresor.mx/desarrollo',
     images: [{ url: '/1g-1.jpg', width: 1920, height: 992 }],

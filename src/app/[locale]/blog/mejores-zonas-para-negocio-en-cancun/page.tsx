@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     'mejor ubicacion local comercial cancun',
   ],
   alternates: {
-    canonical: 'https://www.quattroplaza.mx/blog/mejores-zonas-para-negocio-en-cancun',
+    canonical: 'https://tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
   },
   openGraph: {
     title: 'Las Mejores Zonas para Poner un Negocio en Cancún',
     description: 'Análisis completo de las mejores zonas comerciales de Cancún: tráfico, precios, tipo de cliente y potencial de cada corredor.',
-    url: 'https://www.quattroplaza.mx/blog/mejores-zonas-para-negocio-en-cancun',
-    images: [{ url: 'https://www.quattroplaza.mx/blog/AdobeStock_838554951.jpeg', width: 1200, height: 630 }],
+    url: 'https://tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
+    images: [{ url: 'https://tresor.mx/blog/AdobeStock_838554951.jpeg', width: 1200, height: 630 }],
   },
 };
 
@@ -30,14 +30,14 @@ const jsonLd = {
   headline: 'Las Mejores Zonas para Poner un Negocio en Cancún',
   datePublished: '2026-06-23',
   dateModified: '2026-06-23',
-  author: { '@type': 'Organization', name: 'Quattro Plaza Center' },
+  author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',
-    name: 'Quattro Plaza Center',
-    logo: 'https://www.quattroplaza.mx/logos/logo-quattro.svg',
+    name: 'Tresor Real Estate',
+    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://www.quattroplaza.mx/blog/AdobeStock_838554951.jpeg',
-  mainEntityOfPage: 'https://www.quattroplaza.mx/blog/mejores-zonas-para-negocio-en-cancun',
+  image: 'https://tresor.mx/blog/AdobeStock_838554951.jpeg',
+  mainEntityOfPage: 'https://tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
 };
 
 export default function ArticlePage() {

@@ -1,9 +1,18 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Cormorant_Garamond } from 'next/font/google';
 import localFont from 'next/font/local';
 import { ArrowLeft } from 'lucide-react';
 import '@/styles/globals.css';
+
+// not-found.tsx a nivel raíz (fuera de [locale]) renderiza su propio
+// <html><body> completo, así que no hereda el title.template del layout —
+// necesita su propio <title>, si no se queda sin ninguno.
+export const metadata: Metadata = {
+  title: 'Página no encontrada · Tresor Real Estate',
+  robots: { index: false, follow: false },
+};
 
 const cormorant = Cormorant_Garamond({
   subsets: ['latin'],
@@ -76,7 +85,7 @@ export default function NotFound() {
             </div>
 
             <p className="mt-16 text-[11px] uppercase tracking-[0.3em] text-white/30">
-              Quattro Plaza Center · Cancún
+              Tresor Real Estate · Cancún
             </p>
           </div>
         </main>

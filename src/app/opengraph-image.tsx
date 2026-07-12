@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 
 export const runtime = 'edge';
-export const alt = 'Quattro Plaza Center — Locales en Venta Cancún';
+export const alt = 'Tresor Real Estate — Propiedades en Cancún y Riviera Maya';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -45,7 +45,7 @@ export default async function OG() {
               textTransform: 'uppercase',
             }}
           >
-            — Quattro Plaza Center
+            — Tresor Real Estate
           </div>
         </div>
 
@@ -60,16 +60,16 @@ export default async function OG() {
               maxWidth: 920,
             }}
           >
-            Locales comerciales premium en Cancún
+            Propiedades en Cancún y Riviera Maya
           </div>
           <div style={{ fontSize: 24, color: 'rgba(255,255,255,0.65)', fontWeight: 300 }}>
-            Long Island · Gardens · Tulum · Marina · Huayacán
+            Departamentos · Locales comerciales · Lotes residenciales
           </div>
         </div>
 
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' }}>
           <div style={{ fontSize: 18, color: 'rgba(255,255,255,0.55)' }}>
-            Un desarrollo de Tresor Real Estate
+            Desarrollador y comercializador inmobiliario
           </div>
           <div
             style={{
@@ -80,7 +80,7 @@ export default async function OG() {
               fontWeight: 700,
             }}
           >
-            quattroplaza.mx
+            tresor.mx
           </div>
         </div>
       </div>

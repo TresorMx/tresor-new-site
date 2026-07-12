@@ -77,26 +77,26 @@ export async function generateMetadata({
     metadataBase: new URL(SITE_URL),
     title: {
       default: isEs
-        ? 'Quattro Plaza Center — Locales en Venta Cancún'
-        : 'Quattro Plaza Center — Commercial Units for Sale in Cancún',
-      template: '%s · Quattro Plaza Center',
+        ? 'Tresor Real Estate | Propiedades Inmobiliarias en Cancún y Riviera Maya'
+        : 'Tresor Real Estate | Real Estate in Cancún and Riviera Maya',
+      template: '%s · Tresor Real Estate',
     },
     description: isEs
-      ? 'Plazas comerciales premium en Cancún. Locales en preventa con alto retorno. Long Island y Gardens disponibles. Por Tresor Real Estate.'
-      : 'Premium commercial plazas in Cancún. Pre-sale units with high returns. Long Island & Gardens available. By Tresor Real Estate.',
+      ? 'Desarrollador y comercializador inmobiliario en Cancún y la Riviera Maya. Departamentos, locales comerciales y lotes residenciales en preventa y entrega inmediata.'
+      : 'Real estate developer and broker in Cancún and the Riviera Maya. Apartments, commercial units and residential lots in pre-sale and immediate delivery.',
     keywords: isEs
       ? [
-          'locales en venta Cancún',
-          'plaza comercial Cancún',
-          'inversión inmobiliaria Cancún',
-          'locales preventa Quintana Roo',
-          'desarrollo comercial Cancún',
-          'Quattro Plaza Center',
-          'Long Island Cancún',
-          'Gardens Cancún',
           'Tresor Real Estate',
+          'inmobiliaria Cancún',
+          'departamentos en venta Cancún',
+          'locales en venta Cancún',
+          'lotes residenciales Cancún',
+          'inversión inmobiliaria Cancún',
+          'preventa Quintana Roo',
+          'Riviera Maya bienes raíces',
+          'Quattro Plaza Center',
         ]
-      : ['commercial units Cancún', 'real estate investment Cancún', 'Quattro Plaza Center'],
+      : ['Tresor Real Estate', 'real estate Cancún', 'apartments for sale Cancún', 'commercial units Cancún', 'Riviera Maya real estate'],
     authors: [{ name: 'Tresor Real Estate' }],
     creator: 'Tresor Real Estate',
     publisher: 'Tresor Real Estate',
@@ -112,21 +112,21 @@ export async function generateMetadata({
     openGraph: {
       type: 'website',
       locale: isEs ? 'es_MX' : 'en_US',
-      siteName: 'Quattro Plaza Center',
+      siteName: 'Tresor Real Estate',
       title: isEs
-        ? 'Quattro Plaza Center — Locales en Venta Cancún'
-        : 'Quattro Plaza Center — Commercial Units in Cancún',
+        ? 'Tresor Real Estate | Propiedades Inmobiliarias en Cancún y Riviera Maya'
+        : 'Tresor Real Estate | Real Estate in Cancún and Riviera Maya',
       description: isEs
-        ? 'Plazas comerciales premium en Cancún. Long Island y Gardens en preventa.'
-        : 'Premium commercial plazas in Cancún. Long Island and Gardens in pre-sale.',
-      images: [{ url: '/og/home.jpg', width: 1200, height: 630, alt: 'Quattro Plaza Center' }],
+        ? 'Departamentos, locales comerciales y lotes residenciales en Cancún y la Riviera Maya. Preventa y entrega inmediata.'
+        : 'Apartments, commercial units and residential lots in Cancún and the Riviera Maya. Pre-sale and immediate delivery.',
+      images: [{ url: '/og/home.jpg', width: 1200, height: 630, alt: 'Tresor Real Estate' }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Quattro Plaza Center',
+      title: 'Tresor Real Estate',
       description: isEs
-        ? 'Locales comerciales premium en Cancún.'
-        : 'Premium commercial units in Cancún.',
+        ? 'Propiedades inmobiliarias en Cancún y la Riviera Maya.'
+        : 'Real estate properties in Cancún and the Riviera Maya.',
       images: ['/og/home.jpg'],
     },
     verification: { google: 'U4evI45bFXrab7MhX6773_n1G9ZW862gxl8W9FufDh4' },
@@ -180,18 +180,13 @@ export default async function LocaleLayout({
   const orgJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'RealEstateAgent',
-    name: 'Quattro Plaza Center',
+    name: 'Tresor Real Estate',
     url: SITE_URL,
-    logo: `${SITE_URL}/logos/logo-quattro.svg`,
+    logo: `${SITE_URL}/logos/LogoTresor-ink.svg`,
     image: `${SITE_URL}/og/home.jpg`,
-    description: 'Plazas comerciales premium en Cancún. Locales en venta con alto retorno en Long Island y Gardens. Por Tresor Real Estate.',
+    description: 'Desarrollador y comercializador inmobiliario en Cancún y la Riviera Maya. Departamentos, locales comerciales y lotes residenciales en preventa y entrega inmediata.',
     telephone: '+52-998-404-5602',
     email: 'hello@tresor.mx',
-    parentOrganization: {
-      '@type': 'Organization',
-      name: 'Tresor Real Estate',
-      url: 'https://tresor.mx',
-    },
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Cancún',
@@ -199,20 +194,22 @@ export default async function LocaleLayout({
       postalCode: '77500',
       addressCountry: 'MX',
     },
-    areaServed: {
-      '@type': 'City',
-      name: 'Cancún',
-    },
+    areaServed: [
+      { '@type': 'City', name: 'Cancún' },
+      { '@type': 'City', name: 'Tulum' },
+      { '@type': 'City', name: 'Playa del Carmen' },
+    ],
     sameAs: [
       'https://www.instagram.com/quattroplazacenter',
       `${SITE_URL}`,
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Locales Comerciales en Venta Cancún',
+      name: 'Propiedades en Venta en Cancún y Riviera Maya',
       itemListElement: [
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Local Comercial Quattro Plaza Gardens', description: 'Locales comerciales en venta en Cancún desde 32 m². Enganche desde $147,000 MXN.' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Local Comercial Quattro Plaza Long Island', description: 'Locales comerciales en venta en Cancún. Diseño premium y ubicación estratégica.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Departamentos en venta en Cancún y Riviera Maya', description: 'Departamentos en preventa y entrega inmediata en Cancún, Tulum, Playa del Carmen y Puerto Cancún.' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Locales comerciales en venta en Cancún', description: 'Locales comerciales en preventa en plazas premium de Cancún, desde 32 m².' } },
+        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Lotes residenciales en venta en Cancún', description: 'Lotes y macrolotes residenciales en las zonas de mayor plusvalía de Cancún.' } },
       ],
     },
   };

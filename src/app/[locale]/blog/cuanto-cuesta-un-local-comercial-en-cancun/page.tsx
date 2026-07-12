@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     'locales comerciales cancun 2026 precio',
   ],
   alternates: {
-    canonical: 'https://www.quattroplaza.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
+    canonical: 'https://tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
   },
   openGraph: {
     title: '¿Cuánto Cuesta un Local Comercial en Cancún en 2026?',
     description: 'Precios reales de locales comerciales en Cancún por zona y m². Todo lo que necesitas saber antes de comprar.',
-    url: 'https://www.quattroplaza.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
-    images: [{ url: 'https://www.quattroplaza.mx/blog/AdobeStock_804358854.jpeg', width: 1200, height: 630 }],
+    url: 'https://tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
+    images: [{ url: 'https://tresor.mx/blog/AdobeStock_804358854.jpeg', width: 1200, height: 630 }],
   },
 };
 
@@ -30,14 +30,14 @@ const jsonLd = {
   headline: '¿Cuánto Cuesta un Local Comercial en Cancún en 2026?',
   datePublished: '2026-06-23',
   dateModified: '2026-06-23',
-  author: { '@type': 'Organization', name: 'Quattro Plaza Center' },
+  author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',
-    name: 'Quattro Plaza Center',
-    logo: 'https://www.quattroplaza.mx/logos/logo-quattro.svg',
+    name: 'Tresor Real Estate',
+    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://www.quattroplaza.mx/blog/AdobeStock_804358854.jpeg',
-  mainEntityOfPage: 'https://www.quattroplaza.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
+  image: 'https://tresor.mx/blog/AdobeStock_804358854.jpeg',
+  mainEntityOfPage: 'https://tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
 };
 
 const zonas = [

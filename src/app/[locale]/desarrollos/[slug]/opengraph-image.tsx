@@ -4,7 +4,7 @@ import { getPlazaBySlugAsync } from '@/lib/data';
 export const runtime = 'nodejs';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
-export const alt = 'Quattro Plaza Center';
+export const alt = 'Tresor Real Estate';
 
 // Minimalista, mismo tratamiento que el card del home: foto de fondo con
 // overlay oscuro + logo blanco centrado. Nada de texto, pills ni precio.

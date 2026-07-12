@@ -94,7 +94,7 @@ export default function ExitIntent({ agendaHref = '/agenda' }: { agendaHref?: st
         <div className="relative hidden w-[45%] shrink-0 md:block">
           <Image
             src="/promo.png"
-            alt="Quattro Plaza Center — Programa Rewards"
+            alt="Tresor Real Estate — Programa Rewards"
             fill
             className="object-cover"
           />
@@ -103,7 +103,7 @@ export default function ExitIntent({ agendaHref = '/agenda' }: { agendaHref?: st
         {/* Contenido */}
         <div className="flex flex-1 flex-col justify-center px-8 py-10 md:px-10">
           <span className="mb-4 text-[11px] font-bold uppercase tracking-eyebrow text-accent">
-            — Quattro Plaza Center
+            — Tresor Real Estate
           </span>
           <h2 className="font-serif text-[36px] font-light italic leading-[1.15] text-white md:text-[42px]">
             ¿Listo para ver<br />tu próximo local?

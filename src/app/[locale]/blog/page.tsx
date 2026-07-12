@@ -13,14 +13,14 @@ export const metadata: Metadata = {
     'locales comerciales cancun 2026',
   ],
   alternates: {
-    canonical: 'https://www.quattroplaza.mx/blog',
+    canonical: 'https://tresor.mx/blog',
   },
   openGraph: {
     title: 'Blog — Guía de Inversión en Locales Comerciales en Cancún',
     description:
       'Artículos expertos sobre inversión en locales comerciales en Cancún: precios, zonas, preventa y análisis del mercado.',
-    url: 'https://www.quattroplaza.mx/blog',
-    images: [{ url: 'https://www.quattroplaza.mx/blog/AdobeStock_791905652.jpeg', width: 1200, height: 630 }],
+    url: 'https://tresor.mx/blog',
+    images: [{ url: 'https://tresor.mx/blog/AdobeStock_791905652.jpeg', width: 1200, height: 630 }],
   },
 };
 
@@ -85,11 +85,11 @@ const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
   name: 'Blog — Inversión en Locales Comerciales en Cancún',
-  url: 'https://www.quattroplaza.mx/blog',
+  url: 'https://tresor.mx/blog',
   itemListElement: articles.map((a, i) => ({
     '@type': 'ListItem',
     position: i + 1,
-    url: `https://www.quattroplaza.mx/blog/${a.slug}`,
+    url: `https://tresor.mx/blog/${a.slug}`,
     name: a.title,
   })),
 };

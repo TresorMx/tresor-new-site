@@ -52,7 +52,7 @@ const JSONLD = {
       '@type': 'WebPage',
       name: 'Invertir en Cancún — Locales Comerciales para Inversionistas de Monterrey, CDMX y Guadalajara',
       description: 'Locales comerciales en preventa en Cancún con rendimientos del 10–15% anual. Proceso 100% remoto. Ideal para inversionistas de Monterrey, CDMX o Guadalajara.',
-      url: 'https://www.quattroplaza.mx/invertir-en-cancun',
+      url: 'https://tresor.mx/invertir-en-cancun',
     },
     {
       '@type': 'FAQPage',
@@ -64,10 +64,10 @@ const JSONLD = {
     },
     {
       '@type': 'LocalBusiness',
-      '@id': 'https://www.quattroplaza.mx/#organization',
-      name: 'Quattro Plaza Center — Tresor Real Estate',
-      url: 'https://www.quattroplaza.mx',
-      logo: 'https://www.quattroplaza.mx/logos/logo-quattro.svg',
+      '@id': 'https://tresor.mx/#organization',
+      name: 'Tresor Real Estate',
+      url: 'https://tresor.mx',
+      logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
       telephone: '+529984045602',
       email: 'hello@tresor.mx',
       address: { '@type': 'PostalAddress', addressLocality: 'Cancún', addressRegion: 'Quintana Roo', addressCountry: 'MX' },

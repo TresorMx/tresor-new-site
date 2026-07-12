@@ -189,7 +189,7 @@ export default function Chatbot() {
           {stage === 'form' ? (
             <div className="flex flex-1 flex-col justify-center px-6 py-8">
               <p className="mb-6 text-[14px] leading-relaxed text-ink-2">
-                ¡Hola! Soy Luis, tu asesor de Quattro Plaza Center. Por favor ingresa tus datos para comenzar:
+                ¡Hola! Soy Luis, tu asesor de Tresor Real Estate. Por favor ingresa tus datos para comenzar:
               </p>
               <form onSubmit={submitLead} className="flex flex-col gap-4">
                 <div className="flex flex-col gap-1.5">

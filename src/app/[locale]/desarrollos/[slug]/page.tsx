@@ -64,7 +64,7 @@ export async function generateMetadata({
     : (plaza?.seoDescriptionEn ?? dev.seoDescription?.en ?? dev.seoDescription?.es ?? dev.description ??
         `${name} in ${city}${fromText}.`);
 
-  const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.quattroplaza.mx';
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tresor.mx';
   const heroImg = dev.heroRender ?? dev.image;
 
   return {
@@ -147,7 +147,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           ? Array.from({ length: 6 }, (_, i) => `/renders/gardens/0${i + 1}.jpg`)
           : [];
 
-  const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.quattroplaza.mx';
+  const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tresor.mx';
   const heroImg = dev.heroRender ?? dev.image;
   const location = dev.location ?? plaza?.location;
   const developer = developers[dev.developer] ?? developers.Tresor;

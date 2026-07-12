@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     'preventa inmobiliaria cancun 2026',
   ],
   alternates: {
-    canonical: 'https://www.quattroplaza.mx/blog/guia-comprar-en-preventa-cancun',
+    canonical: 'https://tresor.mx/blog/guia-comprar-en-preventa-cancun',
   },
   openGraph: {
     title: 'Guía para Comprar en Preventa en Cancún: Todo lo que Debes Saber',
     description: 'Checklist, documentos y preguntas clave para comprar en preventa en Cancún sin errores. Guía completa para el inversionista inteligente.',
-    url: 'https://www.quattroplaza.mx/blog/guia-comprar-en-preventa-cancun',
-    images: [{ url: 'https://www.quattroplaza.mx/blog/AdobeStock_887006964.jpeg', width: 1200, height: 630 }],
+    url: 'https://tresor.mx/blog/guia-comprar-en-preventa-cancun',
+    images: [{ url: 'https://tresor.mx/blog/AdobeStock_887006964.jpeg', width: 1200, height: 630 }],
   },
 };
 
@@ -31,14 +31,14 @@ const jsonLd = {
   headline: 'Guía para Comprar en Preventa en Cancún: Todo lo que Debes Saber',
   datePublished: '2026-06-23',
   dateModified: '2026-06-23',
-  author: { '@type': 'Organization', name: 'Quattro Plaza Center' },
+  author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',
-    name: 'Quattro Plaza Center',
-    logo: 'https://www.quattroplaza.mx/logos/logo-quattro.svg',
+    name: 'Tresor Real Estate',
+    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://www.quattroplaza.mx/blog/AdobeStock_887006964.jpeg',
-  mainEntityOfPage: 'https://www.quattroplaza.mx/blog/guia-comprar-en-preventa-cancun',
+  image: 'https://tresor.mx/blog/AdobeStock_887006964.jpeg',
+  mainEntityOfPage: 'https://tresor.mx/blog/guia-comprar-en-preventa-cancun',
 };
 
 export default function ArticlePage() {

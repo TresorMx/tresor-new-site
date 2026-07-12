@@ -14,13 +14,13 @@ export const metadata: Metadata = {
     'invertir cancun 2026',
   ],
   alternates: {
-    canonical: 'https://www.quattroplaza.mx/blog/local-comercial-vs-departamento-cancun',
+    canonical: 'https://tresor.mx/blog/local-comercial-vs-departamento-cancun',
   },
   openGraph: {
     title: 'Local Comercial vs Departamento en Cancún: ¿Qué Conviene Más como Inversión?',
     description: 'Análisis objetivo entre invertir en local comercial o departamento en Cancún. Rendimientos, riesgos y qué conviene según tu perfil.',
-    url: 'https://www.quattroplaza.mx/blog/local-comercial-vs-departamento-cancun',
-    images: [{ url: 'https://www.quattroplaza.mx/blog/AdobeStock_862766615.jpeg', width: 1200, height: 630 }],
+    url: 'https://tresor.mx/blog/local-comercial-vs-departamento-cancun',
+    images: [{ url: 'https://tresor.mx/blog/AdobeStock_862766615.jpeg', width: 1200, height: 630 }],
   },
 };
 
@@ -30,14 +30,14 @@ const jsonLd = {
   headline: 'Local Comercial vs Departamento en Cancún: ¿Qué Conviene Más como Inversión?',
   datePublished: '2026-06-23',
   dateModified: '2026-06-23',
-  author: { '@type': 'Organization', name: 'Quattro Plaza Center' },
+  author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',
-    name: 'Quattro Plaza Center',
-    logo: 'https://www.quattroplaza.mx/logos/logo-quattro.svg',
+    name: 'Tresor Real Estate',
+    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://www.quattroplaza.mx/blog/AdobeStock_862766615.jpeg',
-  mainEntityOfPage: 'https://www.quattroplaza.mx/blog/local-comercial-vs-departamento-cancun',
+  image: 'https://tresor.mx/blog/AdobeStock_862766615.jpeg',
+  mainEntityOfPage: 'https://tresor.mx/blog/local-comercial-vs-departamento-cancun',
 };
 
 const comparacion = [

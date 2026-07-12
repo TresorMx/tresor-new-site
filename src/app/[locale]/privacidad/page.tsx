@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Política de Privacidad — Quattro Plaza Center',
-  description: 'Conoce cómo Urban Brokers / Quattro Plaza Center trata y protege tus datos personales.',
+  title: 'Política de Privacidad',
+  description: 'Conoce cómo Urban Brokers / Tresor Real Estate trata y protege tus datos personales.',
 };
 
 const sections = [

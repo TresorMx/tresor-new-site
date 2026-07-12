@@ -108,12 +108,12 @@ export interface QuotePDFProps {
   siteUrl?: string;
 }
 
-export function QuotePDF({ quote, quoteId, contact, siteUrl = 'https://quattroplaza.mx' }: QuotePDFProps) {
+export function QuotePDF({ quote, quoteId, contact, siteUrl = 'https://tresor.mx' }: QuotePDFProps) {
   const today = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
   const valid = new Date(quote.validUntil).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
 
   return (
-    <Document title={`Cotización ${quoteId}`} author="Quattro Plaza Center">
+    <Document title={`Cotización ${quoteId}`} author="Tresor Real Estate">
       <Page size="A4" style={styles.page}>
         {/* Header */}
         <View style={styles.header}>

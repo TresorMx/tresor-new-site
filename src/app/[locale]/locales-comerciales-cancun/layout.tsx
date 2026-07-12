@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Locales Comerciales en Venta en Cancún | Quattro Plaza Center',
+  title: 'Locales Comerciales en Venta en Cancún',
   description: 'Locales comerciales en venta en Cancún desde $1,968,600 MXN + IVA. Dos plazas disponibles: Gardens y Long Island. Enganche desde $147,000 MXN. Tresor Real Estate.',
   keywords: [
     'locales comerciales en cancun',
@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     'local comercial preventa cancun',
     'quattro plaza center',
   ],
-  alternates: { canonical: 'https://www.quattroplaza.mx/locales-comerciales-cancun' },
+  alternates: { canonical: 'https://tresor.mx/locales-comerciales-cancun' },
   openGraph: {
-    title: 'Locales Comerciales en Venta en Cancún | Quattro Plaza Center',
+    title: 'Locales Comerciales en Venta en Cancún',
     description: 'Dos plazas comerciales premium en Cancún. Locales desde 32 m² y desde $1,968,600 MXN + IVA. Enganche desde $147,000 MXN. Entrega 2027.',
-    url: 'https://www.quattroplaza.mx/locales-comerciales-cancun',
-    images: [{ url: 'https://www.quattroplaza.mx/renders/gardens/02.jpg', width: 1200, height: 630 }],
+    url: 'https://tresor.mx/locales-comerciales-cancun',
+    images: [{ url: 'https://tresor.mx/renders/gardens/02.jpg', width: 1200, height: 630 }],
     locale: 'es_MX',
     type: 'website',
   },

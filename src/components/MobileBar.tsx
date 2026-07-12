@@ -20,7 +20,7 @@ export default function MobileBar() {
       </Link>
       <div className="w-px bg-line" />
       <a
-        href={whatsappURL(phone, 'Hola, me interesa Quattro Plaza Center')}
+        href={whatsappURL(phone, 'Hola, me interesan las propiedades de Tresor Real Estate')}
         target="_blank"
         rel="noopener noreferrer"
         className="flex flex-1 items-center justify-center gap-2 bg-[#25D366] py-4 text-[11px] font-semibold uppercase tracking-caps text-white"
