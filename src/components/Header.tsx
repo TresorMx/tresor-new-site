@@ -175,7 +175,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
               {isAsesor ? (
                 <span className="inline-flex items-center gap-3">
                   <span className="inline-flex items-center gap-1.5 uppercase">
-                    <span className="h-1.5 w-1.5 rounded-full bg-ink" />
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                     Asesor
                   </span>
                   <button onClick={logout} className="inline-flex items-center gap-1 uppercase transition-opacity hover:opacity-60">
