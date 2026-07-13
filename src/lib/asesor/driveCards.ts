@@ -61,6 +61,7 @@ interface DriveLayoutItem {
 // excepto desarrollos tipo 'Lotes' (no hay depa muestra en un lote).
 const UNIVERSAL_ITEMS: DriveLayoutItem[] = [
   { key: 'showUnit', excludeTypes: ['Lotes'] },
+  { key: 'finishesCatalog' },
 ];
 
 // Layout por grupo de desarrollador — qué documentos se muestran y en qué
