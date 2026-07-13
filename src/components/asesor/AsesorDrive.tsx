@@ -5,13 +5,14 @@ import { Download } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import AsesorGate from '@/components/asesor/AsesorGate';
-import { DRIVE_MAIN, DRIVE_ADMIN, type DriveCard } from '@/lib/asesor/driveCards';
+import { DRIVE_CATALOG, getDriveLayout, getDriveAdminLayout, type DriveCard } from '@/lib/asesor/driveCards';
 import { OBJECT_POSITION_MOBILE, OBJECT_POSITION_DESKTOP } from '@/lib/heroImagePosition';
 
 export interface DriveDev {
   slug: string;   // slug de ruta (mismo de la ficha)
   name: string;
   developerName: string;
+  developer: string; // id (Tresor/Live/Onix/'Urban Homes') — elige el layout del drive, ver driveCards.ts
   logo?: string;  // logo del desarrollo (blanco, va sobre fondo oscuro)
   image?: string;
   // Mismo encuadre/escala que usa el hero de la ficha pública (ver
@@ -20,12 +21,19 @@ export interface DriveDev {
   heroImagePosition?: { mobile?: 'top' | 'center' | 'bottom'; desktop?: 'top' | 'center' | 'bottom' };
   heroLogoScale?: number;
   heroLogoScaleMobile?: number;
+  // Qué documentos tienen contenido real (archivo o liga) en Sanity/estático
+  // — un tile SOLO se muestra si available[key] es true. Ver
+  // fetchDriveAssetsPresence en src/lib/sanity/drive.ts.
+  available: Record<string, boolean>;
   // Formatos administrativos (Recibo de Pago, Apartado, etc.) — solo existen
   // para desarrollos propios de Tresor (Quattro), no para Sales Partner.
   showAdmin?: boolean;
 }
 
 export default function AsesorDrive({ dev }: { dev: DriveDev }) {
+  const mainItems = getDriveLayout(dev.developer).filter((item) => dev.available[item.key]);
+  const adminItems = dev.showAdmin ? getDriveAdminLayout(dev.developer).filter((item) => dev.available[item.key]) : [];
+
   return (
     <AsesorGate>
       {/* Sin <main> propio: el layout raíz ya envuelve todo en
@@ -96,28 +104,38 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
           <section className="container-wrap pt-14">
             <div className="mb-7 flex items-end justify-between gap-4">
               <h2 className="font-sans text-[clamp(20px,2.6vw,30px)] font-medium tracking-tight">Drive principal</h2>
-              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{DRIVE_MAIN.length} secciones</span>
+              <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{mainItems.length} secciones</span>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {DRIVE_MAIN.map((c) => (
-                <DriveTile key={c.key} card={c} slug={dev.slug} />
-              ))}
-            </div>
+            {mainItems.length === 0 ? (
+              <p className="text-[13px] text-ink-3">Todavía no hay material cargado para este desarrollo.</p>
+            ) : (
+              <div className="grid gap-4 sm:grid-cols-2">
+                {mainItems.map((item) => (
+                  <DriveTile
+                    key={item.key}
+                    card={DRIVE_CATALOG[item.key]}
+                    labelOverride={item.label}
+                    slug={dev.slug}
+                    fullWidth={item.fullWidth}
+                  />
+                ))}
+              </div>
+            )}
           </section>
 
           {/* Formatos administrativos — solo Quattro (Sales Partner no los tiene) */}
-          {dev.showAdmin && (
+          {adminItems.length > 0 && (
             <section className="container-wrap pt-16">
               <div className="mb-7 flex items-end justify-between gap-4">
                 <div>
                   <span className="eyebrow eyebrow-accent block font-bold">— Administrativo</span>
                   <h2 className="mt-3 font-sans text-[clamp(20px,2.6vw,30px)] font-medium tracking-tight">Formatos administrativos</h2>
                 </div>
-                <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{DRIVE_ADMIN.length} formatos</span>
+                <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{adminItems.length} formatos</span>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {DRIVE_ADMIN.map((c) => (
-                  <DriveTile key={c.key} card={c} slug={dev.slug} variant="admin" />
+              <div className="grid gap-4 sm:grid-cols-2">
+                {adminItems.map((item) => (
+                  <DriveTile key={item.key} card={DRIVE_CATALOG[item.key]} slug={dev.slug} variant="admin" />
                 ))}
               </div>
             </section>
@@ -128,14 +146,29 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
   );
 }
 
-function DriveTile({ card, slug, variant = 'main' }: { card: DriveCard; slug: string; variant?: 'main' | 'admin' }) {
+function DriveTile({
+  card,
+  slug,
+  variant = 'main',
+  labelOverride,
+  fullWidth,
+}: {
+  card: DriveCard;
+  slug: string;
+  variant?: 'main' | 'admin';
+  labelOverride?: string;
+  fullWidth?: boolean;
+}) {
   const Icon = card.icon;
   return (
     <a
       href={`/api/asesor/file?dev=${slug}&doc=${card.key}`}
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex flex-col gap-5 rounded-[18px] bg-white p-6 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)]"
+      className={cn(
+        'group flex flex-col gap-5 rounded-[18px] bg-white p-6 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)]',
+        fullWidth && 'sm:col-span-2',
+      )}
     >
       <div
         className={cn(
@@ -148,7 +181,7 @@ function DriveTile({ card, slug, variant = 'main' }: { card: DriveCard; slug: st
         <Icon size={20} strokeWidth={1.4} />
       </div>
       <div className="flex-1">
-        <div className="font-sans text-[17px] font-medium leading-tight">{card.label}</div>
+        <div className="font-sans text-[17px] font-medium leading-tight">{labelOverride ?? card.label}</div>
         <p className="mt-1.5 text-[12.5px] leading-relaxed text-ink-3">{card.desc}</p>
       </div>
       <span className="inline-flex items-center gap-2 text-[10.5px] font-bold uppercase tracking-[0.16em] text-ink-3 group-hover:text-accent">

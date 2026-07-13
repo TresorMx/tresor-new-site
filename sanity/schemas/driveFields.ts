@@ -20,4 +20,13 @@ export const driveFields = [
   defineField({ name: 'receiptReserve', title: 'Recibo de Apartado', type: 'driveAsset', group: 'drive', description: 'Formato editable (archivo o liga).' }),
   defineField({ name: 'checklist', title: 'Check List', type: 'driveAsset', group: 'drive', description: 'Validación previa al cierre (archivo o liga).' }),
   defineField({ name: 'offerLetter', title: 'Carta Oferta', type: 'driveAsset', group: 'drive', description: 'Plantilla institucional (archivo o liga).' }),
+
+  // ── Extendidos — layout de Live Desarrollos (y los que sigan; ver
+  // src/lib/asesor/driveCards.ts DRIVE_LAYOUTS). "File"/nombre distinto al
+  // módulo real cuando ya existe un campo con ese nombre en el schema. ──
+  defineField({ name: 'amenitiesFile', title: 'Amenidades (Drive)', type: 'driveAsset', group: 'drive', description: 'Ficha o brochure de amenidades (PDF o liga). Independiente del módulo "Amenidades" de la ficha pública.' }),
+  defineField({ name: 'virtualTour', title: 'Tour Virtual', type: 'driveAsset', group: 'drive', description: 'Liga al recorrido virtual 360°.' }),
+  defineField({ name: 'floorPlansFile', title: 'Floor Plans (Drive)', type: 'driveAsset', group: 'drive', description: 'PDF con todas las tipologías juntas, o liga (archivo o liga).' }),
+  defineField({ name: 'constructionProgress', title: 'Avances de Obra', type: 'driveAsset', group: 'drive', description: 'Reporte o galería de avance de construcción (PDF, ZIP o liga).' }),
+  defineField({ name: 'quoter', title: 'Cotizador Tresor', type: 'driveAsset', group: 'drive', description: 'Liga al cotizador (o archivo, si aplica).' }),
 ];
