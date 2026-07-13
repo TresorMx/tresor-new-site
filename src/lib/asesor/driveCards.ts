@@ -3,6 +3,7 @@ import {
   FileText, ClipboardList, Layers, Banknote, MapPin, Megaphone, Building2,
   Image as ImageIcon, Receipt, ReceiptText, CheckSquare, FileSignature,
   Sparkles, Video, LayoutGrid, HardHat, Calculator,
+  BookOpen, Box, FileStack, Film, Palette, DoorOpen, Clapperboard,
 } from 'lucide-react';
 
 export interface DriveCard {
@@ -36,6 +37,14 @@ export const DRIVE_CATALOG: Record<string, DriveCard> = {
   floorPlans:            { key: 'floorPlans',            label: 'Floor Plans',   desc: 'Todas las tipologías juntas', icon: LayoutGrid },
   constructionProgress:  { key: 'constructionProgress',  label: 'Avances de Obra', desc: 'Reporte de avance de construcción', icon: HardHat },
   quoter:                { key: 'quoter',                label: 'Cotizador Tresor', desc: 'Cotiza en línea con el equipo Tresor', icon: Calculator },
+  // ── Extendidos (Urban Homes, Onix Living y los que sigan) ──
+  brochure:              { key: 'brochure',              label: 'Brochure',       desc: 'Brochure comercial del proyecto', icon: BookOpen },
+  prototypes:            { key: 'prototypes',            label: 'Prototipos',     desc: 'Fichas de cada prototipo', icon: Box },
+  individualFloorPlans:  { key: 'individualFloorPlans',  label: 'Planos Individuales', desc: 'Plano por tipología, uno a uno', icon: FileStack },
+  multimedia:            { key: 'multimedia',            label: 'Contenido Multimedia', desc: 'Fotos y videos para redes', icon: Film },
+  finishesCatalog:       { key: 'finishesCatalog',       label: 'Catálogo de Acabados', desc: 'Materiales y especificaciones', icon: Palette },
+  showUnit:              { key: 'showUnit',              label: 'Departamento Muestra', desc: 'Fotos y video del depa muestra', icon: DoorOpen },
+  videos:                { key: 'videos',                label: 'Videos',         desc: 'Videos del proyecto', icon: Clapperboard },
 };
 
 interface DriveLayoutItem {

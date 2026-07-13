@@ -29,4 +29,13 @@ export const driveFields = [
   defineField({ name: 'floorPlansFile', title: 'Floor Plans (Drive)', type: 'driveAsset', group: 'drive', description: 'PDF con todas las tipologías juntas, o liga (archivo o liga).' }),
   defineField({ name: 'constructionProgress', title: 'Avances de Obra', type: 'driveAsset', group: 'drive', description: 'Reporte o galería de avance de construcción (PDF, ZIP o liga).' }),
   defineField({ name: 'quoter', title: 'Cotizador Tresor', type: 'driveAsset', group: 'drive', description: 'Liga al cotizador (o archivo, si aplica).' }),
+
+  // ── Extendidos — layout de Urban Homes / Onix Living (y los que sigan) ──
+  defineField({ name: 'brochure', title: 'Brochure', type: 'driveAsset', group: 'drive', description: 'Brochure comercial del proyecto (PDF o liga).' }),
+  defineField({ name: 'prototypes', title: 'Prototipos', type: 'driveAsset', group: 'drive', description: 'Fichas de cada prototipo (PDF, ZIP o liga).' }),
+  defineField({ name: 'individualFloorPlans', title: 'Planos Individuales', type: 'driveAsset', group: 'drive', description: 'Plano por tipología, uno a uno (ZIP o liga).' }),
+  defineField({ name: 'multimedia', title: 'Contenido Multimedia', type: 'driveAsset', group: 'drive', description: 'Fotos y videos para redes (ZIP o liga a carpeta compartida).' }),
+  defineField({ name: 'finishesCatalog', title: 'Catálogo de Acabados', type: 'driveAsset', group: 'drive', description: 'Materiales y especificaciones (PDF o liga).' }),
+  defineField({ name: 'showUnit', title: 'Departamento Muestra', type: 'driveAsset', group: 'drive', description: 'Fotos y video del depa muestra (ZIP o liga).' }),
+  defineField({ name: 'videos', title: 'Videos', type: 'driveAsset', group: 'drive', description: 'Videos del proyecto (liga o archivo).' }),
 ];
