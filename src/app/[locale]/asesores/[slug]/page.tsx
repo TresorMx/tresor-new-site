@@ -44,6 +44,7 @@ export default async function AsesorDrivePage({ params }: { params: Promise<{ sl
     name: dev.name,
     developerName: dev.brand ?? developers[dev.developer]?.name ?? dev.developer,
     developer: dev.developer,
+    type: dev.type,
     logo: dev.logo,
     image: dev.heroRender ?? dev.image,
     // Mismo encuadre/escala que la ficha pública — el Drive usa la misma

@@ -51,7 +51,17 @@ interface DriveLayoutItem {
   key: string;        // debe existir en DRIVE_CATALOG
   label?: string;      // override de label solo para este layout (ej. "Inventario y Lista de Precios")
   fullWidth?: boolean; // ocupa las 2 columnas del grid (ej. "Cotizador Tresor")
+  excludeTypes?: string[]; // no se muestra si dev.type está en esta lista (ej. showUnit no aplica a 'Lotes')
 }
+
+// Documentos que aplican a CUALQUIER desarrollador que no sea Quattro
+// (Tresor) — se agregan automáticamente al final de cada layout (antes de
+// los items fullWidth) sin tener que repetirlos en cada entrada de
+// DRIVE_LAYOUTS. Ej: Departamento Muestra aplica a todos los Sales Partner
+// excepto desarrollos tipo 'Lotes' (no hay depa muestra en un lote).
+const UNIVERSAL_ITEMS: DriveLayoutItem[] = [
+  { key: 'showUnit', excludeTypes: ['Lotes'] },
+];
 
 // Layout por grupo de desarrollador — qué documentos se muestran y en qué
 // orden. `default` es el que ya existía (Quattro y cualquiera sin layout
@@ -92,8 +102,13 @@ export const DRIVE_ADMIN_LAYOUTS: Record<string, DriveLayoutItem[]> = {
   ],
 };
 
-export function getDriveLayout(developerId: string): DriveLayoutItem[] {
-  return DRIVE_LAYOUTS[developerId] ?? DRIVE_LAYOUTS.default;
+export function getDriveLayout(developerId: string, devType?: string): DriveLayoutItem[] {
+  const base = DRIVE_LAYOUTS[developerId] ?? DRIVE_LAYOUTS.default;
+  const extra = developerId === 'Tresor'
+    ? []
+    : UNIVERSAL_ITEMS.filter((u) => !base.some((b) => b.key === u.key));
+  const withExtra = [...base.filter((i) => !i.fullWidth), ...extra, ...base.filter((i) => i.fullWidth)];
+  return withExtra.filter((item) => !item.excludeTypes?.includes(devType ?? ''));
 }
 
 export function getDriveAdminLayout(developerId: string): DriveLayoutItem[] {

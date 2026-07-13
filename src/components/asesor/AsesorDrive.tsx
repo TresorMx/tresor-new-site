@@ -13,6 +13,7 @@ export interface DriveDev {
   name: string;
   developerName: string;
   developer: string; // id (Tresor/Live/Onix/'Urban Homes') — elige el layout del drive, ver driveCards.ts
+  type?: string; // 'Residencial'/'Comercial'/'Lotes'… — filtra items universales (ej. showUnit no aplica a Lotes)
   logo?: string;  // logo del desarrollo (blanco, va sobre fondo oscuro)
   image?: string;
   // Mismo encuadre/escala que usa el hero de la ficha pública (ver
@@ -31,7 +32,7 @@ export interface DriveDev {
 }
 
 export default function AsesorDrive({ dev }: { dev: DriveDev }) {
-  const mainItems = getDriveLayout(dev.developer).filter((item) => dev.available[item.key]);
+  const mainItems = getDriveLayout(dev.developer, dev.type).filter((item) => dev.available[item.key]);
   const adminItems = dev.showAdmin ? getDriveAdminLayout(dev.developer).filter((item) => dev.available[item.key]) : [];
 
   return (
