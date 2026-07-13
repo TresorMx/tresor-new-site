@@ -64,10 +64,40 @@ const UNIVERSAL_ITEMS: DriveLayoutItem[] = [
   { key: 'finishesCatalog' },
 ];
 
+// Layout genérico para cualquier Sales Partner SIN layout propio (Onix,
+// Urban Homes, y los que sigan) — a diferencia de curar campo por campo,
+// aquí se listan TODOS los documentos del catálogo y la visibilidad real la
+// decide `available[key]` (solo aparece si el editor llenó ese campo en
+// Sanity). Evita el bug de "llené 8 campos y solo aparecen 6" por tener
+// listas curadas distintas por desarrollador.
+const ALL_ITEMS_LAYOUT: DriveLayoutItem[] = [
+  { key: 'presentation' },
+  { key: 'priceList' },
+  { key: 'masterPlan' },
+  { key: 'bankAccounts' },
+  { key: 'location' },
+  { key: 'marketing' },
+  { key: 'developer' },
+  { key: 'renders' },
+  { key: 'amenities' },
+  { key: 'virtualTour' },
+  { key: 'floorPlans' },
+  { key: 'constructionProgress' },
+  { key: 'brochure' },
+  { key: 'prototypes' },
+  { key: 'individualFloorPlans' },
+  { key: 'multimedia' },
+  { key: 'finishesCatalog' },
+  { key: 'showUnit', excludeTypes: ['Lotes'] },
+  { key: 'videos' },
+  { key: 'quoter', fullWidth: true },
+];
+
 // Layout por grupo de desarrollador — qué documentos se muestran y en qué
-// orden. `default` es el que ya existía (Quattro y cualquiera sin layout
-// propio todavía). Agregar un desarrollador nuevo (Urban Homes, Onix
-// Living…) es solo una entrada más aquí, sin tocar el componente.
+// orden. `default` es Quattro (Tresor), curado a mano, no cambia. Un
+// desarrollador SIN entrada aquí (cualquier Sales Partner nuevo) cae en
+// ALL_ITEMS_LAYOUT, ver getDriveLayout. `Live` sigue con su orden propio
+// (viene de una captura de referencia específica).
 export const DRIVE_LAYOUTS: Record<string, DriveLayoutItem[]> = {
   default: [
     { key: 'presentation' },
@@ -104,10 +134,9 @@ export const DRIVE_ADMIN_LAYOUTS: Record<string, DriveLayoutItem[]> = {
 };
 
 export function getDriveLayout(developerId: string, devType?: string): DriveLayoutItem[] {
-  const base = DRIVE_LAYOUTS[developerId] ?? DRIVE_LAYOUTS.default;
-  const extra = developerId === 'Tresor'
-    ? []
-    : UNIVERSAL_ITEMS.filter((u) => !base.some((b) => b.key === u.key));
+  if (developerId === 'Tresor') return DRIVE_LAYOUTS.default;
+  const base = DRIVE_LAYOUTS[developerId] ?? ALL_ITEMS_LAYOUT;
+  const extra = UNIVERSAL_ITEMS.filter((u) => !base.some((b) => b.key === u.key));
   const withExtra = [...base.filter((i) => !i.fullWidth), ...extra, ...base.filter((i) => i.fullWidth)];
   return withExtra.filter((item) => !item.excludeTypes?.includes(devType ?? ''));
 }
