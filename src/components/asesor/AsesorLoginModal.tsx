@@ -41,9 +41,9 @@ export default function AsesorLoginModal() {
     e.preventDefault();
     setErr(null);
     setLoading(true);
-    const ok = await login(email, password);
-    if (!ok) {
-      setErr('Correo o contraseña incorrectos.');
+    const errorMessage = await login(email, password);
+    if (errorMessage) {
+      setErr(errorMessage);
       setLoading(false);
     }
   }

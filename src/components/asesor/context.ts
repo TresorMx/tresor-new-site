@@ -8,7 +8,11 @@ export interface AsesorCtx {
   openLogin: () => void;
   closeLogin: () => void;
   loginOpen: boolean;
-  login: (email: string, password: string) => Promise<boolean>;
+  // Devuelve `null` si el login fue exitoso, o el mensaje de error del
+  // servidor si no (credenciales incorrectas, rate limit, etc.) — así el
+  // modal muestra el motivo real en vez de un genérico "incorrectos" para
+  // todo, incluyendo un 429 por demasiados asesores logueándose a la vez.
+  login: (email: string, password: string) => Promise<string | null>;
   logout: () => Promise<void>;
   // true mientras se refresca el árbol server-rendered después de un login/
   // logout (ver AsesorProvider) — úsalo para mostrar feedback de carga.

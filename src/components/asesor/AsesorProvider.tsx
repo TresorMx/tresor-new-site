@@ -29,7 +29,10 @@ export function AsesorProvider({ children, initialIsAsesor }: AsesorProviderProp
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email, password }),
     });
-    if (!res.ok) return false;
+    if (!res.ok) {
+      const body = await res.json().catch(() => ({}));
+      return typeof body.error === 'string' ? body.error : 'Correo o contraseña incorrectos.';
+    }
     setIsAsesor(true);
     setLoginOpen(false);
     // CRÍTICO: el CTA de la ficha (cotizador/apartado vs Agenda) se decide
@@ -40,7 +43,7 @@ export function AsesorProvider({ children, initialIsAsesor }: AsesorProviderProp
     // vuelve a pedir los Server Components de la ruta actual con la cookie ya
     // puesta, sin perder el estado de cliente (scroll, modales, etc.).
     startTransition(() => { router.refresh(); });
-    return true;
+    return null;
   }, [router]);
 
   const logout = useCallback(async () => {

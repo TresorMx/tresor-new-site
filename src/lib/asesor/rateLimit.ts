@@ -4,8 +4,15 @@
 // comparte entre instancias serverless (cada una lleva su propio conteo),
 // pero eso solo hace el límite MÁS generoso en el peor caso, nunca menos
 // seguro — sigue siendo mejor que no tener ningún límite.
+//
+// El contador es por IP, y hasta 25 asesores pueden compartir la misma IP
+// de oficina — 8 intentos totales entre todos se agotaban en minutos y el
+// resto veía "usuario o contraseña incorrectos" aunque la sesión de arriba
+// estuviera bien escrita. 60 deja margen real para 25 personas con algún
+// typo cada quien, sin dejar de frenar fuerza bruta contra una sola
+// contraseña fija.
 const WINDOW_MS = 10 * 60 * 1000; // 10 minutos
-const MAX_ATTEMPTS = 8;
+const MAX_ATTEMPTS = 60;
 
 const attempts = new Map<string, { count: number; resetAt: number }>();
 
