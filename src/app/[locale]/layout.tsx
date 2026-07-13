@@ -9,6 +9,7 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import MobileBar from '@/components/MobileBar';
+import ChromeGate from '@/components/ChromeGate';
 import { cookies } from 'next/headers';
 import { AsesorProvider } from '@/components/asesor/AsesorProvider';
 import FloatingLayer from '@/components/asesor/FloatingLayer';
@@ -226,12 +227,19 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AsesorProvider initialIsAsesor={initialIsAsesor}>
-            <Header logoStyle={siteSettings.headerLogoStyle} />
-            <main className="min-h-screen pt-[104px]">{children}</main>
-            <Footer />
-            <MobileBar />
-            {/* FloatingLayer = Luis, o el botón "Drive de Ventas" si eres asesor y estás en una ficha. */}
-            <FloatingLayer />
+            <ChromeGate
+              header={<Header logoStyle={siteSettings.headerLogoStyle} />}
+              footer={<Footer />}
+              extras={
+                <>
+                  <MobileBar />
+                  {/* FloatingLayer = Luis, o el botón "Drive de Ventas" si eres asesor y estás en una ficha. */}
+                  <FloatingLayer />
+                </>
+              }
+            >
+              {children}
+            </ChromeGate>
             {/* <ExitIntent /> desactivado por lo pronto */}
           </AsesorProvider>
         </NextIntlClientProvider>
