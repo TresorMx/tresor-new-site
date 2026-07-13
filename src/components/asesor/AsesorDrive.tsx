@@ -109,7 +109,7 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
             {mainItems.length === 0 ? (
               <p className="text-[13px] text-ink-3">Todavía no hay material cargado para este desarrollo.</p>
             ) : (
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-4 lg:grid-cols-4">
                 {mainItems.map((item) => (
                   <DriveTile
                     key={item.key}
@@ -133,7 +133,7 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
                 </div>
                 <span className="text-[11px] font-bold uppercase tracking-[0.16em] text-ink-3">{adminItems.length} formatos</span>
               </div>
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-4 lg:grid-cols-4">
                 {adminItems.map((item) => (
                   <DriveTile key={item.key} card={DRIVE_CATALOG[item.key]} slug={dev.slug} variant="admin" />
                 ))}
@@ -167,7 +167,7 @@ function DriveTile({
       rel="noopener noreferrer"
       className={cn(
         'group flex flex-col gap-5 rounded-[18px] bg-white p-6 transition-all duration-300 ease-soft hover:-translate-y-1 hover:shadow-[0_20px_45px_rgba(0,0,0,0.08)]',
-        fullWidth && 'sm:col-span-2',
+        fullWidth && 'lg:col-span-4',
       )}
     >
       <div
