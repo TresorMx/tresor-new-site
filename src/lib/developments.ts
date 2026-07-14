@@ -149,6 +149,11 @@ export interface ContentBlock {
   // muestra la imagen completa sin recortar — para renders/planos con fondo
   // transparente donde recortar se ve mal (ej. mastercumbres.png).
   imageFit?: 'cover' | 'contain';
+  // 'normal' (default, 50/50) o 'wide' — la columna de imagen crece a la
+  // misma proporción que el mapa de Ubicación (1fr texto / 1.6fr imagen).
+  // Solo aplica en layout 'side-by-side'. Para master plans/planos anchos
+  // que se ven chicos en la mitad de la columna (ej. lausana-master-plan.jpg).
+  imageWidth?: 'normal' | 'wide';
   // CTA opcional (ej. "Vista Panorámica" de un masterplan/residencial) — abre
   // `url` en el mismo modal/iframe que usa el "Tour virtual" de floor plans.
   cta?: { label: I18nText; url: string };
@@ -736,7 +741,9 @@ export const developments: Development[] = [
           es: 'Ubicada al sur de Cancún, Lausana es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques.',
           en: 'Located south of Cancún, Lausana is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks.',
         },
-        image: '/desarrollos/loreta/lausanamapa.png',
+        image: '/lausana-master-plan.jpg',
+        imageFit: 'contain',
+        imageWidth: 'wide',
         layout: 'side-by-side',
         imagePosition: 'right',
         cta: {
@@ -895,7 +902,9 @@ export const developments: Development[] = [
           es: 'Ubicada al sur de Cancún, Lausana es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques.',
           en: 'Located south of Cancún, Lausana is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks.',
         },
-        image: '/desarrollos/loreta/lausanamapa.png',
+        image: '/lausana-master-plan.jpg',
+        imageFit: 'contain',
+        imageWidth: 'wide',
         layout: 'side-by-side',
         imagePosition: 'right',
         cta: {

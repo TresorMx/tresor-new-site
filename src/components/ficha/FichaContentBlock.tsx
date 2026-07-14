@@ -31,6 +31,7 @@ export default function FichaContentBlock({ block, locale, gray = false }: Ficha
   const layout = block.layout ?? (block.image ? 'side-by-side' : 'stacked');
   const imageOnRight = (block.imagePosition ?? 'right') === 'right';
   const imageFitClass = block.imageFit === 'contain' ? 'object-contain' : 'object-cover';
+  const isWide = block.imageWidth === 'wide';
   const ctaLabel = block.cta ? (isEs ? block.cta.label.es : block.cta.label.en ?? block.cta.label.es) : undefined;
 
   const textContent = (
@@ -58,14 +59,14 @@ export default function FichaContentBlock({ block, locale, gray = false }: Ficha
     <section className={`${gray ? 'bg-[#FAFAFA]' : 'bg-bg'} py-20 md:py-28`}>
       <div className="container-wrap">
         {layout === 'side-by-side' && block.image ? (
-          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+          <div className={`grid items-center gap-10 md:gap-16 ${isWide ? 'md:grid-cols-[1fr_1.6fr]' : 'md:grid-cols-2'}`}>
             <div className={imageOnRight ? 'md:order-1' : 'md:order-2'}>{textContent}</div>
             <div
-              className={`relative aspect-[4/3] overflow-hidden rounded-[18px] bg-bg-soft ${
+              className={`relative overflow-hidden rounded-[18px] bg-bg-soft ${isWide ? 'aspect-[2.1/1]' : 'aspect-[4/3]'} ${
                 imageOnRight ? 'md:order-2' : 'md:order-1'
               }`}
             >
-              <Image src={block.image} alt={title} fill sizes="(max-width: 768px) 100vw, 50vw" className={imageFitClass} />
+              <Image src={block.image} alt={title} fill sizes={isWide ? '(max-width: 768px) 100vw, 62vw' : '(max-width: 768px) 100vw, 50vw'} className={imageFitClass} />
             </div>
           </div>
         ) : (

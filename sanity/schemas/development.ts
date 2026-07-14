@@ -266,6 +266,12 @@ export default defineType({
             description: 'Default: "Rellenar y recortar". Usa "Completa sin recortar" para imágenes con fondo transparente o que no deben cortarse.',
           },
           {
+            name: 'imageWidth', title: 'Ancho de la columna de imagen', type: 'string',
+            options: { list: [{ title: 'Normal (50/50 con el texto)', value: 'normal' }, { title: 'Ancha (como el mapa de Ubicación)', value: 'wide' }], layout: 'radio' },
+            description: 'Solo aplica en diseño "2 columnas". Usa "Ancha" para master plans/planos que se ven chicos a la mitad del ancho.',
+            hidden: ({ parent }: any) => parent?.layout === 'stacked',
+          },
+          {
             name: 'layout', title: 'Diseño', type: 'string',
             options: { list: [{ title: '2 columnas (imagen a un lado)', value: 'side-by-side' }, { title: 'Apilado (imagen abajo, ancho completo)', value: 'stacked' }], layout: 'radio' },
             description: 'Si no eliges, con imagen usa "2 columnas" automáticamente.',
