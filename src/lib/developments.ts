@@ -418,6 +418,10 @@ export const developments: Development[] = [
         imageFit: 'contain',
         layout: 'side-by-side',
         imagePosition: 'right',
+        cta: {
+          label: { es: 'Vista Panorámica', en: 'Panoramic View' },
+          url: 'https://kuula.co/share/htbyk/collection/7Hjkz?logo=1&info=1&fs=1&vr=0&sd=1&thumbs=1',
+        },
       },
     ],
     floorPlans: [
