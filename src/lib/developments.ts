@@ -795,7 +795,7 @@ export const developments: Development[] = [
     propertyType: 'Departamento',
     priceLabel: 'Desde $2,613,000 MXN',
     description:
-      'Preventa de departamentos desde 76 m² con vistas espectaculares al paseo Lausana y al campo de golf, en un entorno residencial de excepción en Cancún.',
+      'Preventa de departamentos desde 39 m² con vistas espectaculares al paseo Lausana y al campo de golf, en un entorno residencial de excepción en Cancún.',
     // ── Apartado en línea (piloto Sales Partner) ──
     reservationEnabled: true,
     reservationAmount: 25000,
@@ -805,8 +805,8 @@ export const developments: Development[] = [
     tagline: { es: 'Vive frente al paseo Lausana y el campo de golf' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Lausana Residencial' },
-      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
-      { label: 'Superficie', labelEn: 'Size', value: 'Desde 76 m²', valueEn: 'From 76 m²' },
+      { label: 'Tipología', labelEn: 'Property type', value: 'Estudio a 2 Rec y PH', valueEn: 'Studio to 2 Bed & PH' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 39 m²', valueEn: 'From 39 sqm' },
     ],
     gallery: [
       '/desarrollos/olivia/5.-Fachada-frontal.jpg',
@@ -1007,7 +1007,7 @@ export const developments: Development[] = [
     tagline: { es: 'Solo 20 condominios exclusivos en Aldea Premium, Tulum' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Aldea Premium, Tulum' },
-      { label: 'Tipología', labelEn: 'Property type', value: '1 a 3 Rec y PH', valueEn: '1 to 3 Bed & PH' },
+      { label: 'Tipología', labelEn: 'Property type', value: '1 a 2 Rec y PH', valueEn: '1 to 2 Bed & PH' },
       { label: 'Superficie', labelEn: 'Size', value: 'Desde 45 m²', valueEn: 'From 45 sqm' },
     ],
     gallery: [
@@ -1481,7 +1481,7 @@ export const developments: Development[] = [
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Marina Puerto Cancún', valueEn: 'Puerto Cancún Marina' },
       { label: 'Tipología', labelEn: 'Property type', value: '2 a 3 Rec y PH', valueEn: '2 to 3 Bed & PH' },
-      { label: 'Unidades', labelEn: 'Units', value: '113 (109 + 4 PH)' },
+      { label: 'Unidades', labelEn: 'Units', value: '113 Unidades', valueEn: '113 Units' },
     ],
     gallery: [
       '/desarrollos/Blume/BLUME-Drone-1.jpg',
