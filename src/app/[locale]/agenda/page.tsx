@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import CategoryHero from '@/components/category/CategoryHero';
+import LocationModal from '@/components/LocationModal';
 
 const TIME_SLOTS = [
   '09:00', '10:00', '11:00', '12:00',
@@ -19,7 +20,9 @@ const OFFICE_ADDRESS = 'Plaza Espacio, Oficina S-214, Av. Puerto Cancún, Puerto
 const OFFICE_PHONE_DISPLAY = '+52 998 404 5602';
 const OFFICE_PHONE_TEL = '+529984045602';
 const WHATSAPP_URL = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? '529984045602'}`;
-const DIRECTIONS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(OFFICE_ADDRESS)}`;
+// TRESOR Real Estate — Plaza Espacio, Puerto Cancún (coordenadas reales de Google Maps)
+const OFFICE_LAT = 21.1600969;
+const OFFICE_LNG = -86.8066403;
 
 const formatTime = (t: string) => {
   const [h] = t.split(':').map(Number);
@@ -49,6 +52,7 @@ export default function AgendaPage() {
   });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const [mapOpen, setMapOpen] = useState(false);
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
@@ -92,12 +96,6 @@ export default function AgendaPage() {
     { value: 'zoom',       icon: Video,  title: t('zoom'),        desc: t('zoomDesc') },
   ] as const;
 
-  const steps = [
-    { n: t('step01n'), title: t('step01t'), desc: t('step01d') },
-    { n: t('step02nPresencial'), title: t('step02tPresencial'), desc: t('step02dPresencial') },
-    { n: t('step03n'), title: t('step03t'), desc: t('step03d') },
-  ];
-
   return (
     <>
       <CategoryHero
@@ -108,10 +106,14 @@ export default function AgendaPage() {
         subtitle={t('desc')}
       />
 
-      <section className="bg-bg py-20 md:py-28">
+      <section
+        data-nav="light"
+        className="relative z-10 -mt-10 rounded-[2.5rem] py-20 md:py-28"
+        style={{ backgroundImage: 'linear-gradient(180deg, #f7f8fa 0%, #f2f3f5 55%, #eceef1 100%)' }}
+      >
         <div className="container-wrap grid gap-14 md:grid-cols-[1fr_1.5fr] md:gap-16">
 
-          {/* ── Columna izquierda: oficina + qué esperar ── */}
+          {/* ── Columna izquierda: nuestra oficina ── */}
           <div className="md:sticky md:top-28 md:self-start">
             <span className="eyebrow eyebrow-accent block font-bold">{t('officeEyebrow')}</span>
             <h2 className="mt-4 h-display text-[clamp(24px,3.2vw,40px)]">{t('officeTitle')}</h2>
@@ -142,14 +144,13 @@ export default function AgendaPage() {
               </div>
 
               <div className="mt-6 flex flex-wrap gap-3">
-                <a
-                  href={DIRECTIONS_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  onClick={() => setMapOpen(true)}
                   className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2.5 text-[11px] font-bold uppercase tracking-caps text-ink transition-colors hover:border-ink"
                 >
                   <Navigation size={13} strokeWidth={1.8} /> {t('officeDirections')}
-                </a>
+                </button>
                 <a
                   href={WHATSAPP_URL}
                   target="_blank"
@@ -160,22 +161,11 @@ export default function AgendaPage() {
                 </a>
               </div>
             </div>
-
-            <div className="mt-10 hidden space-y-6 border-t border-line pt-8 md:block">
-              {steps.map((s) => (
-                <div key={s.n} className="flex gap-4">
-                  <span className="font-mono text-[11px] uppercase tracking-caps text-accent-deep">{s.n}</span>
-                  <div>
-                    <div className="text-[13.5px] font-semibold text-ink">{s.title}</div>
-                    <p className="mt-1 text-[12.5px] leading-relaxed text-ink-3">{s.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* ── Columna derecha: formulario ── */}
           <form onSubmit={submit}>
+            <p className="mb-8 text-[15px] font-light leading-relaxed text-ink-2">{t('formIntro')}</p>
 
             {/* Nombre + Apellido */}
             <div className="grid gap-6 sm:grid-cols-2">
@@ -323,6 +313,15 @@ export default function AgendaPage() {
           </form>
         </div>
       </section>
+
+      <LocationModal
+        open={mapOpen}
+        onClose={() => setMapOpen(false)}
+        lat={OFFICE_LAT}
+        lng={OFFICE_LNG}
+        address={OFFICE_ADDRESS}
+        title={t('officeName')}
+      />
     </>
   );
 }

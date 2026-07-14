@@ -197,9 +197,10 @@
     "rights": "© 2026 Tresor Real Estate · All rights reserved"
   },
   "agenda": {
-    "eyebrow": "— Schedule a visit",
+    "eyebrow": "— Contact",
     "title": "Schedule your visit",
     "desc": "Tell us what you're looking for and let's book your appointment — in office or by video call, an advisor will walk you through the available options.",
+    "formIntro": "Complete the form below to book your visit and take the first step toward your next investment.",
     "firstName": "First name *",
     "firstNamePlaceholder": "Your first name",
     "lastName": "Last name *",

@@ -197,9 +197,10 @@
     "rights": "© 2026 Tresor Real Estate · Todos los derechos reservados"
   },
   "agenda": {
-    "eyebrow": "— Agenda tu visita",
+    "eyebrow": "— Contacto",
     "title": "Agenda tu visita",
     "desc": "Cuéntanos qué buscas y reservamos tu cita — en oficina o por videollamada, un asesor te muestra las opciones disponibles y resuelve tus dudas.",
+    "formIntro": "Completa el siguiente formulario para agendar tu visita y da el primer paso hacia tu próxima inversión.",
     "firstName": "Nombre *",
     "firstNamePlaceholder": "Tu nombre",
     "lastName": "Apellido *",

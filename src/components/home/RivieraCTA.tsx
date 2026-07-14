@@ -69,7 +69,7 @@ export default function RivieraCTA() {
               <ArrowRight size={15} strokeWidth={1.8} />
             </Link>
             <Link href="/agenda" className="btn btn-glass btn-lg border-0">
-              Asesoría sin costo
+              Agenda una visita
             </Link>
           </div>
         </RevealOnScroll>
