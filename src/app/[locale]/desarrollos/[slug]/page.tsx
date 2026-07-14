@@ -29,6 +29,11 @@ import FichaContentBlock from '@/components/ficha/FichaContentBlock';
 import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount, getMergedDevelopmentsAsync } from '@/lib/developments';
 import { OBJECT_POSITION_MOBILE, OBJECT_POSITION_DESKTOP } from '@/lib/heroImagePosition';
 
+// El cotizador interno (/cotizar/[slug]) todavía no está listo para asesores
+// — mientras tanto, "Cotizar" en fichas de Quattro (con `plaza`) manda al
+// cotizador real de quattroplaza.mx, en pestaña nueva.
+const QUATTRO_COTIZADOR_URL = 'https://www.quattroplaza.mx/cotizador';
+
 export async function generateStaticParams() {
   // Tresor (con ficha en Sanity) + Sales Partner (solo developments.ts) —
   // ambos viven bajo /desarrollos/[slug], mismo contenedor de ruta.
@@ -422,10 +427,10 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
                     <Link href="#master-plan" className="btn border-0 bg-accent text-ink hover:brightness-95">
                       {t('viewAvailability')}
                     </Link>
-                    <Link href={`/cotizar/${plaza.slug}`} className="btn btn-primary font-semibold">
+                    <a href={QUATTRO_COTIZADOR_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary font-semibold">
                       {t('quoteUnit')}
                       <ArrowRight size={14} strokeWidth={1.6} />
-                    </Link>
+                    </a>
                   </>
                 ) : (
                   <Link href="#aparta" className="btn border-0 bg-accent text-ink hover:brightness-95">
@@ -530,7 +535,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
         <>
           <FloorPlans plaza={plaza} floorPlansDesc={isEs ? (plaza.floorPlansDesc ?? undefined) : (plaza.floorPlansDescEn ?? plaza.floorPlansDesc ?? undefined)} gray={stripe.floorPlans} />
           <div id="master-plan">
-            <MasterPlan plaza={plaza} showAgendaWidget={showAgendaWidget} gray={stripe.masterPlan} />
+            <MasterPlan plaza={plaza} showAgendaWidget={showAgendaWidget} isAsesor={isAsesor} gray={stripe.masterPlan} />
           </div>
         </>
       )}

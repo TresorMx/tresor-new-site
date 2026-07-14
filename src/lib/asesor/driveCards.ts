@@ -108,6 +108,7 @@ export const DRIVE_LAYOUTS: Record<string, DriveLayoutItem[]> = {
     { key: 'marketing' },
     { key: 'developer' },
     { key: 'renders' },
+    { key: 'quoter', fullWidth: true },
   ],
   Live: [
     { key: 'presentation' },

@@ -17,7 +17,9 @@ import SlidingTabs from '@/components/ui/SlidingTabs';
  * Las coordenadas de los pines se editan en Sanity. Si no hay pin definido,
  * se posiciona en grid automático según el código del local.
  */
-export default function MasterPlan({ plaza, showAgendaWidget = false, gray = true }: { plaza: Plaza; showAgendaWidget?: boolean; gray?: boolean }) {
+const QUATTRO_COTIZADOR_URL = 'https://www.quattroplaza.mx/cotizador';
+
+export default function MasterPlan({ plaza, showAgendaWidget = false, isAsesor = false, gray = true }: { plaza: Plaza; showAgendaWidget?: boolean; isAsesor?: boolean; gray?: boolean }) {
   const t = useTranslations('plaza');
   const [level, setLevel] = useState<1 | 2>(1);
   const [statusFilter, setStatusFilter] = useState<UnitStatus | 'all'>('all');
@@ -181,7 +183,22 @@ export default function MasterPlan({ plaza, showAgendaWidget = false, gray = tru
                 </div>
 
                 {selected.status === 'disponible' && selected.price ? (
-                  showAgendaWidget ? (
+                  isAsesor ? (
+                    // Asesor logueado: el cotizador interno todavía no está
+                    // listo — manda directo al cotizador real de
+                    // quattroplaza.mx, sin pasar por Agenda/#aparta (que
+                    // además puede estar oculto para asesores, ver
+                    // siteSettings.hideAsesorForms).
+                    <a
+                      href={QUATTRO_COTIZADOR_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn btn-primary mt-5 w-full font-semibold"
+                    >
+                      {t('quoteThis')}
+                      <ArrowRight size={14} strokeWidth={1.6} />
+                    </a>
+                  ) : showAgendaWidget ? (
                     <button
                       onClick={() => document.getElementById('aparta')?.scrollIntoView({ behavior: 'smooth' })}
                       className="btn btn-primary mt-5 w-full font-semibold"
