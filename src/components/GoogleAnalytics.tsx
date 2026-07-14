@@ -2,7 +2,7 @@
 
 import Script from 'next/script';
 
-const GA_ID  = 'G-P0FP7MCCC5';
+const GA_ID  = 'G-14BFY19YM5';
 const ADS_ID = 'AW-17453917774';
 
 export default function GoogleAnalytics() {
