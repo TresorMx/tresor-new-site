@@ -20,9 +20,11 @@ interface FichaFloorPlansProps {
   gray?: boolean;
   ctaLabels?: { scheduleVisit?: I18nText; virtualTour?: I18nText };
   // Asesor logueado: este botón deja de ser "Agendar visita" (el público sí
-  // lo sigue viendo) y pasa a ser "Aparta ahora", igual que el resto de la
-  // ficha en modo asesor.
+  // lo sigue viendo) y pasa a ser "Cotizar ahora", con liga directa al
+  // cotizador de este desarrollo (Drive de Ventas, campo `quoter`) — para
+  // eso necesita el slug de la ruta.
   isAsesor?: boolean;
+  devSlug?: string;
 }
 
 // Módulo de tipologías para desarrollos SIN inventario propio (Sales
@@ -31,14 +33,14 @@ interface FichaFloorPlansProps {
 // frente/fondo) y el CTA es "Tour virtual" (si existe) + "Agendar una
 // visita" (o "Aparta ahora" para un asesor) en vez de "Ver disponibilidad"
 // (no hay unidades que consultar).
-export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaLabels, isAsesor = false }: FichaFloorPlansProps) {
+export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaLabels, isAsesor = false, devSlug }: FichaFloorPlansProps) {
   const isEs = locale !== 'en';
   const [active, setActive] = useState(0);
   const [tourOpen, setTourOpen] = useState<string | null>(null);
   const current = floorPlans[active];
 
   const scheduleLabel = isAsesor
-    ? (isEs ? 'Aparta ahora' : 'Reserve now')
+    ? (isEs ? 'Cotizar ahora' : 'Get a quote')
     : (isEs ? ctaLabels?.scheduleVisit?.es : ctaLabels?.scheduleVisit?.en ?? ctaLabels?.scheduleVisit?.es) ??
       (isEs ? 'Agendar una visita' : 'Schedule a visit');
   const tourLabel =
@@ -147,10 +149,22 @@ export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaL
                   {tourLabel}
                 </button>
               )}
-              <Link href="#aparta" className="btn w-full border-0 bg-accent text-ink hover:brightness-95">
-                {isAsesor ? <ArrowRight size={15} strokeWidth={1.8} /> : <Calendar size={15} strokeWidth={1.8} />}
-                {scheduleLabel}
-              </Link>
+              {isAsesor ? (
+                <a
+                  href={`/api/asesor/file?dev=${devSlug}&doc=quoter`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn w-full border-0 bg-accent text-ink hover:brightness-95"
+                >
+                  <ArrowRight size={15} strokeWidth={1.8} />
+                  {scheduleLabel}
+                </a>
+              ) : (
+                <Link href="#aparta" className="btn w-full border-0 bg-accent text-ink hover:brightness-95">
+                  <Calendar size={15} strokeWidth={1.8} />
+                  {scheduleLabel}
+                </Link>
+              )}
             </div>
           </div>
         </div>

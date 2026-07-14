@@ -257,6 +257,11 @@ export default defineType({
           { name: 'descriptionEn', title: 'Descripción (EN)', type: 'text', rows: 4 },
           { name: 'image', title: 'Imagen', type: 'image', options: { hotspot: true }, description: 'Opcional. Sin imagen, el bloque se muestra como texto centrado.' },
           {
+            name: 'imageFit', title: 'Ajuste de la imagen', type: 'string',
+            options: { list: [{ title: 'Rellenar y recortar (fotos normales)', value: 'cover' }, { title: 'Completa sin recortar (renders/planos con fondo transparente)', value: 'contain' }], layout: 'radio' },
+            description: 'Default: "Rellenar y recortar". Usa "Completa sin recortar" para imágenes con fondo transparente o que no deben cortarse.',
+          },
+          {
             name: 'layout', title: 'Diseño', type: 'string',
             options: { list: [{ title: '2 columnas (imagen a un lado)', value: 'side-by-side' }, { title: 'Apilado (imagen abajo, ancho completo)', value: 'stacked' }], layout: 'radio' },
             description: 'Si no eliges, con imagen usa "2 columnas" automáticamente.',

@@ -30,6 +30,7 @@ export default function FichaContentBlock({ block, locale, gray = false }: Ficha
   const description = isEs ? block.description.es : block.description.en ?? block.description.es;
   const layout = block.layout ?? (block.image ? 'side-by-side' : 'stacked');
   const imageOnRight = (block.imagePosition ?? 'right') === 'right';
+  const imageFitClass = block.imageFit === 'contain' ? 'object-contain' : 'object-cover';
   const ctaLabel = block.cta ? (isEs ? block.cta.label.es : block.cta.label.en ?? block.cta.label.es) : undefined;
 
   const textContent = (
@@ -64,7 +65,7 @@ export default function FichaContentBlock({ block, locale, gray = false }: Ficha
                 imageOnRight ? 'md:order-2' : 'md:order-1'
               }`}
             >
-              <Image src={block.image} alt={title} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover" />
+              <Image src={block.image} alt={title} fill sizes="(max-width: 768px) 100vw, 50vw" className={imageFitClass} />
             </div>
           </div>
         ) : (
@@ -72,7 +73,7 @@ export default function FichaContentBlock({ block, locale, gray = false }: Ficha
             <div className="mb-10 max-w-[62ch]">{textContent}</div>
             {block.image && (
               <div className="relative aspect-[16/7] max-h-[640px] w-full overflow-hidden rounded-[18px] bg-bg-soft">
-                <Image src={block.image} alt={title} fill sizes="100vw" className="object-cover" />
+                <Image src={block.image} alt={title} fill sizes="100vw" className={imageFitClass} />
               </div>
             )}
           </>

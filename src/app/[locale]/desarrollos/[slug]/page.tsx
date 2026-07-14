@@ -433,12 +433,20 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
                     </a>
                   </>
                 ) : (
-                  <Link href="#aparta" className="btn border-0 bg-accent text-ink hover:brightness-95">
-                    {isEs
-                      ? `Aparta ahora con ${formatMXN(getReservationAmount(dev))} MXN`
-                      : `Reserve now with ${formatMXN(getReservationAmount(dev))} MXN`}
+                  // Sales Partner: el cotizador interno todavía no está listo
+                  // — manda a la liga del cotizador de ESE desarrollo (Drive
+                  // de Ventas, campo `quoter`), no al form de apartado
+                  // (además puede estar oculto para asesores, ver
+                  // siteSettings.hideAsesorForms).
+                  <a
+                    href={`/api/asesor/file?dev=${slug}&doc=quoter`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn border-0 bg-accent text-ink hover:brightness-95"
+                  >
+                    {isEs ? 'Cotizar ahora' : 'Get a quote'}
                     <ArrowRight size={14} strokeWidth={1.6} />
-                  </Link>
+                  </a>
                 )
               ) : plaza ? (
                 <>
@@ -548,6 +556,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           gray={stripe.floorPlans}
           ctaLabels={dev.ctaLabels}
           isAsesor={isAsesor}
+          devSlug={slug}
         />
       )}
 

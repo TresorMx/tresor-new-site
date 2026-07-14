@@ -145,6 +145,10 @@ export interface ContentBlock {
   // tamaño de la galería (ancho completo, aspect 16/7). Default: side-by-side.
   layout?: 'stacked' | 'side-by-side';
   imagePosition?: 'left' | 'right';  // solo aplica en 'side-by-side'. Default: 'right'.
+  // 'cover' (default) recorta a la caja — para fotos normales. 'contain'
+  // muestra la imagen completa sin recortar — para renders/planos con fondo
+  // transparente donde recortar se ve mal (ej. mastercumbres.png).
+  imageFit?: 'cover' | 'contain';
   // CTA opcional (ej. "Vista Panorámica" de un masterplan/residencial) — abre
   // `url` en el mismo modal/iframe que usa el "Tour virtual" de floor plans.
   cta?: { label: I18nText; url: string };
@@ -401,6 +405,21 @@ export const developments: Development[] = [
       { key: 'asadores', labelOverride: 'Área pergolada con asadores' },
       { key: 'seguridad-24-7' },
     ],
+    contentBlocks: [
+      {
+        eyebrow: { es: '— La comunidad más exclusiva de Cancún' },
+        title: { es: 'Vía Cumbres' },
+        titleMuted: { es: 'un desarrollo urbano de gran escala' },
+        description: {
+          es: 'Esther está ubicado dentro de Vía Cumbres, un innovador desarrollo habitacional en una de las mejores zonas de Cancún, resultado de una **colaboración entre la iniciativa privada y el gobierno** que sienta precedente en desarrollo urbano responsable y sostenible en la región. Fue inaugurado oficialmente a finales de **noviembre de 2024** por la gobernadora Mara Lezama.',
+          en: 'Esther sits inside Vía Cumbres, an innovative residential development in one of Cancún\'s best areas, the result of a **partnership between private investment and government** that sets a precedent for responsible, sustainable urban development in the region. It was officially inaugurated in **November 2024** by governor Mara Lezama.',
+        },
+        image: '/mastercumbres.png',
+        imageFit: 'contain',
+        layout: 'side-by-side',
+        imagePosition: 'right',
+      },
+    ],
     floorPlans: [
       {
         slug: '1rec',
@@ -556,14 +575,15 @@ export const developments: Development[] = [
     ],
     contentBlocks: [
       {
-        eyebrow: { es: '— Conoce el desarrollo' },
-        title: { es: 'Parte de Vía Cumbres' },
+        eyebrow: { es: '— La comunidad más exclusiva de Cancún' },
+        title: { es: 'Vía Cumbres' },
         titleMuted: { es: 'un desarrollo urbano de gran escala' },
         description: {
           es: 'Ximena está ubicado dentro de Vía Cumbres, un innovador desarrollo habitacional en una de las mejores zonas de Cancún, resultado de una **colaboración entre la iniciativa privada y el gobierno** que sienta precedente en desarrollo urbano responsable y sostenible en la región. Fue inaugurado oficialmente a finales de **noviembre de 2024** por la gobernadora Mara Lezama.',
           en: 'Ximena sits inside Vía Cumbres, an innovative residential development in one of Cancún\'s best areas, the result of a **partnership between private investment and government** that sets a precedent for responsible, sustainable urban development in the region. It was officially inaugurated in **November 2024** by governor Mara Lezama.',
         },
-        image: '/desarrollos/ximena/4.-Fachada-Áreas-Comunes.jpg',
+        image: '/mastercumbres.png',
+        imageFit: 'contain',
         layout: 'side-by-side',
         imagePosition: 'right',
       },
