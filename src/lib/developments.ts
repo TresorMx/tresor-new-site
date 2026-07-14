@@ -368,7 +368,7 @@ export const developments: Development[] = [
     tagline: { es: 'Vive sobre avenida Huayacán, dentro de Vía Cumbres' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Vía Cumbres' },
-      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Tipología', labelEn: 'Property type', value: '1 a 3 Rec y PH', valueEn: '1 to 3 Bed & PH' },
       { label: 'Superficie', labelEn: 'Size', value: 'Desde 67 m²', valueEn: 'From 67 sqm' },
     ],
     gallery: [
@@ -512,7 +512,7 @@ export const developments: Development[] = [
     tagline: { es: 'Diseño contemporáneo dentro de Vía Cumbres' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Vía Cumbres' },
-      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Tipología', labelEn: 'Property type', value: '1 a 3 Rec y PH', valueEn: '1 to 3 Bed & PH' },
       { label: 'Superficie', labelEn: 'Size', value: 'Desde 63 m²', valueEn: 'From 63 sqm' },
     ],
     gallery: [
@@ -652,7 +652,7 @@ export const developments: Development[] = [
     tagline: { es: 'Vive dentro de la primera Smart City de Cancún' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Lausana Residencial' },
-      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Tipología', labelEn: 'Property type', value: '1 a 3 Rec y PH', valueEn: '1 to 3 Bed & PH' },
       { label: 'Superficie', labelEn: 'Size', value: 'Desde 79 m²', valueEn: 'From 79 sqm' },
     ],
     gallery: [
@@ -1007,8 +1007,8 @@ export const developments: Development[] = [
     tagline: { es: 'Solo 20 condominios exclusivos en Aldea Premium, Tulum' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Aldea Premium, Tulum' },
-      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
-      { label: 'Unidades', labelEn: 'Units', value: 'Solo 20 condos', valueEn: 'Only 20 condos' },
+      { label: 'Tipología', labelEn: 'Property type', value: '1 a 3 Rec y PH', valueEn: '1 to 3 Bed & PH' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 45 m²', valueEn: 'From 45 sqm' },
     ],
     gallery: [
       '/desarrollos/xaviera/fotos/3. Vista Frontal.jpg',
@@ -1111,8 +1111,8 @@ export const developments: Development[] = [
     tagline: { es: 'Departamentos de 1, 2 y 3 recámaras con amenidades exclusivas' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Zona Huayacán' },
-      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
-      { label: 'Recámaras', labelEn: 'Bedrooms', value: '1, 2 y 3', valueEn: '1, 2 & 3' },
+      { label: 'Tipología', labelEn: 'Property type', value: '1 a 3 Rec', valueEn: '1 to 3 Bed' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 79 m²', valueEn: 'From 79 sqm' },
     ],
     gallery: [
       '/desarrollos/koa/AEREO_01.jpg',
@@ -1247,8 +1247,8 @@ export const developments: Development[] = [
     tagline: { es: 'Un oasis de tranquilidad frente a la laguna, en el corazón de la Zona Hotelera' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Zona Hotelera' },
-      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
-      { label: 'Recámaras', labelEn: 'Bedrooms', value: '1, 2 y 3', valueEn: '1, 2 & 3' },
+      { label: 'Tipología', labelEn: 'Property type', value: '1 a 3 Rec', valueEn: '1 to 3 Bed' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 88 m²', valueEn: 'From 88 sqm' },
     ],
     gallery: [
       '/desarrollos/villalta/portada3.jpg',
@@ -1480,7 +1480,7 @@ export const developments: Development[] = [
     tagline: { es: 'Un lugar donde el lujo se fusiona con la belleza natural de Cancún' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Marina Puerto Cancún', valueEn: 'Puerto Cancún Marina' },
-      { label: 'Tipología', labelEn: 'Property type', value: 'Deptos y Penthouses', valueEn: 'Condos & Penthouses' },
+      { label: 'Tipología', labelEn: 'Property type', value: '2 a 3 Rec y PH', valueEn: '2 to 3 Bed & PH' },
       { label: 'Unidades', labelEn: 'Units', value: '113 (109 + 4 PH)' },
     ],
     gallery: [
@@ -1640,7 +1640,7 @@ export const developments: Development[] = [
     tagline: { es: 'Departamentos con entrega inmediata en Gran Vía' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Av. Huayacán' },
-      { label: 'Tipología', labelEn: 'Property type', value: 'Departamentos', valueEn: 'Apartments' },
+      { label: 'Tipología', labelEn: 'Property type', value: '2 a 3 Rec', valueEn: '2 to 3 Bed' },
       { label: 'Superficie', labelEn: 'Size', value: 'Desde 87 m²', valueEn: 'From 87 sqm' },
     ],
     gallery: [
