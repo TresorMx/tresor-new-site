@@ -12,7 +12,7 @@ const DRIVE_DOC_KEYS = [
   'checklist', 'offerLetter',
   'amenities', 'virtualTour', 'floorPlans', 'constructionProgress', 'quoter',
   'brochure', 'prototypes', 'individualFloorPlans', 'multimedia',
-  'finishesCatalog', 'showUnit', 'videos',
+  'finishesCatalog', 'showUnit', 'videos', 'availability',
 ] as const;
 
 type DriveDocKey = (typeof DRIVE_DOC_KEYS)[number];

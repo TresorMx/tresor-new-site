@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Orbit, Calendar, ArrowRight } from 'lucide-react';
+import { Orbit, Calendar, ArrowRight, MapPinned } from 'lucide-react';
 import { Link } from '@/navigation';
 import { cn } from '@/lib/utils';
 import VirtualTourModal from '@/components/ficha/VirtualTourModal';
@@ -150,15 +150,26 @@ export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaL
                 </button>
               )}
               {isAsesor ? (
-                <a
-                  href={`/api/asesor/file?dev=${devSlug}&doc=quoter`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn w-full border-0 bg-accent text-ink hover:brightness-95"
-                >
-                  <ArrowRight size={15} strokeWidth={1.8} />
-                  {scheduleLabel}
-                </a>
+                <>
+                  <a
+                    href={`/api/asesor/file?dev=${devSlug}&doc=availability`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-outline w-full font-semibold"
+                  >
+                    <MapPinned size={15} strokeWidth={1.8} />
+                    {isEs ? 'Ver disponibilidad' : 'View availability'}
+                  </a>
+                  <a
+                    href={`/api/asesor/file?dev=${devSlug}&doc=quoter`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn w-full border-0 bg-accent text-ink hover:brightness-95"
+                  >
+                    <ArrowRight size={15} strokeWidth={1.8} />
+                    {scheduleLabel}
+                  </a>
+                </>
               ) : (
                 <Link href="#aparta" className="btn w-full border-0 bg-accent text-ink hover:brightness-95">
                   <Calendar size={15} strokeWidth={1.8} />
