@@ -411,8 +411,8 @@ export const developments: Development[] = [
         title: { es: 'Vía Cumbres' },
         titleMuted: { es: 'un desarrollo urbano de gran escala' },
         description: {
-          es: 'Esther está ubicado dentro de Vía Cumbres, un innovador desarrollo habitacional en una de las mejores zonas de Cancún, resultado de una **colaboración entre la iniciativa privada y el gobierno** que sienta precedente en desarrollo urbano responsable y sostenible en la región. Fue inaugurado oficialmente a finales de **noviembre de 2024** por la gobernadora Mara Lezama.',
-          en: 'Esther sits inside Vía Cumbres, an innovative residential development in one of Cancún\'s best areas, the result of a **partnership between private investment and government** that sets a precedent for responsible, sustainable urban development in the region. It was officially inaugurated in **November 2024** by governor Mara Lezama.',
+          es: 'Esther está ubicado dentro de Vía Cumbres, un innovador desarrollo habitacional en una de las mejores zonas de Cancún, resultado de una **colaboración entre la iniciativa privada y el gobierno** que sienta precedente en desarrollo urbano responsable y sostenible en la región.',
+          en: 'Esther sits inside Vía Cumbres, an innovative residential development in one of Cancún\'s best areas, the result of a **partnership between private investment and government** that sets a precedent for responsible, sustainable urban development in the region.',
         },
         image: '/mastercumbres.png',
         imageFit: 'contain',
@@ -583,8 +583,8 @@ export const developments: Development[] = [
         title: { es: 'Vía Cumbres' },
         titleMuted: { es: 'un desarrollo urbano de gran escala' },
         description: {
-          es: 'Ximena está ubicado dentro de Vía Cumbres, un innovador desarrollo habitacional en una de las mejores zonas de Cancún, resultado de una **colaboración entre la iniciativa privada y el gobierno** que sienta precedente en desarrollo urbano responsable y sostenible en la región. Fue inaugurado oficialmente a finales de **noviembre de 2024** por la gobernadora Mara Lezama.',
-          en: 'Ximena sits inside Vía Cumbres, an innovative residential development in one of Cancún\'s best areas, the result of a **partnership between private investment and government** that sets a precedent for responsible, sustainable urban development in the region. It was officially inaugurated in **November 2024** by governor Mara Lezama.',
+          es: 'Ximena está ubicado dentro de Vía Cumbres, un innovador desarrollo habitacional en una de las mejores zonas de Cancún, resultado de una **colaboración entre la iniciativa privada y el gobierno** que sienta precedente en desarrollo urbano responsable y sostenible en la región.',
+          en: 'Ximena sits inside Vía Cumbres, an innovative residential development in one of Cancún\'s best areas, the result of a **partnership between private investment and government** that sets a precedent for responsible, sustainable urban development in the region.',
         },
         image: '/mastercumbres.png',
         imageFit: 'contain',
@@ -724,12 +724,12 @@ export const developments: Development[] = [
     ],
     contentBlocks: [
       {
-        eyebrow: { es: '— Conoce el desarrollo' },
-        title: { es: 'Dentro de Lausana Residencial' },
+        eyebrow: { es: '— Las vistas más sorprendentes' },
+        title: { es: 'Lausana Residencial' },
         titleMuted: { es: 'la primera Smart City de Cancún' },
         description: {
-          es: 'Lausana Residencial, al sur de Cancún, es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques.',
-          en: 'Lausana Residencial, south of Cancún, is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks.',
+          es: 'Ubicada al sur de Cancún, Lausana es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques.',
+          en: 'Located south of Cancún, Lausana is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks.',
         },
         image: '/desarrollos/loreta/lausanamapa.png',
         layout: 'side-by-side',
@@ -883,12 +883,12 @@ export const developments: Development[] = [
     ],
     contentBlocks: [
       {
-        eyebrow: { es: '— Conoce el desarrollo' },
-        title: { es: 'Dentro de Lausana Residencial' },
+        eyebrow: { es: '— Las vistas más sorprendentes' },
+        title: { es: 'Lausana Residencial' },
         titleMuted: { es: 'la primera Smart City de Cancún' },
         description: {
-          es: 'Lausana Residencial, al sur de Cancún, es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques.',
-          en: 'Lausana Residencial, south of Cancún, is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks.',
+          es: 'Ubicada al sur de Cancún, Lausana es la primera **Smart City** de la ciudad — diseño urbano de clase mundial, conectividad y amenidades para todas las edades distribuidas en más de **15 hectáreas de áreas verdes**, con lagos, ciclovías y parques.',
+          en: 'Located south of Cancún, Lausana is the city\'s first **Smart City** — world-class urban design, connectivity and amenities for every age spread across more than **15 hectares of green areas**, with lakes, bike paths and parks.',
         },
         image: '/desarrollos/loreta/lausanamapa.png',
         layout: 'side-by-side',
