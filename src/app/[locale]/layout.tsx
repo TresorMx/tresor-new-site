@@ -220,6 +220,13 @@ export default async function LocaleLayout({
       lang={locale}
       className={`${cormorant.variable} ${switzer.variable} ${jetbrains.variable}`}
     >
+      {/* Google exige el snippet de GA dentro de <head> para verificar la
+          propiedad del sitio en Search Console — en <body> no cuenta, aunque
+          el tag esté presente en el HTML. Next.js fusiona este <head> con el
+          que genera solo desde `metadata`. */}
+      <head>
+        <GoogleAnalytics />
+      </head>
       <body>
         <script
           type="application/ld+json"
@@ -244,7 +251,6 @@ export default async function LocaleLayout({
           </AsesorProvider>
         </NextIntlClientProvider>
         <MetaPixel />
-        <GoogleAnalytics />
         <Analytics />
         <SpeedInsights />
       </body>
