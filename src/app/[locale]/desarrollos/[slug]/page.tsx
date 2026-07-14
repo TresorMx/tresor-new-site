@@ -119,7 +119,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   // Sales Partner como "Olivia Wow Condos"), el nombre queda intacto.
   const displayName = dev.name.replace(/\s*Plaza Center\s*/, ' ').replace(/\s+/g, ' ').trim();
   const isEs = locale !== 'en';
-  const { showAgendaWidget } = siteSettings;
+  const { showAgendaWidget, hideAsesorForms } = siteSettings;
   const agendaEyebrow = isEs ? siteSettings.agendaEyebrow : siteSettings.agendaEyebrowEn;
   const agendaTitle1  = isEs ? siteSettings.agendaTitle1  : siteSettings.agendaTitle1En;
   const agendaTitle2  = isEs ? siteSettings.agendaTitle2  : siteSettings.agendaTitle2En;
@@ -549,7 +549,12 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
       {/* ═════ 6. APARTADO EN LÍNEA — asesor: cotizador (Quattro) o apartado
               (Sales Partner) siempre, sin Agenda. Público: comportamiento
               de siempre (tabs Agenda/Aparta — Tresor cotizador/Agenda según
-              el toggle del sitio — Reserva Rápida si no hay apartado) ═════ */}
+              el toggle del sitio — Reserva Rápida si no hay apartado).
+              `hideAsesorForms` (siteSettings, Sanity): pausa temporal para
+              ocultar el formulario cuando el asesor está logueado — los
+              botones de arriba que apuntan a #aparta se quedan tal cual,
+              solo desaparece el formulario en sí. Público nunca se afecta. ═════ */}
+      {!(isAsesor && hideAsesorForms) && (
       <section
         className={`relative z-10 -mb-10 overflow-hidden rounded-b-[2.5rem] ${stripe.cta ? 'bg-[#FAFAFA]' : 'bg-white'}`}
         id="aparta"
@@ -655,6 +660,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           </>
         )}
       </section>
+      )}
 
       {/* ═════ 7. TAMBIÉN TE PUEDE INTERESAR — mismo developer ═════ */}
       <RelatedDevelopments items={relatedDevelopments} />

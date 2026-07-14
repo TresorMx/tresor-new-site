@@ -122,6 +122,7 @@ export interface SiteSettings {
   weDevelopLayout: 'cards' | 'carousel';
   salesPartnerLayout: 'grouped' | 'grid';
   showAgendaWidget: boolean;
+  hideAsesorForms: boolean;
   agendaEyebrow: string;
   agendaEyebrowEn: string;
   agendaTitle1: string;
@@ -139,6 +140,7 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
       weDevelopLayout,
       salesPartnerLayout,
       showAgendaWidget,
+      hideAsesorForms,
       agendaEyebrow, agendaEyebrowEn,
       agendaTitle1, agendaTitle1En,
       agendaTitle2, agendaTitle2En,
@@ -156,6 +158,7 @@ export async function fetchSiteSettings(): Promise<SiteSettings> {
     weDevelopLayout: raw?.weDevelopLayout === 'carousel' ? 'carousel' : 'cards',
     salesPartnerLayout: raw?.salesPartnerLayout === 'grid' ? 'grid' : 'grouped',
     showAgendaWidget: raw?.showAgendaWidget ?? false,
+    hideAsesorForms: raw?.hideAsesorForms ?? false,
     agendaEyebrow,
     agendaEyebrowEn: raw?.agendaEyebrowEn || agendaEyebrow,
     agendaTitle1,

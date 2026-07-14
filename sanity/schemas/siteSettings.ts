@@ -55,6 +55,13 @@ export default defineType({
       description: 'Activa esto para reemplazar el cotizador en todas las páginas de plaza por el formulario de agenda de visita.',
     }),
     defineField({
+      name: 'hideAsesorForms',
+      title: 'Ocultar formularios de apartado/cotizador para asesores logueados',
+      type: 'boolean',
+      initialValue: false,
+      description: 'Cuando está activo, un asesor logueado deja de ver el formulario de apartado/cotizador al fondo de cada ficha — los botones que apuntan ahí (Cotizador, Aparta ahora, etc.) siguen visibles, solo se oculta el formulario en sí. Pensado como pausa temporal mientras se decide a dónde deben apuntar esos botones.',
+    }),
+    defineField({
       name: 'agendaEyebrow',
       title: 'Eyebrow agenda (ES)',
       type: 'string',

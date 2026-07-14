@@ -104,6 +104,7 @@ export async function getSiteSettings() {
     weDevelopLayout: 'cards' as const,
     salesPartnerLayout: 'grouped' as const,
     showAgendaWidget: false,
+    hideAsesorForms: false,
     agendaEyebrow: '— Agenda tu visita', agendaEyebrowEn: '— Schedule your visit',
     agendaTitle1: 'Agenda', agendaTitle1En: 'Schedule',
     agendaTitle2: 'tu visita', agendaTitle2En: 'your visit',
