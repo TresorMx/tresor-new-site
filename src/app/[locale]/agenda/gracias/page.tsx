@@ -51,19 +51,18 @@ function AgendaGraciasContent() {
   const date    = sp.get('date') ?? '';
   const time    = sp.get('time') ?? '';
   const name    = sp.get('name') ?? '';
-  const plaza   = sp.get('plaza') ?? '';
-  const devName = sp.get('devName') || plaza;
+  const interest = sp.get('interest') ?? '';
   const isZoom = mode === 'zoom';
 
   const gcalUrl = date && time
     ? googleCalendarUrl({
-        title: locale === 'en' ? `Visit — ${devName}` : `Visita — ${devName}`,
+        title: locale === 'en' ? 'Visit — Tresor Real Estate' : 'Visita — Tresor Real Estate',
         date,
         time,
         details: locale === 'en'
           ? `${isZoom ? 'Zoom video call' : 'In-person visit'} scheduled with Tresor Real Estate.`
           : `${isZoom ? 'Videollamada Zoom' : 'Visita presencial'} agendada con Tresor Real Estate.`,
-        location: isZoom ? 'Zoom' : (devName || 'Tresor Real Estate'),
+        location: isZoom ? 'Zoom' : 'Plaza Espacio, Puerto Cancún',
       })
     : null;
 
@@ -179,8 +178,8 @@ function AgendaGraciasContent() {
             <Link href="/" className="btn btn-lg" style={{ background: '#FAB413', color: '#0E0E0E' }}>
               {t('backHome')}
             </Link>
-            {plaza && (
-              <Link href={`/desarrollos/${plaza}`} className="btn btn-lg btn-ghost-light">
+            {interest && (
+              <Link href="/#portafolio" className="btn btn-lg btn-ghost-light">
                 {t('viewDevelopment')} <ArrowRight size={14} strokeWidth={1.6} />
               </Link>
             )}

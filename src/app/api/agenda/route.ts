@@ -1,16 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'crypto';
 import { Resend } from 'resend';
-import { sendLeadToGHL, plazaToDesarrollo } from '@/lib/ghl';
+import { sendLeadToGHL } from '@/lib/ghl';
 import { saveLeadToSanity } from '@/lib/sanity/saveLead';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const PLAZA_LABELS: Record<string, string> = {
-  'long-island': 'Long Island',
-  'gardens': 'Gardens',
-  'ambos': 'Long Island + Gardens',
+// Ya no es un proyecto específico de Quattro (Long Island/Gardens) — el
+// formulario de /agenda ahora sirve para cualquier tipo de propiedad.
+const INTEREST_LABELS: Record<string, string> = {
+  local: 'Local comercial',
+  departamento: 'Departamento',
+  lote: 'Lote residencial',
+  asesoria: 'Aún no lo sabe / quiere asesoría',
 };
 
 const MODE_LABELS: Record<string, string> = {
@@ -34,9 +37,9 @@ function formatTime(t: string) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { firstName, lastName, email, phone, plaza, mode, date, time } = body;
+    const { firstName, lastName, email, phone, interest, mode, date, time } = body;
 
-    if (!firstName || !lastName || !email || !phone || !plaza || !mode || !date || !time) {
+    if (!firstName || !lastName || !email || !phone || !interest || !mode || !date || !time) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
@@ -48,24 +51,25 @@ export async function POST(req: NextRequest) {
       fullName: `${firstName} ${lastName}`,
       email,
       phone,
-      plazaSlug: plaza,
+      plazaSlug: interest,
       message: `${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
     });
 
-    // 2) Enviar a GHL
+    // 2) Enviar a GHL — sin `desarrollo_de_inters`: ese picklist en GHL solo
+    // tiene opciones de Quattro configuradas, y un valor sin opción
+    // coincidente simplemente no se guarda. El interés real viaja en tags/notas.
     await sendLeadToGHL({
       firstName,
       lastName,
       email,
       phone,
       source: 'agenda',
-      tags: ['cita', plaza],
+      tags: ['cita', interest],
       customFields: {
-        'desarrollo_de_inters': plazaToDesarrollo(plaza),
         'fuente_de_contacto': 'digital',
-        'observaciones': `Visita agendada · ${PLAZA_LABELS[plaza] ?? plaza} · ${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
+        'observaciones': `Visita agendada · ${INTEREST_LABELS[interest] ?? interest} · ${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
       },
-      notes: `Visita agendada · ${PLAZA_LABELS[plaza] ?? plaza} · ${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
+      notes: `Visita agendada · ${INTEREST_LABELS[interest] ?? interest} · ${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
     });
 
     // 2) Email de notificación interna
@@ -75,15 +79,15 @@ export async function POST(req: NextRequest) {
         await resend.emails.send({
           from: process.env.RESEND_FROM_EMAIL ?? 'hello@tresor.mx',
           to: process.env.LEADS_EMAIL_TO ?? 'david.baena@gmail.com',
-          subject: `📅 Nueva visita agendada · ${PLAZA_LABELS[plaza] ?? plaza} · ${firstName} ${lastName}`,
-          html: agendaEmailHTML({ id, firstName, lastName, email, phone, plaza, mode, date, time }),
+          subject: `📅 Nueva visita agendada · ${INTEREST_LABELS[interest] ?? interest} · ${firstName} ${lastName}`,
+          html: agendaEmailHTML({ id, firstName, lastName, email, phone, interest, mode, date, time }),
         });
       } catch (e) {
         console.error('[Resend] agenda error', e);
       }
     }
 
-    console.log('[Agenda] Booked:', { id, firstName, lastName, email, plaza, mode, date, time });
+    console.log('[Agenda] Booked:', { id, firstName, lastName, email, interest, mode, date, time });
 
     return NextResponse.json({ id, success: true });
   } catch (err) {
@@ -93,10 +97,10 @@ export async function POST(req: NextRequest) {
 }
 
 function agendaEmailHTML({
-  id, firstName, lastName, email, phone, plaza, mode, date, time,
+  id, firstName, lastName, email, phone, interest, mode, date, time,
 }: {
   id: string; firstName: string; lastName: string; email: string; phone: string;
-  plaza: string; mode: string; date: string; time: string;
+  interest: string; mode: string; date: string; time: string;
 }) {
   return `
     <div style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 540px; margin: 0 auto; color: #0E0E0E;">
@@ -105,7 +109,7 @@ function agendaEmailHTML({
         <div style="color: #6B6863; font-size: 13px; margin-top: 4px;">${id}</div>
       </div>
       <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-        <tr><td style="padding: 8px 0; color: #6B6863;">Proyecto</td><td style="text-align: right; font-weight: 600;">${PLAZA_LABELS[plaza] ?? plaza}</td></tr>
+        <tr><td style="padding: 8px 0; color: #6B6863;">Interés</td><td style="text-align: right; font-weight: 600;">${INTEREST_LABELS[interest] ?? interest}</td></tr>
         <tr><td style="padding: 8px 0; color: #6B6863;">Modalidad</td><td style="text-align: right; font-weight: 600;">${MODE_LABELS[mode] ?? mode}</td></tr>
         <tr><td style="padding: 8px 0; color: #6B6863;">Fecha</td><td style="text-align: right; font-weight: 600;">${formatDate(date)}</td></tr>
         <tr><td style="padding: 8px 0; color: #6B6863;">Hora</td><td style="text-align: right; font-weight: 600;">${formatTime(time)}</td></tr>

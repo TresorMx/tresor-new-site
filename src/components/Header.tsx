@@ -285,7 +285,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                 href="/agenda"
                 className="hidden rounded-full bg-accent px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-ink transition-all hover:brightness-95 sm:inline-flex"
               >
-                Asesoría sin costo
+                Agenda una visita
               </Link>
 
               {/* Hamburguesa móvil */}
@@ -387,7 +387,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                     href="/agenda"
                     className="flex w-full items-center justify-center rounded-full bg-accent px-6 py-3.5 text-[11px] font-bold uppercase tracking-caps text-ink"
                   >
-                    Asesoría sin costo
+                    Agenda una visita
                   </Link>
                 </div>
               </div>
