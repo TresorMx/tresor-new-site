@@ -208,6 +208,9 @@ export interface Development {
                                     // en Sanity será un 2do campo de texto junto al título.
   projectBody?: I18nText[];        // párrafos de "El Proyecto"
   gallery?: string[];              // → módulo Galería (si length > 0)
+  galleryTourUrl?: string;         // si existe, el módulo Galería muestra un botón
+                                    // "Tour Virtual" (mismo popup que floor plans) en vez
+                                    // de la etiqueta "Galería del Proyecto".
   amenitiesGallery?: string[];     // fotos curadas para la columna vertical
                                     // del módulo Amenidades (1 o varias).
   amenities?: Amenity[];           // → módulo Amenidades (si existe)
@@ -381,6 +384,7 @@ export const developments: Development[] = [
       '/desarrollos/esther/Recámara-principal.jpg',
       '/desarrollos/esther/Recámara-secundaria.jpg',
     ],
+    galleryTourUrl: 'https://nimboostudio.viewin360.co/share/collection/7KVDB?logo=-1&info=0&fs=1&vr=1&thumbs=1',
     projectTitle: { es: 'Departamentos de 1 a 3 recámaras' },
     projectTitleMuted: { es: 'en Vía Cumbres' },
     projectBody: [
@@ -544,6 +548,7 @@ export const developments: Development[] = [
       '/desarrollos/ximena/1.-Recámara-Principal.jpg',
       '/desarrollos/ximena/4.-Recámara-Doble.jpg',
     ],
+    galleryTourUrl: 'https://nimboostudio.viewin360.co/share/collection/7b46V?logo=-1&info=0&fs=1&vr=1&thumbs=1',
     amenitiesGallery: [
       '/desarrollos/ximena/5.-Alberca.jpg',
       '/desarrollos/ximena/10.-Kids-Club.jpg',

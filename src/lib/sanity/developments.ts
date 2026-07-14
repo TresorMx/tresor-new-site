@@ -53,6 +53,7 @@ const DEVELOPMENT_FIELDS = `
   "logo":      logo.asset->url,
   "heroRender": heroRender.asset->url,
   "gallery":   gallery[].asset->url,
+  galleryTourUrl,
   "amenitiesGallery": amenitiesGallery[].asset->url,
   amenities[]{ "key": key, labelOverride, labelOverrideEn },
   "floorPlans": floorPlans[]{
@@ -189,6 +190,7 @@ function normalizeDevelopment(raw: any): Development & { developerDocId?: string
     projectTitleMuted: i18n(raw.projectTitleMuted, raw.projectTitleMutedEn),
     projectBody: projectBody.length ? projectBody : undefined,
     gallery: raw.gallery?.length ? raw.gallery : undefined,
+    galleryTourUrl: raw.galleryTourUrl || undefined,
     amenitiesGallery: raw.amenitiesGallery?.length ? raw.amenitiesGallery : undefined,
     amenities: amenities.length ? amenities : undefined,
     location: raw.location,

@@ -182,6 +182,10 @@ export default defineType({
       of: [{ type: 'image', options: { hotspot: true } }],
     }),
     defineField({
+      name: 'galleryTourUrl', title: 'Tour Virtual de la galería', type: 'url', group: 'media',
+      description: 'Opcional. Si lo llenas, en el módulo Galería aparece un botón "Tour Virtual" (abre esta liga en una ventana emergente) en vez de la etiqueta "Galería del Proyecto".',
+    }),
+    defineField({
       name: 'amenitiesGallery', title: 'Galería de amenidades', type: 'array', group: 'media',
       description: 'Fotos específicas de alberca, gym, casa club, etc. — se muestran junto al listado de amenidades. Si dejas 1 sola foto, se ve como foto única sin flechas.',
       of: [{ type: 'image', options: { hotspot: true } }],

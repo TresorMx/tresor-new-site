@@ -2,10 +2,14 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Orbit } from 'lucide-react';
+import VirtualTourModal from '@/components/ficha/VirtualTourModal';
 
-export default function Gallery({ images, alt, gray = true }: { images: string[]; alt: string; gray?: boolean }) {
+export default function Gallery({
+  images, alt, gray = true, tourUrl,
+}: { images: string[]; alt: string; gray?: boolean; tourUrl?: string }) {
   const [active, setActive] = useState(0);
+  const [tourOpen, setTourOpen] = useState(false);
 
   const prev = () => setActive((i) => (i - 1 + images.length) % images.length);
   const next = () => setActive((i) => (i + 1) % images.length);
@@ -19,7 +23,17 @@ export default function Gallery({ images, alt, gray = true }: { images: string[]
             <span className="eyebrow eyebrow-accent block font-bold">— Galería</span>
             <h2 className="mt-3 h-display text-[clamp(24px,3.2vw,48px)]">{alt}</h2>
           </div>
-          <span className="caps text-ink-3">Renders del proyecto</span>
+          {tourUrl ? (
+            <button
+              onClick={() => setTourOpen(true)}
+              className="btn btn-outline font-semibold"
+            >
+              <Orbit size={15} strokeWidth={1.8} />
+              Tour Virtual
+            </button>
+          ) : (
+            <span className="caps text-ink-3">Galería del Proyecto</span>
+          )}
         </div>
 
         {/* Main stage */}
@@ -85,6 +99,14 @@ export default function Gallery({ images, alt, gray = true }: { images: string[]
           ))}
         </div>
       </div>
+
+      {tourUrl && (
+        <VirtualTourModal
+          url={tourOpen ? tourUrl : null}
+          onClose={() => setTourOpen(false)}
+          title={`${alt} — Tour Virtual`}
+        />
+      )}
     </section>
   );
 }
