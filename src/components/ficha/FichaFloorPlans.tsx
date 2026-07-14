@@ -152,7 +152,7 @@ export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaL
               {isAsesor ? (
                 <>
                   <a
-                    href={`/api/asesor/file?dev=${devSlug}&doc=availability`}
+                    href={`/api/asesor/file?dev=${devSlug}&doc=priceList`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-outline w-full font-semibold"

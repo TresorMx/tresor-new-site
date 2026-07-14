@@ -3,7 +3,7 @@ import {
   FileText, ClipboardList, Layers, Banknote, MapPin, Megaphone, Building2,
   Image as ImageIcon, Receipt, ReceiptText, CheckSquare, FileSignature,
   Sparkles, Video, LayoutGrid, HardHat, Calculator,
-  BookOpen, Box, FileStack, Film, Palette, DoorOpen, Clapperboard, MapPinned,
+  BookOpen, Box, FileStack, Film, Palette, DoorOpen, Clapperboard,
 } from 'lucide-react';
 
 export interface DriveCard {
@@ -45,7 +45,6 @@ export const DRIVE_CATALOG: Record<string, DriveCard> = {
   finishesCatalog:       { key: 'finishesCatalog',       label: 'Catálogo de Acabados', desc: 'Materiales y especificaciones', icon: Palette },
   showUnit:              { key: 'showUnit',              label: 'Departamento Muestra', desc: 'Fotos y video del depa muestra', icon: DoorOpen },
   videos:                { key: 'videos',                label: 'Videos',         desc: 'Videos del proyecto', icon: Clapperboard },
-  availability:          { key: 'availability',          label: 'Disponibilidad', desc: 'Mapa interactivo de unidades disponibles', icon: MapPinned },
 };
 
 interface DriveLayoutItem {
@@ -91,7 +90,6 @@ const ALL_ITEMS_LAYOUT: DriveLayoutItem[] = [
   { key: 'finishesCatalog' },
   { key: 'showUnit', excludeTypes: ['Lotes'] },
   { key: 'videos' },
-  { key: 'availability' },
   { key: 'quoter', fullWidth: true },
 ];
 
@@ -121,7 +119,6 @@ export const DRIVE_LAYOUTS: Record<string, DriveLayoutItem[]> = {
     { key: 'floorPlans' },
     { key: 'constructionProgress' },
     { key: 'priceList', label: 'Inventario y Lista de Precios' },
-    { key: 'availability' },
     { key: 'quoter', fullWidth: true },
   ],
 };

@@ -38,5 +38,4 @@ export const driveFields = [
   defineField({ name: 'finishesCatalog', title: 'Catálogo de Acabados', type: 'driveAsset', group: 'drive', description: 'Materiales y especificaciones (PDF o liga).' }),
   defineField({ name: 'showUnit', title: 'Departamento Muestra', type: 'driveAsset', group: 'drive', description: 'Fotos y video del depa muestra (ZIP o liga).' }),
   defineField({ name: 'videos', title: 'Videos', type: 'driveAsset', group: 'drive', description: 'Videos del proyecto (liga o archivo).' }),
-  defineField({ name: 'availability', title: 'Disponibilidad', type: 'driveAsset', group: 'drive', description: 'Mapa interactivo de disponibilidad del desarrollador (liga), o archivo. Este es el que también se usa para el botón "Ver disponibilidad" en floor plans cuando el asesor está logueado.' }),
 ];
