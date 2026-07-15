@@ -10,7 +10,14 @@ export default function BrokerAuthForm({ initialMode = 'register' }: { initialMo
   const [email, setEmail] = useState('');
 
   return (
-    <main className="min-h-screen bg-bg-soft pt-24 pb-24">
+    /* El header es fixed con backdrop-blur + sombra — con el fondo blanco de
+       <main> del layout raíz detrás, ese blur se ve como una mancha blanca
+       alrededor del header (mismo bug que en AsesoresIndex). Se arregla
+       llevando el fondo gris hasta el borde real de la página (-mt-[104px],
+       detrás del header) y compensando con pt-[200px] (104px del header +
+       96px del pt-24 que tenía antes) para que el contenido visible quede
+       en el mismo lugar de siempre. */
+    <main className="-mt-[104px] min-h-screen bg-bg-soft pb-24 pt-[200px]">
       <section className="container-wrap grid items-center gap-16 pt-4 pb-16 md:grid-cols-[1fr_1.2fr]">
         <div>
           <span className="eyebrow eyebrow-accent">— Acceso Broker</span>
