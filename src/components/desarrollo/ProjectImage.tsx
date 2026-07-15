@@ -15,6 +15,10 @@ export default function ProjectImage({
   const [active, setActive] = useState(0);
   const multi = images.length > 1;
   const fitClass = fit === 'contain' ? 'object-contain' : 'object-cover';
+  // Con 'contain' el contenedor casi siempre asoma en los márgenes que la
+  // imagen no llena — bg-bg-soft (gris) se nota como mancha contra un render
+  // de fondo blanco (ej. master plans). bg-white lo deja invisible.
+  const bgClass = fit === 'contain' ? 'bg-white' : 'bg-bg-soft';
 
   const prev = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -29,7 +33,7 @@ export default function ProjectImage({
     // aspectRatio es dinámico (distinto por proyecto) — Tailwind no puede
     // generar una clase arbitraria en build-time si el valor viene de una
     // variable, así que va como inline style, no como `aspect-[...]`.
-    <div className="group relative overflow-hidden rounded-[20px] bg-bg-soft" style={{ aspectRatio }}>
+    <div className={`group relative overflow-hidden rounded-[20px] ${bgClass}`} style={{ aspectRatio }}>
       {images.map((src, i) => (
         <Image
           key={src}
