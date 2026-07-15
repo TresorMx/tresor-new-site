@@ -9,11 +9,18 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default async function BrokersPage() {
+export default async function BrokersPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ mode?: string }>;
+}) {
   const cookieStore = await cookies();
   if (verifyBrokerSession(cookieStore.get(BROKER_COOKIE)?.value)) {
     redirect('/brokers/drive');
   }
 
-  return <BrokerAuthForm />;
+  const { mode } = await searchParams;
+  const initialMode = mode === 'forgot' ? 'forgot' : 'register';
+
+  return <BrokerAuthForm initialMode={initialMode} />;
 }

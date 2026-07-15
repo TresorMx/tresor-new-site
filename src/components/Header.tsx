@@ -53,7 +53,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
   const router = useRouter();
   const isHome = pathname === '/';
   const { isAsesor, openLogin, logout } = useAsesor();
-  const { isBroker, firstName: brokerFirstName, logout: brokerLogout } = useBroker();
+  const { isBroker, firstName: brokerFirstName, logout: brokerLogout, openLogin: openBrokerLogin } = useBroker();
 
   const [scrollY, setScrollY] = useState(0);
   const [theme, setTheme] = useState<'dark' | 'light'>(isHome ? 'dark' : 'light');
@@ -191,9 +191,10 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                 </button>
               )}
               <span className="h-3 w-px bg-ink/25" />
-              {/* Brokers — a diferencia de Asesores, el login/registro vive en
-                  /brokers (página completa), no un modal: el registro con
-                  verificación por correo no cabe bien en un modal chico. */}
+              {/* Brokers — abre el login (mismo patrón que Asesores). El
+                  registro (con verificación por correo) vive en /brokers,
+                  el modal solo cubre el login rápido de brokers ya
+                  registrados. */}
               {isBroker ? (
                 <span className="inline-flex items-center gap-3">
                   <span className="inline-flex items-center gap-1.5 uppercase">
@@ -206,10 +207,10 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                   </button>
                 </span>
               ) : (
-                <Link href="/brokers" className="inline-flex items-center gap-1.5 uppercase transition-opacity hover:opacity-60">
+                <button onClick={openBrokerLogin} className="inline-flex items-center gap-1.5 uppercase transition-opacity hover:opacity-60">
                   Brokers
                   <Lock size={12} strokeWidth={2} />
-                </Link>
+                </button>
               )}
             </div>
           </div>
@@ -380,7 +381,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                   </button>
                 )}
 
-                {/* Brokers — login/registro completo vive en /brokers. */}
+                {/* Brokers — abre el mismo login modal que desktop. */}
                 {isBroker ? (
                   <button
                     onClick={() => { brokerLogout(); setMobileOpen(false); }}
@@ -390,14 +391,13 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                     <LogOut size={16} strokeWidth={1.8} className="text-ink-3" />
                   </button>
                 ) : (
-                  <Link
-                    href="/brokers"
-                    onClick={() => setMobileOpen(false)}
+                  <button
+                    onClick={() => { openBrokerLogin(); setMobileOpen(false); }}
                     className="flex w-full items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
                   >
                     Brokers
                     <Lock size={15} strokeWidth={1.8} className="text-ink-3" />
-                  </Link>
+                  </button>
                 )}
 
                 {/* Idioma — antes solo existía en desktop (sm:inline-flex),

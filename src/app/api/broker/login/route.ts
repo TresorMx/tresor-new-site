@@ -31,8 +31,8 @@ export async function POST(req: Request) {
   const email = parsed.data.email.trim().toLowerCase();
   const freshClient = sanityClient.withConfig({ useCdn: false });
 
-  const account = await freshClient.fetch<{ _id: string; passwordHash: string; verified: boolean } | null>(
-    `*[_type == "brokerAccount" && email == $email][0]{ _id, passwordHash, verified }`,
+  const account = await freshClient.fetch<{ _id: string; passwordHash: string; verified: boolean; fullName: string } | null>(
+    `*[_type == "brokerAccount" && email == $email][0]{ _id, passwordHash, verified, fullName }`,
     { email },
   );
 
@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Tu cuenta todavía no está verificada.', needsVerification: true }, { status: 403 });
   }
 
-  const res = NextResponse.json({ ok: true });
+  const res = NextResponse.json({ ok: true, firstName: account.fullName?.split(' ')[0] ?? null });
   const secure = process.env.NODE_ENV === 'production';
   res.cookies.set(BROKER_COOKIE, signBrokerSession(account._id), {
     path: '/', maxAge: MAX_AGE, sameSite: 'lax', secure, httpOnly: true,

@@ -5,6 +5,13 @@ import { createContext, useContext } from 'react';
 export interface BrokerCtx {
   isBroker: boolean;
   firstName: string | null;
+  openLogin: () => void;
+  closeLogin: () => void;
+  loginOpen: boolean;
+  // Devuelve `null` si el login fue exitoso, o `{ error }` / `{ needsVerification }`
+  // si no — así el modal puede mandar a un broker sin verificar a /brokers en
+  // vez de solo mostrar "credenciales incorrectas".
+  login: (email: string, password: string) => Promise<{ error: string; needsVerification?: boolean } | null>;
   logout: () => Promise<void>;
 }
 

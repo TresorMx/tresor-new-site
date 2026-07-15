@@ -30,10 +30,13 @@ export default function AsesoresIndex({
     <Gate>
       {/* Sin pt propio: el <main> del layout raíz ya trae pt-[104px] — tener
           otro <main> anidado con SU propio padding duplicaba el espacio.
-          Fondo bg-soft (gris muy claro) para que las tarjetas blancas
-          resalten sin necesitar un borde — mismo truco que las secciones
-          de cards del home. */}
-      <div className="min-h-screen bg-bg-soft pb-24 pt-9">
+          -mt-10 rounded-[2.5rem]: mismo truco que /gestion y /desarrollo
+          para que el fondo gris se empalme con el header flotante, sin
+          dejar un hueco blanco del <main> de fondo entre el header y el
+          contenido. Fondo bg-soft (gris muy claro) para que las tarjetas
+          blancas resalten sin necesitar un borde — mismo truco que las
+          secciones de cards del home. */}
+      <div className="relative z-10 -mt-10 min-h-screen rounded-[2.5rem] bg-bg-soft pb-24 pt-9">
         <div className="container-wrap">
           {greeting ? (
             <>

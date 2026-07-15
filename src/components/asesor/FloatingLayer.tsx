@@ -5,23 +5,28 @@ import { Link } from '@/navigation';
 import { usePathname } from '@/navigation';
 import Chatbot from '@/components/Chatbot';
 import { useAsesor } from '@/components/asesor/context';
+import { useBroker } from '@/components/broker/context';
 
 // Capa flotante global (reemplaza al <Chatbot /> suelto en el layout). El
-// chat de Luis NUNCA aparece con sesión de asesor — no tiene sentido para
-// alguien del equipo de ventas. En su lugar:
+// chat de Luis NUNCA aparece con sesión de asesor NI de broker — no tiene
+// sentido para alguien que ya está adentro del Drive. En su lugar:
 //   - En una ficha: botón volado "Drive de Ventas" (el de ese desarrollo).
 //   - En cualquier otra página (home, agenda, etc.): botón volado "Todos
-//     los drives" → /asesores. Antes esto vivía como un link repetido en
-//     cada card del home; un solo botón flotante es más simple y consistente
-//     con cómo ya funciona en la ficha.
+//     los drives" → /asesores o /brokers/drive según el caso. Antes esto
+//     vivía como un link repetido en cada card del home; un solo botón
+//     flotante es más simple y consistente con cómo ya funciona en la ficha.
+// isAsesor tiene prioridad sobre isBroker en el caso (raro) de que alguien
+// tenga ambas sesiones activas — el equipo interno manda.
 export default function FloatingLayer() {
   const { isAsesor } = useAsesor();
+  const { isBroker } = useBroker();
   const pathname = usePathname(); // sin prefijo de locale (viene de @/navigation)
 
-  if (!isAsesor) return <Chatbot />;
+  if (!isAsesor && !isBroker) return <Chatbot />;
 
   const fichaMatch = pathname.match(/^\/desarrollos\/([^/]+)/);
-  const href = fichaMatch ? `/asesores/${fichaMatch[1]}` : '/asesores';
+  const base = isAsesor ? '/asesores' : '/brokers/drive';
+  const href = fichaMatch ? `${base}/${fichaMatch[1]}` : base;
   const label = fichaMatch ? 'Drive de Ventas' : 'Todos los drives';
   const Icon = fichaMatch ? FolderLock : Grid2x2;
 
