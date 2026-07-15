@@ -111,7 +111,12 @@ export default function AsesorDrive({
           </div>
         </section>
 
-        <div className="bg-bg-soft pb-24">
+        {/* A diferencia del índice (AsesoresIndex), aquí SÍ hay un hero de
+            foto detrás (la sección de arriba) — el mismo truco -mt-10
+            rounded-[2.5rem] que usan /gestion y /desarrollo funciona bien
+            porque el hueco de las esquinas redondeadas revela la foto del
+            hero, no un fondo blanco suelto. */}
+        <div className="relative z-10 -mt-10 rounded-[2.5rem] bg-bg-soft pb-24">
           {/* Drive principal */}
           <section className="container-wrap pt-14">
             <div className="mb-7 flex items-end justify-between gap-4">
