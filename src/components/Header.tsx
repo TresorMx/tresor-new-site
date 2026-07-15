@@ -42,7 +42,7 @@ const CITY_HREF: Record<City, string> = {
 
 // Por desarrollador — mismo orden que aparece en el resto del sitio.
 const developerLinks = [
-  { name: 'Tresor Real Estate', href: '/tresor' },
+  { name: 'Quattro Plaza Center', href: '/quattro-plaza-center' },
   { name: 'Live Desarrollos', href: '/live-desarrollos' },
   { name: 'Onix Living', href: '/onix-living' },
   { name: 'Urban Homes', href: '/urban-homes' },

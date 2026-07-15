@@ -30,6 +30,8 @@ const nextConfig = {
     return [
       { source: '/long-island', destination: '/plazas/long-island', permanent: true },
       { source: '/gardens', destination: '/plazas/gardens', permanent: true },
+      { source: '/tresor', destination: '/quattro-plaza-center', permanent: true },
+      { source: '/en/tresor', destination: '/en/quattro-plaza-center', permanent: true },
     ];
   },
 };
