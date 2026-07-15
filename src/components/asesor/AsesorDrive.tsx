@@ -1,6 +1,6 @@
 'use client';
 
-import type { CSSProperties } from 'react';
+import type { ComponentType, CSSProperties, ReactNode } from 'react';
 import { Download } from 'lucide-react';
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
@@ -31,12 +31,23 @@ export interface DriveDev {
   showAdmin?: boolean;
 }
 
-export default function AsesorDrive({ dev }: { dev: DriveDev }) {
+export default function AsesorDrive({
+  dev,
+  gate: Gate = AsesorGate,
+  fileEndpoint = '/api/asesor/file',
+}: {
+  dev: DriveDev;
+  // Permite reusar este mismo Drive (y su catálogo real) en
+  // /brokers/drive/[slug] con un gate/endpoint de archivo distintos, sin
+  // duplicar el contenido.
+  gate?: ComponentType<{ children: ReactNode }>;
+  fileEndpoint?: string;
+}) {
   const mainItems = getDriveLayout(dev.developer, dev.type).filter((item) => dev.available[item.key]);
   const adminItems = dev.showAdmin ? getDriveAdminLayout(dev.developer).filter((item) => dev.available[item.key]) : [];
 
   return (
-    <AsesorGate>
+    <Gate>
       {/* Sin <main> propio: el layout raíz ya envuelve todo en
           <main className="pt-[104px]">, y anidar OTRO <main> con SU PROPIO
           pt-[104px] duplicaba el padding (104 + 104, con -mt-[72px] solo
@@ -118,6 +129,7 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
                     labelOverride={item.label}
                     slug={dev.slug}
                     fullWidth={item.fullWidth}
+                    fileEndpoint={fileEndpoint}
                   />
                 ))}
               </div>
@@ -136,14 +148,14 @@ export default function AsesorDrive({ dev }: { dev: DriveDev }) {
               </div>
               <div className="grid gap-4 lg:grid-cols-4">
                 {adminItems.map((item) => (
-                  <DriveTile key={item.key} card={DRIVE_CATALOG[item.key]} slug={dev.slug} variant="admin" />
+                  <DriveTile key={item.key} card={DRIVE_CATALOG[item.key]} slug={dev.slug} variant="admin" fileEndpoint={fileEndpoint} />
                 ))}
               </div>
             </section>
           )}
         </div>
       </>
-    </AsesorGate>
+    </Gate>
   );
 }
 
@@ -153,17 +165,19 @@ function DriveTile({
   variant = 'main',
   labelOverride,
   fullWidth,
+  fileEndpoint,
 }: {
   card: DriveCard;
   slug: string;
   variant?: 'main' | 'admin';
   labelOverride?: string;
   fullWidth?: boolean;
+  fileEndpoint: string;
 }) {
   const Icon = card.icon;
   return (
     <a
-      href={`/api/asesor/file?dev=${slug}&doc=${card.key}`}
+      href={`${fileEndpoint}?dev=${slug}&doc=${card.key}`}
       target="_blank"
       rel="noopener noreferrer"
       className={cn(

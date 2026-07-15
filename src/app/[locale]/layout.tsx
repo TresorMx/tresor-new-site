@@ -14,6 +14,9 @@ import { cookies } from 'next/headers';
 import { AsesorProvider } from '@/components/asesor/AsesorProvider';
 import FloatingLayer from '@/components/asesor/FloatingLayer';
 import { verifySession, ASESOR_COOKIE } from '@/lib/asesor/session';
+import { BrokerProvider } from '@/components/broker/BrokerProvider';
+import { verifyBrokerSession, BROKER_COOKIE } from '@/lib/broker/session';
+import { getBrokerFullName } from '@/lib/broker/profile';
 // import ExitIntent from '@/components/ExitIntent'; // desactivado por lo pronto
 import MetaPixel from '@/components/MetaPixel';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
@@ -176,6 +179,13 @@ export default async function LocaleLayout({
   const cookieStore = await cookies();
   const initialIsAsesor = verifySession(cookieStore.get(ASESOR_COOKIE)?.value);
 
+  // Mismo patrón para brokers, pero con cookie/contexto propios (ver
+  // src/lib/broker/cookies.ts) — un broker autenticado nunca debe activar
+  // initialIsAsesor en el resto del sitio.
+  const brokerId = verifyBrokerSession(cookieStore.get(BROKER_COOKIE)?.value);
+  const initialIsBroker = Boolean(brokerId);
+  const initialBrokerFirstName = brokerId ? (await getBrokerFullName(brokerId))?.split(' ')[0] ?? null : null;
+
   const messages = await getMessages();
 
   const orgJsonLd = {
@@ -234,20 +244,22 @@ export default async function LocaleLayout({
         />
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AsesorProvider initialIsAsesor={initialIsAsesor}>
-            <ChromeGate
-              header={<Header logoStyle={siteSettings.headerLogoStyle} />}
-              footer={<Footer />}
-              extras={
-                <>
-                  <MobileBar />
-                  {/* FloatingLayer = Luis, o el botón "Drive de Ventas" si eres asesor y estás en una ficha. */}
-                  <FloatingLayer />
-                </>
-              }
-            >
-              {children}
-            </ChromeGate>
-            {/* <ExitIntent /> desactivado por lo pronto */}
+            <BrokerProvider initialIsBroker={initialIsBroker} initialFirstName={initialBrokerFirstName}>
+              <ChromeGate
+                header={<Header logoStyle={siteSettings.headerLogoStyle} />}
+                footer={<Footer />}
+                extras={
+                  <>
+                    <MobileBar />
+                    {/* FloatingLayer = Luis, o el botón "Drive de Ventas" si eres asesor y estás en una ficha. */}
+                    <FloatingLayer />
+                  </>
+                }
+              >
+                {children}
+              </ChromeGate>
+              {/* <ExitIntent /> desactivado por lo pronto */}
+            </BrokerProvider>
           </AsesorProvider>
         </NextIntlClientProvider>
         <MetaPixel />

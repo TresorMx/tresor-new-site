@@ -84,8 +84,12 @@ export const structure = (S: any) =>
 
       // ── 3) BROKERS ──────────────────────────────────────────────
       S.listItem()
-        .title('📁 Drive de brokers')
-        .child(S.documentTypeList('brokerDoc').title('Documentos')),
+        .title('🪪 Cuentas de broker')
+        .child(
+          S.documentTypeList('brokerAccount')
+            .title('Cuentas de broker')
+            .defaultOrdering([{ field: 'createdAt', direction: 'desc' }])
+        ),
 
       S.divider(),
 

@@ -9,6 +9,7 @@ import { ChevronDown, ArrowUpRight, ArrowRight, Building2, LandPlot, Store, MapP
 import { cn } from '@/lib/utils';
 import { getDevelopDevelopments, countByCity, type City } from '@/lib/developments';
 import { useAsesor } from '@/components/asesor/context';
+import { useBroker } from '@/components/broker/context';
 
 const corporate = [
   { href: '/desarrollo', label: 'Desarrollo' },
@@ -52,6 +53,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
   const router = useRouter();
   const isHome = pathname === '/';
   const { isAsesor, openLogin, logout } = useAsesor();
+  const { isBroker, firstName: brokerFirstName, logout: brokerLogout } = useBroker();
 
   const [scrollY, setScrollY] = useState(0);
   const [theme, setTheme] = useState<'dark' | 'light'>(isHome ? 'dark' : 'light');
@@ -167,8 +169,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                 </Link>
               ))}
               <span className="h-3 w-px bg-ink/25" />
-              {/* Asesores — abre el login (o muestra estado + Salir). Brokers
-                  queda oculto por lo pronto hasta trabajar esa sección. */}
+              {/* Asesores — abre el login (o muestra estado + Salir). */}
               {/* `uppercase` explícito en los <button> — Tailwind Preflight
                   resetea `text-transform: none` en botones, así que no
                   heredan el uppercase del contenedor como sí hacen los <a>. */}
@@ -188,6 +189,27 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                   Asesores
                   <Lock size={12} strokeWidth={2} />
                 </button>
+              )}
+              <span className="h-3 w-px bg-ink/25" />
+              {/* Brokers — a diferencia de Asesores, el login/registro vive en
+                  /brokers (página completa), no un modal: el registro con
+                  verificación por correo no cabe bien en un modal chico. */}
+              {isBroker ? (
+                <span className="inline-flex items-center gap-3">
+                  <span className="inline-flex items-center gap-1.5 uppercase">
+                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                    {brokerFirstName ?? 'Broker'}
+                  </span>
+                  <button onClick={brokerLogout} className="inline-flex items-center gap-1 uppercase transition-opacity hover:opacity-60">
+                    Salir
+                    <LogOut size={12} strokeWidth={2} />
+                  </button>
+                </span>
+              ) : (
+                <Link href="/brokers" className="inline-flex items-center gap-1.5 uppercase transition-opacity hover:opacity-60">
+                  Brokers
+                  <Lock size={12} strokeWidth={2} />
+                </Link>
               )}
             </div>
           </div>
@@ -339,7 +361,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                   <PropiedadesMenuMobile />
                 </MobileAccordionRow>
 
-                {/* Asesores — login (o Salir si ya inició sesión). Brokers oculto por ahora. */}
+                {/* Asesores — login (o Salir si ya inició sesión). */}
                 {isAsesor ? (
                   <button
                     onClick={() => { logout(); setMobileOpen(false); }}
@@ -356,6 +378,26 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                     Asesores
                     <Lock size={15} strokeWidth={1.8} className="text-ink-3" />
                   </button>
+                )}
+
+                {/* Brokers — login/registro completo vive en /brokers. */}
+                {isBroker ? (
+                  <button
+                    onClick={() => { brokerLogout(); setMobileOpen(false); }}
+                    className="flex w-full items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
+                  >
+                    Cerrar sesión de broker
+                    <LogOut size={16} strokeWidth={1.8} className="text-ink-3" />
+                  </button>
+                ) : (
+                  <Link
+                    href="/brokers"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex w-full items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
+                  >
+                    Brokers
+                    <Lock size={15} strokeWidth={1.8} className="text-ink-3" />
+                  </Link>
                 )}
 
                 {/* Idioma — antes solo existía en desktop (sm:inline-flex),

@@ -1,5 +1,6 @@
 'use client';
 
+import type { ComponentType, ReactNode } from 'react';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { Link } from '@/navigation';
@@ -12,9 +13,21 @@ export interface DriveGroup {
   devs: { slug: string; name: string; image?: string }[];
 }
 
-export default function AsesoresIndex({ groups }: { groups: DriveGroup[] }) {
+export default function AsesoresIndex({
+  groups,
+  gate: Gate = AsesorGate,
+  hrefBase = '/asesores',
+  greeting,
+}: {
+  groups: DriveGroup[];
+  // Permite reusar este mismo índice (y su catálogo real) en /brokers/drive
+  // con un gate/URL base/saludo distintos, sin duplicar el contenido.
+  gate?: ComponentType<{ children: ReactNode }>;
+  hrefBase?: string;
+  greeting?: { firstName: string };
+}) {
   return (
-    <AsesorGate>
+    <Gate>
       {/* Sin pt propio: el <main> del layout raíz ya trae pt-[104px] — tener
           otro <main> anidado con SU propio padding duplicaba el espacio.
           Fondo bg-soft (gris muy claro) para que las tarjetas blancas
@@ -22,14 +35,28 @@ export default function AsesoresIndex({ groups }: { groups: DriveGroup[] }) {
           de cards del home. */}
       <div className="min-h-screen bg-bg-soft pb-24 pt-9">
         <div className="container-wrap">
-          <span className="eyebrow eyebrow-accent block font-bold">— Drives de Ventas</span>
-          <h1 className="mt-3 font-sans text-[clamp(28px,4vw,52px)] font-normal leading-[1.05] tracking-tight">
-            Material comercial <span className="text-ink-3">por desarrollo</span>
-          </h1>
-          <p className="mt-4 max-w-xl text-[15px] font-light leading-relaxed text-ink-3">
-            Presentaciones, listas de precios, master plans, cuentas bancarias y formatos
-            administrativos — listos para cerrar.
-          </p>
+          {greeting ? (
+            <>
+              <span className="eyebrow eyebrow-accent block font-bold">— Drive de Ventas</span>
+              <h1 className="mt-3 font-sans text-[clamp(28px,4vw,52px)] font-normal leading-[1.05] tracking-tight">
+                Bienvenido, <span className="text-ink-3">{greeting.firstName}</span>
+              </h1>
+              <p className="mt-4 max-w-xl text-[15px] font-light leading-relaxed text-ink-3">
+                Toda la información comercial actualizada en un solo lugar.
+              </p>
+            </>
+          ) : (
+            <>
+              <span className="eyebrow eyebrow-accent block font-bold">— Drives de Ventas</span>
+              <h1 className="mt-3 font-sans text-[clamp(28px,4vw,52px)] font-normal leading-[1.05] tracking-tight">
+                Material comercial <span className="text-ink-3">por desarrollo</span>
+              </h1>
+              <p className="mt-4 max-w-xl text-[15px] font-light leading-relaxed text-ink-3">
+                Presentaciones, listas de precios, master plans, cuentas bancarias y formatos
+                administrativos — listos para cerrar.
+              </p>
+            </>
+          )}
 
           <div className="mt-14 flex flex-col gap-16">
             {groups.map((g) => (
@@ -50,7 +77,7 @@ export default function AsesoresIndex({ groups }: { groups: DriveGroup[] }) {
                   {g.devs.map((d) => (
                     <Link
                       key={d.slug}
-                      href={`/asesores/${d.slug}`}
+                      href={`${hrefBase}/${d.slug}`}
                       className="group flex items-center gap-4 rounded-[18px] bg-white p-3 pr-5 transition-shadow duration-300 ease-soft hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
                     >
                       <span className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl bg-bg-soft">
@@ -78,6 +105,6 @@ export default function AsesoresIndex({ groups }: { groups: DriveGroup[] }) {
           </div>
         </div>
       </div>
-    </AsesorGate>
+    </Gate>
   );
 }
