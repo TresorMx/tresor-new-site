@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Desarrollo — Nuestra Trayectoria',
     description: 'Proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate en Cancún y Tulum.',
     url: 'https://tresor.mx/desarrollo',
-    images: [{ url: '/1g-1.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

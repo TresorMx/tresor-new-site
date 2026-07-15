@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Las Mejores Zonas para Poner un Negocio en Cancún',
     description: 'Análisis completo de las mejores zonas comerciales de Cancún: tráfico, precios, tipo de cliente y potencial de cada corredor.',
     url: 'https://tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
-    images: [{ url: 'https://tresor.mx/blog/AdobeStock_838554951.jpeg', width: 1200, height: 630 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

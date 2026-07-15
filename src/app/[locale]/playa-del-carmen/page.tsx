@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Propiedades en Venta en Playa del Carmen',
     description: 'Departamentos en preventa y entrega inmediata en Playa del Carmen.',
     url: 'https://tresor.mx/playa-del-carmen',
-    images: [{ url: '/desarrollos/Favorite/playaNIGHT.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

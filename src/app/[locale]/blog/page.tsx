@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     description:
       'Artículos expertos sobre inversión en locales comerciales en Cancún: precios, zonas, preventa y análisis del mercado.',
     url: 'https://tresor.mx/blog',
-    images: [{ url: 'https://tresor.mx/blog/AdobeStock_791905652.jpeg', width: 1200, height: 630 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

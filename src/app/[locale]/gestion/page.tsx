@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: 'Gestión — Servicios de Gestión Inmobiliaria',
     description: 'Servicios integrales de gestión inmobiliaria de Tresor Real Estate, desde la conceptualización hasta la venta de la última unidad.',
     url: 'https://tresor.mx/gestion',
-    images: [{ url: '/1g-1.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: '¿Cuánto Cuesta un Local Comercial en Cancún en 2026?',
     description: 'Precios reales de locales comerciales en Cancún por zona y m². Todo lo que necesitas saber antes de comprar.',
     url: 'https://tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
-    images: [{ url: 'https://tresor.mx/blog/AdobeStock_804358854.jpeg', width: 1200, height: 630 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

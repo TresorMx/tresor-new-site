@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: 'Local Comercial vs Departamento en Cancún: ¿Qué Conviene Más como Inversión?',
     description: 'Análisis objetivo entre invertir en local comercial o departamento en Cancún. Rendimientos, riesgos y qué conviene según tu perfil.',
     url: 'https://tresor.mx/blog/local-comercial-vs-departamento-cancun',
-    images: [{ url: 'https://tresor.mx/blog/AdobeStock_862766615.jpeg', width: 1200, height: 630 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: 'Por Qué Invertir en Cancún desde Monterrey, CDMX o Guadalajara',
     description: 'Cancún ofrece mayor rendimiento y menor precio de entrada que Monterrey, CDMX o GDL. Todo lo que necesitas saber para invertir sin vivir allá.',
     url: 'https://tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
-    images: [{ url: 'https://tresor.mx/blog/AdobeStock_841077811.jpeg', width: 1200, height: 630 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

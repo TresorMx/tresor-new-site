@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Locales Comerciales en Venta en Cancún',
     description: 'Locales comerciales en preventa en plazas premium de Cancún, con alto potencial de retorno.',
     url: 'https://tresor.mx/locales-comerciales',
-    images: [{ url: '/renders/gardens/01.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

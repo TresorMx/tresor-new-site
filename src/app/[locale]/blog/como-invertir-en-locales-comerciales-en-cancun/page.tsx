@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     description:
       'Guía definitiva para invertir en locales comerciales en Cancún: desde elegir la zona correcta hasta negociar el mejor precio.',
     url: 'https://tresor.mx/blog/como-invertir-en-locales-comerciales-en-cancun',
-    images: [{ url: 'https://tresor.mx/blog/AdobeStock_791905652.jpeg', width: 1200, height: 630 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

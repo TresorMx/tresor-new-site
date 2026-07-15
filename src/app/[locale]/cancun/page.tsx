@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Propiedades en Venta en Cancún',
     description: 'Departamentos, locales comerciales y lotes residenciales en las zonas de mayor crecimiento de Cancún.',
     url: 'https://tresor.mx/cancun',
-    images: [{ url: '/desarrollos/villalta/portada2.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Lotes Residenciales en Venta en Cancún',
     description: 'Lotes y macrolotes residenciales en las zonas de mayor plusvalía de Cancún.',
     url: 'https://tresor.mx/lotes-residenciales',
-    images: [{ url: '/desarrollos/Sanam/portada.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

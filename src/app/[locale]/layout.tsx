@@ -124,7 +124,7 @@ export async function generateMetadata({
       description: isEs
         ? 'Departamentos, locales comerciales y lotes residenciales en Cancún y la Riviera Maya. Preventa y entrega inmediata.'
         : 'Apartments, commercial units and residential lots in Cancún and the Riviera Maya. Pre-sale and immediate delivery.',
-      images: [{ url: '/og/home.jpg', width: 1200, height: 630, alt: 'Tresor Real Estate' }],
+      images: [{ url: '/ogfinal.jpg', width: 1200, height: 630, alt: 'Tresor Real Estate' }],
     },
     twitter: {
       card: 'summary_large_image',
@@ -132,7 +132,7 @@ export async function generateMetadata({
       description: isEs
         ? 'Propiedades inmobiliarias en Cancún y la Riviera Maya.'
         : 'Real estate properties in Cancún and the Riviera Maya.',
-      images: ['/og/home.jpg'],
+      images: ['/ogfinal.jpg'],
     },
     verification: { google: 'U4evI45bFXrab7MhX6773_n1G9ZW862gxl8W9FufDh4' },
     robots: { index: true, follow: true, googleBot: { index: true, follow: true } },

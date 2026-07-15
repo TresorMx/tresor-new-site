@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: 'Comercialización — Sales Partner',
     description: 'Master Broker, Sales Partner y Real Estate Agency — el modelo de comercialización de Tresor Real Estate.',
     url: 'https://tresor.mx/comercializacion',
-    images: [{ url: '/salespartner.jpg', width: 1152, height: 648 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

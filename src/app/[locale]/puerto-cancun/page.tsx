@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Propiedades en Venta en Puerto Cancún',
     description: 'Departamentos de lujo en Puerto Cancún, frente al mar Caribe y la marina.',
     url: 'https://tresor.mx/puerto-cancun',
-    images: [{ url: '/desarrollos/Blume/BLUME-Drone-1.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     title: 'Guía para Comprar en Preventa en Cancún: Todo lo que Debes Saber',
     description: 'Checklist, documentos y preguntas clave para comprar en preventa en Cancún sin errores. Guía completa para el inversionista inteligente.',
     url: 'https://tresor.mx/blog/guia-comprar-en-preventa-cancun',
-    images: [{ url: 'https://tresor.mx/blog/AdobeStock_887006964.jpeg', width: 1200, height: 630 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

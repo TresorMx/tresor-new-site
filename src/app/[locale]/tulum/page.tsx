@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Propiedades en Venta en Tulum',
     description: 'Departamentos en preventa en Tulum, el destino de mayor crecimiento de México.',
     url: 'https://tresor.mx/tulum',
-    images: [{ url: '/desarrollos/xaviera/fotos/1. Fachada de Noche.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 

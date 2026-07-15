@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: 'Departamentos en Venta en Cancún y Riviera Maya',
     description: 'Departamentos en preventa y entrega inmediata con las desarrolladoras más sólidas de Quintana Roo.',
     url: 'https://tresor.mx/departamentos',
-    images: [{ url: '/desarrollo-corporativo/LuxuryL.jpg', width: 1920, height: 992 }],
+    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
 
