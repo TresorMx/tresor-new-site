@@ -8,7 +8,7 @@
 // ────────────────────────────────────────────────────────────────────────────
 
 import { getPlazaBySlugAsync, getMinAvailablePrice } from '@/lib/data';
-import type { Unit, PaymentPlan, UnitSpecTemplate, I18nText } from '@/lib/types';
+import type { Unit, PaymentPlan, UnitSpecTemplate, I18nText, Plaza } from '@/lib/types';
 import type { AmenityKey } from '@/lib/amenities';
 
 export type { I18nText };
@@ -1963,6 +1963,30 @@ export function getReservationAmount(dev: Development): number {
     return dev.reservationAmount;
   }
   return dev.relationship === 'develop' ? 50000 : 25000;
+}
+
+const PROPERTY_TYPE_EN: Record<string, string> = {
+  Departamento: 'Apartments',
+  Casa: 'Homes',
+  'Lote Residencial': 'Residential Lots',
+  'Local Comercial': 'Commercial Units',
+};
+
+// SEO: título de <title> Y del <h1> de la ficha — misma función para los
+// dos, así nunca quedan desalineados. Cascada: seoTitle curado a mano
+// (Sanity/estático) primero; si no existe, se arma uno con datos que YA
+// existen y son correctos (tipo de propiedad + ciudad) — nunca se inventa
+// nada, solo se compone lo que el desarrollo ya tiene cargado.
+export function fichaSeoTitle(dev: Development, plaza: Plaza | null | undefined, isEs: boolean): string {
+  const city = plaza?.city ?? dev.city;
+  const kindEs = dev.propertyType ?? 'Desarrollo';
+  const kindEn = dev.propertyType ? (PROPERTY_TYPE_EN[dev.propertyType] ?? dev.propertyType) : 'Development';
+  const fallback = isEs
+    ? `${dev.name} — ${kindEs} en Venta en ${city}`
+    : `${dev.name} — ${kindEn} for Sale in ${city}`;
+  return isEs
+    ? (plaza?.seoTitle ?? dev.seoTitle?.es ?? fallback)
+    : (plaza?.seoTitleEn ?? dev.seoTitle?.en ?? dev.seoTitle?.es ?? fallback);
 }
 
 // ─────────────────────────────────────────────────────────────────────────────

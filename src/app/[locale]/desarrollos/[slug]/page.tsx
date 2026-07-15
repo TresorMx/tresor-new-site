@@ -26,7 +26,7 @@ import FichaFloorPlans from '@/components/ficha/FichaFloorPlans';
 import ReservaRapidaForm from '@/components/ficha/ReservaRapidaForm';
 import RelatedDevelopments from '@/components/ficha/RelatedDevelopments';
 import FichaContentBlock from '@/components/ficha/FichaContentBlock';
-import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount, getMergedDevelopmentsAsync } from '@/lib/developments';
+import { getDevelopment, developers, allDevelopmentRouteSlugs, getReservationAmount, getMergedDevelopmentsAsync, fichaSeoTitle } from '@/lib/developments';
 import { OBJECT_POSITION_MOBILE, OBJECT_POSITION_DESKTOP } from '@/lib/heroImagePosition';
 
 // El cotizador interno (/cotizar/[slug]) todavía no está listo para asesores
@@ -59,9 +59,8 @@ export async function generateMetadata({
 
   // Sitios con ficha rica (plaza) mantienen el título/SEO detallado que ya
   // tenían; Sales Partner usa una versión genérica desde el modelo unificado.
-  const title = isEs
-    ? (plaza?.seoTitle ?? dev.seoTitle?.es ?? `${name} — ${city}`)
-    : (plaza?.seoTitleEn ?? dev.seoTitle?.en ?? dev.seoTitle?.es ?? `${name} — ${city}`);
+  // Misma función que usa el <h1> del hero — nunca quedan desalineados.
+  const title = fichaSeoTitle(dev, plaza, isEs);
 
   const description = isEs
     ? (plaza?.seoDescription ?? dev.seoDescription?.es ?? dev.description ??
@@ -76,7 +75,11 @@ export async function generateMetadata({
     title,
     description,
     alternates: {
-      canonical: `/desarrollos/${slug}`,
+      // Autorreferenciado por idioma — antes SIEMPRE apuntaba a la versión
+      // ES (incluso desde /en/...), lo que le decía a Google que ignorara
+      // la página en inglés a favor de la española. `languages` sigue
+      // cruzando ambas versiones entre sí (eso sí estaba bien).
+      canonical: isEs ? `/desarrollos/${slug}` : `/en/desarrollos/${slug}`,
       languages: {
         'es':        `${SITE}/desarrollos/${slug}`,
         'en':        `${SITE}/en/desarrollos/${slug}`,
@@ -124,6 +127,11 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   // Sales Partner como "Olivia Wow Condos"), el nombre queda intacto.
   const displayName = dev.name.replace(/\s*Plaza Center\s*/, ' ').replace(/\s+/g, ' ').trim();
   const isEs = locale !== 'en';
+  // SEO: mismo texto que <title> (fichaSeoTitle) — el hero antes no tenía
+  // NINGÚN <h1> cuando el desarrollo tiene logo (el logo reemplazaba el
+  // título por completo, sin dejar rastro para buscadores/lectores de
+  // pantalla). sr-only para no tocar el diseño visual del hero.
+  const heroH1 = fichaSeoTitle(dev, plaza, isEs);
   const { showAgendaWidget, hideAsesorForms } = siteSettings;
   const agendaEyebrow = isEs ? siteSettings.agendaEyebrow : siteSettings.agendaEyebrowEn;
   const agendaTitle1  = isEs ? siteSettings.agendaTitle1  : siteSettings.agendaTitle1En;
@@ -295,6 +303,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
         <div className="absolute inset-0 bg-black/50" />
 
         <div className="relative z-10 flex h-full items-center justify-center pt-[72px]">
+          {dev.logo && <h1 className="sr-only">{heroH1}</h1>}
           {dev.logo ? (
             // `fill` + `object-contain` (en vez de width/height fijos tipo
             // 800x280) — con width/height fijos el navegador usa ESA
@@ -325,7 +334,10 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
               />
             </div>
           ) : (
-            <h1 className="h-display text-center text-[clamp(56px,10vw,160px)] text-white">{dev.name}</h1>
+            <>
+              <h1 className="sr-only">{heroH1}</h1>
+              <p aria-hidden className="h-display text-center text-[clamp(56px,10vw,160px)] text-white">{dev.name}</p>
+            </>
           )}
         </div>
       </section>

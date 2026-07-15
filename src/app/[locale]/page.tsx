@@ -78,12 +78,17 @@ function Hero() {
             +10s en móvil aunque la foto de fondo cargara rápido. El fade al
             hacer scroll tiene sentido para contenido debajo del fold, no
             para lo primero que se pinta. */}
-        <h1
+        {/* H1 real para SEO — "The Art of Luxury Living" es la identidad de
+            marca (se queda igual visualmente), pero cero palabra clave. Un
+            solo h1 por página: este va oculto, el texto de marca baja a <p>. */}
+        <h1 className="sr-only">Propiedades en Venta en Cancún y Riviera Maya — Tresor Real Estate</h1>
+        <p
+          aria-hidden
           className="mt-6 w-full text-center text-[clamp(22px,4vw,58px)] leading-[0.95] tracking-tight"
           style={{ fontFamily: 'Javacom, serif' }}
         >
           The Art of Luxury Living
-        </h1>
+        </p>
         <p className="mt-7 w-full text-center text-[clamp(11px,1.1vw,16px)] font-bold uppercase tracking-[0.2em] text-white">
           Desarrollos inmobiliarios en Cancún y Riviera Maya
         </p>
