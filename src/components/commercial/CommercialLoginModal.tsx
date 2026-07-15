@@ -74,6 +74,11 @@ export default function CommercialLoginModal() {
       if (errorMessage) {
         setErr(errorMessage);
         setLoading(false);
+      } else {
+        // A diferencia de broker (que navega directo a /brokers/drive), el
+        // login de asesor se queda en la misma página — hay que cerrar el
+        // modal a mano, si no se quedaba abierto en "Verificando…".
+        closeLogin();
       }
     } else {
       const result = await brokerLogin(email, password);
