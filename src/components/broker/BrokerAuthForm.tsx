@@ -10,8 +10,8 @@ export default function BrokerAuthForm({ initialMode = 'register' }: { initialMo
   const [email, setEmail] = useState('');
 
   return (
-    <main className="min-h-screen bg-bg pt-24 pb-24">
-      <section className="container-wrap grid items-center gap-16 py-16 md:grid-cols-[1fr_1.2fr]">
+    <main className="min-h-screen bg-bg-soft pt-24 pb-24">
+      <section className="container-wrap grid items-center gap-16 pt-4 pb-16 md:grid-cols-[1fr_1.2fr]">
         <div>
           <span className="eyebrow eyebrow-accent">— Acceso Broker</span>
           <h1 className="mt-4 h-display text-[clamp(36px,5vw,64px)] text-ink">
@@ -121,7 +121,7 @@ function RegisterForm({
   }
 
   return (
-    <form onSubmit={submit} className="rounded-lg border border-line bg-white p-10 shadow-sm">
+    <form onSubmit={submit} className="rounded-lg bg-white p-10 shadow-sm">
       <CardHeading
         title="Regístrate"
         subtitle={
@@ -236,7 +236,7 @@ function VerifyForm({ email, onBack }: { email: string; onBack: () => void }) {
   }
 
   return (
-    <form onSubmit={submit} className="rounded-lg border border-line bg-white p-10 shadow-sm">
+    <form onSubmit={submit} className="rounded-lg bg-white p-10 shadow-sm">
       <CardHeading title="Verifica tu correo" subtitle={`Enviamos un código a ${email}`} />
 
       <label className="field">
@@ -317,7 +317,7 @@ function LoginForm({
   }
 
   return (
-    <form onSubmit={submit} className="rounded-lg border border-line bg-white p-10 shadow-sm">
+    <form onSubmit={submit} className="rounded-lg bg-white p-10 shadow-sm">
       <CardHeading
         title="Inicia sesión"
         subtitle={
@@ -405,7 +405,7 @@ function ForgotPasswordForm({
   }
 
   return (
-    <form onSubmit={submit} className="rounded-lg border border-line bg-white p-10 shadow-sm">
+    <form onSubmit={submit} className="rounded-lg bg-white p-10 shadow-sm">
       <CardHeading title="Olvidé mi contraseña" subtitle="Te mandamos un código para crear una nueva." />
 
       <label className="field">
@@ -488,7 +488,7 @@ function ResetPasswordForm({ email, onBack }: { email: string; onBack: () => voi
   }
 
   return (
-    <form onSubmit={submit} className="rounded-lg border border-line bg-white p-10 shadow-sm">
+    <form onSubmit={submit} className="rounded-lg bg-white p-10 shadow-sm">
       <CardHeading title="Crea tu nueva contraseña" subtitle={`Enviamos un código a ${email}`} />
 
       <div className="grid gap-5">
