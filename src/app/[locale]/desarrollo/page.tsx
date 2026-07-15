@@ -202,7 +202,13 @@ export default function DesarrolloPage() {
           (mismo orden que el sitio anterior: Luxury blanco, Residencial
           gris, Comercial blanco, Vacacional gris, Master Plan blanco). ═════ */}
       {CATEGORIES.map((c, i) => (
-        <section key={c.id} id={c.id} className={`py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'}`}>
+        <section
+          key={c.id}
+          id={c.id}
+          className={`py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'} ${
+            i === 0 ? 'relative z-10 -mt-10 rounded-[2.5rem]' : ''
+          }`}
+        >
           <div className="container-wrap">
             <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
               {c.location ? (
