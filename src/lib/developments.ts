@@ -1664,7 +1664,7 @@ export const developments: Development[] = [
     image: '/desarrollos/Blume/BLUME-Arquitectura-1.jpg',
     href: '/desarrollos/blume-urban',
     featured: true,
-    logo: '/desarrollos/Blume/logo.png',
+    logo: '/desarrollos/Blume/logoBlume.png',
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
     priceLabel: 'Desde $19,256,000 MXN',
