@@ -101,7 +101,10 @@ export default function AsesorDrive({
             )}
           </div>
 
-          <div className="container-wrap absolute inset-x-0 bottom-0 z-10 pb-8">
+          {/* pb-16 (no pb-8): la sección de abajo ahora sube -mt-10 (40px)
+              sobre el hero — con solo pb-8 el título quedaba tapado por esa
+              esquina redondeada entrando por debajo. */}
+          <div className="container-wrap absolute inset-x-0 bottom-0 z-10 pb-16">
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent">
               Drive de Ventas · {dev.developerName}
             </span>
