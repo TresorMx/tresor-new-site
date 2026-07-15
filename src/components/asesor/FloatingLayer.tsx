@@ -15,6 +15,8 @@ import { useBroker } from '@/components/broker/context';
 //     los drives" → /asesores o /brokers/drive según el caso. Antes esto
 //     vivía como un link repetido en cada card del home; un solo botón
 //     flotante es más simple y consistente con cómo ya funciona en la ficha.
+//   - Ya DENTRO del Drive (/asesores* o /brokers/drive*): ningún botón —
+//     sería un link a la página en la que ya estás.
 // isAsesor tiene prioridad sobre isBroker en el caso (raro) de que alguien
 // tenga ambas sesiones activas — el equipo interno manda.
 export default function FloatingLayer() {
@@ -24,8 +26,11 @@ export default function FloatingLayer() {
 
   if (!isAsesor && !isBroker) return <Chatbot />;
 
-  const fichaMatch = pathname.match(/^\/desarrollos\/([^/]+)/);
   const base = isAsesor ? '/asesores' : '/brokers/drive';
+  const alreadyInDrive = pathname === base || pathname.startsWith(`${base}/`);
+  if (alreadyInDrive) return null;
+
+  const fichaMatch = pathname.match(/^\/desarrollos\/([^/]+)/);
   const href = fichaMatch ? `${base}/${fichaMatch[1]}` : base;
   const label = fichaMatch ? 'Drive de Ventas' : 'Todos los drives';
   const Icon = fichaMatch ? FolderLock : Grid2x2;
