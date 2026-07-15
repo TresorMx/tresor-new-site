@@ -42,9 +42,9 @@ export default async function Footer() {
               Acerca de Tresor
             </h4>
             <ul className="flex flex-col gap-3 text-[13px] text-white/85 md:text-[14px]">
-              <li><Link href="/nosotros" className="hover:text-accent">Desarrollo</Link></li>
-              <li><Link href="/nosotros" className="hover:text-accent">Gestión</Link></li>
-              <li><Link href="/nosotros" className="hover:text-accent">Comercialización</Link></li>
+              <li><Link href="/desarrollo" className="hover:text-accent">Desarrollo</Link></li>
+              <li><Link href="/gestion" className="hover:text-accent">Gestión</Link></li>
+              <li><Link href="/comercializacion" className="hover:text-accent">Comercialización</Link></li>
               <li><Link href="/blog" className="hover:text-accent">Tresor News</Link></li>
               <li><Link href="/privacidad" className="hover:text-accent">Políticas de Privacidad</Link></li>
             </ul>
@@ -57,8 +57,6 @@ export default async function Footer() {
             </h4>
             <ul className="flex flex-col gap-3 text-[13px] text-white/85 md:text-[14px]">
               <li><Link href="/#portafolio" className="hover:text-accent">Desarrollos</Link></li>
-              <li><Link href="/listings" className="hover:text-accent">Listings</Link></li>
-              <li><Link href="/rentas" className="hover:text-accent">Rentas</Link></li>
             </ul>
           </div>
 
