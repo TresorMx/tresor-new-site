@@ -119,9 +119,11 @@ export default function AsesorDrive({
             rounded-[2.5rem] que usan /gestion y /desarrollo funciona bien
             porque el hueco de las esquinas redondeadas revela la foto del
             hero, no un fondo blanco suelto. */}
-        {/* pb-[100px] fijo (no pb-24, que solo daba 96px) — mismo espacio
-            que el pt del footer, medido en el sitio real. */}
-        <div className="relative z-10 -mt-10 rounded-[2.5rem] bg-bg-soft pb-[100px]">
+        {/* pb-[140px] fijo: el Footer tiene su propio -mt-10 (sube 40px
+            sobre esta sección) — sin compensar esos 40px, el espacio
+            VISIBLE quedaba en 100-40=60px. 100 + 40 = 140px de pb para que
+            el hueco gris visible antes del negro sí sea de 100px. */}
+        <div className="relative z-10 -mt-10 rounded-[2.5rem] bg-bg-soft pb-[140px]">
           {/* Drive principal */}
           <section className="container-wrap pt-14">
             <div className="mb-7 flex items-end justify-between gap-4">

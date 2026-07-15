@@ -39,9 +39,11 @@ export default function AsesoresIndex({
           Sin rounded: ese truco (usado en /gestion, /desarrollo) solo
           funciona cuando hay un hero de color/foto detrás del header que
           rellena el hueco de las esquinas — aquí no hay hero. */}
-      {/* pb-[100px] fijo (no pb-24, que solo daba 96px) — mismo espacio que
-          el pt del footer, medido en el sitio real. */}
-      <div className="-mt-[104px] min-h-screen bg-bg-soft pb-[100px] pt-[140px]">
+      {/* pb-[140px] fijo: el Footer tiene su propio -mt-10 (sube 40px sobre
+          esta sección) — sin compensar esos 40px, el espacio VISIBLE
+          quedaba en 100-40=60px. 100 + 40 = 140px de pb para que el hueco
+          gris visible antes del negro sí sea de 100px. */}
+      <div className="-mt-[104px] min-h-screen bg-bg-soft pb-[140px] pt-[140px]">
         <div className="container-wrap">
           {greeting ? (
             <>

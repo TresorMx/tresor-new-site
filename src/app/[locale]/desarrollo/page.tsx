@@ -210,10 +210,12 @@ export default function DesarrolloPage() {
           key={c.id}
           id={c.id}
           className={`pt-16 md:pt-24 ${
-            // La última sección antes del footer lleva pb-[100px] fijo (no
-            // md:pb-24, que solo daba 96px en desktop y 64px en mobile) —
-            // mismo espacio que el pt del footer, medido en el sitio real.
-            i === CATEGORIES.length - 1 ? 'pb-[100px]' : 'pb-16 md:pb-24'
+            // La última sección antes del footer lleva pb-[140px] fijo: el
+            // Footer tiene su propio -mt-10 (sube 40px sobre esta sección)
+            // — sin compensar esos 40px, el espacio VISIBLE quedaba en
+            // 100-40=60px. 100 + 40 = 140px de pb para que el hueco blanco
+            // visible antes del negro sí sea de 100px.
+            i === CATEGORIES.length - 1 ? 'pb-[140px]' : 'pb-16 md:pb-24'
           } ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'} ${
             i === 0 ? 'relative z-10 -mt-10 rounded-[2.5rem]' : ''
           }`}

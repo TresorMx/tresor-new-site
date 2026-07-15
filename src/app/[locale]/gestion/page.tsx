@@ -106,10 +106,12 @@ export default function GestionPage() {
 
       {/* ═════ PROYECTOS — misma estructura de fila texto/foto que
           /desarrollo (texto izq., foto der., esquinas redondeadas). ═════ */}
-      {/* pb-[100px] fijo (no md:py-24, que solo daba 96px en desktop y 64px
-          en mobile) — mismo espacio que el pt del footer, medido en el
-          sitio real. */}
-      <section className="bg-white pt-16 pb-[100px] md:pt-24">
+      {/* pb-[140px] fijo: el Footer tiene su propio -mt-10 (sube 40px sobre
+          esta sección con esquinas redondeadas) — sin compensar esos 40px,
+          el espacio VISIBLE quedaba en 100-40=60px, no en los 100px reales
+          que se querían. 100 + 40 = 140px de pb para que el hueco blanco
+          visible antes del negro sí sea de 100px. */}
+      <section className="bg-white pt-16 pb-[140px] md:pt-24">
         <div className="flex flex-col gap-20 md:gap-24">
           {PROJECTS.map((p) => (
             <div key={p.name} className="container-wrap grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-14">
