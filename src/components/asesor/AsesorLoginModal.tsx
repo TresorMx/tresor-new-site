@@ -71,8 +71,8 @@ export default function AsesorLoginModal() {
         <h2 className="mt-5 font-sans text-[26px] font-medium leading-tight tracking-tight">
           Acceso Asesores
         </h2>
-        <p className="mt-2 text-[14px] font-light leading-relaxed text-ink-3">
-          Material exclusivo para equipo de ventas.
+        <p className="mt-2 text-[14px] font-light leading-relaxed text-ink">
+          Material exclusivo para equipo de ventas de Tresor Real Estate.
         </p>
 
         <form onSubmit={submit} className="mt-7 grid gap-4">

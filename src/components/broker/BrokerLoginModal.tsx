@@ -75,8 +75,8 @@ export default function BrokerLoginModal() {
         <h2 className="mt-5 font-sans text-[26px] font-medium leading-tight tracking-tight">
           Acceso Brokers
         </h2>
-        <p className="mt-2 text-[14px] font-light leading-relaxed text-ink-3">
-          Inicia sesión para ver el Drive de Ventas.
+        <p className="mt-2 text-[14px] font-light leading-relaxed text-ink">
+          Inicia sesión para ver los materiales de venta de los desarrollos inmobiliarios.
         </p>
 
         <form onSubmit={submit} className="mt-7 grid gap-4">
