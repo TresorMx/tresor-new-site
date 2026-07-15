@@ -69,8 +69,20 @@ export default function GestionPage() {
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
           <span className="eyebrow eyebrow-accent font-bold">— Gestión</span>
-          <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">Servicios de Gestión</h1>
+          <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">We Manage</h1>
           <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">
+            Acompañamos cada proyecto en todas sus etapas, con la misma visión integral con la
+            que desarrollamos — de la planeación a la entrega, cuidando cada detalle para
+            asegurar el éxito de nuestros clientes y socios.
+          </p>
+        </div>
+      </section>
+
+      {/* ═════ SERVICIOS ═════ */}
+      <section className="relative z-10 -mt-10 rounded-[2.5rem] bg-bg-soft py-16 md:py-24">
+        <div className="container-wrap">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">Servicios de Gestión</h2>
+          <p className="mt-6 max-w-2xl text-[15px] font-light leading-relaxed text-ink-2">
             Ofrecemos una amplia gama de servicios para garantizar el éxito de tu proyecto
             inmobiliario, desde la conceptualización inicial hasta la venta de la última unidad.
             Con una visión integral y un enfoque proactivo, nuestro equipo colabora
@@ -78,11 +90,7 @@ export default function GestionPage() {
             verdadero éxito.
           </p>
         </div>
-      </section>
-
-      {/* ═════ SERVICIOS ═════ */}
-      <section className="relative z-10 -mt-10 rounded-[2.5rem] bg-bg-soft py-16 md:py-24">
-        <div className="container-wrap grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="container-wrap mt-14 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((col, i) => (
             <ul key={i} className="flex flex-col gap-4">
               {col.map((item) => (
