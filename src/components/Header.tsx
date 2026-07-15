@@ -12,7 +12,7 @@ import { useAsesor } from '@/components/asesor/context';
 
 const corporate = [
   { href: '/desarrollo', label: 'Desarrollo' },
-  { href: '#', label: 'Gestión' },
+  { href: '/gestion', label: 'Gestión' },
   { href: '#', label: 'Comercialización' },
 ];
 
