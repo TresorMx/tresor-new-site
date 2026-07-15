@@ -9,9 +9,12 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 // blancas + contador), si trae solo una es una imagen estática. Reemplaza
 // al slider de Elementor que tenía el sitio anterior en Allure, Blume y
 // La Vela, con nuestro propio estilo.
-export default function ProjectImage({ images, alt }: { images: string[]; alt: string }) {
+export default function ProjectImage({
+  images, alt, fit = 'cover', aspectRatio = '16/9',
+}: { images: string[]; alt: string; fit?: 'cover' | 'contain'; aspectRatio?: string }) {
   const [active, setActive] = useState(0);
   const multi = images.length > 1;
+  const fitClass = fit === 'contain' ? 'object-contain' : 'object-cover';
 
   const prev = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -23,7 +26,10 @@ export default function ProjectImage({ images, alt }: { images: string[]; alt: s
   };
 
   return (
-    <div className="group relative aspect-[16/9] overflow-hidden rounded-[20px] bg-bg-soft">
+    // aspectRatio es dinámico (distinto por proyecto) — Tailwind no puede
+    // generar una clase arbitraria en build-time si el valor viene de una
+    // variable, así que va como inline style, no como `aspect-[...]`.
+    <div className="group relative overflow-hidden rounded-[20px] bg-bg-soft" style={{ aspectRatio }}>
       {images.map((src, i) => (
         <Image
           key={src}
@@ -32,7 +38,7 @@ export default function ProjectImage({ images, alt }: { images: string[]; alt: s
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1100px) 50vw, 33vw"
           priority={i === 0}
-          className={`object-cover transition-opacity duration-700 ease-in-out ${
+          className={`${fitClass} transition-opacity duration-700 ease-in-out ${
             i === active ? 'opacity-100' : 'opacity-0'
           }`}
         />

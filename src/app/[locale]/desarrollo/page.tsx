@@ -29,6 +29,9 @@ interface Project {
   description: string;
   images?: string[]; // 1 = foto estática, 2+ = slider (Allure/Blume/La Vela)
   tiles?: string[];  // grid de sub-marcas (Astoria, Long Island Community) — reemplaza `images`
+  fit?: 'cover' | 'contain';   // 'contain' para PNGs con fondo transparente que no deben recortarse
+  aspectRatio?: string;        // override del aspect-ratio default (16/9) — necesario con `fit: 'contain'`
+                                // cuando la imagen no es panorámica (ej. un master plan vertical).
 }
 
 interface Category {
@@ -135,13 +138,29 @@ const CATEGORIES: Category[] = [
   {
     id: 'master-plan',
     eyebrow: 'Master Plan',
-    location: 'Cancún',
-    intro: 'Amplia trayectoria en la planeación y desarrollo de master plans integrales, concebidos para crear comunidades con visión a largo plazo y un equilibrio armónico entre urbanismo y naturaleza.',
+    location: '',
+    intro: 'Contamos con una amplia trayectoria en la planeación y desarrollo de Master Plans integrales, concebidos para crear comunidades con visión a largo plazo y un equilibrio armónico entre urbanismo y naturaleza.',
     projects: [
       {
+        name: 'Astoria Cancún',
+        description: 'Un proyecto icónico en Av. Huayacán, la primera comunidad planeada con casas y departamentos dentro de un master plan de 437 unidades.',
+        images: ['/astoriamaster.png'],
+        fit: 'contain',
+        aspectRatio: '1.444/1',
+      },
+      {
+        name: 'Long Island Cancún',
+        description: 'Master plan de 1,315 unidades que dio vida a una comunidad privada, logrando uno de los proyectos más innovadores de Cancún.',
+        images: ['/longmaster.png'],
+        fit: 'contain',
+        aspectRatio: '1.566/1',
+      },
+      {
         name: 'Sanam Country Club',
-        description: 'Lotes unifamiliares y macrolotes para desarrolladores en 32 hectáreas, con una reserva natural de 8 hectáreas —cenotes, área de yoga y senderos. Diseño de Sanzpont Arquitectura.',
-        images: ['/desarrollos/Sanam/portada.jpg'],
+        description: 'Proyecto inmobiliario en Tulum que integra lotes unifamiliares y macrolotes dentro de un entorno de 32 hectáreas, con una reserva natural de 2.5 hectáreas que alberga cenotes, áreas de yoga y senderos. Un diseño de Sanzpont Arquitectura & Artigas.',
+        images: ['/sanammaster.png'],
+        fit: 'contain',
+        aspectRatio: '0.639/1',
       },
     ],
   },
@@ -186,7 +205,11 @@ export default function DesarrolloPage() {
         <section key={c.id} id={c.id} className={`py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'}`}>
           <div className="container-wrap">
             <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
-              {c.eyebrow} <span className="text-ink-3">en {c.location}</span>
+              {c.location ? (
+                <>{c.eyebrow} <span className="text-ink-3">en {c.location}</span></>
+              ) : (
+                c.eyebrow
+              )}
             </h2>
             <p className="mt-6 text-[15px] font-light leading-relaxed text-ink-2">{c.intro}</p>
           </div>
@@ -208,7 +231,7 @@ export default function DesarrolloPage() {
                       ))}
                     </div>
                   ) : (
-                    <ProjectImage images={p.images ?? []} alt={p.name} />
+                    <ProjectImage images={p.images ?? []} alt={p.name} fit={p.fit} aspectRatio={p.aspectRatio} />
                   )}
                 </div>
               </div>
