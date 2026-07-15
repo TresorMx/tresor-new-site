@@ -39,7 +39,9 @@ export default function AsesoresIndex({
           Sin rounded: ese truco (usado en /gestion, /desarrollo) solo
           funciona cuando hay un hero de color/foto detrás del header que
           rellena el hueco de las esquinas — aquí no hay hero. */}
-      <div className="-mt-[104px] min-h-screen bg-bg-soft pb-24 pt-[140px]">
+      {/* pb-[100px] fijo (no pb-24, que solo daba 96px) — mismo espacio que
+          el pt del footer, medido en el sitio real. */}
+      <div className="-mt-[104px] min-h-screen bg-bg-soft pb-[100px] pt-[140px]">
         <div className="container-wrap">
           {greeting ? (
             <>

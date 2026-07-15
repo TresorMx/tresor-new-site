@@ -209,7 +209,12 @@ export default function DesarrolloPage() {
         <section
           key={c.id}
           id={c.id}
-          className={`py-16 md:py-24 ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'} ${
+          className={`pt-16 md:pt-24 ${
+            // La última sección antes del footer lleva pb-[100px] fijo (no
+            // md:pb-24, que solo daba 96px en desktop y 64px en mobile) —
+            // mismo espacio que el pt del footer, medido en el sitio real.
+            i === CATEGORIES.length - 1 ? 'pb-[100px]' : 'pb-16 md:pb-24'
+          } ${i % 2 === 1 ? 'bg-bg-soft' : 'bg-white'} ${
             i === 0 ? 'relative z-10 -mt-10 rounded-[2.5rem]' : ''
           }`}
         >

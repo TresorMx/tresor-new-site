@@ -119,7 +119,9 @@ export default function AsesorDrive({
             rounded-[2.5rem] que usan /gestion y /desarrollo funciona bien
             porque el hueco de las esquinas redondeadas revela la foto del
             hero, no un fondo blanco suelto. */}
-        <div className="relative z-10 -mt-10 rounded-[2.5rem] bg-bg-soft pb-24">
+        {/* pb-[100px] fijo (no pb-24, que solo daba 96px) — mismo espacio
+            que el pt del footer, medido en el sitio real. */}
+        <div className="relative z-10 -mt-10 rounded-[2.5rem] bg-bg-soft pb-[100px]">
           {/* Drive principal */}
           <section className="container-wrap pt-14">
             <div className="mb-7 flex items-end justify-between gap-4">
