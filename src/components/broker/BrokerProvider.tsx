@@ -34,15 +34,15 @@ export function BrokerProvider({ children, initialIsBroker, initialFirstName }: 
         needsVerification: Boolean(body.needsVerification),
       };
     }
-    setIsBroker(true);
-    setFirstName(body.firstName ?? null);
     setLoginOpen(false);
-    // Mismo motivo que AsesorProvider: el estado del header/FloatingLayer se
-    // calcula server-side con la cookie — sin refresh se queda con lo que ya
-    // se había mandado al navegador.
-    startTransition(() => { router.refresh(); });
+    // A diferencia de AsesorProvider (que se queda en la misma página), el
+    // login de broker manda directo al Drive — es lo que el broker vino a
+    // buscar. Navegación completa (no router.push) para que el layout raíz
+    // vuelva a leer la cookie recién puesta (el estado de "Brokers" en el
+    // header depende de eso).
+    window.location.assign('/brokers/drive');
     return null;
-  }, [router]);
+  }, []);
 
   const logout = useCallback(async () => {
     await fetch('/api/broker/logout', { method: 'POST' });

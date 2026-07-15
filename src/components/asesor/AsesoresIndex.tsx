@@ -28,16 +28,18 @@ export default function AsesoresIndex({
 }) {
   return (
     <Gate>
-      {/* Sin pt propio: el <main> del layout raíz ya trae pt-[104px] — tener
-          otro <main> anidado con SU PROPIO padding duplicaba el espacio.
-          SIN -mt-10/rounded: ese truco (usado en /gestion, /desarrollo)
-          solo funciona cuando hay un hero de color/foto detrás del header
-          que rellena el hueco que dejan las esquinas redondeadas — aquí no
-          hay hero, así que las esquinas redondeadas solo dejaban ver el
-          blanco de <main> detrás. Esta sección va lisa, gris de esquina a
-          esquina, pegada al header. Fondo bg-soft (gris muy claro) para que
-          las tarjetas blancas resalten sin necesitar un borde. */}
-      <div className="min-h-screen bg-bg-soft pb-24 pt-9">
+      {/* El header es fixed (flota encima, no empuja el layout) y hace
+          backdrop-blur + shadow sobre lo que tenga detrás — con el <main>
+          blanco detrás, ese blur/sombra se nota como una mancha blanca
+          alrededor del header aunque el contenido de abajo ya sea gris. Se
+          arregla llevando el FONDO gris hasta el borde real de la página
+          (-mt-[104px], detrás del header) y compensando con pt-[140px]
+          (104px del header + 36px del pt-9 que tenía antes) para que el
+          contenido visible quede exactamente en el mismo lugar de siempre.
+          Sin rounded: ese truco (usado en /gestion, /desarrollo) solo
+          funciona cuando hay un hero de color/foto detrás del header que
+          rellena el hueco de las esquinas — aquí no hay hero. */}
+      <div className="-mt-[104px] min-h-screen bg-bg-soft pb-24 pt-[140px]">
         <div className="container-wrap">
           {greeting ? (
             <>
