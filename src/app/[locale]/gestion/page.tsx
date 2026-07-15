@@ -82,7 +82,7 @@ export default function GestionPage() {
       <section className="relative z-10 -mt-10 rounded-[2.5rem] bg-bg-soft py-16 md:py-24">
         <div className="container-wrap">
           <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">Servicios de Gestión</h2>
-          <p className="mt-6 max-w-2xl text-[15px] font-light leading-relaxed text-ink-2">
+          <p className="mt-6 text-[15px] font-light leading-relaxed text-ink-2">
             Ofrecemos una amplia gama de servicios para garantizar el éxito de tu proyecto
             inmobiliario, desde la conceptualización inicial hasta la venta de la última unidad.
             Con una visión integral y un enfoque proactivo, nuestro equipo colabora
