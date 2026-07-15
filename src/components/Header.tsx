@@ -15,7 +15,7 @@ import { useCommercialAccess } from '@/components/commercial/context';
 const corporate = [
   { href: '/desarrollo', label: 'Desarrollo' },
   { href: '/gestion', label: 'Gestión' },
-  { href: '#', label: 'Comercialización' },
+  { href: '/comercializacion', label: 'Comercialización' },
 ];
 
 // Por tipo de propiedad — cada tipo con su ícono (mismo criterio que los cards),
