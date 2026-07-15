@@ -34,6 +34,7 @@ export default async function QuattroPlazaCenterPage() {
         logo="/quattrohero.svg"
         logoAlt="Quattro Plaza Center"
         logoIsWhite
+        logoScale={1.3}
       />
       <CategoryGridSection
         eyebrow="Desarrollador"

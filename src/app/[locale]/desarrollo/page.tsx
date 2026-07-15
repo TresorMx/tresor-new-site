@@ -194,8 +194,8 @@ export default function DesarrolloPage() {
           <span className="eyebrow eyebrow-accent font-bold">— Desarrollo</span>
           <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">We Develop</h1>
           <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">
-            Nos enfocamos en crear lugares especiales y significativos, más allá de la simple
-            construcción — proyectos que dejan una huella duradera en las ciudades donde vivimos.
+            Creamos lugares especiales y significativos, con una huella duradera
+            en las ciudades donde vivimos.
           </p>
         </div>
       </section>

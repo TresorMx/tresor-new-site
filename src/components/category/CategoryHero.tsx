@@ -15,6 +15,7 @@ export default function CategoryHero({
   logo,
   logoAlt,
   logoIsWhite = false,
+  logoScale = 1,
 }: {
   image: string;
   imageAlt: string;
@@ -27,6 +28,11 @@ export default function CategoryHero({
   // tal cual, sin el filtro brightness-0/invert que fuerza a blanco a los
   // logos que solo existen en su color original.
   logoIsWhite?: boolean;
+  // Multiplicador sobre el tamaño default — logos con proporción más
+  // cuadrada (ej. Quattro, ~1.5:1) quedan limitados por la altura de la
+  // caja y se ven más chicos que un wordmark ancho, aunque compartan la
+  // misma caja. Mismo criterio que heroLogoScale en la ficha.
+  logoScale?: number;
 }) {
   return (
     <section
@@ -53,8 +59,8 @@ export default function CategoryHero({
           <div
             className="relative h-[var(--logo-h-mobile)] w-[min(70vw,260px)] md:h-[var(--logo-h-desktop)] md:w-[min(46vw,340px)]"
             style={{
-              ['--logo-h-desktop' as string]: 'clamp(70px, 12vh, 120px)',
-              ['--logo-h-mobile' as string]: 'clamp(52px, 8.5vh, 84px)',
+              ['--logo-h-desktop' as string]: `clamp(${(70 * logoScale).toFixed(0)}px, ${(12 * logoScale).toFixed(1)}vh, ${(120 * logoScale).toFixed(0)}px)`,
+              ['--logo-h-mobile' as string]: `clamp(${(52 * logoScale).toFixed(0)}px, ${(8.5 * logoScale).toFixed(1)}vh, ${(84 * logoScale).toFixed(0)}px)`,
             } as CSSProperties}
           >
             <Image
