@@ -5,9 +5,10 @@ import { createContext, useContext } from 'react';
 export interface AsesorCtx {
   isAsesor: boolean;
   ready: boolean; // ya se hidrató el estado desde la cookie
-  openLogin: () => void;
-  closeLogin: () => void;
-  loginOpen: boolean;
+  // El modal de login (con tabs Asesor/Broker) vive en
+  // src/components/commercial/CommercialLoginModal.tsx — ver
+  // useCommercialAccess() para abrirlo. Este contexto solo expone la
+  // acción real de login/logout, no el estado de un modal propio.
   // Devuelve `null` si el login fue exitoso, o el mensaje de error del
   // servidor si no (credenciales incorrectas, rate limit, etc.) — así el
   // modal muestra el motivo real en vez de un genérico "incorrectos" para

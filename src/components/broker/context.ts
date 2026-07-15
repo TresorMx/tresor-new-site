@@ -5,9 +5,10 @@ import { createContext, useContext } from 'react';
 export interface BrokerCtx {
   isBroker: boolean;
   firstName: string | null;
-  openLogin: () => void;
-  closeLogin: () => void;
-  loginOpen: boolean;
+  // El modal de login (con tabs Asesor/Broker) vive en
+  // src/components/commercial/CommercialLoginModal.tsx — ver
+  // useCommercialAccess() para abrirlo. Este contexto solo expone la
+  // acción real de login/logout, no el estado de un modal propio.
   // Devuelve `null` si el login fue exitoso, o `{ error }` / `{ needsVerification }`
   // si no — así el modal puede mandar a un broker sin verificar a /brokers en
   // vez de solo mostrar "credenciales incorrectas".

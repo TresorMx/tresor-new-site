@@ -3,7 +3,6 @@
 import { useCallback, useState, useTransition } from 'react';
 import { useRouter } from '@/navigation';
 import { AsesorContext } from '@/components/asesor/context';
-import AsesorLoginModal from '@/components/asesor/AsesorLoginModal';
 import AsesorTransitionOverlay from '@/components/asesor/AsesorTransitionOverlay';
 
 interface AsesorProviderProps {
@@ -20,7 +19,6 @@ interface AsesorProviderProps {
 export function AsesorProvider({ children, initialIsAsesor }: AsesorProviderProps) {
   const router = useRouter();
   const [isAsesor, setIsAsesor] = useState(initialIsAsesor);
-  const [loginOpen, setLoginOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const login = useCallback(async (email: string, password: string) => {
@@ -34,7 +32,6 @@ export function AsesorProvider({ children, initialIsAsesor }: AsesorProviderProp
       return typeof body.error === 'string' ? body.error : 'Correo o contraseña incorrectos.';
     }
     setIsAsesor(true);
-    setLoginOpen(false);
     // CRÍTICO: el CTA de la ficha (cotizador/apartado vs Agenda) se decide
     // SERVER-SIDE leyendo la cookie httpOnly en el momento del request. El
     // fetch de arriba solo pone la cookie — no vuelve a renderizar nada. Sin
@@ -52,13 +49,9 @@ export function AsesorProvider({ children, initialIsAsesor }: AsesorProviderProp
     startTransition(() => { router.refresh(); });
   }, [router]);
 
-  const openLogin = useCallback(() => setLoginOpen(true), []);
-  const closeLogin = useCallback(() => setLoginOpen(false), []);
-
   return (
-    <AsesorContext.Provider value={{ isAsesor, ready: true, openLogin, closeLogin, loginOpen, login, logout, isPending }}>
+    <AsesorContext.Provider value={{ isAsesor, ready: true, login, logout, isPending }}>
       {children}
-      <AsesorLoginModal />
       <AsesorTransitionOverlay show={isPending} />
     </AsesorContext.Provider>
   );

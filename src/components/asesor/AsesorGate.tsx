@@ -2,12 +2,15 @@
 
 import { Lock } from 'lucide-react';
 import { useAsesor } from '@/components/asesor/context';
+import { useCommercialAccess } from '@/components/commercial/context';
 
 // Envuelve las vistas de /asesores: si no hay sesión de asesor muestra una
-// pantalla de acceso (con botón que abre el login). Los archivos en sí están
-// protegidos server-side en /api/asesor/file — esta compuerta es de UI.
+// pantalla de acceso (con botón que abre el login, tab "Asesor Tresor" del
+// modal compartido). Los archivos en sí están protegidos server-side en
+// /api/asesor/file — esta compuerta es de UI.
 export default function AsesorGate({ children }: { children: React.ReactNode }) {
-  const { isAsesor, ready, openLogin } = useAsesor();
+  const { isAsesor, ready } = useAsesor();
+  const { openLogin } = useCommercialAccess();
 
   if (!ready) return null; // evita flash antes de hidratar el estado
 
@@ -25,7 +28,7 @@ export default function AsesorGate({ children }: { children: React.ReactNode }) 
             Inicia sesión con tu cuenta de Tresor para ver los Drives de Ventas.
           </p>
           <button
-            onClick={openLogin}
+            onClick={() => openLogin('asesor')}
             className="btn btn-lg mt-7 w-full border-0 bg-accent font-bold text-ink hover:brightness-95"
           >
             Iniciar sesión

@@ -3,7 +3,6 @@
 import { useCallback, useState, useTransition } from 'react';
 import { useRouter } from '@/navigation';
 import { BrokerContext } from '@/components/broker/context';
-import BrokerLoginModal from '@/components/broker/BrokerLoginModal';
 
 interface BrokerProviderProps {
   children: React.ReactNode;
@@ -18,7 +17,6 @@ export function BrokerProvider({ children, initialIsBroker, initialFirstName }: 
   const router = useRouter();
   const [isBroker, setIsBroker] = useState(initialIsBroker);
   const [firstName, setFirstName] = useState(initialFirstName);
-  const [loginOpen, setLoginOpen] = useState(false);
   const [, startTransition] = useTransition();
 
   const login = useCallback(async (email: string, password: string) => {
@@ -34,7 +32,6 @@ export function BrokerProvider({ children, initialIsBroker, initialFirstName }: 
         needsVerification: Boolean(body.needsVerification),
       };
     }
-    setLoginOpen(false);
     // A diferencia de AsesorProvider (que se queda en la misma página), el
     // login de broker manda directo al Drive — es lo que el broker vino a
     // buscar. Navegación completa (no router.push) para que el layout raíz
@@ -51,13 +48,9 @@ export function BrokerProvider({ children, initialIsBroker, initialFirstName }: 
     startTransition(() => { router.refresh(); });
   }, [router]);
 
-  const openLogin = useCallback(() => setLoginOpen(true), []);
-  const closeLogin = useCallback(() => setLoginOpen(false), []);
-
   return (
-    <BrokerContext.Provider value={{ isBroker, firstName, openLogin, closeLogin, loginOpen, login, logout }}>
+    <BrokerContext.Provider value={{ isBroker, firstName, login, logout }}>
       {children}
-      <BrokerLoginModal />
     </BrokerContext.Provider>
   );
 }

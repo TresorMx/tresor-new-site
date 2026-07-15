@@ -17,6 +17,7 @@ import { verifySession, ASESOR_COOKIE } from '@/lib/asesor/session';
 import { BrokerProvider } from '@/components/broker/BrokerProvider';
 import { verifyBrokerSession, BROKER_COOKIE } from '@/lib/broker/session';
 import { getBrokerFullName } from '@/lib/broker/profile';
+import { CommercialAccessProvider } from '@/components/commercial/CommercialAccessProvider';
 // import ExitIntent from '@/components/ExitIntent'; // desactivado por lo pronto
 import MetaPixel from '@/components/MetaPixel';
 import GoogleAnalytics from '@/components/GoogleAnalytics';
@@ -245,20 +246,25 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages} locale={locale}>
           <AsesorProvider initialIsAsesor={initialIsAsesor}>
             <BrokerProvider initialIsBroker={initialIsBroker} initialFirstName={initialBrokerFirstName}>
-              <ChromeGate
-                header={<Header logoStyle={siteSettings.headerLogoStyle} />}
-                footer={<Footer />}
-                extras={
-                  <>
-                    <MobileBar />
-                    {/* FloatingLayer = Luis, o el botón "Drive de Ventas" si eres asesor y estás en una ficha. */}
-                    <FloatingLayer />
-                  </>
-                }
-              >
-                {children}
-              </ChromeGate>
-              {/* <ExitIntent /> desactivado por lo pronto */}
+              {/* CommercialAccessProvider adentro de ambos: el modal
+                  compartido (tabs Asesor/Broker) llama a useAsesor()/
+                  useBroker() para el login real de cada tab. */}
+              <CommercialAccessProvider>
+                <ChromeGate
+                  header={<Header logoStyle={siteSettings.headerLogoStyle} />}
+                  footer={<Footer />}
+                  extras={
+                    <>
+                      <MobileBar />
+                      {/* FloatingLayer = Luis, o el botón "Drive de Ventas" si eres asesor/broker y estás en una ficha. */}
+                      <FloatingLayer />
+                    </>
+                  }
+                >
+                  {children}
+                </ChromeGate>
+                {/* <ExitIntent /> desactivado por lo pronto */}
+              </CommercialAccessProvider>
             </BrokerProvider>
           </AsesorProvider>
         </NextIntlClientProvider>

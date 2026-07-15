@@ -54,9 +54,9 @@ export default function BrokerAuthForm({ initialMode = 'register' }: { initialMo
   );
 }
 
-/* Encabezado compartido por cada card — mismo lenguaje que AsesorLoginModal
-   (font-sans, sin serif/itálica: ese estilo era del /brokers viejo,
-   anterior al sistema de tipografía actual del sitio). */
+/* Encabezado compartido por cada card — mismo lenguaje que
+   CommercialLoginModal (font-sans, sin serif/itálica: ese estilo era del
+   /brokers viejo, anterior al sistema de tipografía actual del sitio). */
 function CardHeading({ title, subtitle }: { title: string; subtitle: React.ReactNode }) {
   return (
     <div className="mb-7 flex items-center gap-3">

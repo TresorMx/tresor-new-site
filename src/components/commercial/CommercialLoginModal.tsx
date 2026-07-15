@@ -3,16 +3,30 @@
 import { useEffect, useState } from 'react';
 import { Lock, X, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { Link } from '@/navigation';
+import SlidingTabs from '@/components/ui/SlidingTabs';
+import { useAsesor } from '@/components/asesor/context';
 import { useBroker } from '@/components/broker/context';
+import { useCommercialAccess, type CommercialTab } from '@/components/commercial/context';
 
-export default function BrokerLoginModal() {
-  const { loginOpen, closeLogin, login } = useBroker();
+export default function CommercialLoginModal() {
+  const { loginOpen, initialTab, closeLogin } = useCommercialAccess();
+  const { login: asesorLogin } = useAsesor();
+  const { login: brokerLogin } = useBroker();
+
+  const [tab, setTab] = useState<CommercialTab>(initialTab);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [needsVerification, setNeedsVerification] = useState(false);
+
+  // Al abrir, arranca en el tab que pidió quien invocó openLogin() (ej.
+  // AsesorGate siempre abre en 'asesor', el botón genérico del header en
+  // 'broker' por default).
+  useEffect(() => {
+    if (loginOpen) setTab(initialTab);
+  }, [loginOpen, initialTab]);
 
   useEffect(() => {
     if (!loginOpen) return;
@@ -28,6 +42,7 @@ export default function BrokerLoginModal() {
     };
   }, [loginOpen, closeLogin]);
 
+  // Limpia el estado al cerrar.
   useEffect(() => {
     if (!loginOpen) {
       setErr(null);
@@ -37,6 +52,15 @@ export default function BrokerLoginModal() {
     }
   }, [loginOpen]);
 
+  // Cuentas distintas por tab (asesor: una sola compartida; broker: una por
+  // persona) — no tiene sentido arrastrar lo escrito al cambiar de tab.
+  useEffect(() => {
+    setEmail('');
+    setPassword('');
+    setErr(null);
+    setNeedsVerification(false);
+  }, [tab]);
+
   if (!loginOpen) return null;
 
   async function submit(e: React.FormEvent) {
@@ -44,11 +68,20 @@ export default function BrokerLoginModal() {
     setErr(null);
     setNeedsVerification(false);
     setLoading(true);
-    const result = await login(email, password);
-    if (result) {
-      setErr(result.error);
-      setNeedsVerification(Boolean(result.needsVerification));
-      setLoading(false);
+
+    if (tab === 'asesor') {
+      const errorMessage = await asesorLogin(email, password);
+      if (errorMessage) {
+        setErr(errorMessage);
+        setLoading(false);
+      }
+    } else {
+      const result = await brokerLogin(email, password);
+      if (result) {
+        setErr(result.error);
+        setNeedsVerification(Boolean(result.needsVerification));
+        setLoading(false);
+      }
     }
   }
 
@@ -73,13 +106,25 @@ export default function BrokerLoginModal() {
           <Lock size={20} strokeWidth={1.6} />
         </div>
         <h2 className="mt-5 font-sans text-[26px] font-medium leading-tight tracking-tight">
-          Acceso Brokers
+          Identifícate para iniciar
         </h2>
         <p className="mt-2 text-[14px] font-light leading-relaxed text-ink">
-          Inicia sesión para ver los materiales de venta de los desarrollos inmobiliarios.
+          {tab === 'asesor'
+            ? 'Material exclusivo para equipo de ventas de Tresor Real Estate.'
+            : 'Inicia sesión para ver los materiales de venta de los desarrollos inmobiliarios.'}
         </p>
 
-        <form onSubmit={submit} className="mt-7 grid gap-4">
+        <SlidingTabs
+          className="mt-6"
+          activeIndex={tab === 'asesor' ? 0 : 1}
+          onChange={(i) => setTab(i === 0 ? 'asesor' : 'broker')}
+          items={[
+            { key: 'asesor', label: 'Asesor Tresor' },
+            { key: 'broker', label: 'Broker' },
+          ]}
+        />
+
+        <form onSubmit={submit} className="mt-6 grid gap-4">
           <label className="field">
             <span className="field-label">Correo</span>
             <input
@@ -118,7 +163,7 @@ export default function BrokerLoginModal() {
           {err && (
             <div className="rounded-xl bg-red-50 px-3.5 py-2.5 text-[13px] text-red-700">
               {err}
-              {needsVerification && (
+              {tab === 'broker' && needsVerification && (
                 <>
                   {' '}
                   <Link href="/brokers" onClick={closeLogin} className="font-semibold underline">
@@ -138,14 +183,16 @@ export default function BrokerLoginModal() {
             <ArrowRight size={15} strokeWidth={1.8} />
           </button>
 
-          <div className="mt-1 flex items-center justify-between text-[12px]">
-            <Link href="/brokers?mode=forgot" onClick={closeLogin} className="text-ink-3 underline">
-              ¿Olvidaste tu contraseña?
-            </Link>
-            <Link href="/brokers" onClick={closeLogin} className="font-semibold text-ink underline">
-              ¿No tienes cuenta? Regístrate
-            </Link>
-          </div>
+          {tab === 'broker' && (
+            <div className="mt-1 flex items-center justify-between text-[12px]">
+              <Link href="/brokers?mode=forgot" onClick={closeLogin} className="text-ink-3 underline">
+                ¿Olvidaste tu contraseña?
+              </Link>
+              <Link href="/brokers" onClick={closeLogin} className="font-semibold text-ink underline">
+                ¿No tienes cuenta? Regístrate
+              </Link>
+            </div>
+          )}
         </form>
       </div>
     </div>
