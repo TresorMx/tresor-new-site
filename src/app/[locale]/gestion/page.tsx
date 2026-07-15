@@ -58,7 +58,7 @@ export default function GestionPage() {
       >
         <div className="absolute inset-0 animate-hero-zoom">
           <Image
-            src="/1g-1.jpg"
+            src="/desarrollos/olivia/5.-Fachada-frontal.jpg"
             alt="Tresor Real Estate — Gestión"
             fill
             priority
