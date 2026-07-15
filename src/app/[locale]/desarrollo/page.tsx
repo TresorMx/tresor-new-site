@@ -160,7 +160,11 @@ const CATEGORIES: Category[] = [
         description: 'Proyecto inmobiliario en Tulum que integra lotes unifamiliares y macrolotes dentro de un entorno de 32 hectáreas, con una reserva natural de 2.5 hectáreas que alberga cenotes, áreas de yoga y senderos. Un diseño de Sanzpont Arquitectura & Artigas.',
         images: ['/sanammaster.png'],
         fit: 'contain',
-        aspectRatio: '0.639/1',
+        // La imagen real es muy vertical (1052×1646 ≈ 0.64/1) — a esa
+        // proporción exacta la columna se ve descomunal en desktop junto al
+        // texto. 4/5 la deja alta pero contenida; con object-contain sigue
+        // sin recortarse, solo entra con un poco de aire arriba/abajo.
+        aspectRatio: '4/5',
       },
     ],
   },
