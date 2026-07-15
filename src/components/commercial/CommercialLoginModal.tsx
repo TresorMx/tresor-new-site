@@ -110,7 +110,7 @@ export default function CommercialLoginModal() {
         </h2>
         <p className="mt-2 text-[14px] font-light leading-relaxed text-ink">
           {tab === 'asesor'
-            ? 'Material exclusivo para equipo de ventas de Tresor Real Estate.'
+            ? 'Material exclusivo para equipo de ventas de Tresor.'
             : 'Inicia sesión para ver los materiales de venta de los desarrollos inmobiliarios.'}
         </p>
 
