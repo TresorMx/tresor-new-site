@@ -6,9 +6,9 @@ import CommercialLoginModal from '@/components/commercial/CommercialLoginModal';
 
 export function CommercialAccessProvider({ children }: { children: React.ReactNode }) {
   const [loginOpen, setLoginOpen] = useState(false);
-  const [initialTab, setInitialTab] = useState<CommercialTab>('broker');
+  const [initialTab, setInitialTab] = useState<CommercialTab>('asesor');
 
-  const openLogin = useCallback((tab: CommercialTab = 'broker') => {
+  const openLogin = useCallback((tab: CommercialTab = 'asesor') => {
     setInitialTab(tab);
     setLoginOpen(true);
   }, []);
