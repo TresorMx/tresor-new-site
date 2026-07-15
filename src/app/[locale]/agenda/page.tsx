@@ -119,7 +119,9 @@ export default function AgendaPage() {
             <h2 className="mt-4 h-display text-[clamp(24px,3.2vw,40px)]">{t('officeTitle')}</h2>
             <p className="mt-4 text-[15px] font-light leading-relaxed text-ink-2">{t('officeDesc')}</p>
 
-            <div className="mt-8 rounded-lg border border-line bg-white p-7">
+            {/* Sin border: mismo lenguaje que las cards del Drive (blanca
+                sin borde sobre fondo gris, con shadow-sm en vez de línea). */}
+            <div className="mt-8 rounded-lg bg-white p-7 shadow-sm">
               <div className="flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-soft">
                   <MapPin size={17} strokeWidth={1.6} className="text-ink" />
@@ -205,10 +207,10 @@ export default function AgendaPage() {
                     type="button"
                     onClick={() => set('interest', value)}
                     className={cn(
-                      'flex items-start gap-3.5 rounded-lg border p-4 text-left transition-all',
+                      'flex items-start gap-3.5 rounded-lg p-4 text-left transition-all',
                       form.interest === value
-                        ? 'border-ink bg-ink text-bg'
-                        : 'border-line bg-white hover:border-ink-3',
+                        ? 'bg-ink text-bg'
+                        : 'bg-white shadow-sm hover:shadow-md',
                     )}
                   >
                     <div className={cn(
@@ -238,8 +240,8 @@ export default function AgendaPage() {
                     type="button"
                     onClick={() => set('mode', value)}
                     className={cn(
-                      'flex items-start gap-4 rounded-lg border p-5 text-left transition-all',
-                      form.mode === value ? 'border-ink bg-ink text-bg' : 'border-line bg-white hover:border-ink-3',
+                      'flex items-start gap-4 rounded-lg p-5 text-left transition-all',
+                      form.mode === value ? 'bg-ink text-bg' : 'bg-white shadow-sm hover:shadow-md',
                     )}
                   >
                     <div className={cn(
@@ -282,10 +284,10 @@ export default function AgendaPage() {
                     type="button"
                     onClick={() => set('time', slot)}
                     className={cn(
-                      'rounded-full border py-2.5 text-[11px] font-semibold uppercase tracking-caps transition-all',
+                      'rounded-full py-2.5 text-[11px] font-semibold uppercase tracking-caps transition-all',
                       form.time === slot
-                        ? 'border-ink bg-ink text-bg'
-                        : 'border-line bg-white text-ink-3 hover:border-ink hover:text-ink',
+                        ? 'bg-ink text-bg'
+                        : 'bg-white text-ink-3 shadow-sm hover:text-ink hover:shadow-md',
                     )}
                   >
                     {formatTime(slot)}
