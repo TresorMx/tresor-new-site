@@ -86,13 +86,13 @@ export default function AsesoresIndex({
                       href={`${hrefBase}/${d.slug}`}
                       className="group flex items-center gap-4 rounded-[18px] bg-white p-3 pr-5 transition-shadow duration-300 ease-soft hover:shadow-[0_10px_30px_rgba(0,0,0,0.08)]"
                     >
-                      <span className="relative h-16 w-20 shrink-0 overflow-hidden rounded-xl bg-bg-soft">
+                      <span className="relative h-[84px] w-[104px] shrink-0 overflow-hidden rounded-lg bg-bg-soft">
                         {d.image && (
                           <Image
                             src={d.image}
                             alt={d.name}
                             fill
-                            sizes="80px"
+                            sizes="104px"
                             className="object-cover transition-transform duration-500 ease-soft group-hover:scale-105"
                           />
                         )}
