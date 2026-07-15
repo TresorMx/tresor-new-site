@@ -71,9 +71,8 @@ export default function GestionPage() {
           <span className="eyebrow eyebrow-accent font-bold">— Gestión</span>
           <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">We Manage</h1>
           <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">
-            Acompañamos cada proyecto en todas sus etapas, con la misma visión integral con la
-            que desarrollamos — de la planeación a la entrega, cuidando cada detalle para
-            asegurar el éxito de nuestros clientes y socios.
+            Acompañamos cada proyecto en todas sus etapas, de la planeación a la entrega —
+            con la misma visión integral con la que desarrollamos.
           </p>
         </div>
       </section>

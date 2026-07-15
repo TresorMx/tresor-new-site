@@ -48,7 +48,7 @@ export default function CategoryHero({
         // si ya es blanco de origen (`logoIsWhite`, ej. Urban Homes) se usa
         // tal cual. H1 sr-only porque el logo ya cubre el rol visual del
         // título — sin esto la página se queda sin H1.
-        <div className="relative z-10 flex h-full items-center justify-center pt-[72px]">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
           {title && <h1 className="sr-only">{title}</h1>}
           <div
             className="relative h-[var(--logo-h-mobile)] w-[min(70vw,260px)] md:h-[var(--logo-h-desktop)] md:w-[min(46vw,340px)]"
@@ -65,6 +65,9 @@ export default function CategoryHero({
               priority
             />
           </div>
+          {subtitle && (
+            <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">{subtitle}</p>
+          )}
         </div>
       ) : (
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">

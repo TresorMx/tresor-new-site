@@ -30,6 +30,7 @@ export default async function UrbanHomesPage() {
         imageAlt={dev.name}
         eyebrow="— Desarrollador"
         title={dev.name}
+        subtitle="Más de 18 años definiendo el estándar de vida de lujo en Puerto Cancún, Playa del Carmen y Tulum."
         logo={dev.logoWhite ?? dev.logoDark}
         logoAlt={dev.name}
         logoIsWhite={Boolean(dev.logoWhite)}

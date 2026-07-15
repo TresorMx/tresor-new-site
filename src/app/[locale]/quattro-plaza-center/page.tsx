@@ -1,11 +1,9 @@
 import type { Metadata } from 'next';
 import CategoryHero from '@/components/category/CategoryHero';
 import CategoryGridSection from '@/components/category/CategoryGridSection';
-import { getMergedDevelopmentsAsync, developers } from '@/lib/developments';
+import { getMergedDevelopmentsAsync } from '@/lib/developments';
 
 export const dynamic = 'force-dynamic';
-
-const dev = developers.Tresor;
 
 export const metadata: Metadata = {
   title: 'Quattro Plaza Center — Locales Comerciales en Cancún',
@@ -29,11 +27,13 @@ export default async function QuattroPlazaCenterPage() {
     <>
       <CategoryHero
         image="/renders/gardens/01.jpg"
-        imageAlt={dev.name}
+        imageAlt="Quattro Plaza Center"
         eyebrow="— Desarrollador"
-        title={dev.name}
-        logo={dev.logoDark}
-        logoAlt={dev.name}
+        title="Quattro Plaza Center"
+        subtitle="Plazas comerciales diseñadas para el flujo y crecimiento de cada zona — ubicación estratégica y alta plusvalía en Cancún."
+        logo="/quattrohero.svg"
+        logoAlt="Quattro Plaza Center"
+        logoIsWhite
       />
       <CategoryGridSection
         eyebrow="Desarrollador"

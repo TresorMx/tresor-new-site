@@ -30,6 +30,7 @@ export default async function OnixLivingPage() {
         imageAlt={dev.name}
         eyebrow="— Desarrollador"
         title={dev.name}
+        subtitle="Comunidades residenciales modernas y bien planeadas, en armonía con su entorno — diseño contemporáneo y plusvalía a largo plazo."
         logo={dev.logoDark}
         logoAlt={dev.name}
       />

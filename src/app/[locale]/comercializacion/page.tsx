@@ -70,9 +70,8 @@ export default function ComercializacionPage() {
           <span className="eyebrow eyebrow-accent font-bold">— Comercialización</span>
           <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">Sales Partner</h1>
           <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">
-            Somos el socio comercial de desarrollos inmobiliarios en Cancún y la Riviera Maya —
-            combinamos una sólida red de brokers aliados, un equipo de ventas especializado y un
-            servicio de agencia inmobiliaria para maximizar el potencial de cada proyecto.
+            Somos el socio comercial de desarrollos inmobiliarios — red de brokers aliados,
+            equipo de ventas y agencia inmobiliaria en Cancún y la Riviera Maya.
           </p>
         </div>
       </section>

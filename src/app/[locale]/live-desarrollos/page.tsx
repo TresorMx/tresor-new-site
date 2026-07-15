@@ -30,6 +30,7 @@ export default async function LiveDesarrollosPage() {
         imageAlt={dev.name}
         eyebrow="— Desarrollador"
         title={dev.name}
+        subtitle="Espacios residenciales de lujo en las zonas de mayor plusvalía de Cancún, con diseño contemporáneo y amenidades de primer nivel."
         logo={dev.logoDark}
         logoAlt={dev.name}
       />
