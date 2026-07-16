@@ -11,12 +11,15 @@ export default function CategoryGridSection({
   developments,
   showDeveloperFilter = true,
   showStatusFilter = true,
+  forceDriveLink = false,
 }: {
   eyebrow: string;
   title: React.ReactNode;
   developments: Development[];
   showDeveloperFilter?: boolean;
   showStatusFilter?: boolean;
+  // Landings espejo /drive/* — ver DevelopmentCard.
+  forceDriveLink?: boolean;
 }) {
   return (
     <section
@@ -31,6 +34,7 @@ export default function CategoryGridSection({
           showCityFilter={false}
           showTypeFilter={false}
           showStatusFilter={showStatusFilter}
+          forceDriveLink={forceDriveLink}
         >
           <div>
             <span className="eyebrow eyebrow-accent font-bold">{eyebrow}</span>

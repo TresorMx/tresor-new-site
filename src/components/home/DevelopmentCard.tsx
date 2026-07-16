@@ -13,7 +13,17 @@ const PROPERTY_ICONS: Record<PropertyType, LucideIcon> = {
   'Local Comercial': Store,
 };
 
-export default function DevelopmentCard({ dev, dark = false }: { dev: Development; dark?: boolean }) {
+export default function DevelopmentCard({
+  dev,
+  dark = false,
+  forceDriveLink = false,
+}: {
+  dev: Development;
+  dark?: boolean;
+  // true en las landings espejo /drive/* — el link "Drive de Ventas"
+  // aparece siempre, sin sesión de asesor, y apunta al Drive abierto.
+  forceDriveLink?: boolean;
+}) {
   const price = dev.priceLabel ?? formatPrice(dev);
   // `brand` es un override opcional; la fuente de verdad del nombre del
   // desarrollador es SIEMPRE el registro `developers` (resuelto por
@@ -124,8 +134,16 @@ export default function DevelopmentCard({ dev, dark = false }: { dev: Developmen
                 Ver desarrollo
               </Link>
             )}
-            {/* Drive de Ventas — solo visible para asesores logueados; null para todos los demás. */}
-            {driveSlug && <AsesorDriveLink slug={driveSlug} />}
+            {/* Drive de Ventas — solo visible para asesores logueados, salvo en
+                las landings espejo /drive/* (forceDriveLink) donde siempre
+                se muestra y apunta al Drive abierto. */}
+            {driveSlug && (
+              <AsesorDriveLink
+                slug={driveSlug}
+                force={forceDriveLink}
+                hrefBase={forceDriveLink ? '/drive/desarrollos' : '/asesores'}
+              />
+            )}
           </div>
         </div>
       </div>

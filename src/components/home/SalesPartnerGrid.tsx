@@ -38,6 +38,8 @@ interface Props {
   showCityFilter?: boolean;
   showTypeFilter?: boolean;
   showStatusFilter?: boolean;
+  // Landings espejo /drive/* — ver DevelopmentCard.
+  forceDriveLink?: boolean;
   children?: React.ReactNode;
 }
 
@@ -139,6 +141,7 @@ export default function SalesPartnerGrid({
   showCityFilter = true,
   showTypeFilter = true,
   showStatusFilter = false,
+  forceDriveLink = false,
   children,
 }: Props) {
   const [filters, setFilters] = useState<FilterState>({
@@ -278,7 +281,7 @@ export default function SalesPartnerGrid({
                   animation: `cardEnter 0.55s cubic-bezier(0.22, 1, 0.36, 1) ${i * 70}ms both`,
                 }}
               >
-                <DevelopmentCard dev={dev} />
+                <DevelopmentCard dev={dev} forceDriveLink={forceDriveLink} />
               </div>
             ))}
           </div>
