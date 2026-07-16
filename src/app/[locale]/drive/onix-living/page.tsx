@@ -10,8 +10,16 @@ export const dynamic = 'force-dynamic';
 const dev = developers.Onix;
 
 export const metadata: Metadata = {
-  title: `Drive de Ventas · ${dev.name}`,
+  title: 'Onix Living - Departamentos en Preventa y Entrega Inmediata en Cancún',
+  description:
+    'Departamentos en preventa y entrega inmediata de Onix Living, comunidades residenciales modernas y bien planeadas en Cancún.',
   robots: { index: false, follow: false },
+  openGraph: {
+    title: 'Onix Living - Departamentos en Preventa y Entrega Inmediata en Cancún',
+    description:
+      'Departamentos en preventa y entrega inmediata de Onix Living, comunidades residenciales modernas y bien planeadas en Cancún.',
+    images: [{ url: '/desarrollos/villalta/portada3.jpg', width: 1920, height: 992 }],
+  },
 };
 
 export default async function DriveOnixLivingPage() {

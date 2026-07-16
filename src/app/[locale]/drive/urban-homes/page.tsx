@@ -10,8 +10,16 @@ export const dynamic = 'force-dynamic';
 const dev = developers['Urban Homes'];
 
 export const metadata: Metadata = {
-  title: `Drive de Ventas · ${dev.name}`,
+  title: 'Urban Homes - Departamentos en Preventa y Entrega Inmediata en Cancún',
+  description:
+    'Departamentos en preventa y entrega inmediata de Urban Homes en Puerto Cancún, Playa del Carmen y Tulum — más de 18 años de experiencia.',
   robots: { index: false, follow: false },
+  openGraph: {
+    title: 'Urban Homes - Departamentos en Preventa y Entrega Inmediata en Cancún',
+    description:
+      'Departamentos en preventa y entrega inmediata de Urban Homes en Puerto Cancún, Playa del Carmen y Tulum — más de 18 años de experiencia.',
+    images: [{ url: '/desarrollos/Blume/BLUME-Drone-1.jpg', width: 1920, height: 992 }],
+  },
 };
 
 export default async function DriveUrbanHomesPage() {

@@ -10,8 +10,16 @@ import { getMergedDevelopmentsAsync } from '@/lib/developments';
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
-  title: 'Drive de Ventas · Quattro Plaza Center',
+  title: 'Quattro Plaza Center - Locales en Preventa en Cancún',
+  description:
+    'Locales comerciales en preventa en Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en las zonas de mayor crecimiento de Cancún.',
   robots: { index: false, follow: false },
+  openGraph: {
+    title: 'Quattro Plaza Center - Locales en Preventa en Cancún',
+    description:
+      'Locales comerciales en preventa en Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en las zonas de mayor crecimiento de Cancún.',
+    images: [{ url: '/renders/gardens/01.jpg', width: 1920, height: 992 }],
+  },
 };
 
 export default async function DriveQuattroPlazaCenterPage() {

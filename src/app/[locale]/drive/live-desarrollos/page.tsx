@@ -10,8 +10,16 @@ export const dynamic = 'force-dynamic';
 const dev = developers.Live;
 
 export const metadata: Metadata = {
-  title: `Drive de Ventas · ${dev.name}`,
+  title: 'Live Desarrollos - Departamentos en Preventa en Cancún',
+  description:
+    'Departamentos en preventa de Live Desarrollos, diseño contemporáneo y amenidades de primer nivel en las zonas de mayor plusvalía de Cancún.',
   robots: { index: false, follow: false },
+  openGraph: {
+    title: 'Live Desarrollos - Departamentos en Preventa en Cancún',
+    description:
+      'Departamentos en preventa de Live Desarrollos, diseño contemporáneo y amenidades de primer nivel en las zonas de mayor plusvalía de Cancún.',
+    images: [{ url: '/desarrollos/ximena/2.-Fachada-de-Noche.jpg', width: 1920, height: 992 }],
+  },
 };
 
 export default async function DriveLiveDesarrollosPage() {
