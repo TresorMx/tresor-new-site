@@ -11,9 +11,16 @@ import { findDevBySlug, buildDriveDev } from '@/lib/asesor/driveDev';
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const dev = await findDevBySlug(slug);
+  const title = dev ? `Drive de Ventas · ${dev.name}` : 'Drive de Ventas';
+  const image = dev?.heroRender ?? dev?.image;
   return {
-    title: dev ? `Drive de Ventas · ${dev.name}` : 'Drive de Ventas',
+    title,
     robots: { index: false, follow: false },
+    openGraph: {
+      title,
+      description: dev?.name ? `Información comercial de ${dev.name}.` : undefined,
+      images: image ? [{ url: image, width: 1920, height: 992 }] : undefined,
+    },
   };
 }
 
