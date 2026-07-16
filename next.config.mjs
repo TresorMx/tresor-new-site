@@ -147,6 +147,7 @@ const nextConfig = {
       // Páginas fijas con slug distinto hoy
       { source: '/politicas-de-privacidad', destination: '/privacidad', permanent: true },
       { source: '/home-tresor', destination: '/', permanent: true },
+      { source: '/en/home-tresor', destination: '/en', permanent: true },
       { source: '/desarrollos', destination: '/#portafolio', permanent: true },
       { source: '/proyectos', destination: '/#portafolio', permanent: true },
 
