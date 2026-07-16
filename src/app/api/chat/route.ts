@@ -197,6 +197,7 @@ async function runTool(name: string, input: any, plazas: Plaza[]): Promise<any> 
             phone: input.telefono,
             source: 'chat',
             tags: ['Ads Quattro'],
+            devSlug: (input.plaza_interes as string) || undefined,
             customFields: { 'fuente_de_contacto': 'digital' },
             notes: input.notas,
           }),

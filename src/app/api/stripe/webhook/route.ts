@@ -47,7 +47,8 @@ export async function POST(req: Request) {
           email: quote.contact.email,
           phone: quote.contact.phone,
           source: 'reservation',
-          tags: ['apartado-pagado', quote.computed.plaza.slug, `local-${quote.computed.unit.code}`],
+          tags: ['apartado-pagado', `local-${quote.computed.unit.code}`],
+          devSlug: quote.computed.plaza.slug,
           customFields: { quoteId, stripeSessionId: session.id },
         });
 
@@ -103,7 +104,8 @@ async function handleReservationPaid(folio: string, session: Stripe.Checkout.Ses
     email: r.contactEmail,
     phone: r.contactPhone,
     source: 'reservation',
-    tags: ['apartado-pagado', r.devSlug],
+    tags: ['apartado-pagado'],
+    devSlug: r.devSlug,
     notes: `Apartado PAGADO — ${r.devName}${r.unitType ? ` · ${r.unitType}` : ''} · Folio ${folio} · $${r.amount.toLocaleString('es-MX')} MXN`,
     customFields: { folio, stripeSessionId: session.id },
   });

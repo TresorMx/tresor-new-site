@@ -31,7 +31,8 @@ export async function POST(req: NextRequest) {
       lastName: rest.join(' ') || undefined,
       phone,
       source: 'reservation',
-      tags: ['reserva-rapida', devSlug],
+      tags: ['reserva-rapida'],
+      devSlug,
       notes: `Reserva rápida — ${devName ?? devSlug}${developerName ? ` (${developerName})` : ''}`,
     });
 

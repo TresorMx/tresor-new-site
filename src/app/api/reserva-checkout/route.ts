@@ -77,7 +77,8 @@ export async function POST(req: NextRequest) {
     email,
     phone,
     source: 'reservation',
-    tags: ['apartado-iniciado', devSlug],
+    tags: ['apartado-iniciado'],
+    devSlug,
     notes: `Apartado iniciado — ${dev.name}${unitSuffix} · Folio ${folio} · $${amount.toLocaleString('es-MX')} MXN`,
   });
 

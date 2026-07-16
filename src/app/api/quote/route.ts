@@ -85,6 +85,7 @@ export async function POST(req: Request) {
     company: contact.company,
     source: 'quote',
     tags: ['Ads Quattro'],
+    devSlug: plaza.slug,
     customFields: {
       'desarrollo_de_inters': plazaToDesarrollo(plaza.slug),
       'fuente_de_contacto': 'digital',

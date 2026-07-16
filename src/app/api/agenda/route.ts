@@ -37,21 +37,30 @@ function formatTime(t: string) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { firstName, lastName, email, phone, interest, mode, date, time } = body;
+    // `plaza` = slug real de desarrollo, lo manda AgendaWidget cuando el
+    // formulario se dispara desde una ficha específica — ahí no hay
+    // selector de "interés" (ya se sabe exactamente cuál desarrollo es).
+    // `interest` es la categoría genérica que sí llena el form de /agenda
+    // (sin ficha de origen). Antes `interest` era obligatorio siempre, así
+    // que CADA envío desde una ficha (que nunca manda `interest`) regresaba
+    // 400 — el widget de "Agendar visita" en las fichas estaba roto.
+    const { firstName, lastName, email, phone, interest, mode, date, time, plaza } = body;
 
-    if (!firstName || !lastName || !email || !phone || !interest || !mode || !date || !time) {
+    if (!firstName || !lastName || !email || !phone || !mode || !date || !time || (!interest && !plaza)) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
     const id = `AGD-${randomUUID().split('-')[0].toUpperCase()}`;
+    const interestLabel = interest ? (INTEREST_LABELS[interest] ?? interest) : undefined;
 
-    // 1) Guardar en Sanity
+    // 1) Guardar en Sanity — `plaza` (slug real) tiene prioridad sobre
+    // `interest` (categoría genérica, no es un slug de plaza real).
     await saveLeadToSanity({
       source: 'agenda',
       fullName: `${firstName} ${lastName}`,
       email,
       phone,
-      plazaSlug: interest,
+      plazaSlug: plaza ?? interest,
       message: `${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
     });
 
@@ -64,12 +73,13 @@ export async function POST(req: NextRequest) {
       email,
       phone,
       source: 'agenda',
-      tags: ['cita', interest],
+      tags: interest ? ['cita', interest] : ['cita'],
+      devSlug: plaza || undefined,
       customFields: {
         'fuente_de_contacto': 'digital',
-        'observaciones': `Visita agendada · ${INTEREST_LABELS[interest] ?? interest} · ${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
+        'observaciones': `Visita agendada · ${interestLabel ?? plaza} · ${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
       },
-      notes: `Visita agendada · ${INTEREST_LABELS[interest] ?? interest} · ${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
+      notes: `Visita agendada · ${interestLabel ?? plaza} · ${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
     });
 
     // 2) Email de notificación interna
@@ -79,8 +89,8 @@ export async function POST(req: NextRequest) {
         await resend.emails.send({
           from: process.env.RESEND_FROM_EMAIL ?? 'hello@tresor.mx',
           to: process.env.LEADS_EMAIL_TO ?? 'david.baena@gmail.com',
-          subject: `📅 Nueva visita agendada · ${INTEREST_LABELS[interest] ?? interest} · ${firstName} ${lastName}`,
-          html: agendaEmailHTML({ id, firstName, lastName, email, phone, interest, mode, date, time }),
+          subject: `📅 Nueva visita agendada · ${interestLabel ?? plaza} · ${firstName} ${lastName}`,
+          html: agendaEmailHTML({ id, firstName, lastName, email, phone, interestLabel: interestLabel ?? plaza, mode, date, time }),
         });
       } catch (e) {
         console.error('[Resend] agenda error', e);
@@ -97,10 +107,10 @@ export async function POST(req: NextRequest) {
 }
 
 function agendaEmailHTML({
-  id, firstName, lastName, email, phone, interest, mode, date, time,
+  id, firstName, lastName, email, phone, interestLabel, mode, date, time,
 }: {
   id: string; firstName: string; lastName: string; email: string; phone: string;
-  interest: string; mode: string; date: string; time: string;
+  interestLabel?: string; mode: string; date: string; time: string;
 }) {
   return `
     <div style="font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 540px; margin: 0 auto; color: #0E0E0E;">
@@ -109,7 +119,7 @@ function agendaEmailHTML({
         <div style="color: #6B6863; font-size: 13px; margin-top: 4px;">${id}</div>
       </div>
       <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-        <tr><td style="padding: 8px 0; color: #6B6863;">Interés</td><td style="text-align: right; font-weight: 600;">${INTEREST_LABELS[interest] ?? interest}</td></tr>
+        <tr><td style="padding: 8px 0; color: #6B6863;">Interés</td><td style="text-align: right; font-weight: 600;">${interestLabel ?? '—'}</td></tr>
         <tr><td style="padding: 8px 0; color: #6B6863;">Modalidad</td><td style="text-align: right; font-weight: 600;">${MODE_LABELS[mode] ?? mode}</td></tr>
         <tr><td style="padding: 8px 0; color: #6B6863;">Fecha</td><td style="text-align: right; font-weight: 600;">${formatDate(date)}</td></tr>
         <tr><td style="padding: 8px 0; color: #6B6863;">Hora</td><td style="text-align: right; font-weight: 600;">${formatTime(time)}</td></tr>

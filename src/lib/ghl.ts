@@ -33,6 +33,13 @@ export interface GHLLead {
   company?: string;
   source: 'quote' | 'chatbot' | 'broker' | 'reservation' | 'agenda' | 'chat';
   tags?: string[];
+  // Slug del desarrollo/ficha que disparó el lead (ej. 'long-island',
+  // 'esther-wow-condos') — se agrega como tag además de 'Tresor Web'.
+  // Se omite cuando el lead no viene de una ficha específica (registro de
+  // broker, rewards, chat/ads genéricos, etc.) — así el enrutamiento por
+  // desarrollo queda en un solo lugar en vez de que cada caller arme el
+  // string de tags a mano.
+  devSlug?: string;
   customFields?: Record<string, string | number | boolean>;
   notes?: string;
 }
@@ -62,7 +69,9 @@ export async function sendLeadToGHL(lead: GHLLead): Promise<{ ok: boolean; conta
         companyName: lead.company,
         locationId,
         source: `web-${lead.source}`,
-        tags: lead.tags ?? [],
+        // 'Tresor Web' siempre, más el desarrollo (si aplica) — un solo
+        // lugar decide el formato en vez de que cada ruta lo arme distinto.
+        tags: ['Tresor Web', ...(lead.devSlug ? [lead.devSlug] : []), ...(lead.tags ?? [])],
         customFields: lead.customFields
           ? Object.entries(lead.customFields).map(([key, value]) => ({ key, field_value: String(value) }))
           : [],
