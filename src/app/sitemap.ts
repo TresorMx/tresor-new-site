@@ -30,6 +30,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/en/brokers`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
   ];
 
+  // Páginas de desarrollador (trayectoria corporativa) — mismo criterio de
+  // prioridad que /desarrollo.
+  const developerSlugs = ['gestion', 'comercializacion', 'quattro-plaza-center', 'live-desarrollos', 'onix-living', 'urban-homes'];
+  const developerRoutes: MetadataRoute.Sitemap = developerSlugs.flatMap((slug) => [
+    { url: `${SITE}/${slug}`,        lastModified: now, changeFrequency: 'monthly' as const, priority: 0.6 },
+    { url: `${SITE}/en/${slug}`,     lastModified: now, changeFrequency: 'monthly' as const, priority: 0.45 },
+  ]);
+
+  // Landings por ciudad y por tipo de propiedad — palabra clave real,
+  // prioridad alta (mismo nivel que /locales-comerciales-cancun e
+  // /invertir-en-cancun, que ya estaban en staticRoutes).
+  const keywordLandingSlugs = [
+    'cancun', 'puerto-cancun', 'playa-del-carmen', 'tulum',
+    'departamentos', 'locales-comerciales', 'lotes-residenciales',
+  ];
+  const keywordLandingRoutes: MetadataRoute.Sitemap = keywordLandingSlugs.flatMap((slug) => [
+    { url: `${SITE}/${slug}`,    lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },
+    { url: `${SITE}/en/${slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.65 },
+  ]);
+
   const plazaRoutes: MetadataRoute.Sitemap = allSlugs.flatMap((slug) => [
     {
       url: `${SITE}/desarrollos/${slug}`,
@@ -64,5 +84,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
   ];
 
-  return [...staticRoutes, ...plazaRoutes, ...blogRoutes];
+  return [...staticRoutes, ...developerRoutes, ...keywordLandingRoutes, ...plazaRoutes, ...blogRoutes];
 }
