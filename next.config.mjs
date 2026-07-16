@@ -35,10 +35,13 @@ const nextConfig = {
       { source: '/tresor', destination: '/quattro-plaza-center', permanent: true },
       { source: '/en/tresor', destination: '/en/quattro-plaza-center', permanent: true },
 
-      // /drive solo (sin nada después) no es una página real — manda a home
-      // en vez de dejar un 404 que invite a curiosear qué más hay bajo /drive.
+      // /drive y /drive/desarrollos solos (sin nada después) no son páginas
+      // reales — mandan a home en vez de dejar un 404 que invite a
+      // curiosear qué más hay bajo /drive.
       { source: '/drive', destination: '/', permanent: false },
       { source: '/en/drive', destination: '/en', permanent: false },
+      { source: '/drive/desarrollos', destination: '/', permanent: false },
+      { source: '/en/drive/desarrollos', destination: '/en', permanent: false },
 
       // ─────────────────────────────────────────────────────────────
       // Migración del sitio anterior (WordPress) — URLs indexadas en
