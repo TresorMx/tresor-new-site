@@ -29,25 +29,31 @@ export async function POST(req: Request) {
   if (!parsed.success) return NextResponse.json({ error: 'Datos inválidos.' }, { status: 400 });
 
   const email = parsed.data.email.trim().toLowerCase();
-  const freshClient = sanityClient.withConfig({ useCdn: false });
 
-  const account = await freshClient.fetch<{ _id: string; passwordHash: string; verified: boolean; fullName: string } | null>(
-    `*[_type == "brokerAccount" && email == $email][0]{ _id, passwordHash, verified, fullName }`,
-    { email },
-  );
+  try {
+    const freshClient = sanityClient.withConfig({ useCdn: false });
 
-  if (!account || !account.passwordHash || !(await comparePassword(parsed.data.password, account.passwordHash))) {
-    return NextResponse.json({ error: 'Correo o contraseña incorrectos.' }, { status: 401 });
+    const account = await freshClient.fetch<{ _id: string; passwordHash: string; verified: boolean; fullName: string } | null>(
+      `*[_type == "brokerAccount" && email == $email][0]{ _id, passwordHash, verified, fullName }`,
+      { email },
+    );
+
+    if (!account || !account.passwordHash || !(await comparePassword(parsed.data.password, account.passwordHash))) {
+      return NextResponse.json({ error: 'Correo o contraseña incorrectos.' }, { status: 401 });
+    }
+
+    if (!account.verified) {
+      return NextResponse.json({ error: 'Tu cuenta todavía no está verificada.', needsVerification: true }, { status: 403 });
+    }
+
+    const res = NextResponse.json({ ok: true, firstName: account.fullName?.split(' ')[0] ?? null });
+    const secure = process.env.NODE_ENV === 'production';
+    res.cookies.set(BROKER_COOKIE, signBrokerSession(account._id), {
+      path: '/', maxAge: MAX_AGE, sameSite: 'lax', secure, httpOnly: true,
+    });
+    return res;
+  } catch (e) {
+    console.error('[broker/login] falló para', email, e);
+    return NextResponse.json({ error: 'No pudimos iniciar sesión. Intenta de nuevo en unos minutos.' }, { status: 500 });
   }
-
-  if (!account.verified) {
-    return NextResponse.json({ error: 'Tu cuenta todavía no está verificada.', needsVerification: true }, { status: 403 });
-  }
-
-  const res = NextResponse.json({ ok: true, firstName: account.fullName?.split(' ')[0] ?? null });
-  const secure = process.env.NODE_ENV === 'production';
-  res.cookies.set(BROKER_COOKIE, signBrokerSession(account._id), {
-    path: '/', maxAge: MAX_AGE, sameSite: 'lax', secure, httpOnly: true,
-  });
-  return res;
 }

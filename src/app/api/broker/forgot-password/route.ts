@@ -23,23 +23,29 @@ export async function POST(req: Request) {
   if (!parsed.success) return NextResponse.json({ error: 'Datos inválidos.' }, { status: 400 });
 
   const email = parsed.data.email.trim().toLowerCase();
-  const freshClient = sanityClient.withConfig({ useCdn: false });
 
-  const account = await freshClient.fetch<{ _id: string } | null>(
-    `*[_type == "brokerAccount" && email == $email][0]{ _id }`,
-    { email },
-  );
+  try {
+    const freshClient = sanityClient.withConfig({ useCdn: false });
 
-  // Mismo mensaje exista o no la cuenta — no revela si un correo está
-  // registrado.
-  if (account) {
-    const code = generateOtp();
-    await freshClient
-      .patch(account._id)
-      .set({ otpCodeHash: hashOtp(code), otpExpiresAt: new Date(Date.now() + OTP_TTL_MS).toISOString(), otpAttempts: 0 })
-      .commit();
-    await sendOtpEmail(email, code, 'reset');
+    const account = await freshClient.fetch<{ _id: string } | null>(
+      `*[_type == "brokerAccount" && email == $email][0]{ _id }`,
+      { email },
+    );
+
+    // Mismo mensaje exista o no la cuenta — no revela si un correo está
+    // registrado.
+    if (account) {
+      const code = generateOtp();
+      await freshClient
+        .patch(account._id)
+        .set({ otpCodeHash: hashOtp(code), otpExpiresAt: new Date(Date.now() + OTP_TTL_MS).toISOString(), otpAttempts: 0 })
+        .commit();
+      await sendOtpEmail(email, code, 'reset');
+    }
+
+    return NextResponse.json({ ok: true });
+  } catch (e) {
+    console.error('[broker/forgot-password] falló para', email, e);
+    return NextResponse.json({ error: 'No pudimos procesar tu solicitud. Intenta de nuevo en unos minutos.' }, { status: 500 });
   }
-
-  return NextResponse.json({ ok: true });
 }
