@@ -24,6 +24,11 @@ export default function FloatingLayer() {
   const { isBroker } = useBroker();
   const pathname = usePathname(); // sin prefijo de locale (viene de @/navigation)
 
+  // /drive/* (landings espejo sin login para brokers de confianza) — nada
+  // de chat ahí tampoco, sin importar la sesión: es una zona oculta, el
+  // chat de Luis no tiene nada que hacer ahí.
+  if (pathname === '/drive' || pathname.startsWith('/drive/')) return null;
+
   if (!isAsesor && !isBroker) return <Chatbot />;
 
   const base = isAsesor ? '/asesores' : '/brokers/drive';
