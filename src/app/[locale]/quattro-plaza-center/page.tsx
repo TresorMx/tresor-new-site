@@ -9,12 +9,12 @@ export const metadata: Metadata = {
   title: 'Quattro Plaza Center — Locales Comerciales en Cancún',
   description:
     'Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en Cancún: locales en preventa y entrega inmediata en zonas de alto crecimiento.',
-  alternates: { canonical: 'https://tresor.mx/quattro-plaza-center' },
+  alternates: { canonical: 'https://www.tresor.mx/quattro-plaza-center' },
   openGraph: {
     title: 'Quattro Plaza Center — Locales Comerciales en Cancún',
     description:
       'Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en Cancún: locales en preventa y entrega inmediata en zonas de alto crecimiento.',
-    url: 'https://tresor.mx/quattro-plaza-center',
+    url: 'https://www.tresor.mx/quattro-plaza-center',
     images: [{ url: '/renders/gardens/01.jpg', width: 1920, height: 992 }],
   },
 };

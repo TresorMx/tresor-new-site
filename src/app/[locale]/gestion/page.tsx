@@ -11,11 +11,11 @@ export const metadata: Metadata = {
   title: 'Gestión — Servicios de Gestión Inmobiliaria',
   description:
     'Servicios integrales de gestión inmobiliaria de Tresor Real Estate: búsqueda de terrenos, estudios de viabilidad, diseño de plan maestro, gestión de permisos, supervisión de obra y comercialización, en Cancún y Tulum.',
-  alternates: { canonical: 'https://tresor.mx/gestion' },
+  alternates: { canonical: 'https://www.tresor.mx/gestion' },
   openGraph: {
     title: 'Gestión — Servicios de Gestión Inmobiliaria',
     description: 'Servicios integrales de gestión inmobiliaria de Tresor Real Estate, desde la conceptualización hasta la venta de la última unidad.',
-    url: 'https://tresor.mx/gestion',
+    url: 'https://www.tresor.mx/gestion',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

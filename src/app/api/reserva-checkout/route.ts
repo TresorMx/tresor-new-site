@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
   // (~$10K) y estos montos lo superan, así que ofrecerlo tronaría la sesión.
   try {
     const stripe = getStripe();
-    const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tresor.mx';
+    const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tresor.mx';
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
       payment_method_types: ['card'],

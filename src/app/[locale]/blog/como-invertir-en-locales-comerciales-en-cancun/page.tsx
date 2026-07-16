@@ -15,13 +15,13 @@ export const metadata: Metadata = {
     'rendimiento local comercial cancun',
   ],
   alternates: {
-    canonical: 'https://tresor.mx/blog/como-invertir-en-locales-comerciales-en-cancun',
+    canonical: 'https://www.tresor.mx/blog/como-invertir-en-locales-comerciales-en-cancun',
   },
   openGraph: {
     title: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa 2026',
     description:
       'Guía definitiva para invertir en locales comerciales en Cancún: desde elegir la zona correcta hasta negociar el mejor precio.',
-    url: 'https://tresor.mx/blog/como-invertir-en-locales-comerciales-en-cancun',
+    url: 'https://www.tresor.mx/blog/como-invertir-en-locales-comerciales-en-cancun',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
@@ -36,10 +36,10 @@ const jsonLd = {
   publisher: {
     '@type': 'Organization',
     name: 'Tresor Real Estate',
-    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
+    logo: 'https://www.tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://tresor.mx/blog/AdobeStock_791905652.jpeg',
-  mainEntityOfPage: 'https://tresor.mx/blog/como-invertir-en-locales-comerciales-en-cancun',
+  image: 'https://www.tresor.mx/blog/AdobeStock_791905652.jpeg',
+  mainEntityOfPage: 'https://www.tresor.mx/blog/como-invertir-en-locales-comerciales-en-cancun',
 };
 
 export default function ArticlePage() {

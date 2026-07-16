@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Propiedades en Venta en Cancún',
   description:
     'Departamentos, locales comerciales y lotes residenciales en las zonas de mayor crecimiento de Cancún. Preventa y entrega inmediata.',
-  alternates: { canonical: 'https://tresor.mx/cancun' },
+  alternates: { canonical: 'https://www.tresor.mx/cancun' },
   openGraph: {
     title: 'Propiedades en Venta en Cancún',
     description: 'Departamentos, locales comerciales y lotes residenciales en las zonas de mayor crecimiento de Cancún.',
-    url: 'https://tresor.mx/cancun',
+    url: 'https://www.tresor.mx/cancun',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

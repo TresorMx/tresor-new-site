@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     'invertir cancun 2026',
   ],
   alternates: {
-    canonical: 'https://tresor.mx/blog/local-comercial-vs-departamento-cancun',
+    canonical: 'https://www.tresor.mx/blog/local-comercial-vs-departamento-cancun',
   },
   openGraph: {
     title: 'Local Comercial vs Departamento en Cancún: ¿Qué Conviene Más como Inversión?',
     description: 'Análisis objetivo entre invertir en local comercial o departamento en Cancún. Rendimientos, riesgos y qué conviene según tu perfil.',
-    url: 'https://tresor.mx/blog/local-comercial-vs-departamento-cancun',
+    url: 'https://www.tresor.mx/blog/local-comercial-vs-departamento-cancun',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
@@ -34,10 +34,10 @@ const jsonLd = {
   publisher: {
     '@type': 'Organization',
     name: 'Tresor Real Estate',
-    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
+    logo: 'https://www.tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://tresor.mx/blog/AdobeStock_862766615.jpeg',
-  mainEntityOfPage: 'https://tresor.mx/blog/local-comercial-vs-departamento-cancun',
+  image: 'https://www.tresor.mx/blog/AdobeStock_862766615.jpeg',
+  mainEntityOfPage: 'https://www.tresor.mx/blog/local-comercial-vs-departamento-cancun',
 };
 
 const comparacion = [

@@ -108,7 +108,7 @@ export interface QuotePDFProps {
   siteUrl?: string;
 }
 
-export function QuotePDF({ quote, quoteId, contact, siteUrl = 'https://tresor.mx' }: QuotePDFProps) {
+export function QuotePDF({ quote, quoteId, contact, siteUrl = 'https://www.tresor.mx' }: QuotePDFProps) {
   const today = new Date().toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
   const valid = new Date(quote.validUntil).toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
 

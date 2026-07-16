@@ -6,7 +6,7 @@ import type { Metadata } from 'next';
 // /sitemap.xml, /opengraph-image raíz) no pasan por ese layout — sin esto,
 // Next resuelve URLs de OG/Twitter contra localhost en vez del dominio real.
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tresor.mx'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tresor.mx'),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

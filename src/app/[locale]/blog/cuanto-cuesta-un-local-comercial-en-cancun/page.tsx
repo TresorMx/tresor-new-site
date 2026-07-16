@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     'locales comerciales cancun 2026 precio',
   ],
   alternates: {
-    canonical: 'https://tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
+    canonical: 'https://www.tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
   },
   openGraph: {
     title: '¿Cuánto Cuesta un Local Comercial en Cancún en 2026?',
     description: 'Precios reales de locales comerciales en Cancún por zona y m². Todo lo que necesitas saber antes de comprar.',
-    url: 'https://tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
+    url: 'https://www.tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
@@ -34,10 +34,10 @@ const jsonLd = {
   publisher: {
     '@type': 'Organization',
     name: 'Tresor Real Estate',
-    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
+    logo: 'https://www.tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://tresor.mx/blog/AdobeStock_804358854.jpeg',
-  mainEntityOfPage: 'https://tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
+  image: 'https://www.tresor.mx/blog/AdobeStock_804358854.jpeg',
+  mainEntityOfPage: 'https://www.tresor.mx/blog/cuanto-cuesta-un-local-comercial-en-cancun',
 };
 
 const zonas = [

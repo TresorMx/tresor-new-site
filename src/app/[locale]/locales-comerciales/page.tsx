@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Locales Comerciales en Venta en Cancún',
   description:
     'Locales comerciales en preventa en plazas premium de Cancún. Alto retorno, ubicaciones estratégicas y desarrolladores con trayectoria comprobada.',
-  alternates: { canonical: 'https://tresor.mx/locales-comerciales' },
+  alternates: { canonical: 'https://www.tresor.mx/locales-comerciales' },
   openGraph: {
     title: 'Locales Comerciales en Venta en Cancún',
     description: 'Locales comerciales en preventa en plazas premium de Cancún, con alto potencial de retorno.',
-    url: 'https://tresor.mx/locales-comerciales',
+    url: 'https://www.tresor.mx/locales-comerciales',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

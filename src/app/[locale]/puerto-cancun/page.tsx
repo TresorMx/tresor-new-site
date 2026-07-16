@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Propiedades en Venta en Puerto Cancún',
   description:
     'Departamentos de lujo en Puerto Cancún, el enclave residencial más exclusivo de la ciudad, frente al mar Caribe y la marina.',
-  alternates: { canonical: 'https://tresor.mx/puerto-cancun' },
+  alternates: { canonical: 'https://www.tresor.mx/puerto-cancun' },
   openGraph: {
     title: 'Propiedades en Venta en Puerto Cancún',
     description: 'Departamentos de lujo en Puerto Cancún, frente al mar Caribe y la marina.',
-    url: 'https://tresor.mx/puerto-cancun',
+    url: 'https://www.tresor.mx/puerto-cancun',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Propiedades en Venta en Tulum',
   description:
     'Departamentos en preventa en Tulum, el destino de mayor crecimiento de México. Aldea Zamá y las zonas de mayor plusvalía.',
-  alternates: { canonical: 'https://tresor.mx/tulum' },
+  alternates: { canonical: 'https://www.tresor.mx/tulum' },
   openGraph: {
     title: 'Propiedades en Venta en Tulum',
     description: 'Departamentos en preventa en Tulum, el destino de mayor crecimiento de México.',
-    url: 'https://tresor.mx/tulum',
+    url: 'https://www.tresor.mx/tulum',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

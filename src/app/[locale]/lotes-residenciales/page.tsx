@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Lotes Residenciales en Venta en Cancún',
   description:
     'Lotes y macrolotes residenciales en las zonas de mayor crecimiento de Cancún. Ideal para desarrolladores e inversionistas.',
-  alternates: { canonical: 'https://tresor.mx/lotes-residenciales' },
+  alternates: { canonical: 'https://www.tresor.mx/lotes-residenciales' },
   openGraph: {
     title: 'Lotes Residenciales en Venta en Cancún',
     description: 'Lotes y macrolotes residenciales en las zonas de mayor plusvalía de Cancún.',
-    url: 'https://tresor.mx/lotes-residenciales',
+    url: 'https://www.tresor.mx/lotes-residenciales',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

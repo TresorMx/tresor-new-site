@@ -10,11 +10,11 @@ export const metadata: Metadata = {
   title: 'Comercialización — Sales Partner',
   description:
     'Modelo de comercialización de Tresor Real Estate: Master Broker, Sales Partner y Real Estate Agency — red de brokers aliados, equipo de ventas y servicio de agencia inmobiliaria en Cancún y Riviera Maya.',
-  alternates: { canonical: 'https://tresor.mx/comercializacion' },
+  alternates: { canonical: 'https://www.tresor.mx/comercializacion' },
   openGraph: {
     title: 'Comercialización — Sales Partner',
     description: 'Master Broker, Sales Partner y Real Estate Agency — el modelo de comercialización de Tresor Real Estate.',
-    url: 'https://tresor.mx/comercializacion',
+    url: 'https://www.tresor.mx/comercializacion',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

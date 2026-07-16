@@ -15,11 +15,11 @@ export const metadata: Metadata = {
   title: 'Desarrollo — Nuestra Trayectoria',
   description:
     'Más de 3,000 unidades entregadas en Cancún y Tulum. Conoce los proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate.',
-  alternates: { canonical: 'https://tresor.mx/desarrollo' },
+  alternates: { canonical: 'https://www.tresor.mx/desarrollo' },
   openGraph: {
     title: 'Desarrollo — Nuestra Trayectoria',
     description: 'Proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate en Cancún y Tulum.',
-    url: 'https://tresor.mx/desarrollo',
+    url: 'https://www.tresor.mx/desarrollo',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

@@ -16,12 +16,12 @@ export const metadata: Metadata = {
     'invertir en cancun sin vivir ahi',
   ],
   alternates: {
-    canonical: 'https://tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
+    canonical: 'https://www.tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
   },
   openGraph: {
     title: 'Por Qué Invertir en Cancún desde Monterrey, CDMX o Guadalajara',
     description: 'Cancún ofrece mayor rendimiento y menor precio de entrada que Monterrey, CDMX o GDL. Todo lo que necesitas saber para invertir sin vivir allá.',
-    url: 'https://tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
+    url: 'https://www.tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
@@ -36,10 +36,10 @@ const jsonLd = {
   publisher: {
     '@type': 'Organization',
     name: 'Tresor Real Estate',
-    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
+    logo: 'https://www.tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://tresor.mx/blog/AdobeStock_841077811.jpeg',
-  mainEntityOfPage: 'https://tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
+  image: 'https://www.tresor.mx/blog/AdobeStock_841077811.jpeg',
+  mainEntityOfPage: 'https://www.tresor.mx/blog/invertir-en-cancun-desde-monterrey-cdmx',
 };
 
 const comparativa = [

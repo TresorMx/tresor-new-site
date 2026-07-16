@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     'mejor ubicacion local comercial cancun',
   ],
   alternates: {
-    canonical: 'https://tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
+    canonical: 'https://www.tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
   },
   openGraph: {
     title: 'Las Mejores Zonas para Poner un Negocio en Cancún',
     description: 'Análisis completo de las mejores zonas comerciales de Cancún: tráfico, precios, tipo de cliente y potencial de cada corredor.',
-    url: 'https://tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
+    url: 'https://www.tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
@@ -34,10 +34,10 @@ const jsonLd = {
   publisher: {
     '@type': 'Organization',
     name: 'Tresor Real Estate',
-    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
+    logo: 'https://www.tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://tresor.mx/blog/AdobeStock_838554951.jpeg',
-  mainEntityOfPage: 'https://tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
+  image: 'https://www.tresor.mx/blog/AdobeStock_838554951.jpeg',
+  mainEntityOfPage: 'https://www.tresor.mx/blog/mejores-zonas-para-negocio-en-cancun',
 };
 
 export default function ArticlePage() {

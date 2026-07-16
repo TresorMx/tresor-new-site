@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     'local comercial preventa cancun',
     'quattro plaza center',
   ],
-  alternates: { canonical: 'https://tresor.mx/locales-comerciales-cancun' },
+  alternates: { canonical: 'https://www.tresor.mx/locales-comerciales-cancun' },
   openGraph: {
     title: 'Locales Comerciales en Venta en Cancún',
     description: 'Dos plazas comerciales premium en Cancún. Locales desde 32 m² y desde $1,968,600 MXN + IVA. Enganche desde $147,000 MXN. Entrega 2027.',
-    url: 'https://tresor.mx/locales-comerciales-cancun',
+    url: 'https://www.tresor.mx/locales-comerciales-cancun',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
     locale: 'es_MX',
     type: 'website',

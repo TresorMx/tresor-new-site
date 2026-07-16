@@ -10,11 +10,11 @@ const dev = developers.Live;
 export const metadata: Metadata = {
   title: `Desarrollos de ${dev.name}`,
   description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
-  alternates: { canonical: 'https://tresor.mx/live-desarrollos' },
+  alternates: { canonical: 'https://www.tresor.mx/live-desarrollos' },
   openGraph: {
     title: `Desarrollos de ${dev.name}`,
     description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
-    url: 'https://tresor.mx/live-desarrollos',
+    url: 'https://www.tresor.mx/live-desarrollos',
     images: [{ url: '/desarrollos/ximena/2.-Fachada-de-Noche.jpg', width: 1920, height: 992 }],
   },
 };

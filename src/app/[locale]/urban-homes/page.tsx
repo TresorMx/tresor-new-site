@@ -10,11 +10,11 @@ const dev = developers['Urban Homes'];
 export const metadata: Metadata = {
   title: `Desarrollos de ${dev.name}`,
   description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
-  alternates: { canonical: 'https://tresor.mx/urban-homes' },
+  alternates: { canonical: 'https://www.tresor.mx/urban-homes' },
   openGraph: {
     title: `Desarrollos de ${dev.name}`,
     description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
-    url: 'https://tresor.mx/urban-homes',
+    url: 'https://www.tresor.mx/urban-homes',
     images: [{ url: '/desarrollos/Blume/BLUME-Drone-1.jpg', width: 1920, height: 992 }],
   },
 };

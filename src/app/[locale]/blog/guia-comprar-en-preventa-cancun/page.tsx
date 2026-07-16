@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     'preventa inmobiliaria cancun 2026',
   ],
   alternates: {
-    canonical: 'https://tresor.mx/blog/guia-comprar-en-preventa-cancun',
+    canonical: 'https://www.tresor.mx/blog/guia-comprar-en-preventa-cancun',
   },
   openGraph: {
     title: 'Guía para Comprar en Preventa en Cancún: Todo lo que Debes Saber',
     description: 'Checklist, documentos y preguntas clave para comprar en preventa en Cancún sin errores. Guía completa para el inversionista inteligente.',
-    url: 'https://tresor.mx/blog/guia-comprar-en-preventa-cancun',
+    url: 'https://www.tresor.mx/blog/guia-comprar-en-preventa-cancun',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };
@@ -35,10 +35,10 @@ const jsonLd = {
   publisher: {
     '@type': 'Organization',
     name: 'Tresor Real Estate',
-    logo: 'https://tresor.mx/logos/LogoTresor-ink.svg',
+    logo: 'https://www.tresor.mx/logos/LogoTresor-ink.svg',
   },
-  image: 'https://tresor.mx/blog/AdobeStock_887006964.jpeg',
-  mainEntityOfPage: 'https://tresor.mx/blog/guia-comprar-en-preventa-cancun',
+  image: 'https://www.tresor.mx/blog/AdobeStock_887006964.jpeg',
+  mainEntityOfPage: 'https://www.tresor.mx/blog/guia-comprar-en-preventa-cancun',
 };
 
 export default function ArticlePage() {

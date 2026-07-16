@@ -62,7 +62,7 @@ const jetbrains = JetBrains_Mono({
   display: 'swap',
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tresor.mx';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tresor.mx';
 
 export const viewport: Viewport = {
   themeColor: '#F6F4EF',

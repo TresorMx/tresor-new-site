@@ -18,7 +18,7 @@ export async function POST(req: Request) {
 
   try {
     const stripe = getStripe();
-    const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tresor.mx';
+    const origin = req.headers.get('origin') ?? process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tresor.mx';
 
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',

@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Departamentos en Venta en Cancún y Riviera Maya',
   description:
     'Departamentos en preventa y entrega inmediata en Cancún, Tulum, Playa del Carmen y Puerto Cancún. Inversión inmobiliaria con las desarrolladoras más sólidas de Quintana Roo.',
-  alternates: { canonical: 'https://tresor.mx/departamentos' },
+  alternates: { canonical: 'https://www.tresor.mx/departamentos' },
   openGraph: {
     title: 'Departamentos en Venta en Cancún y Riviera Maya',
     description: 'Departamentos en preventa y entrega inmediata con las desarrolladoras más sólidas de Quintana Roo.',
-    url: 'https://tresor.mx/departamentos',
+    url: 'https://www.tresor.mx/departamentos',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

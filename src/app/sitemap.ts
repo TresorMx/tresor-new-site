@@ -2,7 +2,7 @@ import type { MetadataRoute } from 'next';
 import { getActivePlazasAsync } from '@/lib/data';
 import { getAllDevelopmentRouteSlugsAsync } from '@/lib/developments';
 
-const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://tresor.mx';
+const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tresor.mx';
 
 export const dynamic = 'force-dynamic';
 

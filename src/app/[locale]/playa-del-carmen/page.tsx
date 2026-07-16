@@ -9,11 +9,11 @@ export const metadata: Metadata = {
   title: 'Propiedades en Venta en Playa del Carmen',
   description:
     'Departamentos en preventa y entrega inmediata en Playa del Carmen, a pasos de la Quinta Avenida y el mar Caribe.',
-  alternates: { canonical: 'https://tresor.mx/playa-del-carmen' },
+  alternates: { canonical: 'https://www.tresor.mx/playa-del-carmen' },
   openGraph: {
     title: 'Propiedades en Venta en Playa del Carmen',
     description: 'Departamentos en preventa y entrega inmediata en Playa del Carmen.',
-    url: 'https://tresor.mx/playa-del-carmen',
+    url: 'https://www.tresor.mx/playa-del-carmen',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
 };

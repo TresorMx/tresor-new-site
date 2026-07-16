@@ -10,11 +10,11 @@ const dev = developers.Onix;
 export const metadata: Metadata = {
   title: `Desarrollos de ${dev.name}`,
   description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
-  alternates: { canonical: 'https://tresor.mx/onix-living' },
+  alternates: { canonical: 'https://www.tresor.mx/onix-living' },
   openGraph: {
     title: `Desarrollos de ${dev.name}`,
     description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
-    url: 'https://tresor.mx/onix-living',
+    url: 'https://www.tresor.mx/onix-living',
     images: [{ url: '/desarrollos/villalta/portada3.jpg', width: 1920, height: 992 }],
   },
 };
