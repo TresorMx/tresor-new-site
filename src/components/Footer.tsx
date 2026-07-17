@@ -32,31 +32,31 @@ export default async function Footer() {
             <ul className="flex flex-col gap-2 text-[13px] text-white/70">
               <li><a href="mailto:hello@tresor.mx" className="hover:text-accent transition-colors">hello@tresor.mx</a></li>
               <li><a href="tel:+529984045602" className="hover:text-accent transition-colors">+52 998 404 5602</a></li>
-              <li className="text-white/50">Cancún, Q. Roo · México</li>
+              <li className="text-white/50">{t('address')}</li>
             </ul>
           </div>
 
           {/* Acerca de Tresor */}
           <div>
             <h4 className="mb-5 text-[11px] uppercase tracking-eyebrow font-medium text-accent">
-              Acerca de Tresor
+              {t('aboutTresor')}
             </h4>
             <ul className="flex flex-col gap-3 text-[13px] text-white/85 md:text-[14px]">
-              <li><Link href="/desarrollo" className="hover:text-accent">Desarrollo</Link></li>
-              <li><Link href="/gestion" className="hover:text-accent">Gestión</Link></li>
-              <li><Link href="/comercializacion" className="hover:text-accent">Comercialización</Link></li>
+              <li><Link href="/desarrollo" className="hover:text-accent">{t('devLabel')}</Link></li>
+              <li><Link href="/gestion" className="hover:text-accent">{t('gestionLabel')}</Link></li>
+              <li><Link href="/comercializacion" className="hover:text-accent">{t('comercializacionLabel')}</Link></li>
               <li><Link href="/blog" className="hover:text-accent">Tresor News</Link></li>
-              <li><Link href="/privacidad" className="hover:text-accent">Políticas de Privacidad</Link></li>
+              <li><Link href="/privacidad" className="hover:text-accent">{t('privacy')}</Link></li>
             </ul>
           </div>
 
           {/* Propiedades */}
           <div>
             <h4 className="mb-5 text-[11px] uppercase tracking-eyebrow font-medium text-accent">
-              Propiedades
+              {t('properties')}
             </h4>
             <ul className="flex flex-col gap-3 text-[13px] text-white/85 md:text-[14px]">
-              <li><Link href="/#portafolio" className="hover:text-accent">Desarrollos</Link></li>
+              <li><Link href="/#portafolio" className="hover:text-accent">{t('developments')}</Link></li>
             </ul>
           </div>
 
@@ -97,14 +97,7 @@ export default async function Footer() {
         {/* Disclaimer legal */}
         <div className="border-t border-white/10 py-6">
           <p className="mx-auto w-[95%] text-center text-[10px] font-light leading-relaxed text-white/35">
-            La información, precios y condiciones publicados en este sitio tienen carácter meramente
-            informativo y pueden modificarse sin previo aviso. Las imágenes, renders, planos y áreas son
-            representaciones ilustrativas con fines promocionales y no constituyen una representación exacta
-            del producto final ni generan obligación contractual alguna. Los desarrollos en los que Tresor
-            Real Estate participa como Sales Partner son propiedad y responsabilidad de sus respectivos
-            desarrolladores; Tresor actúa exclusivamente como comercializador y no asume responsabilidad
-            sobre el diseño, construcción, entrega o cumplimiento de dichos proyectos. Toda compra queda
-            sujeta a los términos y condiciones establecidos en el contrato correspondiente.
+            {t('disclaimer')}
           </p>
         </div>
       </div>

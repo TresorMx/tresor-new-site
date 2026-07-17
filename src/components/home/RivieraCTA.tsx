@@ -2,11 +2,15 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { Link } from '@/navigation';
 import { ArrowRight } from 'lucide-react';
 import RevealOnScroll from '@/components/RevealOnScroll';
 
 export default function RivieraCTA() {
+  const t = useTranslations('rivieraCta');
+  const tNav = useTranslations('nav');
+  const tHome = useTranslations('home');
   const ref = useRef<HTMLElement>(null);
   const [offset, setOffset] = useState(0);
 
@@ -54,22 +58,20 @@ export default function RivieraCTA() {
       {/* Contenido */}
       <div className="container-wrap relative z-10 w-full py-24 md:py-32">
         <RevealOnScroll className="max-w-[56rem]">
-          <span className="eyebrow text-accent font-bold">Cancún y Riviera Maya</span>
+          <span className="eyebrow text-accent font-bold">{t('eyebrow')}</span>
           <h2 className="mt-5 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
-            Vive y crece en <span className="text-white/60">el corazón del Caribe mexicano</span>
+            {t('titleMain')} <span className="text-white/60">{t('titleHighlight')}</span>
           </h2>
           <p className="mt-6 text-[15px] font-normal leading-relaxed text-white">
-            El destino que más crece en México: plusvalía sostenida, rentas en dólares
-            y calidad de vida todo el año. Invierte hoy donde el Caribe trabaja para ti
-            y asegura tu lugar en los desarrollos de mayor potencial de la región.
+            {t('desc')}
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row">
             <Link href="#portafolio" className="btn btn-lg border-0 bg-accent text-ink hover:brightness-95">
-              Ver desarrollos
+              {tHome('ctaViewDevelopments')}
               <ArrowRight size={15} strokeWidth={1.8} />
             </Link>
             <Link href="/agenda" className="btn btn-glass btn-lg border-0">
-              Agenda una visita
+              {tNav('scheduleVisit')}
             </Link>
           </div>
         </RevealOnScroll>

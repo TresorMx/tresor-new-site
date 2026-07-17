@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
 import { Lock, X, ArrowRight, Eye, EyeOff } from 'lucide-react';
 import { Link } from '@/navigation';
 import SlidingTabs from '@/components/ui/SlidingTabs';
@@ -9,6 +10,7 @@ import { useBroker } from '@/components/broker/context';
 import { useCommercialAccess, type CommercialTab } from '@/components/commercial/context';
 
 export default function CommercialLoginModal() {
+  const t = useTranslations('commercialModal');
   const { loginOpen, initialTab, closeLogin } = useCommercialAccess();
   const { login: asesorLogin } = useAsesor();
   const { login: brokerLogin } = useBroker();
@@ -101,7 +103,7 @@ export default function CommercialLoginModal() {
       >
         <button
           onClick={closeLogin}
-          aria-label="Cerrar"
+          aria-label={t('close')}
           className="absolute right-5 top-5 flex h-8 w-8 items-center justify-center rounded-full text-ink-3 transition-colors hover:bg-black/[0.05] hover:text-ink"
         >
           <X size={18} strokeWidth={1.8} />
@@ -111,12 +113,10 @@ export default function CommercialLoginModal() {
           <Lock size={20} strokeWidth={1.6} />
         </div>
         <h2 className="mt-5 font-sans text-[26px] font-medium leading-tight tracking-tight">
-          Identifícate para iniciar
+          {t('title')}
         </h2>
         <p className="mt-2 text-[14px] font-light leading-relaxed text-ink">
-          {tab === 'asesor'
-            ? 'Material exclusivo para equipo de ventas de Tresor.'
-            : 'Inicia sesión para ver los materiales de venta de los desarrollos inmobiliarios.'}
+          {tab === 'asesor' ? t('descAsesor') : t('descBroker')}
         </p>
 
         <SlidingTabs
@@ -124,14 +124,14 @@ export default function CommercialLoginModal() {
           activeIndex={tab === 'asesor' ? 0 : 1}
           onChange={(i) => setTab(i === 0 ? 'asesor' : 'broker')}
           items={[
-            { key: 'asesor', label: 'Asesor Tresor' },
-            { key: 'broker', label: 'Broker' },
+            { key: 'asesor', label: t('tabAsesor') },
+            { key: 'broker', label: t('tabBroker') },
           ]}
         />
 
         <form onSubmit={submit} className="mt-6 grid gap-4">
           <label className="field">
-            <span className="field-label">Correo</span>
+            <span className="field-label">{t('email')}</span>
             <input
               type="email"
               autoComplete="username"
@@ -143,7 +143,7 @@ export default function CommercialLoginModal() {
             />
           </label>
           <label className="field">
-            <span className="field-label">Contraseña</span>
+            <span className="field-label">{t('password')}</span>
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -157,7 +157,7 @@ export default function CommercialLoginModal() {
               <button
                 type="button"
                 onClick={() => setShowPassword((v) => !v)}
-                aria-label={showPassword ? 'Ocultar contraseña' : 'Mostrar contraseña'}
+                aria-label={showPassword ? t('hidePassword') : t('showPassword')}
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-ink-3 transition-colors hover:text-ink"
               >
                 {showPassword ? <EyeOff size={17} strokeWidth={1.6} /> : <Eye size={17} strokeWidth={1.6} />}
@@ -172,7 +172,7 @@ export default function CommercialLoginModal() {
                 <>
                   {' '}
                   <Link href="/brokers" onClick={closeLogin} className="font-semibold underline">
-                    Verifica tu cuenta aquí.
+                    {t('verifyAccountLink')}
                   </Link>
                 </>
               )}
@@ -184,17 +184,17 @@ export default function CommercialLoginModal() {
             disabled={loading || !email || !password}
             className="btn btn-lg mt-2 w-full border-0 bg-accent font-bold text-ink transition-all hover:brightness-95 disabled:opacity-40"
           >
-            {loading ? 'Verificando…' : 'Iniciar sesión'}
+            {loading ? t('verifying') : t('submit')}
             <ArrowRight size={15} strokeWidth={1.8} />
           </button>
 
           {tab === 'broker' && (
             <div className="mt-1 flex items-center justify-between text-[12px]">
               <Link href="/brokers?mode=forgot" onClick={closeLogin} className="text-ink-3 underline">
-                ¿Olvidaste tu contraseña?
+                {t('forgotPassword')}
               </Link>
               <Link href="/brokers" onClick={closeLogin} className="font-semibold text-ink underline">
-                ¿No tienes cuenta? Regístrate
+                {t('noAccount')}
               </Link>
             </div>
           )}

@@ -99,7 +99,11 @@ export interface SanityDeveloperPatch {
 }
 
 function i18n(es: string | undefined, en: string | undefined): I18nText | undefined {
-  return es ? { es, en } : undefined;
+  // Si falta `es` pero sí hay `en` (pasaba en varios `development` con
+  // seoDescription/seoTitle solo llenos en inglés), el resultado no debe
+  // desaparecer por completo — cae a `en` como base para ambos.
+  if (!es && !en) return undefined;
+  return { es: es ?? en!, en };
 }
 
 // Un `development` en Sanity guarda un `type` de ficha "ligera" (Sales

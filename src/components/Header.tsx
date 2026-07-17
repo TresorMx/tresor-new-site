@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from '@/navigation';
 import Image from 'next/image';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/navigation';
 import { ChevronDown, ArrowUpRight, ArrowRight, Building2, LandPlot, Store, MapPin, Phone, Mail, Globe, Lock, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -13,19 +13,19 @@ import { useBroker } from '@/components/broker/context';
 import { useCommercialAccess } from '@/components/commercial/context';
 
 const corporate = [
-  { href: '/desarrollo', label: 'Desarrollo' },
-  { href: '/gestion', label: 'Gestión' },
-  { href: '/comercializacion', label: 'Comercialización' },
-];
+  { href: '/desarrollo', key: 'corporateDesarrollo' },
+  { href: '/gestion', key: 'corporateGestion' },
+  { href: '/comercializacion', key: 'corporateComercializacion' },
+] as const;
 
 // Por tipo de propiedad — cada tipo con su ícono (mismo criterio que los cards),
 // apunta a su landing real (/departamentos, etc.) para SEO — antes todos
 // caían al ancla genérica /#portafolio.
 const propertyTypes = [
-  { icon: Store, title: 'Locales Comerciales', desc: 'Plazas y locales premium', href: '/locales-comerciales' },
-  { icon: Building2, title: 'Departamentos', desc: 'Residencias de 1, 2 y 3 recámaras', href: '/departamentos' },
-  { icon: LandPlot, title: 'Lotes Residenciales', desc: 'Terrenos en zonas de plusvalía', href: '/lotes-residenciales' },
-];
+  { icon: Store, titleKey: 'typeLocalesTitle', descKey: 'typeLocalesDesc', href: '/locales-comerciales' },
+  { icon: Building2, titleKey: 'typeDeptosTitle', descKey: 'typeDeptosDesc', href: '/departamentos' },
+  { icon: LandPlot, titleKey: 'typeLotesTitle', descKey: 'typeLotesDesc', href: '/lotes-residenciales' },
+] as const;
 
 // Todas las ciudades del portafolio; en el menú solo se muestran las que tienen
 // desarrollos activos (countByCity > 0). El slug de ruta de cada una vive en
@@ -50,6 +50,8 @@ const developerLinks = [
 
 export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertical' | 'horizontal' }) {
   const locale = useLocale();
+  const t = useTranslations('header');
+  const tNav = useTranslations('nav');
   const pathname = usePathname();
   const router = useRouter();
   const isHome = pathname === '/';
@@ -166,8 +168,8 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
             {/* Derecha: navegación corporativa — solo desktop */}
             <div className="hidden items-center gap-6 md:flex">
               {corporate.map((l) => (
-                <Link key={l.label} href={l.href} className="transition-opacity hover:opacity-60">
-                  {l.label}
+                <Link key={l.key} href={l.href} className="transition-opacity hover:opacity-60">
+                  {t(l.key)}
                 </Link>
               ))}
               <span className="h-3 w-px bg-ink/25" />
@@ -182,10 +184,10 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                 <span className="inline-flex items-center gap-3">
                   <span className="inline-flex items-center gap-1.5 uppercase">
                     <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    Asesor
+                    {t('advisorStatus')}
                   </span>
                   <button onClick={logout} className="inline-flex items-center gap-1 uppercase transition-opacity hover:opacity-60">
-                    Salir
+                    {t('logout')}
                     <LogOut size={12} strokeWidth={2} />
                   </button>
                 </span>
@@ -196,13 +198,13 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                     {brokerFirstName ?? 'Broker'}
                   </span>
                   <button onClick={brokerLogout} className="inline-flex items-center gap-1 uppercase transition-opacity hover:opacity-60">
-                    Salir
+                    {t('logout')}
                     <LogOut size={12} strokeWidth={2} />
                   </button>
                 </span>
               ) : (
                 <button onClick={() => openLogin()} className="inline-flex items-center gap-1.5 uppercase transition-opacity hover:opacity-60">
-                  Acceso Comercial
+                  {t('commercialAccess')}
                   <Lock size={12} strokeWidth={2} />
                 </button>
               )}
@@ -260,7 +262,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                   openMenu === 'propiedades' ? (dark ? 'bg-white/10' : 'bg-black/[0.04]') : '',
                 )}
               >
-                Propiedades
+                {t('propiedades')}
                 <ChevronDown
                   size={14}
                   strokeWidth={2}
@@ -277,7 +279,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                   dark ? 'bg-white/10' : 'bg-black/[0.05]',
                 )}
                 role="group"
-                aria-label="Idioma"
+                aria-label={t('language')}
               >
                 {(['es', 'en'] as const).map((lng) => (
                   <button
@@ -302,12 +304,12 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                 href="/agenda"
                 className="hidden rounded-full bg-accent px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.2em] text-ink transition-all hover:brightness-95 sm:inline-flex"
               >
-                Agenda una visita
+                {tNav('scheduleVisit')}
               </Link>
 
               {/* Hamburguesa móvil */}
               <button
-                aria-label="Abrir menú"
+                aria-label={t('openMenu')}
                 onClick={() => setMobileOpen((v) => !v)}
                 className="flex flex-col gap-[5px] p-2 md:hidden"
               >
@@ -349,7 +351,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
             <div className="mx-auto max-w-wrap pt-3">
               <div className="max-h-[calc(100svh-140px)] overflow-y-auto overscroll-contain rounded-[26px] bg-white text-ink shadow-[0_30px_80px_rgba(0,0,0,0.18)] ring-1 ring-black/[0.04]">
                 <MobileAccordionRow
-                  label="Propiedades"
+                  label={t('propiedades')}
                   open={mobileSection === 'propiedades'}
                   onToggle={() => setMobileSection((v) => (v === 'propiedades' ? null : 'propiedades'))}
                 >
@@ -362,7 +364,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                     onClick={() => { logout(); setMobileOpen(false); }}
                     className="flex w-full items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
                   >
-                    Cerrar sesión de asesor
+                    {t('logoutAdvisor')}
                     <LogOut size={16} strokeWidth={1.8} className="text-ink-3" />
                   </button>
                 ) : isBroker ? (
@@ -370,7 +372,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                     onClick={() => { brokerLogout(); setMobileOpen(false); }}
                     className="flex w-full items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
                   >
-                    Cerrar sesión de broker
+                    {t('logoutBroker')}
                     <LogOut size={16} strokeWidth={1.8} className="text-ink-3" />
                   </button>
                 ) : (
@@ -378,7 +380,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                     onClick={() => { openLogin(); setMobileOpen(false); }}
                     className="flex w-full items-center justify-between border-t border-line px-6 py-5 text-[15px] font-semibold"
                   >
-                    Acceso Comercial
+                    {t('commercialAccess')}
                     <Lock size={15} strokeWidth={1.8} className="text-ink-3" />
                   </button>
                 )}
@@ -388,9 +390,9 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                 <div className="flex items-center justify-between border-t border-line px-6 py-5">
                   <span className="flex items-center gap-2 text-[13px] font-medium text-ink-3">
                     <Globe size={16} strokeWidth={1.6} />
-                    Idioma
+                    {t('language')}
                   </span>
-                  <div className="inline-flex items-center gap-px rounded-full bg-black/[0.05] p-[3px]" role="group" aria-label="Idioma">
+                  <div className="inline-flex items-center gap-px rounded-full bg-black/[0.05] p-[3px]" role="group" aria-label={t('language')}>
                     {(['es', 'en'] as const).map((lng) => (
                       <button
                         key={lng}
@@ -412,7 +414,7 @@ export default function Header({ logoStyle = 'vertical' }: { logoStyle?: 'vertic
                     href="/agenda"
                     className="flex w-full items-center justify-center rounded-full bg-accent px-6 py-3.5 text-[11px] font-bold uppercase tracking-caps text-ink"
                   >
-                    Agenda una visita
+                    {tNav('scheduleVisit')}
                   </Link>
                 </div>
               </div>
@@ -471,6 +473,7 @@ function MobileAccordionRow({
 
 /* ════════════════ Mega-menú Propiedades ════════════════ */
 function PropiedadesMenu() {
+  const t = useTranslations('header');
   // Destacados: solo desarrollos propios (WE DEVELOP), sin los "próximamente", máx. 2.
   const destacados = getDevelopDevelopments().filter((d) => !d.comingSoon).slice(0, 2);
   // Ciudades: solo las que tienen desarrollos activos.
@@ -481,16 +484,16 @@ function PropiedadesMenu() {
       <div className="grid gap-8 p-8 lg:grid-cols-[1fr_0.8fr_0.8fr_1.1fr]">
         {/* Por tipo de propiedad */}
         <div>
-          <span className="eyebrow eyebrow-accent font-bold">Por tipo de propiedad</span>
+          <span className="eyebrow eyebrow-accent font-bold">{t('byType')}</span>
           <div className="mt-5 flex flex-col gap-1">
             {propertyTypes.map((it) => (
-              <Link key={it.title} href={it.href} className="group flex items-center gap-4 rounded-xl p-3 transition-colors hover:bg-bg-soft">
+              <Link key={it.titleKey} href={it.href} className="group flex items-center gap-4 rounded-xl p-3 transition-colors hover:bg-bg-soft">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-bg-soft text-ink transition-colors group-hover:bg-accent">
                   <it.icon size={19} strokeWidth={1.5} />
                 </span>
                 <span>
-                  <span className="block text-[15px] font-semibold">{it.title}</span>
-                  <span className="block text-[13px] text-ink-3">{it.desc}</span>
+                  <span className="block text-[15px] font-semibold">{t(it.titleKey)}</span>
+                  <span className="block text-[13px] text-ink-3">{t(it.descKey)}</span>
                 </span>
               </Link>
             ))}
@@ -499,7 +502,7 @@ function PropiedadesMenu() {
 
         {/* Por ciudad */}
         <div>
-          <span className="eyebrow eyebrow-accent font-bold">Por ciudad</span>
+          <span className="eyebrow eyebrow-accent font-bold">{t('byCity')}</span>
           <div className="mt-5 flex flex-col">
             {activeCities.map((c) => (
               <Link key={c} href={CITY_HREF[c]} className="group flex items-center justify-between border-b border-line py-3 transition-colors last:border-0 hover:text-accent">
@@ -515,7 +518,7 @@ function PropiedadesMenu() {
 
         {/* Por desarrollador */}
         <div>
-          <span className="eyebrow eyebrow-accent font-bold">Por desarrollador</span>
+          <span className="eyebrow eyebrow-accent font-bold">{t('byDeveloper')}</span>
           <div className="mt-5 flex flex-col">
             {developerLinks.map((d) => (
               <Link key={d.href} href={d.href} className="border-b border-line py-3 text-[15px] font-medium transition-colors last:border-0 hover:text-accent">
@@ -527,7 +530,7 @@ function PropiedadesMenu() {
 
         {/* Destacados */}
         <div>
-          <span className="eyebrow eyebrow-accent font-bold">Destacados</span>
+          <span className="eyebrow eyebrow-accent font-bold">{t('featured')}</span>
           <div className="mt-5 grid grid-cols-2 gap-3">
             {destacados.map((d) => (
               <Link key={d.slug} href={d.href} className="group flex flex-col gap-2">
@@ -548,7 +551,7 @@ function PropiedadesMenu() {
           The Art of Luxury Living
         </span>
         <Link href="/#portafolio" className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-caps text-ink transition-colors hover:text-accent">
-          Ver todo el portafolio
+          {t('viewAllPortfolio')}
           <ArrowRight size={14} strokeWidth={1.8} />
         </Link>
       </div>
@@ -560,6 +563,7 @@ function PropiedadesMenu() {
    Misma data que PropiedadesMenu (desktop), apilada en 1 columna en vez de
    3 — el patrón a seguir cuando lleguen más secciones de nav con submenú. */
 function PropiedadesMenuMobile() {
+  const t = useTranslations('header');
   const destacados = getDevelopDevelopments().filter((d) => !d.comingSoon).slice(0, 2);
   const activeCities = cityList.filter((c) => countByCity(c) > 0);
 
@@ -567,14 +571,14 @@ function PropiedadesMenuMobile() {
     <div className="flex flex-col gap-7 px-6 pb-7">
       {/* Por tipo de propiedad */}
       <div>
-        <span className="eyebrow eyebrow-accent font-bold">Por tipo de propiedad</span>
+        <span className="eyebrow eyebrow-accent font-bold">{t('byType')}</span>
         <div className="mt-3 flex flex-col gap-1">
           {propertyTypes.map((it) => (
-            <Link key={it.title} href={it.href} className="flex items-center gap-3.5 rounded-xl py-2.5">
+            <Link key={it.titleKey} href={it.href} className="flex items-center gap-3.5 rounded-xl py-2.5">
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-bg-soft text-ink">
                 <it.icon size={17} strokeWidth={1.5} />
               </span>
-              <span className="text-[14px] font-medium">{it.title}</span>
+              <span className="text-[14px] font-medium">{t(it.titleKey)}</span>
             </Link>
           ))}
         </div>
@@ -582,7 +586,7 @@ function PropiedadesMenuMobile() {
 
       {/* Por ciudad */}
       <div>
-        <span className="eyebrow eyebrow-accent font-bold">Por ciudad</span>
+        <span className="eyebrow eyebrow-accent font-bold">{t('byCity')}</span>
         <div className="mt-3 flex flex-col">
           {activeCities.map((c) => (
             <Link key={c} href={CITY_HREF[c]} className="flex items-center justify-between border-b border-line py-3 last:border-0">
@@ -598,7 +602,7 @@ function PropiedadesMenuMobile() {
 
       {/* Por desarrollador */}
       <div>
-        <span className="eyebrow eyebrow-accent font-bold">Por desarrollador</span>
+        <span className="eyebrow eyebrow-accent font-bold">{t('byDeveloper')}</span>
         <div className="mt-3 flex flex-col">
           {developerLinks.map((d) => (
             <Link key={d.href} href={d.href} className="border-b border-line py-3 text-[14px] font-medium last:border-0">
@@ -610,7 +614,7 @@ function PropiedadesMenuMobile() {
 
       {/* Destacados */}
       <div>
-        <span className="eyebrow eyebrow-accent font-bold">Destacados</span>
+        <span className="eyebrow eyebrow-accent font-bold">{t('featured')}</span>
         <div className="mt-3 grid grid-cols-2 gap-3">
           {destacados.map((d) => (
             <Link key={d.slug} href={d.href} className="flex flex-col gap-2">
@@ -624,7 +628,7 @@ function PropiedadesMenuMobile() {
       </div>
 
       <Link href="/#portafolio" className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-caps text-ink">
-        Ver todo el portafolio
+        {t('viewAllPortfolio')}
         <ArrowRight size={14} strokeWidth={1.8} />
       </Link>
     </div>

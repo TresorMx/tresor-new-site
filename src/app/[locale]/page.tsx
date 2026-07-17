@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { getTranslations } from 'next-intl/server';
 import { Link } from '@/navigation';
 import { ArrowRight, Building2, ShieldCheck, Handshake } from 'lucide-react';
 import RevealOnScroll from '@/components/RevealOnScroll';
@@ -47,7 +48,9 @@ export default async function HomePage() {
 }
 
 /* ════════════════════════════ HERO ════════════════════════════ */
-function Hero() {
+async function Hero() {
+  const t = await getTranslations('home');
+  const tNav = await getTranslations('nav');
   return (
     <section
       className="sticky top-0 z-0 -mt-[104px] flex h-[100svh] flex-col justify-center overflow-hidden bg-bg-deep pt-[104px] text-bg"
@@ -81,7 +84,7 @@ function Hero() {
         {/* H1 real para SEO — "The Art of Luxury Living" es la identidad de
             marca (se queda igual visualmente), pero cero palabra clave. Un
             solo h1 por página: este va oculto, el texto de marca baja a <p>. */}
-        <h1 className="sr-only">Propiedades en Venta en Cancún y Riviera Maya — Tresor Real Estate</h1>
+        <h1 className="sr-only">{t('heroH1')}</h1>
         <p
           aria-hidden
           className="mt-6 w-full text-center text-[clamp(22px,4vw,58px)] leading-[0.95] tracking-tight"
@@ -90,7 +93,7 @@ function Hero() {
           The Art of Luxury Living
         </p>
         <p className="mt-7 w-full text-center text-[clamp(11px,1.1vw,16px)] font-bold uppercase tracking-[0.2em] text-white">
-          Desarrollos inmobiliarios en Cancún y Riviera Maya
+          {t('heroSubtitle')}
         </p>
 
         {/* Fuera de RevealOnScroll a propósito: su fade de opacidad se
@@ -98,11 +101,11 @@ function Hero() {
             veía "más transparente" durante el segundo de la animación. */}
         <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Link href="#portafolio" className="btn btn-lg border-0 bg-accent text-ink hover:brightness-95">
-            Ver desarrollos
+            {t('ctaViewDevelopments')}
             <ArrowRight size={15} strokeWidth={1.8} />
           </Link>
           <Link href="/agenda" className="btn btn-glass btn-lg border-0">
-            Agenda una visita
+            {tNav('scheduleVisit')}
           </Link>
         </div>
       </div>
@@ -135,7 +138,8 @@ const intents = [
   },
 ];
 
-function Intent({ developments, layout }: { developments: Development[]; layout: 'cards' | 'carousel' }) {
+async function Intent({ developments, layout }: { developments: Development[]; layout: 'cards' | 'carousel' }) {
+  const t = await getTranslations('home');
   return (
     <section
       data-nav="light"
@@ -148,9 +152,9 @@ function Intent({ developments, layout }: { developments: Development[]; layout:
       <div className="container-wrap">
         <RevealOnScroll className="mb-12 flex items-center justify-between gap-8">
           <div className="flex-1">
-            <span className="eyebrow eyebrow-accent font-bold">WE DEVELOP</span>
+            <span className="eyebrow eyebrow-accent font-bold">{t('weDevelopEyebrow')}</span>
             <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
-              Conoce los <span className="text-ink-3">desarrollos de<br />Tresor Real Estate</span>
+              {t('intentTitleMain')} <span className="text-ink-3">{t('intentTitleHighlight')}</span>
             </h2>
           </div>
           <Image
@@ -177,12 +181,13 @@ function Intent({ developments, layout }: { developments: Development[]; layout:
 }
 
 /* ════════════════════════════ PORTFOLIO ════════════════════════════ */
-function Portfolio({ developments, layout }: { developments: Development[]; layout: 'grouped' | 'grid' }) {
+async function Portfolio({ developments, layout }: { developments: Development[]; layout: 'grouped' | 'grid' }) {
+  const t = await getTranslations('home');
   const title = (
     <div>
-      <span className="eyebrow eyebrow-accent font-bold">Sales Partner</span>
+      <span className="eyebrow eyebrow-accent font-bold">{t('salesPartnerEyebrow')}</span>
       <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
-        Colaboramos con los <span className="text-ink-3">más destacados<br />desarrolladores.</span>
+        {t('portfolioTitleMain')} <span className="text-ink-3">{t('portfolioTitleHighlight')}</span>
       </h2>
     </div>
   );
@@ -212,45 +217,32 @@ function Portfolio({ developments, layout }: { developments: Development[]; layo
 
 /* ════════════════════════════ POSITIONING ════════════════════════════ */
 const services = [
-  {
-    icon: Building2,
-    t: 'Develop',
-    d: 'Creamos lugares con significado que dejan una huella duradera en las ciudades.',
-  },
-  {
-    icon: ShieldCheck,
-    t: 'Manage',
-    d: 'Te acompañamos desde la planeación financiera hasta la implementación comercial.',
-  },
-  {
-    icon: Handshake,
-    t: 'Sales Partner',
-    d: 'Nos convertimos en tu dirección de ventas para asegurar tu éxito inmobiliario.',
-  },
-];
+  { icon: Building2, titleKey: 'serviceDevelopTitle', descKey: 'serviceDevelopDesc' },
+  { icon: ShieldCheck, titleKey: 'serviceManageTitle', descKey: 'serviceManageDesc' },
+  { icon: Handshake, titleKey: 'serviceSalesPartnerTitle', descKey: 'serviceSalesPartnerDesc' },
+] as const;
 
-function Positioning() {
+async function Positioning() {
+  const t = await getTranslations('home');
   return (
     <section data-nav="dark" className="relative z-0 -mt-10 overflow-hidden bg-black py-20 text-bg md:py-28">
       <div className="container-wrap">
         <div className="grid gap-14 md:grid-cols-[1.1fr_1fr] md:items-end">
           <RevealOnScroll>
-            <span className="eyebrow text-accent font-bold">Quiénes somos</span>
+            <span className="eyebrow text-accent font-bold">{t('aboutUsEyebrow')}</span>
             <h2 className="mt-5 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
-              <span className="text-white/55">Desarrollamos, gestionamos y comercializamos,</span> todo bajo un mismo sello.
+              <span className="text-white/55">{t('positioningTitleMuted')}</span> {t('positioningTitleRest')}
             </h2>
             <p className="mt-6 text-[15px] font-light leading-relaxed text-white/70">
-              Ofrecemos soluciones integrales —de la planeación y comercialización de
-              desarrollos a la compra y venta de propiedades— con asesoría experta,
-              estrategias a la medida y un servicio de excelencia que asegura resultados.
+              {t('positioningDesc')}
             </p>
 
             <div className="mt-10 grid gap-px overflow-hidden rounded-lg bg-white/10 sm:grid-cols-3">
               {services.map((s) => (
-                <div key={s.t} className="bg-bg-deep p-6">
+                <div key={s.titleKey} className="bg-bg-deep p-6">
                   <s.icon size={22} strokeWidth={1.3} className="text-accent" />
-                  <h3 className="mt-4 font-sans text-[17px] font-light">{s.t}</h3>
-                  <p className="mt-2 text-[13px] font-light leading-relaxed text-white/60">{s.d}</p>
+                  <h3 className="mt-4 font-sans text-[17px] font-light">{t(s.titleKey)}</h3>
+                  <p className="mt-2 text-[13px] font-light leading-relaxed text-white/60">{t(s.descKey)}</p>
                 </div>
               ))}
             </div>

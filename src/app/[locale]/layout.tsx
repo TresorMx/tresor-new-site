@@ -188,6 +188,7 @@ export default async function LocaleLayout({
   const initialBrokerFirstName = brokerId ? (await getBrokerFullName(brokerId))?.split(' ')[0] ?? null : null;
 
   const messages = await getMessages();
+  const isEsLd = locale === 'es';
 
   const orgJsonLd = {
     '@context': 'https://schema.org',
@@ -196,7 +197,9 @@ export default async function LocaleLayout({
     url: SITE_URL,
     logo: `${SITE_URL}/logos/LogoTresor-ink.svg`,
     image: `${SITE_URL}/og/home.jpg`,
-    description: 'Desarrollador y comercializador inmobiliario en Cancún y la Riviera Maya. Departamentos, locales comerciales y lotes residenciales en preventa y entrega inmediata.',
+    description: isEsLd
+      ? 'Desarrollador y comercializador inmobiliario en Cancún y la Riviera Maya. Departamentos, locales comerciales y lotes residenciales en preventa y entrega inmediata.'
+      : 'Real estate developer and marketing agent in Cancún and the Riviera Maya. Apartments, commercial spaces, and residential lots in pre-sale and ready to move in.',
     telephone: '+52-998-404-5602',
     email: 'hello@tresor.mx',
     address: {
@@ -217,12 +220,18 @@ export default async function LocaleLayout({
     ],
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
-      name: 'Propiedades en Venta en Cancún y Riviera Maya',
-      itemListElement: [
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Departamentos en venta en Cancún y Riviera Maya', description: 'Departamentos en preventa y entrega inmediata en Cancún, Tulum, Playa del Carmen y Puerto Cancún.' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Locales comerciales en venta en Cancún', description: 'Locales comerciales en preventa en plazas premium de Cancún, desde 32 m².' } },
-        { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Lotes residenciales en venta en Cancún', description: 'Lotes y macrolotes residenciales en las zonas de mayor plusvalía de Cancún.' } },
-      ],
+      name: isEsLd ? 'Propiedades en Venta en Cancún y Riviera Maya' : 'Properties for Sale in Cancún and the Riviera Maya',
+      itemListElement: isEsLd
+        ? [
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Departamentos en venta en Cancún y Riviera Maya', description: 'Departamentos en preventa y entrega inmediata en Cancún, Tulum, Playa del Carmen y Puerto Cancún.' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Locales comerciales en venta en Cancún', description: 'Locales comerciales en preventa en plazas premium de Cancún, desde 32 m².' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Lotes residenciales en venta en Cancún', description: 'Lotes y macrolotes residenciales en las zonas de mayor plusvalía de Cancún.' } },
+          ]
+        : [
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Apartments for sale in Cancún and the Riviera Maya', description: 'Apartments in pre-sale and ready to move in, in Cancún, Tulum, Playa del Carmen, and Puerto Cancún.' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Commercial spaces for sale in Cancún', description: 'Commercial spaces in pre-sale in premium plazas in Cancún, from 32 sqm.' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Residential lots for sale in Cancún', description: 'Residential lots and macro-lots in the highest-value areas of Cancún.' } },
+          ],
     },
   };
 
