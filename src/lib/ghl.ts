@@ -44,6 +44,58 @@ export interface GHLLead {
   notes?: string;
 }
 
+/**
+ * Como sendLeadToGHL, pero hace upsert (POST /contacts/upsert) en vez de
+ * create — GHL dedupea por teléfono/email dentro de la location y siempre
+ * regresa el mismo contactId para la misma persona. Úsala en cualquier flujo
+ * donde la misma persona pueda "entrar" más de una vez (ej. el chat: form
+ * previo + capture_lead + book_appointment) para no crear contactos
+ * duplicados y poder encadenar el contactId entre esos pasos.
+ */
+export async function upsertGHLContact(lead: GHLLead): Promise<{ ok: boolean; contactId?: string; error?: string }> {
+  const apiKey = process.env.GHL_API_KEY;
+  const locationId = process.env.GHL_LOCATION_ID;
+
+  if (!apiKey || !locationId) {
+    console.log('[GHL] Skipped (upsert) — credentials not configured. Lead:', lead.email, lead.source);
+    return { ok: true };
+  }
+
+  try {
+    const res = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        Version: '2021-07-28',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        firstName: lead.firstName,
+        lastName: lead.lastName ?? '',
+        ...(lead.email ? { email: lead.email } : {}),
+        phone: lead.phone,
+        companyName: lead.company,
+        locationId,
+        source: `web-${lead.source}`,
+        tags: lead.tags ?? [],
+        customFields: lead.customFields
+          ? Object.entries(lead.customFields).map(([key, value]) => ({ key, field_value: String(value) }))
+          : [],
+      }),
+    });
+    if (!res.ok) {
+      const text = await res.text();
+      console.error('[GHL] Upsert error', res.status, text);
+      return { ok: false, error: text };
+    }
+    const data = await res.json();
+    return { ok: true, contactId: data.contact?.id };
+  } catch (e) {
+    console.error('[GHL] Upsert network error', e);
+    return { ok: false, error: String(e) };
+  }
+}
+
 export async function sendLeadToGHL(lead: GHLLead): Promise<{ ok: boolean; contactId?: string; error?: string }> {
   const apiKey = process.env.GHL_API_KEY;
   const locationId = process.env.GHL_LOCATION_ID;

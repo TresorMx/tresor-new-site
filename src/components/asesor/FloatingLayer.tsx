@@ -29,13 +29,14 @@ export default function FloatingLayer() {
   // chat de Luis no tiene nada que hacer ahí.
   if (pathname === '/drive' || pathname.startsWith('/drive/')) return null;
 
-  if (!isAsesor && !isBroker) return <Chatbot />;
+  const fichaMatch = pathname.match(/^\/desarrollos\/([^/]+)/);
+
+  if (!isAsesor && !isBroker) return <Chatbot devSlug={fichaMatch?.[1]} />;
 
   const base = isAsesor ? '/asesores' : '/brokers/drive';
   const alreadyInDrive = pathname === base || pathname.startsWith(`${base}/`);
   if (alreadyInDrive) return null;
 
-  const fichaMatch = pathname.match(/^\/desarrollos\/([^/]+)/);
   const href = fichaMatch ? `${base}/${fichaMatch[1]}` : base;
   const label = fichaMatch ? 'Drive de Ventas' : 'Todos los drives';
   const Icon = fichaMatch ? FolderLock : Grid2x2;

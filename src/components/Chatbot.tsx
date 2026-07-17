@@ -7,6 +7,15 @@ import { X, Send, ChevronDown, Sparkles } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 type Message = { role: 'user' | 'assistant'; content: string };
+type SlotDay = { date: string; label: string; slots: { time: string; iso: string }[] };
+
+/** "14:30" → "2:30 pm" — mismo criterio que AgendaWidget/formatTime */
+function formatSlotTime(t: string): string {
+  const [h, m] = t.split(':').map(Number);
+  const period = h >= 12 ? 'pm' : 'am';
+  const display = h % 12 === 0 ? 12 : h % 12;
+  return `${display}:${String(m).padStart(2, '0')} ${period}`;
+}
 
 /** Renderiza texto con URLs convertidas en links clickeables */
 function MessageContent({ content, isUser }: { content: string; isUser: boolean }) {
@@ -40,7 +49,7 @@ function MessageContent({ content, isUser }: { content: string; isUser: boolean 
   );
 }
 
-export default function Chatbot() {
+export default function Chatbot({ devSlug }: { devSlug?: string }) {
   const t = useTranslations('chatbot');
   const [open, setOpen] = useState(false);
   const [stage, setStage] = useState<'form' | 'chat'>('form');
@@ -49,48 +58,74 @@ export default function Chatbot() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
+  const [contactId, setContactId] = useState<string | null>(null);
+  const [devName, setDevName] = useState<string | null>(null);
+  const [pendingSlots, setPendingSlots] = useState<SlotDay[] | null>(null);
   const endRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => endRef.current?.scrollIntoView({ behavior: 'smooth' }), [messages, loading]);
+
+  // Nombre del desarrollo actual (si el chat se abre desde una ficha) — sin
+  // pasar por el LLM, para que el arranque curado sea instantáneo y nunca
+  // invente el nombre.
+  useEffect(() => {
+    if (!devSlug) return;
+    fetch(`/api/dev-name?slug=${devSlug}`)
+      .then((r) => r.json())
+      .then((d) => { if (d.name) setDevName(d.name); })
+      .catch(() => {});
+  }, [devSlug]);
 
   async function submitLead(e: React.FormEvent) {
     e.preventDefault();
     if (!leadForm.fullName.trim() || !leadForm.phone.trim()) return;
     setLeadSaving(true);
     try {
-      await fetch('/api/chat-lead', {
+      const res = await fetch('/api/chat-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ fullName: leadForm.fullName, phone: leadForm.phone }),
       });
+      const data = await res.json().catch(() => ({}));
+      if (data.contactId) setContactId(data.contactId);
       if (typeof (window as any).gtag === 'function') {
         (window as any).gtag('event', 'conversion', { send_to: 'AW-17453917774/wazACPXDnMQcEM7M1oJB' });
       }
     } catch {}
-    const welcome = `¡Gracias, ${leadForm.fullName.split(' ')[0]}! ¿En qué te puedo ayudar?`;
+    const firstName = leadForm.fullName.split(' ')[0];
+    const welcome = devSlug && devName
+      ? `¡Gracias, ${firstName}! Vi que estás viendo ${devName} — ¿qué te gustaría saber?`
+      : `¡Gracias, ${firstName}! ¿En qué te puedo ayudar?`;
     setMessages([{ role: 'assistant', content: welcome }]);
     setStage('chat');
     setLeadSaving(false);
   }
 
-  async function quickSend(text: string) {
-    if (loading) return;
-    const userMsg: Message = { role: 'user', content: text };
-    setMessages((m) => [...m, userMsg]);
+  async function callChat(nextMessages: Message[]) {
     setLoading(true);
+    setPendingSlots(null);
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMsg] }),
+        body: JSON.stringify({ messages: nextMessages, devSlug, contactId }),
       });
       const data = await res.json();
+      if (data.contactId) setContactId(data.contactId);
+      if (data.slots) setPendingSlots(data.slots);
       setMessages((m) => [...m, { role: 'assistant', content: data.message ?? 'Lo siento, hubo un error.' }]);
     } catch {
       setMessages((m) => [...m, { role: 'assistant', content: 'No pude conectarme. Intenta de nuevo.' }]);
     } finally {
       setLoading(false);
     }
+  }
+
+  async function quickSend(text: string) {
+    if (loading) return;
+    const userMsg: Message = { role: 'user', content: text };
+    setMessages((m) => [...m, userMsg]);
+    await callChat([...messages, userMsg]);
   }
 
   async function send(e: React.FormEvent) {
@@ -99,21 +134,7 @@ export default function Chatbot() {
     const userMsg: Message = { role: 'user', content: input.trim() };
     setMessages((m) => [...m, userMsg]);
     setInput('');
-    setLoading(true);
-
-    try {
-      const res = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: [...messages, userMsg] }),
-      });
-      const data = await res.json();
-      setMessages((m) => [...m, { role: 'assistant', content: data.message ?? 'Lo siento, hubo un error.' }]);
-    } catch {
-      setMessages((m) => [...m, { role: 'assistant', content: 'No pude conectarme. Intenta de nuevo.' }]);
-    } finally {
-      setLoading(false);
-    }
+    await callChat([...messages, userMsg]);
   }
 
   return (
@@ -250,14 +271,14 @@ export default function Chatbot() {
                   </div>
                 ))}
 
-                {/* Quick replies — solo después del mensaje de bienvenida */}
-                {messages.length === 1 && !loading && (
+                {/* Quick replies — solo después del mensaje de bienvenida, y solo
+                    si no hay slots de cita pendientes por elegir */}
+                {messages.length === 1 && !loading && !pendingSlots && (
                   <div className="flex flex-col gap-2 pl-8">
-                    {[
-                      '¿Qué locales tienen disponibles?',
-                      'Quiero cotizar un local',
-                      'Quiero agendar una visita',
-                    ].map((suggestion) => (
+                    {(devSlug && devName
+                      ? ['Ver disponibilidad', 'Precio y planes de pago', `Agendar visita a ${devName}`]
+                      : ['¿Qué tienen disponible?', 'Quiero cotizar', 'Quiero agendar una visita']
+                    ).map((suggestion) => (
                       <button
                         key={suggestion}
                         onClick={() => quickSend(suggestion)}
@@ -265,6 +286,28 @@ export default function Chatbot() {
                       >
                         {suggestion}
                       </button>
+                    ))}
+                  </div>
+                )}
+
+                {/* Horarios de cita — botones traídos del calendario real de GHL */}
+                {pendingSlots && !loading && (
+                  <div className="flex flex-col gap-2.5 pl-8">
+                    {pendingSlots.map((day) => (
+                      <div key={day.date} className="flex flex-col gap-1.5">
+                        <span className="text-[10.5px] font-semibold uppercase tracking-caps text-ink-3">{day.label}</span>
+                        <div className="flex flex-wrap gap-1.5">
+                          {day.slots.map((s) => (
+                            <button
+                              key={s.iso}
+                              onClick={() => { setPendingSlots(null); quickSend(`${day.label} · ${formatSlotTime(s.time)}`); }}
+                              className="rounded-full border border-line bg-white px-3.5 py-1.5 text-[12px] font-medium text-ink-2 transition-all hover:border-ink hover:bg-bg-soft"
+                            >
+                              {formatSlotTime(s.time)}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 )}
