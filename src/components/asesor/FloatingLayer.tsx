@@ -19,12 +19,30 @@ import { useBroker } from '@/components/broker/context';
 //     sería un link a la página en la que ya estás.
 // isAsesor tiene prioridad sobre isBroker en el caso (raro) de que alguien
 // tenga ambas sesiones activas — el equipo interno manda.
+
+// Slugs de las 4 landings espejo (/drive/quattro-plaza-center, etc.) — para
+// distinguirlas de /drive/{slug-de-ficha-real}, que es la ficha espejo de
+// UN desarrollo específico (ver src/app/[locale]/drive/[slug]/page.tsx).
+const DRIVE_LANDING_SLUGS = ['quattro-plaza-center', 'live-desarrollos', 'onix-living', 'urban-homes'];
+
 export default function FloatingLayer() {
   const { isAsesor } = useAsesor();
   const { isBroker } = useBroker();
   const pathname = usePathname(); // sin prefijo de locale (viene de @/navigation)
 
-  // /drive/* (landings espejo sin login para brokers de confianza) — nada
+  // Ficha espejo /drive/{slug} (no una landing, no /drive/desarrollos/*):
+  // el visitante anónimo ve el mismo botón "Drive de Ventas" que vería un
+  // asesor logueado en la ficha real — nunca el chat de Luis aquí.
+  const driveFichaMatch = pathname.match(/^\/drive\/([^/]+)$/);
+  const driveFichaSlug = driveFichaMatch && driveFichaMatch[1] !== 'desarrollos' && !DRIVE_LANDING_SLUGS.includes(driveFichaMatch[1])
+    ? driveFichaMatch[1]
+    : null;
+
+  if (driveFichaSlug) {
+    return <FloatingDriveButton href={`/drive/desarrollos/${driveFichaSlug}`} label="Drive de Ventas" Icon={FolderLock} />;
+  }
+
+  // Resto de /drive/* (las 4 landings, /drive/desarrollos/*, etc.) — nada
   // de chat ahí tampoco, sin importar la sesión: es una zona oculta, el
   // chat de Luis no tiene nada que hacer ahí.
   if (pathname === '/drive' || pathname.startsWith('/drive/')) return null;
@@ -41,6 +59,10 @@ export default function FloatingLayer() {
   const label = fichaMatch ? 'Drive de Ventas' : 'Todos los drives';
   const Icon = fichaMatch ? FolderLock : Grid2x2;
 
+  return <FloatingDriveButton href={href} label={label} Icon={Icon} />;
+}
+
+function FloatingDriveButton({ href, label, Icon }: { href: string; label: string; Icon: typeof FolderLock }) {
   return (
     <Link
       href={href}

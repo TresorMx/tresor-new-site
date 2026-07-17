@@ -144,7 +144,7 @@ export default function DevelopmentCard({
               </span>
             ) : (
               <Link
-                href={dev.href}
+                href={forceDriveLink && driveSlug ? `/drive/${driveSlug}` : dev.href}
                 className="inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-ink transition-all hover:brightness-95"
               >
                 {isEs ? 'Ver desarrollo' : 'View development'}
