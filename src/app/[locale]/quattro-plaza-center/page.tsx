@@ -15,7 +15,11 @@ export const metadata: Metadata = {
     description:
       'Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en Cancún: locales en preventa y entrega inmediata en zonas de alto crecimiento.',
     url: 'https://www.tresor.mx/quattro-plaza-center',
-    images: [{ url: '/renders/gardens/01.jpg', width: 1920, height: 992 }],
+    // Imagen dedicada para compartir (1200×630, ~280KB) — la foto original
+    // del hero (/renders/gardens/01.jpg) pesa 2.1MB y con dimensiones
+    // declaradas que no coinciden con las reales (992 vs 1080 real), lo que
+    // hacía que el bot de WhatsApp fallara al traerla intermitentemente.
+    images: [{ url: '/og/quattro-plaza-center.jpg', width: 1200, height: 630 }],
   },
   // Sin esto, Twitter/X heredaba el twitter:image genérico del layout raíz
   // (ogfinal.jpg) — Next.js solo reemplaza `openGraph` si lo defines, pero
@@ -25,7 +29,7 @@ export const metadata: Metadata = {
     title: 'Quattro Plaza Center — Locales Comerciales en Cancún',
     description:
       'Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en Cancún: locales en preventa y entrega inmediata en zonas de alto crecimiento.',
-    images: ['/renders/gardens/01.jpg'],
+    images: ['/og/quattro-plaza-center.jpg'],
   },
 };
 

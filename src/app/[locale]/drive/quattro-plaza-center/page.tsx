@@ -25,14 +25,18 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title,
       description,
-      images: [{ url: '/renders/gardens/01.jpg', width: 1920, height: 992 }],
+      // Imagen dedicada para compartir (1200×630, ~280KB) — la foto
+      // original del hero pesa 2.1MB con dimensiones declaradas que no
+      // coincidían con las reales, y el bot de WhatsApp fallaba al traerla
+      // intermitentemente.
+      images: [{ url: '/og/quattro-plaza-center.jpg', width: 1200, height: 630 }],
       locale: isEs ? 'es_MX' : 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/renders/gardens/01.jpg'],
+      images: ['/og/quattro-plaza-center.jpg'],
     },
   };
 }
