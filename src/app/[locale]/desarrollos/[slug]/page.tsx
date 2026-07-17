@@ -92,6 +92,7 @@ export async function generateMetadata({
       images: heroImg
         ? [{ url: heroImg, width: 1600, height: 900, alt: name }]
         : [{ url: '/og/home.jpg', width: 1200, height: 630, alt: name }],
+      locale: isEs ? 'es_MX' : 'en_US',
     },
     twitter: {
       card: 'summary_large_image',
