@@ -35,7 +35,9 @@ export default async function DriveOnixLivingPage({ params }: { params: Promise<
   const { locale } = await params;
   const isEs = locale !== 'en';
   const all = await getMergedDevelopmentsAsync();
-  const developments = all.filter((d) => d.developer === 'Onix');
+  // Bardenna (bardenna-onix) fuera de este landing por pedido explícito —
+  // sigue sin ficha real (href: '#'), no tiene sentido ofrecerla aquí.
+  const developments = all.filter((d) => d.developer === 'Onix' && d.slug !== 'bardenna-onix');
 
   return (
     <>
