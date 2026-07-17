@@ -11,7 +11,8 @@ type SlotDay = { date: string; label: string; slots: { time: string; iso: string
 
 /** "14:30" → "2:30 pm" — mismo criterio que AgendaWidget/formatTime */
 function formatSlotTime(t: string): string {
-  const [h, m] = t.split(':').map(Number);
+  const [h, m] = (t ?? '').split(':').map(Number);
+  if (!Number.isFinite(h) || !Number.isFinite(m)) return t ?? '';
   const period = h >= 12 ? 'pm' : 'am';
   const display = h % 12 === 0 ? 12 : h % 12;
   return `${display}:${String(m).padStart(2, '0')} ${period}`;
@@ -112,7 +113,7 @@ export default function Chatbot({ devSlug }: { devSlug?: string }) {
       });
       const data = await res.json();
       if (data.contactId) setContactId(data.contactId);
-      if (data.slots) setPendingSlots(data.slots);
+      if (Array.isArray(data.slots) && data.slots.length) setPendingSlots(data.slots);
       setMessages((m) => [...m, { role: 'assistant', content: data.message ?? 'Lo siento, hubo un error.' }]);
     } catch {
       setMessages((m) => [...m, { role: 'assistant', content: 'No pude conectarme. Intenta de nuevo.' }]);
