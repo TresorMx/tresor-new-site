@@ -244,6 +244,14 @@ export default defineType({
       group: 'seo',
       validation: (r) => r.max(160),
     }),
+    defineField({
+      name: 'seoImage',
+      title: 'OG Image (imagen al compartir en WhatsApp/redes)',
+      type: 'image',
+      group: 'seo',
+      options: { hotspot: true },
+      description: 'Si se deja vacía usa el Hero (render principal) de arriba — la de este campo, si existe, siempre gana.',
+    }),
 
     // ── LOCALES ──────────────────────────────────────────────────
     defineField({

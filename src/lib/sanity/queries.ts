@@ -51,6 +51,7 @@ const PLAZA_FIELDS = `
   seoTitleEn,
   seoDescription,
   seoDescriptionEn,
+  "seoImage":         seoImage.asset->url,
   highlights,
   "heroRender":       heroRender.asset->url,
   "logoWhite":        logoWhite.asset->url,

@@ -327,6 +327,14 @@ export default defineType({
     defineField({ name: 'seoTitleEn', title: 'SEO Title (EN)', type: 'string', group: 'seo', validation: (r) => r.max(60) }),
     defineField({ name: 'seoDescription', title: 'Meta Description (ES)', type: 'text', rows: 3, group: 'seo', description: 'Si se deja vacío usa la Descripción corta de la pestaña General. Recomendado: 140-160 caracteres.', validation: (r) => r.max(160) }),
     defineField({ name: 'seoDescriptionEn', title: 'Meta Description (EN)', type: 'text', rows: 3, group: 'seo', validation: (r) => r.max(160) }),
+    defineField({
+      name: 'seoImage',
+      title: 'OG Image (imagen al compartir en WhatsApp/redes)',
+      type: 'image',
+      group: 'seo',
+      options: { hotspot: true },
+      description: 'Si se deja vacía usa el Hero (foto grande de la ficha) — la de este campo, si existe, siempre gana.',
+    }),
   ],
 
   preview: {

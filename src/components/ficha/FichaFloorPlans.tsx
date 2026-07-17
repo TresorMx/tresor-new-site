@@ -109,7 +109,7 @@ export default function FichaFloorPlans({ floorPlans, locale, gray = false, ctaL
             {current.image ? (
               <Image
                 src={current.image}
-                alt={isEs ? current.label.es : current.label.en ?? current.label.es}
+                alt={(isEs ? current.label.es : current.label.en ?? current.label.es) ?? ''}
                 width={900}
                 height={640}
                 className="h-full w-full object-contain p-6"

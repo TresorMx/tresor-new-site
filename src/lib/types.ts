@@ -1,10 +1,15 @@
 export type UnitStatus = 'disponible' | 'apartado' | 'vendido' | 'bloqueado';
 
-// Texto bilingüe. Si falta `en`, la UI cae a `es`. Vive aquí (no en
+// Texto bilingüe. Si falta `en`, la UI cae a `es` (y viceversa) — ambos
+// campos son opcionales A PROPÓSITO: si `es` viniera con un default falso
+// (ej. el valor en inglés relleno ahí para "no perder el dato"), cualquier
+// `campo?.es ?? fallbackReal` de más arriba en la cadena dejaría de
+// funcionar porque `??` solo cae al fallback con `null`/`undefined`, nunca
+// con un string ya presente (aunque esté mal). Vive aquí (no en
 // developments.ts ni amenities.ts) para que ambos puedan importarlo sin
 // crear un ciclo de imports entre sí.
 export interface I18nText {
-  es: string;
+  es?: string;
   en?: string;
 }
 
@@ -128,6 +133,7 @@ export interface Plaza {
   seoTitleEn?: string;
   seoDescription?: string;
   seoDescriptionEn?: string;
+  seoImage?: string; // override de la imagen al compartir (WhatsApp/redes) — si no está, cae a heroRender
   // gallery / floor plans
   gallery?: string[];
   floorPlans?: { label: string; labelEn?: string; area?: number; frente?: number; fondo?: number; order?: number; image?: string }[];

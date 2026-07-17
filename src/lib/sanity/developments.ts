@@ -75,7 +75,8 @@ const DEVELOPMENT_FIELDS = `
   ctaScheduleVisit, ctaScheduleVisitEn,
   ctaVirtualTour, ctaVirtualTourEn,
   seoTitle, seoTitleEn,
-  seoDescription, seoDescriptionEn
+  seoDescription, seoDescriptionEn,
+  "seoImage": seoImage.asset->url
 `;
 
 const DEVELOPER_FIELDS = `
@@ -99,11 +100,16 @@ export interface SanityDeveloperPatch {
 }
 
 function i18n(es: string | undefined, en: string | undefined): I18nText | undefined {
-  // Si falta `es` pero sí hay `en` (pasaba en varios `development` con
-  // seoDescription/seoTitle solo llenos en inglés), el resultado no debe
-  // desaparecer por completo — cae a `en` como base para ambos.
+  // Si falta uno de los dos (pasaba en varios `development` con
+  // seoDescription/seoTitle solo llenos en inglés), el objeto no debe
+  // desaparecer por completo — pero tampoco hay que rellenar `es` con el
+  // valor de `en` (o viceversa): eso hacía que un `campo?.es ?? fallback`
+  // más arriba en la cadena nunca cayera al fallback real, porque `??`
+  // solo activa el fallback con `undefined`, no con un string ya presente
+  // aunque esté en el idioma equivocado. `I18nText.es`/`en` son opcionales
+  // exactamente para esto.
   if (!es && !en) return undefined;
-  return { es: es ?? en!, en };
+  return { es, en };
 }
 
 // Un `development` en Sanity guarda un `type` de ficha "ligera" (Sales
@@ -210,6 +216,7 @@ function normalizeDevelopment(raw: any): Development & { developerDocId?: string
     },
     seoTitle: i18n(raw.seoTitle, raw.seoTitleEn),
     seoDescription: i18n(raw.seoDescription, raw.seoDescriptionEn),
+    seoImage: raw.seoImage || undefined,
   };
 }
 

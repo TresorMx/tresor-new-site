@@ -257,6 +257,7 @@ export interface Development {
   // ─── SEO por ficha ───
   seoTitle?: I18nText;
   seoDescription?: I18nText;
+  seoImage?: string; // override de la imagen al compartir (WhatsApp/redes) — si no está, cae a heroRender/image
 }
 
 export const developments: Development[] = [

@@ -69,7 +69,9 @@ export async function generateMetadata({
         `${name} in ${city}${fromText}.`);
 
   const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tresor.mx';
-  const heroImg = dev.heroRender ?? dev.image;
+  // seoImage (pestaña SEO en Sanity) es un override manual — si no está,
+  // cae al hero real de la ficha, igual que antes.
+  const heroImg = plaza?.seoImage ?? dev.seoImage ?? dev.heroRender ?? dev.image;
 
   return {
     title,

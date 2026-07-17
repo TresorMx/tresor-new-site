@@ -23,11 +23,11 @@ export default function FichaContentBlock({ block, locale, gray = false }: Ficha
   const isEs = locale !== 'en';
   const [tourOpen, setTourOpen] = useState<string | null>(null);
   const eyebrow = block.eyebrow ? (isEs ? block.eyebrow.es : block.eyebrow.en ?? block.eyebrow.es) : undefined;
-  const title = isEs ? block.title.es : block.title.en ?? block.title.es;
+  const title = (isEs ? block.title.es : block.title.en ?? block.title.es) ?? '';
   const titleMuted = block.titleMuted
     ? (isEs ? block.titleMuted.es : block.titleMuted.en ?? block.titleMuted.es)
     : undefined;
-  const description = isEs ? block.description.es : block.description.en ?? block.description.es;
+  const description = (isEs ? block.description.es : block.description.en ?? block.description.es) ?? '';
   const layout = block.layout ?? (block.image ? 'side-by-side' : 'stacked');
   const imageOnRight = (block.imagePosition ?? 'right') === 'right';
   const imageFitClass = block.imageFit === 'contain' ? 'object-contain' : 'object-cover';
