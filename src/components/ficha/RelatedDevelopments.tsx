@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import DevelopmentCard from '@/components/home/DevelopmentCard';
 import SlidingTabs from '@/components/ui/SlidingTabs';
+import { usePathname } from '@/navigation';
 import type { Development } from '@/lib/developments';
 
 interface RelatedDevelopmentsProps {
@@ -19,6 +20,12 @@ interface RelatedDevelopmentsProps {
 // pasar por aquí (mismo fix que el footer).
 export default function RelatedDevelopments({ items }: RelatedDevelopmentsProps) {
   const t = useTranslations('plaza');
+  // Dentro del espejo /drive/[slug] (ver src/app/[locale]/drive/[slug]/page.tsx),
+  // estas cards también deben quedarse dentro de esa zona oculta en vez de
+  // sacar al broker hacia la ficha pública normal — mismo criterio que ya
+  // se aplicó a las 4 landings de /drive/*.
+  const pathname = usePathname();
+  const isDriveMirror = pathname.startsWith('/drive/');
   const cities = useMemo(() => Array.from(new Set(items.map((d) => d.city))), [items]);
   const [cityIndex, setCityIndex] = useState(0); // 0 = todas las ciudades
 
@@ -53,7 +60,7 @@ export default function RelatedDevelopments({ items }: RelatedDevelopmentsProps)
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((d) => (
-            <DevelopmentCard key={d.slug} dev={d} dark />
+            <DevelopmentCard key={d.slug} dev={d} dark forceDriveLink={isDriveMirror} />
           ))}
         </div>
       </div>
