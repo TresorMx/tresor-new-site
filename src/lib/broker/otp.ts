@@ -55,7 +55,7 @@ export async function sendOtpEmail(email: string, code: string, purpose: OtpPurp
   // (dominio sin verificar, etc.) — regresa { data: null, error }. Sin este
   // chequeo, un envío fallido se reportaba como éxito silencioso.
   const { error } = await resend.emails.send({
-    from: process.env.RESEND_FROM_EMAIL ?? 'hello@tresor.mx',
+    from: `Tresor Real Estate <${process.env.RESEND_FROM_EMAIL ?? 'hello@tresor.mx'}>`,
     to: email,
     subject: copy.subject(code),
     html: `
