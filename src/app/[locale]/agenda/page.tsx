@@ -10,11 +10,7 @@ import {
 import { cn } from '@/lib/utils';
 import CategoryHero from '@/components/category/CategoryHero';
 import LocationModal from '@/components/LocationModal';
-
-const TIME_SLOTS = [
-  '09:00', '10:00', '11:00', '12:00',
-  '14:00', '15:00', '16:00', '17:00',
-];
+import { useAgendaSlots } from '@/hooks/useAgendaSlots';
 
 const OFFICE_ADDRESS = 'Plaza Espacio, Oficina S-214, Av. Puerto Cancún, Puerto Cancún, Zona Hotelera, 77500 Cancún, Q.R.';
 const OFFICE_PHONE_DISPLAY = '+52 998 404 5602';
@@ -49,12 +45,16 @@ export default function AgendaPage() {
     mode: '' as 'presencial' | 'zoom' | '',
     date: '',
     time: '',
+    timeIso: null as string | null,
   });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
   const [mapOpen, setMapOpen] = useState(false);
+  const { slots, loading: slotsLoading } = useAgendaSlots(form.date);
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
+  const setDate = (v: string) => setForm((f) => ({ ...f, date: v, time: '', timeIso: null }));
+  const setTime = (time: string, iso: string | null) => setForm((f) => ({ ...f, time, timeIso: iso }));
 
   const valid =
     form.firstName && form.lastName && form.email && form.phone &&
@@ -69,7 +69,7 @@ export default function AgendaPage() {
       const res = await fetch('/api/agenda', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, startTimeISO: form.timeIso }),
       });
       if (!res.ok) throw new Error(t('errorMsg'));
       const { id } = await res.json();
@@ -268,7 +268,7 @@ export default function AgendaPage() {
                   <CalendarDays size={11} strokeWidth={2} /> {t('dateLabel')}
                 </span>
                 <input required type="date" min={minDate()} className="field-input cursor-pointer"
-                  value={form.date} onChange={(e) => set('date', e.target.value)} />
+                  value={form.date} onChange={(e) => setDate(e.target.value)} />
               </label>
             </div>
 
@@ -277,23 +277,31 @@ export default function AgendaPage() {
               <span className="field-label flex items-center gap-1.5 mb-4">
                 <Clock size={11} strokeWidth={2} /> {t('timeLabel')}
               </span>
-              <div className="grid grid-cols-4 gap-2">
-                {TIME_SLOTS.map((slot) => (
-                  <button
-                    key={slot}
-                    type="button"
-                    onClick={() => set('time', slot)}
-                    className={cn(
-                      'rounded-full py-2.5 text-[11px] font-semibold uppercase tracking-caps transition-all',
-                      form.time === slot
-                        ? 'bg-ink text-bg'
-                        : 'bg-white text-ink-3 shadow-sm hover:text-ink hover:shadow-md',
-                    )}
-                  >
-                    {formatTime(slot)}
-                  </button>
-                ))}
-              </div>
+              {!form.date ? (
+                <p className="text-[12px] text-ink-3">{t('timePickDateFirst')}</p>
+              ) : slotsLoading ? (
+                <p className="text-[12px] text-ink-3">{t('timeLoading')}</p>
+              ) : slots.length === 0 ? (
+                <p className="text-[12px] text-ink-3">{t('timeNoSlots')}</p>
+              ) : (
+                <div className="grid grid-cols-4 gap-2">
+                  {slots.map(({ time, iso }) => (
+                    <button
+                      key={time}
+                      type="button"
+                      onClick={() => setTime(time, iso)}
+                      className={cn(
+                        'rounded-full py-2.5 text-[11px] font-semibold uppercase tracking-caps transition-all',
+                        form.time === time
+                          ? 'bg-ink text-bg'
+                          : 'bg-white text-ink-3 shadow-sm hover:text-ink hover:shadow-md',
+                      )}
+                    >
+                      {formatTime(time)}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {err && (

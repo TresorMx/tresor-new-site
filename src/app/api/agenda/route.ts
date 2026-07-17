@@ -3,6 +3,7 @@ import { randomUUID } from 'crypto';
 import { Resend } from 'resend';
 import { sendLeadToGHL } from '@/lib/ghl';
 import { saveLeadToSanity } from '@/lib/sanity/saveLead';
+import { createGHLAppointment } from '@/lib/ghlCalendar';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -44,7 +45,7 @@ export async function POST(req: NextRequest) {
     // (sin ficha de origen). Antes `interest` era obligatorio siempre, así
     // que CADA envío desde una ficha (que nunca manda `interest`) regresaba
     // 400 — el widget de "Agendar visita" en las fichas estaba roto.
-    const { firstName, lastName, email, phone, interest, mode, date, time, plaza } = body;
+    const { firstName, lastName, email, phone, interest, mode, date, time, plaza, startTimeISO } = body;
 
     if (!firstName || !lastName || !email || !phone || !mode || !date || !time || (!interest && !plaza)) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -67,7 +68,7 @@ export async function POST(req: NextRequest) {
     // 2) Enviar a GHL — sin `desarrollo_de_inters`: ese picklist en GHL solo
     // tiene opciones de Quattro configuradas, y un valor sin opción
     // coincidente simplemente no se guarda. El interés real viaja en tags/notas.
-    await sendLeadToGHL({
+    const ghlResult = await sendLeadToGHL({
       firstName,
       lastName,
       email,
@@ -81,6 +82,20 @@ export async function POST(req: NextRequest) {
       },
       notes: `Visita agendada · ${interestLabel ?? plaza} · ${MODE_LABELS[mode] ?? mode} · ${formatDate(date)} ${formatTime(time)}`,
     });
+
+    // 2.1) Crear la cita en el calendario Round Robin de GHL — se reparte
+    // sola entre los asesores que sean miembros de ese calendario. No
+    // fatal si falla: el lead ya quedó guardado en Sanity y en GHL.
+    if (ghlResult.contactId && startTimeISO) {
+      const apptResult = await createGHLAppointment({
+        contactId: ghlResult.contactId,
+        startTimeISO,
+        title: `${interestLabel ?? plaza} · ${firstName} ${lastName}`,
+      });
+      if (!apptResult.ok) {
+        console.error('[Agenda] No se pudo crear la cita en GHL', apptResult.error);
+      }
+    }
 
     // 2) Email de notificación interna
     if (process.env.RESEND_API_KEY) {

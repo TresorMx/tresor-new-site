@@ -7,11 +7,7 @@ import { CalendarDays, Video, MapPin, ArrowRight, Clock } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { pixel } from '@/lib/pixel';
 import DatePicker from '@/components/ui/DatePicker';
-
-const TIME_SLOTS = [
-  '09:00', '10:00', '11:00', '12:00',
-  '14:00', '15:00', '16:00', '17:00',
-];
+import { useAgendaSlots } from '@/hooks/useAgendaSlots';
 
 const formatTime = (t: string) => {
   const [h] = t.split(':').map(Number);
@@ -44,11 +40,15 @@ export default function AgendaWidget({ devSlug, devName }: AgendaWidgetProps) {
     mode: '' as 'presencial' | 'zoom' | '',
     date: '',
     time: '',
+    timeIso: null as string | null,
   });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState<string | null>(null);
+  const { slots, loading: slotsLoading } = useAgendaSlots(form.date);
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
+  const setDate = (v: string) => setForm((f) => ({ ...f, date: v, time: '', timeIso: null }));
+  const setTime = (time: string, iso: string | null) => setForm((f) => ({ ...f, time, timeIso: iso }));
 
   const valid =
     form.firstName && form.lastName && form.email && form.phone &&
@@ -63,7 +63,7 @@ export default function AgendaWidget({ devSlug, devName }: AgendaWidgetProps) {
       const res = await fetch('/api/agenda', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, plaza: devSlug }),
+        body: JSON.stringify({ ...form, startTimeISO: form.timeIso, plaza: devSlug }),
       });
       if (!res.ok) throw new Error(t('errorMsg'));
       const { id } = await res.json();
@@ -154,7 +154,7 @@ export default function AgendaWidget({ devSlug, devName }: AgendaWidgetProps) {
             </span>
             <DatePicker
               value={form.date}
-              onChange={(v) => set('date', v)}
+              onChange={setDate}
               minDate={minDate()}
               locale={locale}
             />
@@ -166,23 +166,31 @@ export default function AgendaWidget({ devSlug, devName }: AgendaWidgetProps) {
           <span className="field-label flex items-center gap-1.5 mb-4">
             <Clock size={11} strokeWidth={2} /> {t('timeLabel')}
           </span>
-          <div className="grid grid-cols-4 gap-2">
-            {TIME_SLOTS.map((slot) => (
-              <button
-                key={slot}
-                type="button"
-                onClick={() => set('time', slot)}
-                className={cn(
-                  'rounded-full border py-2.5 text-[11px] font-semibold uppercase tracking-caps transition-all',
-                  form.time === slot
-                    ? 'border-ink bg-ink text-bg'
-                    : 'border-line bg-white text-ink-3 hover:border-ink hover:text-ink',
-                )}
-              >
-                {formatTime(slot)}
-              </button>
-            ))}
-          </div>
+          {!form.date ? (
+            <p className="text-[12px] text-ink-3">{t('timePickDateFirst')}</p>
+          ) : slotsLoading ? (
+            <p className="text-[12px] text-ink-3">{t('timeLoading')}</p>
+          ) : slots.length === 0 ? (
+            <p className="text-[12px] text-ink-3">{t('timeNoSlots')}</p>
+          ) : (
+            <div className="grid grid-cols-4 gap-2">
+              {slots.map(({ time, iso }) => (
+                <button
+                  key={time}
+                  type="button"
+                  onClick={() => setTime(time, iso)}
+                  className={cn(
+                    'rounded-full border py-2.5 text-[11px] font-semibold uppercase tracking-caps transition-all',
+                    form.time === time
+                      ? 'border-ink bg-ink text-bg'
+                      : 'border-line bg-white text-ink-3 hover:border-ink hover:text-ink',
+                  )}
+                >
+                  {formatTime(time)}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         {err && (
