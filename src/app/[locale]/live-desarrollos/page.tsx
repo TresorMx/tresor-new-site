@@ -17,6 +17,12 @@ export const metadata: Metadata = {
     url: 'https://www.tresor.mx/live-desarrollos',
     images: [{ url: '/desarrollos/ximena/2.-Fachada-de-Noche.jpg', width: 1920, height: 992 }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Desarrollos de ${dev.name}`,
+    description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
+    images: ['/desarrollos/ximena/2.-Fachada-de-Noche.jpg'],
+  },
 };
 
 export default async function LiveDesarrollosPage() {

@@ -17,6 +17,12 @@ export const metadata: Metadata = {
     url: 'https://www.tresor.mx/onix-living',
     images: [{ url: '/desarrollos/villalta/portada3.jpg', width: 1920, height: 992 }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Desarrollos de ${dev.name}`,
+    description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
+    images: ['/desarrollos/villalta/portada3.jpg'],
+  },
 };
 
 export default async function OnixLivingPage() {

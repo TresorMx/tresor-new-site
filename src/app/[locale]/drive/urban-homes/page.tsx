@@ -28,6 +28,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       images: [{ url: '/desarrollos/Blume/BLUME-Drone-1.jpg', width: 1920, height: 992 }],
       locale: isEs ? 'es_MX' : 'en_US',
     },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/desarrollos/Blume/BLUME-Drone-1.jpg'],
+    },
   };
 }
 

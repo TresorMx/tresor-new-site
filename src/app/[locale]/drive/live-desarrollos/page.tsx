@@ -28,6 +28,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       images: [{ url: '/desarrollos/ximena/2.-Fachada-de-Noche.jpg', width: 1920, height: 992 }],
       locale: isEs ? 'es_MX' : 'en_US',
     },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/desarrollos/ximena/2.-Fachada-de-Noche.jpg'],
+    },
   };
 }
 

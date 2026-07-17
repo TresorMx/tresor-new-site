@@ -17,6 +17,12 @@ export const metadata: Metadata = {
     url: 'https://www.tresor.mx/urban-homes',
     images: [{ url: '/desarrollos/Blume/BLUME-Drone-1.jpg', width: 1920, height: 992 }],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Desarrollos de ${dev.name}`,
+    description: dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`,
+    images: ['/desarrollos/Blume/BLUME-Drone-1.jpg'],
+  },
 };
 
 export default async function UrbanHomesPage() {

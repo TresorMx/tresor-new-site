@@ -17,19 +17,26 @@ export async function generateMetadata({
   const isEs = locale !== 'en';
   const dev = await findDevBySlug(slug);
   const title = dev ? `${isEs ? 'Drive de Ventas' : 'Sales Drive'} · ${dev.name}` : isEs ? 'Drive de Ventas' : 'Sales Drive';
+  const description = dev?.name
+    ? isEs
+      ? `Información comercial de ${dev.name}.`
+      : `Commercial information for ${dev.name}.`
+    : undefined;
   const image = dev?.heroRender ?? dev?.image;
   return {
     title,
     robots: { index: false, follow: false },
     openGraph: {
       title,
-      description: dev?.name
-        ? isEs
-          ? `Información comercial de ${dev.name}.`
-          : `Commercial information for ${dev.name}.`
-        : undefined,
+      description,
       images: image ? [{ url: image, width: 1920, height: 992 }] : undefined,
       locale: isEs ? 'es_MX' : 'en_US',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: image ? [image] : undefined,
     },
   };
 }

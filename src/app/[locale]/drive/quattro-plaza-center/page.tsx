@@ -28,6 +28,12 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       images: [{ url: '/renders/gardens/01.jpg', width: 1920, height: 992 }],
       locale: isEs ? 'es_MX' : 'en_US',
     },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: ['/renders/gardens/01.jpg'],
+    },
   };
 }
 
