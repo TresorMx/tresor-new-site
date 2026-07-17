@@ -1905,12 +1905,13 @@ export function countByCity(city: City): number {
   return getStaticOrCachedDevelopments().filter((d) => d.city === city).length;
 }
 
-export function formatPrice(d: Development): string | null {
+export function formatPrice(d: Development, isEs = true): string | null {
   if (!d.priceFrom) return null;
+  const from = isEs ? 'Desde' : 'From';
   if (d.currency === 'USD') {
-    return `Desde USD $${d.priceFrom.toLocaleString('en-US')}`;
+    return `${from} USD $${d.priceFrom.toLocaleString('en-US')}`;
   }
-  return `Desde $${d.priceFrom.toLocaleString('es-MX')} MXN`;
+  return `${from} $${d.priceFrom.toLocaleString('es-MX')} MXN`;
 }
 
 // ── Precio en vivo (solo Tresor) ──

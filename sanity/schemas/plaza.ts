@@ -112,7 +112,8 @@ export default defineType({
         fields: [
           { name: 'label',   title: 'Etiqueta (ES)', type: 'string', validation: (r: any) => r.required() },
           { name: 'labelEn', title: 'Etiqueta (EN)', type: 'string' },
-          { name: 'value',   title: 'Valor',         type: 'string', validation: (r: any) => r.required() },
+          { name: 'value',   title: 'Valor (ES)',    type: 'string', validation: (r: any) => r.required() },
+          { name: 'valueEn', title: 'Valor (EN)',    type: 'string' },
         ],
         preview: { select: { title: 'value', subtitle: 'label' } },
       }],

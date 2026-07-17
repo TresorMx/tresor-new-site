@@ -4,50 +4,74 @@ import { Gem } from 'lucide-react';
 import ProjectImage from '@/components/desarrollo/ProjectImage';
 
 // Página fija (sin Sanity), réplica de la estructura de /desarrollo —
-// hero + secciones de contenido. Contenido en español únicamente, mismo
-// criterio que /desarrollo y las páginas de blog.
+// hero + secciones de contenido. Bilingüe (isEs), mismo criterio que
+// /desarrollo y /comercializacion.
 
-export const metadata: Metadata = {
-  title: 'Gestión — Servicios de Gestión Inmobiliaria',
-  description:
-    'Servicios integrales de gestión inmobiliaria de Tresor Real Estate: búsqueda de terrenos, estudios de viabilidad, diseño de plan maestro, gestión de permisos, supervisión de obra y comercialización, en Cancún y Tulum.',
-  alternates: { canonical: 'https://www.tresor.mx/gestion' },
-  openGraph: {
-    title: 'Gestión — Servicios de Gestión Inmobiliaria',
-    description: 'Servicios integrales de gestión inmobiliaria de Tresor Real Estate, desde la conceptualización hasta la venta de la última unidad.',
-    url: 'https://www.tresor.mx/gestion',
-    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isEs = locale !== 'en';
+  const title = isEs ? 'Gestión — Servicios de Gestión Inmobiliaria' : 'Management — Real Estate Management Services';
+  const description = isEs
+    ? 'Servicios integrales de gestión inmobiliaria de Tresor Real Estate: búsqueda de terrenos, estudios de viabilidad, diseño de plan maestro, gestión de permisos, supervisión de obra y comercialización, en Cancún y Tulum.'
+    : "Tresor Real Estate's end-to-end real estate management services: land search, feasibility studies, master plan design, permitting, construction supervision, and commercialization, in Cancún and Tulum.";
+  return {
+    title,
+    description,
+    alternates: { canonical: isEs ? 'https://www.tresor.mx/gestion' : 'https://www.tresor.mx/en/gestion' },
+    openGraph: {
+      title,
+      description: isEs
+        ? 'Servicios integrales de gestión inmobiliaria de Tresor Real Estate, desde la conceptualización hasta la venta de la última unidad.'
+        : "Tresor Real Estate's end-to-end real estate management services, from initial concept to the sale of the last unit.",
+      url: isEs ? 'https://www.tresor.mx/gestion' : 'https://www.tresor.mx/en/gestion',
+      images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
+      locale: isEs ? 'es_MX' : 'en_US',
+    },
+  };
+}
 
-const SERVICES = [
+const SERVICES_ES = [
   ['Búsqueda de Terrenos', 'Estudios de Viabilidad', 'Proyecciones Financieras', 'Inversión y Financiamiento'],
   ['Diseño del Plan Maestro', 'Definición de Prototipos', 'Gestión de Permisos', 'Supervisión de Obra'],
   ['Gestión Comercial', 'Estrategia de Marketing', 'Procesos Operativos y Comunicación', 'Titulación y Entrega de Viviendas'],
 ];
 
+const SERVICES_EN = [
+  ['Land Search', 'Feasibility Studies', 'Financial Projections', 'Investment & Financing'],
+  ['Master Plan Design', 'Prototype Definition', 'Permitting', 'Construction Supervision'],
+  ['Sales Management', 'Marketing Strategy', 'Operations & Communication', 'Titling & Home Delivery'],
+];
+
 interface Project {
   name: string;
-  description: string;
+  description: { es: string; en: string };
   images: string[];
 }
 
 const PROJECTS: Project[] = [
   {
     name: 'Amira District',
-    description:
-      'Ubicado a solo 280 metros de la playa de Tulum, este exclusivo desarrollo, rodeado de exuberante naturaleza y paisajes tropicales, ofrece amenidades premium y áreas en la azotea con vistas espectaculares al mar, diseñadas para el descanso, la convivencia y disfrutar de un estilo de vida único junto a la naturaleza.',
+    description: {
+      es: 'Ubicado a solo 280 metros de la playa de Tulum, este exclusivo desarrollo, rodeado de exuberante naturaleza y paisajes tropicales, ofrece amenidades premium y áreas en la azotea con vistas espectaculares al mar, diseñadas para el descanso, la convivencia y disfrutar de un estilo de vida único junto a la naturaleza.',
+      en: 'Located just 280 meters from the beach in Tulum, this exclusive development is surrounded by lush nature and tropical landscapes, offering premium amenities and rooftop areas with spectacular ocean views, designed for rest, connection, and a unique lifestyle close to nature.',
+    },
     images: ['/amira.jpg'],
   },
   {
     name: 'Novo Cancún',
-    description:
-      'Un exclusivo desarrollo inmobiliario de Hansa Urbana en Puerto Cancún, dirigido por el equipo directivo de Tresor Real Estate. Un desarrollo rodeado de agua y muelles, con una ubicación única frente al mar que abarca 250 metros de playa, y donde se alojan actualmente nuevas fases del proyecto SLS Cancún.',
+    description: {
+      es: 'Un exclusivo desarrollo inmobiliario de Hansa Urbana en Puerto Cancún, dirigido por el equipo directivo de Tresor Real Estate. Un desarrollo rodeado de agua y muelles, con una ubicación única frente al mar que abarca 250 metros de playa, y donde se alojan actualmente nuevas fases del proyecto SLS Cancún.',
+      en: "An exclusive real estate development by Hansa Urbana in Puerto Cancún, led by Tresor Real Estate's management team. Surrounded by water and marinas, with a unique beachfront location spanning 250 meters of coastline, currently home to new phases of the SLS Cancún project.",
+    },
     images: ['/novo.jpg'],
   },
 ];
 
-export default function GestionPage() {
+export default async function GestionPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const isEs = locale !== 'en';
+  const services = isEs ? SERVICES_ES : SERVICES_EN;
+
   return (
     <>
       {/* ═════ HERO ═════ */}
@@ -68,11 +92,12 @@ export default function GestionPage() {
         </div>
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
-          <span className="eyebrow eyebrow-accent font-bold">— Gestión</span>
+          <span className="eyebrow eyebrow-accent font-bold">{isEs ? '— Gestión' : '— Management'}</span>
           <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">We Manage</h1>
           <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">
-            Acompañamos cada proyecto en todas sus etapas, de la planeación a la entrega —
-            con la misma visión integral con la que desarrollamos.
+            {isEs
+              ? 'Acompañamos cada proyecto en todas sus etapas, de la planeación a la entrega — con la misma visión integral con la que desarrollamos.'
+              : 'We support every project through every stage, from planning to delivery — with the same end-to-end vision we bring to our own developments.'}
           </p>
         </div>
       </section>
@@ -80,17 +105,17 @@ export default function GestionPage() {
       {/* ═════ SERVICIOS ═════ */}
       <section className="relative z-10 -mt-10 rounded-[2.5rem] bg-bg-soft py-16 md:py-24">
         <div className="container-wrap">
-          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">Servicios de Gestión</h2>
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
+            {isEs ? 'Servicios de Gestión' : 'Management Services'}
+          </h2>
           <p className="mt-6 text-[15px] font-light leading-relaxed text-ink-2">
-            Ofrecemos una amplia gama de servicios para garantizar el éxito de tu proyecto
-            inmobiliario, desde la conceptualización inicial hasta la venta de la última unidad.
-            Con una visión integral y un enfoque proactivo, nuestro equipo colabora
-            estrechamente con nuestros clientes para asegurar que cada etapa del proceso sea un
-            verdadero éxito.
+            {isEs
+              ? 'Ofrecemos una amplia gama de servicios para garantizar el éxito de tu proyecto inmobiliario, desde la conceptualización inicial hasta la venta de la última unidad. Con una visión integral y un enfoque proactivo, nuestro equipo colabora estrechamente con nuestros clientes para asegurar que cada etapa del proceso sea un verdadero éxito.'
+              : "We offer a wide range of services to ensure the success of your real estate project, from initial concept to the sale of the last unit. With an end-to-end vision and a proactive approach, our team works closely with our clients to make sure every stage of the process is a true success."}
           </p>
         </div>
         <div className="container-wrap mt-14 grid gap-x-10 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((col, i) => (
+          {services.map((col, i) => (
             <ul key={i} className="flex flex-col gap-4">
               {col.map((item) => (
                 <li key={item} className="flex items-center gap-3 text-[15px] font-light text-ink">
@@ -116,7 +141,7 @@ export default function GestionPage() {
             <div key={p.name} className="container-wrap grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-14">
               <div>
                 <h2 className="font-sans text-[clamp(20px,2.2vw,32px)] font-medium leading-[1.15] text-ink">{p.name}</h2>
-                <p className="mt-5 text-[15px] font-light leading-relaxed text-ink-2">{p.description}</p>
+                <p className="mt-5 text-[15px] font-light leading-relaxed text-ink-2">{isEs ? p.description.es : p.description.en}</p>
               </div>
               <div>
                 <ProjectImage images={p.images} alt={p.name} />

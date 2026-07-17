@@ -1,4 +1,7 @@
+'use client';
+
 import Image from 'next/image';
+import { useLocale } from 'next-intl';
 import { Link } from '@/navigation';
 import { MapPin, Store, Home, Building2, LandPlot, type LucideIcon } from 'lucide-react';
 import { formatPrice, developers, type Development, type PropertyType } from '@/lib/developments';
@@ -13,6 +16,17 @@ const PROPERTY_ICONS: Record<PropertyType, LucideIcon> = {
   'Local Comercial': Store,
 };
 
+// `badge`/`status` son valores fijos en español (enum DevStatus o texto
+// libre por desarrollo) — sin esto, el badge del card se quedaba en
+// español aunque el resto del sitio estuviera en inglés.
+const STATUS_LABEL_EN: Record<string, string> = {
+  'Preventa': 'Pre-Sale',
+  'Lanzamiento': 'Launch',
+  'En obra': 'Under Construction',
+  'Entrega inmediata': 'Ready to Move In',
+  'Próximamente': 'Coming Soon',
+};
+
 export default function DevelopmentCard({
   dev,
   dark = false,
@@ -24,7 +38,8 @@ export default function DevelopmentCard({
   // aparece siempre, sin sesión de asesor, y apunta al Drive abierto.
   forceDriveLink?: boolean;
 }) {
-  const price = dev.priceLabel ?? formatPrice(dev);
+  const isEs = useLocale() !== 'en';
+  const price = dev.priceLabel ?? formatPrice(dev, isEs);
   // `brand` es un override opcional; la fuente de verdad del nombre del
   // desarrollador es SIEMPRE el registro `developers` (resuelto por
   // `dev.developer`) — nunca un default fijo a "Tresor Real Estate", que
@@ -35,7 +50,8 @@ export default function DevelopmentCard({
   // Slug de ruta para el Drive de Ventas (mismo slug de la ficha). Los
   // "próximamente" (href '#') no tienen drive.
   const driveSlug = dev.href.startsWith('/desarrollos/') ? dev.href.slice('/desarrollos/'.length) : null;
-  const badge = dev.badge ?? dev.status;
+  const badgeRaw = dev.badge ?? dev.status;
+  const badge = isEs ? badgeRaw : (STATUS_LABEL_EN[badgeRaw] ?? badgeRaw);
   const location = dev.phases ?? `${dev.zone ? `${dev.zone}, ` : ''}${dev.city}`;
   // Ícono según propertyType; fallback al type amplio si aún no está definido.
   const TypeIcon = dev.propertyType
@@ -103,8 +119,8 @@ export default function DevelopmentCard({
             <span className="eyebrow eyebrow-accent mt-1 block font-bold">
               {dev.comingSoon ? (
                 <>
-                  Desde{' '}
-                  <span className="select-none blur-[3px]">{price.replace(/^Desde\s*/i, '')}</span>
+                  {isEs ? 'Desde' : 'From'}{' '}
+                  <span className="select-none blur-[3px]">{price.replace(/^(Desde|From)\s*/i, '')}</span>
                 </>
               ) : (
                 price
@@ -124,14 +140,14 @@ export default function DevelopmentCard({
                   dark ? 'bg-white/10 text-white/40' : 'bg-ink/[0.08] text-ink/40'
                 }`}
               >
-                Muy pronto
+                {isEs ? 'Muy pronto' : 'Coming Soon'}
               </span>
             ) : (
               <Link
                 href={dev.href}
                 className="inline-flex items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-ink transition-all hover:brightness-95"
               >
-                Ver desarrollo
+                {isEs ? 'Ver desarrollo' : 'View development'}
               </Link>
             )}
             {/* Drive de Ventas — solo visible para asesores logueados, salvo en

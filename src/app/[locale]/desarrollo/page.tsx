@@ -8,25 +8,34 @@ import ProjectImage from '@/components/desarrollo/ProjectImage';
 // encabezado de categoría a la izquierda, fila de texto+foto por proyecto
 // (texto izquierda, media derecha) — con nuestra tipografía, esquinas
 // redondeadas en todas las fotos y nuestro propio estilo de slider en los
-// 3 proyectos que lo tenían (Allure, Blume, La Vela). Contenido en español
-// únicamente, mismo criterio que las páginas de blog.
+// 3 proyectos que lo tenían (Allure, Blume, La Vela). Bilingüe (isEs).
 
-export const metadata: Metadata = {
-  title: 'Desarrollo — Nuestra Trayectoria',
-  description:
-    'Más de 3,000 unidades entregadas en Cancún y Tulum. Conoce los proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate.',
-  alternates: { canonical: 'https://www.tresor.mx/desarrollo' },
-  openGraph: {
-    title: 'Desarrollo — Nuestra Trayectoria',
-    description: 'Proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate en Cancún y Tulum.',
-    url: 'https://www.tresor.mx/desarrollo',
-    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isEs = locale !== 'en';
+  const title = isEs ? 'Desarrollo — Nuestra Trayectoria' : 'Development — Our Track Record';
+  const description = isEs
+    ? 'Más de 3,000 unidades entregadas en Cancún y Tulum. Conoce los proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate.'
+    : 'Over 3,000 units delivered in Cancún and Tulum. Discover the luxury, residential, commercial, vacation, and master plan projects developed by Tresor Real Estate.';
+  return {
+    title,
+    description,
+    alternates: { canonical: isEs ? 'https://www.tresor.mx/desarrollo' : 'https://www.tresor.mx/en/desarrollo' },
+    openGraph: {
+      title,
+      description: isEs
+        ? 'Proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate en Cancún y Tulum.'
+        : 'Luxury, residential, commercial, vacation, and master plan projects developed by Tresor Real Estate in Cancún and Tulum.',
+      url: isEs ? 'https://www.tresor.mx/desarrollo' : 'https://www.tresor.mx/en/desarrollo',
+      images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
+      locale: isEs ? 'es_MX' : 'en_US',
+    },
+  };
+}
 
 interface Project {
   name: string;
-  description: string;
+  description: { es: string; en: string };
   images?: string[]; // 1 = foto estática, 2+ = slider (Allure/Blume/La Vela)
   tiles?: string[];  // grid de sub-marcas (Astoria, Long Island Community) — reemplaza `images`
   fit?: 'cover' | 'contain';   // 'contain' para PNGs con fondo transparente que no deben recortarse
@@ -36,50 +45,71 @@ interface Project {
 
 interface Category {
   id: string;
-  eyebrow: string;
+  eyebrow: { es: string; en: string };
   location: string;
-  intro: string;
+  intro: { es: string; en: string };
   projects: Project[];
 }
 
 const CATEGORIES: Category[] = [
   {
     id: 'luxury',
-    eyebrow: 'Luxury',
+    eyebrow: { es: 'Luxury', en: 'Luxury' },
     location: 'Puerto Cancún',
-    intro: 'Como Managing Partner de Urban Homes, hemos desarrollado dos proyectos frente al mar en Puerto Cancún —Allure y Blume— y participamos en la conceptualización y planeación de La Vela.',
+    intro: {
+      es: 'Como Managing Partner de Urban Homes, hemos desarrollado dos proyectos frente al mar en Puerto Cancún —Allure y Blume— y participamos en la conceptualización y planeación de La Vela.',
+      en: 'As Managing Partner of Urban Homes, we have developed two beachfront projects in Puerto Cancún —Allure and Blume— and took part in the conceptualization and planning of La Vela.',
+    },
     projects: [
       {
         name: 'Allure Luxury Condos',
-        description: 'Frente al Mar Caribe en Puerto Cancún: 96 departamentos de 2 a 4 recámaras (153–428 m²) y 8 penthouses (535–589 m²). Spa, business center, kids club, gimnasio y muelle propio. Diseño de Ancona + Ancona Arquitectos.',
+        description: {
+          es: 'Frente al Mar Caribe en Puerto Cancún: 96 departamentos de 2 a 4 recámaras (153–428 m²) y 8 penthouses (535–589 m²). Spa, business center, kids club, gimnasio y muelle propio. Diseño de Ancona + Ancona Arquitectos.',
+          en: 'On the Caribbean Sea in Puerto Cancún: 96 apartments with 2 to 4 bedrooms (153–428 sqm) and 8 penthouses (535–589 sqm). Spa, business center, kids club, gym, and private dock. Designed by Ancona + Ancona Arquitectos.',
+        },
         images: ['/desarrollo-corporativo/LuxuryL.jpg', '/desarrollo-corporativo/LuxuryG.jpg'],
       },
       {
         name: 'Blume Boutique Condos',
-        description: 'En la marina de Puerto Cancún: 109 departamentos de 3 recámaras (235–265 m²) y 4 penthouses (380–430 m²). Alberca infinity frente a la marina, muelle propio, spa y gimnasio.',
+        description: {
+          es: 'En la marina de Puerto Cancún: 109 departamentos de 3 recámaras (235–265 m²) y 4 penthouses (380–430 m²). Alberca infinity frente a la marina, muelle propio, spa y gimnasio.',
+          en: 'On the marina in Puerto Cancún: 109 three-bedroom apartments (235–265 sqm) and 4 penthouses (380–430 sqm). Infinity pool facing the marina, private dock, spa, and gym.',
+        },
         images: ['/desarrollos/Blume/BLUME-Arquitectura-1.jpg', '/desarrollos/Blume/BLUME-Drone-1.jpg'],
       },
       {
         name: 'La Vela',
-        description: 'Frente a la marina de Puerto Cancún: 105 unidades de 3 y 4 recámaras (300–400 m²) y penthouses (400–500 m²), con vistas al campo de golf de Puerto Cancún.',
+        description: {
+          es: 'Frente a la marina de Puerto Cancún: 105 unidades de 3 y 4 recámaras (300–400 m²) y penthouses (400–500 m²), con vistas al campo de golf de Puerto Cancún.',
+          en: 'Facing the marina in Puerto Cancún: 105 three and four-bedroom units (300–400 sqm) and penthouses (400–500 sqm), with views of the Puerto Cancún golf course.',
+        },
         images: ['/desarrollo-corporativo/LuxuryJ.jpg', '/desarrollo-corporativo/LuxuryP.jpg'],
       },
     ],
   },
   {
     id: 'residencial',
-    eyebrow: 'Residencial',
+    eyebrow: { es: 'Residencial', en: 'Residential' },
     location: 'Cancún',
-    intro: 'Como Managing Partner de Urban Homes hemos entregado y registrado más de 1,800 unidades residenciales en puntos estratégicos de Cancún, como Av. Huayacán —reconocida por su alta plusvalía.',
+    intro: {
+      es: 'Como Managing Partner de Urban Homes hemos entregado y registrado más de 1,800 unidades residenciales en puntos estratégicos de Cancún, como Av. Huayacán —reconocida por su alta plusvalía.',
+      en: "As Managing Partner of Urban Homes, we have delivered and registered more than 1,800 residential units in strategic areas of Cancún, including Av. Huayacán — known for its high appreciation.",
+    },
     projects: [
       {
         name: 'Vita Residenze',
-        description: 'Departamentos de 2 recámaras y casas de 2 y 3 niveles en una de las zonas residenciales con mayor crecimiento de Cancún, con amenidades pensadas para el día a día.',
+        description: {
+          es: 'Departamentos de 2 recámaras y casas de 2 y 3 niveles en una de las zonas residenciales con mayor crecimiento de Cancún, con amenidades pensadas para el día a día.',
+          en: "Two-bedroom apartments and 2 and 3-story houses in one of Cancún's fastest-growing residential areas, with amenities designed for everyday life.",
+        },
         images: ['/desarrollo-corporativo/ResidencialE.jpg'],
       },
       {
         name: 'Astoria Gated Community',
-        description: '437 unidades y áreas comerciales en Av. Huayacán, combinando privadas de casas y departamentos frente a amplias áreas comunes y jardines.',
+        description: {
+          es: '437 unidades y áreas comerciales en Av. Huayacán, combinando privadas de casas y departamentos frente a amplias áreas comunes y jardines.',
+          en: '437 units and commercial areas on Av. Huayacán, combining gated house and apartment clusters facing expansive common areas and gardens.',
+        },
         tiles: [
           '/desarrollo-corporativo/astoriaA.jpg', // Tribeca
           '/desarrollo-corporativo/astoriaB.jpg', // Queens
@@ -89,7 +119,10 @@ const CATEGORIES: Category[] = [
       },
       {
         name: 'Long Island Community',
-        description: '15 desarrollos de casas y departamentos —cerca de 1,300 unidades en clusters de 60 a 90— uno de los referentes residenciales de Cancún.',
+        description: {
+          es: '15 desarrollos de casas y departamentos —cerca de 1,300 unidades en clusters de 60 a 90— uno de los referentes residenciales de Cancún.',
+          en: "15 house and apartment developments — nearly 1,300 units in clusters of 60 to 90 — one of Cancún's benchmark residential communities.",
+        },
         tiles: [
           '/desarrollo-corporativo/ResidencialA.jpg', // Kings
           '/desarrollo-corporativo/ResidencialB.jpg', // Madison
@@ -101,63 +134,93 @@ const CATEGORIES: Category[] = [
   },
   {
     id: 'comercial',
-    eyebrow: 'Comercial',
+    eyebrow: { es: 'Comercial', en: 'Commercial' },
     location: 'Cancún',
-    intro: 'Quattro Plaza Center es nuestra línea de plazas comerciales, diseñada por la prestigiosa firma Ancona + Ancona Arquitectos.',
+    intro: {
+      es: 'Quattro Plaza Center es nuestra línea de plazas comerciales, diseñada por la prestigiosa firma Ancona + Ancona Arquitectos.',
+      en: 'Quattro Plaza Center is our line of commercial plazas, designed by the prestigious firm Ancona + Ancona Arquitectos.',
+    },
     projects: [
       {
         name: 'Quattro Plaza Center · Long Island',
-        description: 'Plaza comercial en zona de alto crecimiento en Cancún, entre Av. Huayacán y Av. Chac Mool, junto a residenciales de prestigio como Aqua, Río y Long Island.',
+        description: {
+          es: 'Plaza comercial en zona de alto crecimiento en Cancún, entre Av. Huayacán y Av. Chac Mool, junto a residenciales de prestigio como Aqua, Río y Long Island.',
+          en: 'Commercial plaza in a high-growth area of Cancún, between Av. Huayacán and Av. Chac Mool, next to prestigious residential communities such as Aqua, Río, and Long Island.',
+        },
         images: ['/renders/long-island/01.jpg'],
       },
       {
         name: 'Quattro Plaza Center · Gardens',
-        description: 'Plaza comercial en una de las zonas de mayor crecimiento de Cancún, rodeada de residenciales como Jardines del Sur VI, Ciudadela, Zienna, Terraquia y La Rioja II.',
+        description: {
+          es: 'Plaza comercial en una de las zonas de mayor crecimiento de Cancún, rodeada de residenciales como Jardines del Sur VI, Ciudadela, Zienna, Terraquia y La Rioja II.',
+          en: "Commercial plaza in one of Cancún's fastest-growing areas, surrounded by residential communities such as Jardines del Sur VI, Ciudadela, Zienna, Terraquia, and La Rioja II.",
+        },
         images: ['/renders/gardens/01.jpg'],
       },
     ],
   },
   {
     id: 'vacacional',
-    eyebrow: 'Vacacional',
+    eyebrow: { es: 'Vacacional', en: 'Vacation' },
     location: 'Tulum',
-    intro: 'Desde 2022 desarrollamos proyectos en Aldea Zamá, una de las zonas más exclusivas de Tulum, pensados para maximizar el retorno por renta vacacional.',
+    intro: {
+      es: 'Desde 2022 desarrollamos proyectos en Aldea Zamá, una de las zonas más exclusivas de Tulum, pensados para maximizar el retorno por renta vacacional.',
+      en: "Since 2022 we have developed projects in Aldea Zamá, one of Tulum's most exclusive areas, designed to maximize vacation rental returns.",
+    },
     projects: [
       {
         name: 'Luna Residence',
-        description: 'En Aldea Zamá: 28 departamentos de 1 recámara y locales comerciales, en conjunto con Giada Developments. Elevador, recepción y alberca infinity.',
+        description: {
+          es: 'En Aldea Zamá: 28 departamentos de 1 recámara y locales comerciales, en conjunto con Giada Developments. Elevador, recepción y alberca infinity.',
+          en: 'In Aldea Zamá: 28 one-bedroom apartments and commercial spaces, developed together with Giada Developments. Elevator, reception, and infinity pool.',
+        },
         images: ['/desarrollo-corporativo/TulumB.jpg'],
       },
       {
         name: 'Kabana',
-        description: 'En la fase 4 premium de Aldea Zamá: 16 departamentos en 3 modelos —Garden Houses, Condos y Penthouses con roof garden— de 150 a 250 m².',
+        description: {
+          es: 'En la fase 4 premium de Aldea Zamá: 16 departamentos en 3 modelos —Garden Houses, Condos y Penthouses con roof garden— de 150 a 250 m².',
+          en: 'In the premium phase 4 of Aldea Zamá: 16 apartments across 3 models — Garden Houses, Condos, and Penthouses with roof gardens — from 150 to 250 sqm.',
+        },
         images: ['/desarrollo-corporativo/TulumC.jpg'],
       },
     ],
   },
   {
     id: 'master-plan',
-    eyebrow: 'Master Plan',
+    eyebrow: { es: 'Master Plan', en: 'Master Plan' },
     location: '',
-    intro: 'Contamos con una amplia trayectoria en la planeación y desarrollo de Master Plans integrales, concebidos para crear comunidades con visión a largo plazo y un equilibrio armónico entre urbanismo y naturaleza.',
+    intro: {
+      es: 'Contamos con una amplia trayectoria en la planeación y desarrollo de Master Plans integrales, concebidos para crear comunidades con visión a largo plazo y un equilibrio armónico entre urbanismo y naturaleza.',
+      en: 'We have extensive experience planning and developing comprehensive master plans, conceived to create communities with a long-term vision and a harmonious balance between urban design and nature.',
+    },
     projects: [
       {
         name: 'Astoria Cancún',
-        description: 'Un proyecto icónico en Av. Huayacán, la primera comunidad planeada con casas y departamentos dentro de un master plan de 437 unidades.',
+        description: {
+          es: 'Un proyecto icónico en Av. Huayacán, la primera comunidad planeada con casas y departamentos dentro de un master plan de 437 unidades.',
+          en: 'An iconic project on Av. Huayacán, the first planned community with houses and apartments within a 437-unit master plan.',
+        },
         images: ['/astoriamaster.png'],
         fit: 'contain',
         aspectRatio: '1.444/1',
       },
       {
         name: 'Long Island Cancún',
-        description: 'Master plan de 1,315 unidades que dio vida a una comunidad privada, logrando uno de los proyectos más innovadores de Cancún.',
+        description: {
+          es: 'Master plan de 1,315 unidades que dio vida a una comunidad privada, logrando uno de los proyectos más innovadores de Cancún.',
+          en: "A 1,315-unit master plan that gave rise to a gated community, becoming one of Cancún's most innovative projects.",
+        },
         images: ['/longmaster.png'],
         fit: 'contain',
         aspectRatio: '1.566/1',
       },
       {
         name: 'Sanam Country Club',
-        description: 'Proyecto inmobiliario en Tulum que integra lotes unifamiliares y macrolotes dentro de un entorno de 32 hectáreas, con una reserva natural de 2.5 hectáreas que alberga cenotes, áreas de yoga y senderos. Un diseño de Sanzpont Arquitectura & Artigas.',
+        description: {
+          es: 'Proyecto inmobiliario en Tulum que integra lotes unifamiliares y macrolotes dentro de un entorno de 32 hectáreas, con una reserva natural de 2.5 hectáreas que alberga cenotes, áreas de yoga y senderos. Un diseño de Sanzpont Arquitectura & Artigas.',
+          en: 'A real estate project in Tulum that integrates single-family lots and macro-lots within a 32-hectare setting, with a 2.5-hectare nature reserve home to cenotes, yoga areas, and trails. Designed by Sanzpont Arquitectura & Artigas.',
+        },
         images: ['/sanammaster.png'],
         fit: 'contain',
         // La imagen real es muy vertical (1052×1646 ≈ 0.64/1) — a esa
@@ -170,7 +233,10 @@ const CATEGORIES: Category[] = [
   },
 ];
 
-export default function DesarrolloPage() {
+export default async function DesarrolloPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const isEs = locale !== 'en';
+
   return (
     <>
       {/* ═════ HERO ═════ */}
@@ -191,11 +257,12 @@ export default function DesarrolloPage() {
         </div>
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
-          <span className="eyebrow eyebrow-accent font-bold">— Desarrollo</span>
+          <span className="eyebrow eyebrow-accent font-bold">{isEs ? '— Desarrollo' : '— Development'}</span>
           <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">We Develop</h1>
           <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">
-            Creamos lugares especiales y significativos, con una huella duradera
-            en las ciudades donde vivimos.
+            {isEs
+              ? 'Creamos lugares especiales y significativos, con una huella duradera en las ciudades donde vivimos.'
+              : 'We create special, meaningful places that leave a lasting mark on the cities where we live.'}
           </p>
         </div>
       </section>
@@ -223,12 +290,12 @@ export default function DesarrolloPage() {
           <div className="container-wrap">
             <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight">
               {c.location ? (
-                <>{c.eyebrow} <span className="text-ink-3">en {c.location}</span></>
+                <>{isEs ? c.eyebrow.es : c.eyebrow.en} <span className="text-ink-3">{isEs ? `en ${c.location}` : `in ${c.location}`}</span></>
               ) : (
-                c.eyebrow
+                isEs ? c.eyebrow.es : c.eyebrow.en
               )}
             </h2>
-            <p className="mt-6 text-[15px] font-light leading-relaxed text-ink-2">{c.intro}</p>
+            <p className="mt-6 text-[15px] font-light leading-relaxed text-ink-2">{isEs ? c.intro.es : c.intro.en}</p>
           </div>
 
           <div className="mt-14 flex flex-col gap-20 md:gap-24">
@@ -236,7 +303,7 @@ export default function DesarrolloPage() {
               <div key={p.name} className="container-wrap grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center md:gap-14">
                 <div>
                   <h3 className="font-sans text-[clamp(18px,1.8vw,28px)] font-medium leading-[1.15] text-ink">{p.name}</h3>
-                  <p className="mt-5 text-[15px] font-light leading-relaxed text-ink-2">{p.description}</p>
+                  <p className="mt-5 text-[15px] font-light leading-relaxed text-ink-2">{isEs ? p.description.es : p.description.en}</p>
                 </div>
                 <div>
                   {p.tiles ? (
