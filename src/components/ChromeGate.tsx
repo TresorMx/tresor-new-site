@@ -1,6 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import DriveHeader from '@/components/drive/DriveHeader';
 
 // Oculta el chrome del sitio (Header, Footer, MobileBar, FloatingLayer) en
 // rutas de herramienta a pantalla completa — hoy /asesores/[slug]/cotizador
@@ -23,6 +24,23 @@ export default function ChromeGate({
 
   if (bare) {
     return <main className="min-h-screen">{children}</main>;
+  }
+
+  // /drive/* (landings + fichas espejo, ver src/app/[locale]/drive/) — zona
+  // oculta para brokers de confianza: nada de barra amarilla, menú
+  // "Propiedades", "Agenda una visita" ni footer — todo eso invita a
+  // navegar fuera. Header mínimo (logo sin link + idioma) en su lugar.
+  // `extras` se queda (MobileBar/FloatingLayer ya se ocultan/adaptan solos
+  // en /drive/* por su propia cuenta, ver esos componentes).
+  const isDrive = pathname === '/drive' || pathname?.startsWith('/drive/');
+  if (isDrive) {
+    return (
+      <>
+        <DriveHeader />
+        <main className="min-h-screen pt-[104px]">{children}</main>
+        {extras}
+      </>
+    );
   }
 
   return (
