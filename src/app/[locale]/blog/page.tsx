@@ -26,6 +26,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    slug: 'desarrollos-inmobiliarios-en-cancun',
+    title: 'Desarrollos Inmobiliarios en Cancún 2026: Guía Completa y Proyectos Destacados',
+    description:
+      'El mapa completo de los desarrollos inmobiliarios más relevantes de Cancún: zonas, tipos de proyecto y el portafolio activo de Tresor Real Estate.',
+    image: '/renders/long-island/01.jpg',
+    readTime: '10 min',
+    date: '18 de julio de 2026',
+  },
+  {
     slug: 'como-invertir-en-locales-comerciales-en-cancun',
     title: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa 2026',
     description:

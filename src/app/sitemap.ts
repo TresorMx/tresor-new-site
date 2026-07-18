@@ -66,6 +66,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const blogSlugs = [
+    'desarrollos-inmobiliarios-en-cancun',
     'como-invertir-en-locales-comerciales-en-cancun',
     'cuanto-cuesta-un-local-comercial-en-cancun',
     'mejores-zonas-para-negocio-en-cancun',
