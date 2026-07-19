@@ -167,6 +167,7 @@ export interface Development {
   brand?: string; // etiqueta de marca a mostrar (puede coincidir con developer)
   city: City;
   zone?: string;
+  zoneEn?: string;
   type: DevType;
   intent: Intent[];
   priceFrom?: number;
@@ -181,7 +182,9 @@ export interface Development {
   logo?: string;        // logo blanco para sobreponer en la foto
   phases?: string;      // etapas/sub-marcas, ej. 'Long Island · RIO · Aqua'
   description?: string; // copy del card
+  descriptionEn?: string; // copy del card en inglés (si no está, el card cae al español)
   priceLabel?: string;  // etiqueta de precio override, ej. 'Desde $2,650,000 MXN + IVA'
+  priceLabelEn?: string; // override en inglés, ej. 'From $2,650,000 MXN + VAT'
   badge?: string;       // etiqueta del badge override (si no, usa status)
   propertyType?: PropertyType; // tipo específico para filtros (más granular que `type`)
   logoScale?: number;   // factor de escala del logo sobre la foto (1 = base).
@@ -269,6 +272,7 @@ export const developments: Development[] = [
     brand: 'Tresor Real Estate',
     city: 'Cancún',
     zone: 'Av. Huayacán',
+    zoneEn: 'Huayacán Ave.',
     type: 'Comercial',
     intent: ['invertir', 'negocio'],
     priceFrom: 2650000,
@@ -284,7 +288,10 @@ export const developments: Development[] = [
     phases: 'Long Island · RIO · Aqua',
     description:
       'Plaza comercial con locales en preventa, ubicada en una de las zonas con mayor dinamismo y crecimiento de todo Cancún.',
+    descriptionEn:
+      'Commercial plaza with pre-sale units, located in one of the most dynamic, fastest-growing areas in all of Cancún.',
     priceLabel: 'Desde $2,650,000 MXN + IVA',
+    priceLabelEn: 'From $2,650,000 MXN + VAT',
     badge: 'Preventa',
     propertyType: 'Local Comercial',
   },
@@ -296,6 +303,7 @@ export const developments: Development[] = [
     brand: 'Tresor Real Estate',
     city: 'Cancún',
     zone: 'Av. Huayacán',
+    zoneEn: 'Huayacán Ave.',
     type: 'Comercial',
     intent: ['invertir', 'negocio'],
     priceFrom: 1968600,
@@ -311,7 +319,10 @@ export const developments: Development[] = [
     phases: 'Jardines · Zienna · Ciudadela',
     description:
       'Plaza comercial con locales en preventa, ubicada en una de las zonas con mayor dinamismo y crecimiento de todo Cancún.',
+    descriptionEn:
+      'Commercial plaza with pre-sale units, located in one of the most dynamic, fastest-growing areas in all of Cancún.',
     priceLabel: 'Desde $1,968,600 MXN + IVA',
+    priceLabelEn: 'From $1,968,600 MXN + VAT',
     badge: 'Lanzamiento',
     propertyType: 'Local Comercial',
   },
@@ -324,6 +335,7 @@ export const developments: Development[] = [
     brand: 'Tresor Real Estate',
     city: 'Cancún',
     zone: 'Av. Huayacán',
+    zoneEn: 'Huayacán Ave.',
     type: 'Comercial',
     intent: ['invertir', 'negocio'],
     priceFrom: 1968600,
@@ -343,7 +355,10 @@ export const developments: Development[] = [
     phases: 'Paseo de la Selva',
     description:
       'Nuestro próximo desarrollo en una de las zonas de mayor plusvalía de Cancún. Muy pronto revelaremos todos los detalles.',
+    descriptionEn:
+      'Our next development in one of Cancún\'s highest-value areas. Full details coming soon.',
     priceLabel: 'Desde $1,968,600 MXN + IVA',
+    priceLabelEn: 'From $1,968,600 MXN + VAT',
     badge: 'Próximamente',
     propertyType: 'Local Comercial',
     comingSoon: true,
@@ -370,8 +385,11 @@ export const developments: Development[] = [
     badge: 'Preventa',
     propertyType: 'Departamento',
     priceLabel: 'Desde $3,500,000 MXN',
+    priceLabelEn: 'From $3,500,000 MXN',
     description:
       'Departamentos en preventa de 1, 2 y 3 recámaras en Vía Cumbres, la zona de mayor crecimiento y plusvalía de Cancún, con amenidades de primer nivel.',
+    descriptionEn:
+      'Pre-sale 1, 2 and 3-bedroom apartments in Vía Cumbres, Cancún\'s fastest-growing, highest-value area, with first-class amenities.',
     // ── Apartado en línea ──
     reservationEnabled: true,
     reservationAmount: 25000,
@@ -534,8 +552,11 @@ export const developments: Development[] = [
     badge: 'Preventa',
     propertyType: 'Departamento',
     priceLabel: 'Desde $3,500,000 MXN',
+    priceLabelEn: 'From $3,500,000 MXN',
     description:
       'Uno de los desarrollos más exclusivos de Cancún: departamentos de lujo de 1, 2 y 3 recámaras en Vía Cumbres, con diseño y amenidades de primer nivel.',
+    descriptionEn:
+      'One of Cancún\'s most exclusive developments: luxury 1, 2 and 3-bedroom apartments in Vía Cumbres, with first-class design and amenities.',
     // ── Apartado en línea ──
     reservationEnabled: true,
     reservationAmount: 25000,
@@ -680,8 +701,11 @@ export const developments: Development[] = [
     badge: 'Preventa',
     propertyType: 'Departamento',
     priceLabel: 'Desde $3,800,000 MXN',
+    priceLabelEn: 'From $3,800,000 MXN',
     description:
       'Preventa de departamentos desde 76 m² con vistas abiertas al paseo Lausana y al campo de golf, dentro del exclusivo Lausana Residencial en Cancún.',
+    descriptionEn:
+      'Pre-sale apartments from 76 sqm with open views of the Lausana promenade and the golf course, inside the exclusive Lausana Residencial in Cancún.',
     // ── Apartado en línea ──
     reservationEnabled: true,
     reservationAmount: 25000,
@@ -835,8 +859,11 @@ export const developments: Development[] = [
     badge: 'Preventa',
     propertyType: 'Departamento',
     priceLabel: 'Desde $2,613,000 MXN',
+    priceLabelEn: 'From $2,613,000 MXN',
     description:
       'Preventa de departamentos desde 39 m² con vistas espectaculares al paseo Lausana y al campo de golf, en un entorno residencial de excepción en Cancún.',
+    descriptionEn:
+      'Pre-sale apartments from 39 sqm with spectacular views of the Lausana promenade and the golf course, in an exceptional residential setting in Cancún.',
     // ── Apartado en línea (piloto Sales Partner) ──
     reservationEnabled: true,
     reservationAmount: 25000,
@@ -1043,8 +1070,11 @@ export const developments: Development[] = [
     badge: 'Preventa',
     propertyType: 'Departamento',
     priceLabel: 'Desde $2,900,000 MXN',
+    priceLabelEn: 'From $2,900,000 MXN',
     description:
       'En Aldea Zamá, corazón de Tulum —el destino de mayor crecimiento de México—, Xaviera ofrece exclusivos departamentos de 1 a 3 recámaras.',
+    descriptionEn:
+      'In Aldea Zamá, the heart of Tulum —Mexico\'s fastest-growing destination—, Xaviera offers exclusive 1 to 3-bedroom apartments.',
     // ── Capa de ficha ──
     heroRender: '/desarrollos/xaviera/fotos/1. Fachada de Noche.jpg',
     tagline: { es: 'Solo 20 condominios exclusivos en Aldea Premium, Tulum' },
@@ -1135,6 +1165,7 @@ export const developments: Development[] = [
     brand: 'Onix Living',
     city: 'Cancún',
     zone: 'Zona Huayacán',
+    zoneEn: 'Huayacán Zone',
     type: 'Residencial',
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
@@ -1145,8 +1176,11 @@ export const developments: Development[] = [
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
     priceLabel: 'Desde $3,500,000 MXN',
+    priceLabelEn: 'From $3,500,000 MXN',
     description:
       'Departamentos de 1, 2 y 3 recámaras con diseño exclusivo y amenidades de lujo, en la zona residencial de mayor crecimiento y proyección de Cancún.',
+    descriptionEn:
+      '1, 2 and 3-bedroom apartments with exclusive design and luxury amenities, in Cancún\'s fastest-growing, highest-potential residential area.',
     // ── Capa de ficha (contenido tomado de koatowers.com) ──
     heroRender: '/desarrollos/koa/Copia-de-FF_01.jpg', // misma foto que el card
     heroLogoScale: 0.6,
@@ -1270,6 +1304,7 @@ export const developments: Development[] = [
     brand: 'Onix Living',
     city: 'Cancún',
     zone: 'Zona Hotelera',
+    zoneEn: 'Hotel Zone',
     type: 'Residencial',
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
@@ -1280,8 +1315,11 @@ export const developments: Development[] = [
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
     priceLabel: 'Desde $5,000,000 MXN',
+    priceLabelEn: 'From $5,000,000 MXN',
     description:
       'Residencial de lujo que redefine el estándar de vida en la Zona Hotelera de Cancún: departamentos de 1, 2 y 3 recámaras con vistas increíbles al mar.',
+    descriptionEn:
+      'A luxury residential development that redefines the standard of living in Cancún\'s Hotel Zone: 1, 2 and 3-bedroom apartments with breathtaking ocean views.',
     // ── Capa de ficha ──
     heroRender: '/desarrollos/villalta/portada2.jpg',
     // El edificio y la alberca quedan hasta abajo de la foto — bottom evita
@@ -1382,6 +1420,7 @@ export const developments: Development[] = [
     brand: 'Onix Living',
     city: 'Cancún',
     zone: 'Av. Huayacán',
+    zoneEn: 'Huayacán Ave.',
     type: 'Lotes',
     intent: ['invertir'],
     status: 'Preventa',
@@ -1392,8 +1431,11 @@ export const developments: Development[] = [
     badge: 'Preventa',
     propertyType: 'Lote Residencial',
     priceLabel: 'Desde $1,750,000 MXN',
+    priceLabelEn: 'From $1,750,000 MXN',
     description:
       'Comunidad residencial sobre Av. Huayacán con 604 lotes unifamiliares, casa club y áreas deportivas, en una de las zonas de mayor plusvalía de Cancún.',
+    descriptionEn:
+      'A residential community on Huayacán Ave. with 604 single-family lots, a clubhouse and sports areas, in one of Cancún\'s highest-value areas.',
     // ── Capa de ficha (contenido tomado de zienna.mx) ──
     heroRender: '/desarrollos/zienna/portadazienna.jpg', // misma foto que el card
     // La foto tiene mucho cielo vacío arriba; el acceso/portada (lo importante)
@@ -1483,6 +1525,7 @@ export const developments: Development[] = [
     brand: 'Onix Living',
     city: 'Cancún',
     zone: 'Av. Huayacán',
+    zoneEn: 'Huayacán Ave.',
     type: 'Residencial',
     intent: ['vivir', 'invertir'],
     status: 'Preventa',
@@ -1493,8 +1536,11 @@ export const developments: Development[] = [
     badge: 'Preventa',
     propertyType: 'Departamento',
     priceLabel: 'Desde $3,769,588.03 MXN',
+    priceLabelEn: 'From $3,769,588.03 MXN',
     description:
       'Departamentos de 2 y 3 recámaras dentro de Zienna Residencial, sobre Av. Huayacán, la zona con mayor plusvalía y crecimiento inmobiliario de Cancún.',
+    descriptionEn:
+      '2 and 3-bedroom apartments inside Zienna Residencial, on Huayacán Ave., Cancún\'s highest-value, fastest-growing real estate area.',
   },
 
   // ── SALES PARTNER · Urban Homes ──
@@ -1506,6 +1552,7 @@ export const developments: Development[] = [
     brand: 'Urban Homes',
     city: 'Cancún',
     zone: 'Av. Huayacán',
+    zoneEn: 'Huayacán Ave.',
     type: 'Residencial',
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
@@ -1516,8 +1563,11 @@ export const developments: Development[] = [
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
     priceLabel: 'Desde $2,595,000 MXN',
+    priceLabelEn: 'From $2,595,000 MXN',
     description:
       'Departamentos de lujo de 2 y 3 recámaras sobre Av. Huayacán, dentro de la exclusiva comunidad Gran Vía, en una zona de alta plusvalía de Cancún.',
+    descriptionEn:
+      'Luxury 2 and 3-bedroom apartments on Huayacán Ave., inside the exclusive Gran Vía community, in a high-value area of Cancún.',
     // ── Capa de ficha ──
     heroRender: '/desarrollos/Valmira/galeria-valmira/VistaDesarrollo.jpg',
     heroLogoScale: 0.7,
@@ -1608,8 +1658,11 @@ export const developments: Development[] = [
     badge: 'Preventa',
     propertyType: 'Departamento',
     priceLabel: 'Desde $14,800,000 MXN',
+    priceLabelEn: 'From $14,800,000 MXN',
     description:
       'Condominios exclusivos frente a la marina de Puerto Cancún, con amenidades de primer nivel en la zona residencial más cotizada del Caribe mexicano.',
+    descriptionEn:
+      'Exclusive condominiums facing the Puerto Cancún marina, with first-class amenities in the most sought-after residential area of the Mexican Caribbean.',
   },
   {
     slug: 'la-selva-urban',
@@ -1629,8 +1682,11 @@ export const developments: Development[] = [
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
     priceLabel: 'Desde $2,244,000 MXN',
+    priceLabelEn: 'From $2,244,000 MXN',
     description:
       'Departamentos de entrega inmediata de 2 y 3 recámaras en el corazón de la Riviera Maya, con amenidades de excepción y diseño contemporáneo de autor.',
+    descriptionEn:
+      'Ready-to-move-in 2 and 3-bedroom apartments in the heart of the Riviera Maya, with exceptional amenities and signature contemporary design.',
   },
   {
     slug: 'sanam-urban',
@@ -1649,8 +1705,11 @@ export const developments: Development[] = [
     badge: 'Preventa',
     propertyType: 'Departamento',
     priceLabel: 'Desde $2,925,000 MXN',
+    priceLabelEn: 'From $2,925,000 MXN',
     description:
       'Departamentos de 2 y 3 recámaras en una comunidad privada en el corazón de Tulum, a diez minutos de la playa, entre naturaleza, diseño y confort.',
+    descriptionEn:
+      '2 and 3-bedroom apartments in a private community in the heart of Tulum, ten minutes from the beach, amid nature, design and comfort.',
   },
   {
     slug: 'blume-urban',
@@ -1669,8 +1728,11 @@ export const developments: Development[] = [
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
     priceLabel: 'Desde $19,256,000 MXN',
+    priceLabelEn: 'From $19,256,000 MXN',
     description:
       'Condominios de lujo de 2 y 3 recámaras en Puerto Cancún, con marina propia y amenidades únicas, en el enclave residencial más exclusivo de Cancún.',
+    descriptionEn:
+      'Luxury 2 and 3-bedroom condominiums in Puerto Cancún, with a private marina and unique amenities, in Cancún\'s most exclusive residential enclave.',
     // ── Capa de ficha (contenido tomado de blumeboutiquecondos.com) ──
     heroRender: '/desarrollos/Blume/BLUME-Arquitectura-1.jpg', // misma foto que el card
     tagline: { es: 'Un lugar donde el lujo se fusiona con la belleza natural de Cancún' },
@@ -1766,8 +1828,11 @@ export const developments: Development[] = [
     propertyType: 'Departamento',
     comingSoon: true,
     priceLabel: 'Desde $9,999,999 MXN',
+    priceLabelEn: 'From $9,999,999 MXN',
     description:
       'Departamentos de lujo a unos pasos del mar Caribe y de la célebre Quinta Avenida de Playa del Carmen. Muy pronto revelaremos todos los detalles.',
+    descriptionEn:
+      'Luxury apartments steps from the Caribbean Sea and Playa del Carmen\'s famous Fifth Avenue. Full details coming soon.',
   },
 ];
 

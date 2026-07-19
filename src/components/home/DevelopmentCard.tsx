@@ -39,7 +39,7 @@ export default function DevelopmentCard({
   forceDriveLink?: boolean;
 }) {
   const isEs = useLocale() !== 'en';
-  const price = dev.priceLabel ?? formatPrice(dev, isEs);
+  const price = (isEs ? dev.priceLabel : dev.priceLabelEn ?? dev.priceLabel) ?? formatPrice(dev, isEs);
   // `brand` es un override opcional; la fuente de verdad del nombre del
   // desarrollador es SIEMPRE el registro `developers` (resuelto por
   // `dev.developer`) — nunca un default fijo a "Tresor Real Estate", que
@@ -52,7 +52,9 @@ export default function DevelopmentCard({
   const driveSlug = dev.href.startsWith('/desarrollos/') ? dev.href.slice('/desarrollos/'.length) : null;
   const badgeRaw = dev.badge ?? dev.status;
   const badge = isEs ? badgeRaw : (STATUS_LABEL_EN[badgeRaw] ?? badgeRaw);
-  const location = dev.phases ?? `${dev.zone ? `${dev.zone}, ` : ''}${dev.city}`;
+  const zone = (isEs ? dev.zone : dev.zoneEn ?? dev.zone);
+  const location = dev.phases ?? `${zone ? `${zone}, ` : ''}${dev.city}`;
+  const description = isEs ? dev.description : dev.descriptionEn ?? dev.description;
   // Ícono según propertyType; fallback al type amplio si aún no está definido.
   const TypeIcon = dev.propertyType
     ? PROPERTY_ICONS[dev.propertyType]
@@ -127,9 +129,9 @@ export default function DevelopmentCard({
               )}
             </span>
           )}
-          {dev.description && (
+          {description && (
             <p className={`mt-2 text-[13px] font-light leading-relaxed ${dark ? 'text-white/70' : 'text-ink-2'}`}>
-              {dev.description}
+              {description}
             </p>
           )}
           <div className="flex flex-wrap items-center gap-x-5 gap-y-3 pt-5">
