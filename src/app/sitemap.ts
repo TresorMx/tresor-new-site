@@ -66,6 +66,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const blogSlugs = [
+    'donde-comprar-departamento-en-cancun',
     'desarrollos-inmobiliarios-en-cancun',
     'como-invertir-en-locales-comerciales-en-cancun',
     'cuanto-cuesta-un-local-comercial-en-cancun',

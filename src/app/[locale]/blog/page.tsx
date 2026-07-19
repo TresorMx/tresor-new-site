@@ -26,6 +26,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    slug: 'donde-comprar-departamento-en-cancun',
+    title: 'Zona Hotelera vs. Puerto Cancún vs. Av. Huayacán: ¿Dónde Comprar Departamento en Cancún?',
+    description:
+      'Comparamos las tres zonas donde hoy se concentra la oferta de departamentos en Cancún: precios, perfil de comprador, plusvalía y desarrollos activos en cada una.',
+    image: '/desarrollos/villalta/portada3.jpg',
+    readTime: '9 min',
+    date: '19 de julio de 2026',
+  },
+  {
     slug: 'desarrollos-inmobiliarios-en-cancun',
     title: 'Desarrollos Inmobiliarios en Cancún 2026: Guía Completa y Proyectos Destacados',
     description:
