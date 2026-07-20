@@ -24,6 +24,22 @@ const nextConfig = {
           { key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=(self)' },
         ],
       },
+      // /drive/* se embebe como iframe dentro de GoHighLevel (crm.tresor.mx)
+      // — los navegadores modernos ignoran X-Frame-Options: DENY (arriba)
+      // cuando hay una directiva frame-ancestors de CSP, así que basta con
+      // agregarla aquí sin tocar la regla global del resto del sitio.
+      {
+        source: '/drive/:path*',
+        headers: [
+          { key: 'Content-Security-Policy', value: "frame-ancestors 'self' https://crm.tresor.mx" },
+        ],
+      },
+      {
+        source: '/en/drive/:path*',
+        headers: [
+          { key: 'Content-Security-Policy', value: "frame-ancestors 'self' https://crm.tresor.mx" },
+        ],
+      },
     ];
   },
   async redirects() {
