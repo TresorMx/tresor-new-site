@@ -63,7 +63,7 @@ export default function ArticlePage() {
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10">
           <div className="container-wrap">
             <p className="eyebrow eyebrow-accent mb-3">Guía del Comprador</p>
-            <h1 className="font-serif italic text-3xl md:text-5xl text-white max-w-3xl leading-tight">
+            <h1 className="h-display text-[clamp(28px,4.5vw,52px)] text-white max-w-3xl leading-tight">
               Guía para Comprar en Preventa en Cancún: Todo lo que Debes Saber
             </h1>
             <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
@@ -99,7 +99,7 @@ export default function ArticlePage() {
             En esta guía te explicamos todo el proceso de compra en preventa, desde la selección del proyecto hasta la escrituración, incluyendo un checklist completo y las 10 preguntas que debes hacerle a cualquier desarrollador.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Qué es la preventa y por qué conviene?
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -118,7 +118,7 @@ export default function ArticlePage() {
             En el mercado actual de Cancún, proyectos como <Link href="/locales-comerciales-cancun" className="text-accent hover:underline">Quattro Plaza Center</Link> ofrecen exactamente estas condiciones: precios desde $1,968,600 MXN + IVA con enganche desde $147,000 MXN.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Los riesgos reales de comprar en preventa y cómo mitigarlos
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -153,7 +153,7 @@ export default function ArticlePage() {
             Nunca firmes un contrato de preventa sin revisión legal independiente. Los puntos clave a revisar: cláusulas de entrega y penalidades por retraso, especificaciones técnicas prometidas, condiciones de escrituración y qué pasa si el proyecto no se concluye.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Documentos que debes pedir al desarrollador
           </h2>
           <ol className="space-y-4 mb-10 text-ink-2">
@@ -176,7 +176,7 @@ export default function ArticlePage() {
             ))}
           </ol>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             10 preguntas que debes hacerle al desarrollador
           </h2>
           <div className="space-y-4 mb-10">
@@ -199,7 +199,7 @@ export default function ArticlePage() {
             ))}
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             El proceso de compra en preventa paso a paso
           </h2>
           <ol className="space-y-6 mb-8">
@@ -222,7 +222,7 @@ export default function ArticlePage() {
             ))}
           </ol>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Preventa en Cancún 2026: las oportunidades disponibles
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -255,7 +255,7 @@ export default function ArticlePage() {
             </div>
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Conclusión: la preventa es para el inversionista informado
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -266,7 +266,7 @@ export default function ArticlePage() {
           </p>
 
           {/* Related articles */}
-          <h2 className="font-serif italic text-2xl text-ink mt-16 mb-6">Artículos relacionados</h2>
+          <h2 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal leading-[1.05] tracking-tight text-ink mt-16 mb-6">Artículos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
             {[
               { slug: 'como-invertir-en-locales-comerciales-en-cancun', title: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa', img: '/blog/AdobeStock_663402090.jpeg' },

@@ -64,7 +64,7 @@ export default function ArticlePage() {
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10">
           <div className="container-wrap">
             <p className="eyebrow eyebrow-accent mb-3">Inversión Inmobiliaria</p>
-            <h1 className="font-serif italic text-3xl md:text-5xl text-white max-w-3xl leading-tight">
+            <h1 className="h-display text-[clamp(28px,4.5vw,52px)] text-white max-w-3xl leading-tight">
               Cómo Invertir en Locales Comerciales en Cancún: Guía Completa 2026
             </h1>
             <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
@@ -100,7 +100,7 @@ export default function ArticlePage() {
             En esta guía te explicamos todo: desde cómo evaluar una oportunidad de inversión hasta qué preguntar antes de firmar un contrato, pasando por las zonas con mayor potencial y el tipo de locales que generan mejor retorno.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Por qué invertir en locales comerciales en Cancún en 2026?
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -113,7 +113,7 @@ export default function ArticlePage() {
             Además, la plusvalía histórica en corredores comerciales consolidados de Cancún ha superado el 15% anual en los últimos cinco años, impulsada por la escasez de suelo disponible y la presión de la demanda.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Tipos de inversión en locales comerciales
           </h2>
           <h3 className="font-sans font-semibold text-xl text-ink mt-8 mb-4">
@@ -146,7 +146,7 @@ export default function ArticlePage() {
             Si quieres profundizar en este tema, lee nuestra <Link href="/blog/guia-comprar-en-preventa-cancun" className="text-accent hover:underline">Guía para Comprar en Preventa en Cancún</Link>.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Factores clave para evaluar una inversión en local comercial
           </h2>
 
@@ -178,7 +178,7 @@ export default function ArticlePage() {
             Para calcular el retorno de tu inversión, divide la renta anual entre el precio de compra. Un local de $2,000,000 MXN que rentas en $18,000/mes genera $216,000 al año, un rendimiento del 10.8% bruto. A esto suma la plusvalía anual esperada (mínimo 8–12% en zonas consolidadas de Cancún) y obtienes un retorno total muy superior al de cualquier instrumento financiero tradicional.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Pasos para invertir en un local comercial en Cancún
           </h2>
           <ol className="space-y-6 mb-8">
@@ -199,7 +199,7 @@ export default function ArticlePage() {
             ))}
           </ol>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Las mejores zonas para invertir en locales comerciales en Cancún
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -212,7 +212,7 @@ export default function ArticlePage() {
             <li className="flex gap-2"><span className="text-accent font-bold">→</span> <span><strong>Plazas ancla consolidadas:</strong> Dentro de plazas con afluencia probada y mezcla de giros complementarios.</span></li>
           </ul>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Local comercial o departamento? La comparación que importa
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -222,7 +222,7 @@ export default function ArticlePage() {
             En síntesis: los locales generan rentas más altas como porcentaje del valor del inmueble, los contratos son más largos (mínimo 2–3 años) y los inquilinos comerciales suelen cuidar mejor el espacio que los residenciales.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Quattro Plaza Center: inversión real en Cancún
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -236,7 +236,7 @@ export default function ArticlePage() {
             Ambos proyectos están diseñados para maximizar el tráfico peatonal, con una mezcla de giros complementarios y financiamiento accesible desde $147,000 MXN de enganche.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Conclusión: 2026 es el año para invertir
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -247,7 +247,7 @@ export default function ArticlePage() {
           </p>
 
           {/* Related articles */}
-          <h2 className="font-serif italic text-2xl text-ink mt-16 mb-6">Artículos relacionados</h2>
+          <h2 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal leading-[1.05] tracking-tight text-ink mt-16 mb-6">Artículos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
             {[
               { slug: 'cuanto-cuesta-un-local-comercial-en-cancun', title: '¿Cuánto Cuesta un Local Comercial en Cancún en 2026?', img: '/blog/AdobeStock_664567241.jpeg' },

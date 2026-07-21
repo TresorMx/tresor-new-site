@@ -70,7 +70,7 @@ export default function ArticlePage() {
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10">
           <div className="container-wrap">
             <p className="eyebrow eyebrow-accent mb-3">Precios y Mercado</p>
-            <h1 className="font-serif italic text-3xl md:text-5xl text-white max-w-3xl leading-tight">
+            <h1 className="h-display text-[clamp(28px,4.5vw,52px)] text-white max-w-3xl leading-tight">
               ¿Cuánto Cuesta un Local Comercial en Cancún en 2026?
             </h1>
             <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
@@ -106,7 +106,7 @@ export default function ArticlePage() {
             En este artículo desglosamos los precios reales del mercado, los factores que los determinan y cómo saber si lo que estás mirando es un buen precio o no.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Precio por m² de locales comerciales en Cancún por zona
           </h2>
           <p className="text-ink-2 leading-relaxed mb-6">
@@ -136,7 +136,7 @@ export default function ArticlePage() {
             </table>
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Qué factores determinan el precio de un local comercial?
           </h2>
 
@@ -175,7 +175,7 @@ export default function ArticlePage() {
             Comprar en preventa puede significar un ahorro de 20–35% frente al precio de mercado una vez que el proyecto está terminado y en operación. Sin embargo, implica esperar el tiempo de construcción. Para quien no necesita el local de forma inmediata, la preventa es la opción con mayor potencial de plusvalía. Aprende más sobre esto en nuestra <Link href="/blog/guia-comprar-en-preventa-cancun" className="text-accent hover:underline">Guía para Comprar en Preventa en Cancún</Link>.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Ejemplos de precios reales en 2026
           </h2>
           <p className="text-ink-2 leading-relaxed mb-6">
@@ -203,7 +203,7 @@ export default function ArticlePage() {
             * Precios vigentes a junio 2026. Sujetos a cambio según disponibilidad.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Cómo saber si el precio que te ofrecen es justo?
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -217,7 +217,7 @@ export default function ArticlePage() {
             <li className="flex gap-2"><span className="text-accent font-bold">→</span> <span>Condiciones de pago: enganche, mensualidades, precio de lista vs. descuento de contado</span></li>
           </ul>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Financiamiento: cuánto necesitas para entrar
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -232,7 +232,7 @@ export default function ArticlePage() {
             <li className="flex gap-2"><span className="text-accent font-bold">→</span> <span><strong>Pago de contado:</strong> Generalmente obtiene descuentos adicionales de 5–10%.</span></li>
           </ul>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Conclusión: el precio es solo el principio
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -243,7 +243,7 @@ export default function ArticlePage() {
           </p>
 
           {/* Related articles */}
-          <h2 className="font-serif italic text-2xl text-ink mt-16 mb-6">Artículos relacionados</h2>
+          <h2 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal leading-[1.05] tracking-tight text-ink mt-16 mb-6">Artículos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
             {[
               { slug: 'como-invertir-en-locales-comerciales-en-cancun', title: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa 2026', img: '/blog/AdobeStock_663402090.jpeg' },

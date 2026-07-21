@@ -167,7 +167,7 @@ export default function ArticlePage() {
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10">
           <div className="container-wrap">
             <p className="eyebrow eyebrow-accent mb-3">Panorama del Mercado</p>
-            <h1 className="font-serif italic text-3xl md:text-5xl text-white max-w-3xl leading-tight">
+            <h1 className="h-display text-[clamp(28px,4.5vw,52px)] text-white max-w-3xl leading-tight">
               Desarrollos Inmobiliarios en Cancún 2026: Guía Completa y Proyectos Destacados
             </h1>
             <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
@@ -203,7 +203,7 @@ export default function ArticlePage() {
             En esta guía reunimos el panorama completo: por qué Cancún sigue siendo un destino de inversión sólido, qué tipos de desarrollos existen, en qué zonas conviene mirar, y un repaso a fondo de los proyectos activos de Tresor Real Estate y sus desarrolladores aliados — Quattro Plaza Center, Live Desarrollos, Onix Living y Urban Homes.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Por qué Cancún sigue siendo un mercado fuerte para desarrollos inmobiliarios?
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -218,7 +218,7 @@ export default function ArticlePage() {
             El resultado es una plusvalía consistente: zonas de expansión reciente en Cancún han registrado incrementos de valor de entre 10% y 15% anual en los últimos ciclos, con los desarrollos en preventa capturando la mayor parte de esa ganancia antes incluso de la entrega.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Tipos de desarrollos inmobiliarios en Cancún
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -238,7 +238,7 @@ export default function ArticlePage() {
             ))}
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Las mejores zonas de Cancún para invertir en desarrollos inmobiliarios
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -257,7 +257,7 @@ export default function ArticlePage() {
             <Link href="/tulum" className="text-accent hover:underline">Tulum</Link>.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Desarrollos inmobiliarios destacados en Cancún 2026
           </h2>
           <p className="text-ink-2 leading-relaxed mb-8">
@@ -296,7 +296,7 @@ export default function ArticlePage() {
             <Link href="/desarrollo" className="text-accent hover:underline">nuestra sección de desarrollos</Link>.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Cómo elegir el desarrollo correcto para tu inversión
           </h2>
           <ol className="space-y-6 mb-8">
@@ -317,7 +317,7 @@ export default function ArticlePage() {
             ))}
           </ol>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Preguntas frecuentes sobre desarrollos inmobiliarios en Cancún
           </h2>
           <div className="space-y-4 mb-10">
@@ -334,7 +334,7 @@ export default function ArticlePage() {
             ))}
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Por qué invertir en desarrollos inmobiliarios en Cancún con Tresor Real Estate
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -347,7 +347,7 @@ export default function ArticlePage() {
             <Link href="/blog/cuanto-cuesta-un-local-comercial-en-cancun" className="text-accent hover:underline">precios de locales comerciales en 2026</Link>.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Conclusión
           </h2>
           <p className="text-ink-2 leading-relaxed mb-8">
@@ -355,7 +355,7 @@ export default function ArticlePage() {
           </p>
 
           {/* Related articles */}
-          <h2 className="font-serif italic text-2xl text-ink mt-16 mb-6">Artículos relacionados</h2>
+          <h2 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal leading-[1.05] tracking-tight text-ink mt-16 mb-6">Artículos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
             {[
               { slug: 'como-invertir-en-locales-comerciales-en-cancun', title: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa', img: '/blog/AdobeStock_663402090.jpeg' },
@@ -375,7 +375,16 @@ export default function ArticlePage() {
 
       <div className="px-6">
         <div className="max-w-3xl mx-auto">
-          <BlogCTA title="Conoce el portafolio completo de desarrollos en Cancún" />
+          <BlogCTA
+            eyebrow="Tresor Real Estate"
+            title="Conoce el portafolio completo de desarrollos en Cancún"
+            subtitle="Habla con un asesor hoy. Comerciales, residenciales y lotes en las zonas de mayor crecimiento de Cancún."
+            image="/renders/gardens/03.jpg"
+            imageAlt="Portafolio de desarrollos Tresor Real Estate en Cancún"
+            primaryHref="/desarrollo"
+            primaryLabel="Ver todos los desarrollos"
+            whatsappMessage="Hola, me interesa conocer el portafolio de desarrollos en Cancún"
+          />
         </div>
       </div>
     </>

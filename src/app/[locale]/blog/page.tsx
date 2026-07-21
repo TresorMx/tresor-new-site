@@ -1,24 +1,25 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import Link from 'next/link';
+import BlogArticlesGrid from '@/components/blog/BlogArticlesGrid';
 
 export const metadata: Metadata = {
-  title: 'Guía de Inversión en Locales Comerciales en Cancún',
+  title: 'Blog Tresor Real Estate — Inversión Inmobiliaria en Cancún y la Riviera Maya',
   description:
-    'Artículos, análisis y guías para invertir con éxito en locales comerciales en Cancún. Aprende sobre precios, zonas, preventa y más.',
+    'Artículos, análisis y guías para invertir con éxito en Cancún y la Riviera Maya: departamentos, locales comerciales, lotes residenciales y preventa.',
   keywords: [
-    'blog locales comerciales cancun',
+    'blog tresor real estate',
     'inversión inmobiliaria cancun',
-    'guia comprar local cancun',
+    'blog inmobiliario cancun',
+    'guia comprar propiedad cancun',
     'locales comerciales cancun 2026',
   ],
   alternates: {
     canonical: 'https://www.tresor.mx/blog',
   },
   openGraph: {
-    title: 'Blog — Guía de Inversión en Locales Comerciales en Cancún',
+    title: 'Blog Tresor Real Estate — Inversión Inmobiliaria en Cancún y la Riviera Maya',
     description:
-      'Artículos expertos sobre inversión en locales comerciales en Cancún: precios, zonas, preventa y análisis del mercado.',
+      'Artículos expertos sobre inversión inmobiliaria en Cancún y la Riviera Maya: precios, zonas, preventa y análisis del mercado.',
     url: 'https://www.tresor.mx/blog',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
@@ -102,7 +103,7 @@ const articles = [
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'ItemList',
-  name: 'Blog — Inversión en Locales Comerciales en Cancún',
+  name: 'Blog — Tresor Real Estate',
   url: 'https://www.tresor.mx/blog',
   itemListElement: articles.map((a, i) => ({
     '@type': 'ListItem',
@@ -120,76 +121,35 @@ export default function BlogPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      {/* Hero */}
-      <section className="bg-ink text-white py-20 overflow-hidden">
-        <div className="container-wrap grid md:grid-cols-[1fr_400px] gap-12 items-center">
-          <div>
-            <p className="eyebrow eyebrow-accent mb-4">Blog</p>
-            <h1 className="font-serif italic text-4xl md:text-5xl lg:text-6xl mb-4 leading-tight">
-              Guía de Inversión en Locales Comerciales en Cancún
-            </h1>
-            <p className="text-white/60 text-lg max-w-xl">
-              Análisis, guías y consejos para tomar mejores decisiones de inversión inmobiliaria en Cancún.
-            </p>
-          </div>
-          {/* collage 2 fotos */}
-          <div className="hidden md:grid grid-cols-2 gap-3 h-64">
-            <div className="relative rounded-xl overflow-hidden">
-              <Image
-                src="/blog/AdobeStock_656227413.jpeg"
-                alt="Inversión inmobiliaria en Cancún"
-                fill sizes="200px"
-                className="object-cover"
-              />
-            </div>
-            <div className="relative rounded-xl overflow-hidden mt-8">
-              <Image
-                src="/blog/AdobeStock_811104407.jpeg"
-                alt="Locales comerciales en Cancún"
-                fill sizes="200px"
-                className="object-cover"
-              />
-            </div>
-          </div>
+      {/* ═════ HERO ═════ */}
+      <section
+        data-nav="dark"
+        className="relative -mt-[72px] overflow-hidden bg-bg-deep text-bg"
+        style={{ height: 'calc(100svh - 104px - 72px)', minHeight: '480px' }}
+      >
+        <div className="absolute inset-0 animate-hero-zoom">
+          <Image
+            src="/blog/AdobeStock_656227413.jpeg"
+            alt="Blog Tresor Real Estate — Inversión inmobiliaria en Cancún"
+            fill
+            priority
+            sizes="100vw"
+            className="scale-105 object-cover"
+          />
+        </div>
+        <div className="absolute inset-0 bg-black/55" />
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
+          <span className="eyebrow eyebrow-accent font-bold">— Blog</span>
+          <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">
+            Blog Tresor Real Estate
+          </h1>
+          <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">
+            Análisis, guías y consejos para invertir con éxito en Cancún, Tulum, Playa del Carmen y Puerto Cancún.
+          </p>
         </div>
       </section>
 
-      {/* Articles grid */}
-      <section className="py-20 px-6">
-        <div className="container-wrap">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {articles.map((article) => (
-              <Link
-                key={article.slug}
-                href={`/blog/${article.slug}`}
-                className="group flex flex-col rounded-2xl overflow-hidden border border-line hover:shadow-xl transition-shadow"
-              >
-                <div className="relative aspect-[16/9] overflow-hidden">
-                  <Image
-                    src={article.image}
-                    alt={article.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  />
-                </div>
-                <div className="p-6 flex flex-col flex-1">
-                  <div className="flex items-center gap-3 text-xs text-ink-3 mb-3">
-                    <span>{article.date}</span>
-                    <span>·</span>
-                    <span>{article.readTime} de lectura</span>
-                  </div>
-                  <h2 className="font-serif italic text-xl text-ink leading-snug mb-3 group-hover:text-accent transition-colors">
-                    {article.title}
-                  </h2>
-                  <p className="text-ink-2 text-sm leading-relaxed flex-1">{article.description}</p>
-                  <span className="mt-4 text-sm font-semibold text-accent">Leer artículo →</span>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <BlogArticlesGrid articles={articles} />
     </>
   );
 }

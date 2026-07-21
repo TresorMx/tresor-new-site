@@ -62,7 +62,7 @@ export default function ArticlePage() {
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10">
           <div className="container-wrap">
             <p className="eyebrow eyebrow-accent mb-3">Zonas y Ubicaciones</p>
-            <h1 className="font-serif italic text-3xl md:text-5xl text-white max-w-3xl leading-tight">
+            <h1 className="h-display text-[clamp(28px,4.5vw,52px)] text-white max-w-3xl leading-tight">
               Las Mejores Zonas para Poner un Negocio en Cancún
             </h1>
             <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
@@ -98,7 +98,7 @@ export default function ArticlePage() {
             En este artículo analizamos las principales zonas donde poner un negocio en Cancún, sus ventajas y desventajas, el tipo de cliente que captan y el rango de precios de locales en cada una.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             La Zona Hotelera: el corredor turístico premium
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -114,7 +114,7 @@ export default function ArticlePage() {
             <strong>Ideal para:</strong> marcas establecidas con modelo probado y capacidad de pagar rentas altas desde el primer mes.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Av. Tulum y Av. Kabah: el corazón comercial de la ciudad
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -130,7 +130,7 @@ export default function ArticlePage() {
             <strong>Ideal para:</strong> inversionistas que buscan flujo de caja estable y riesgo bajo, así como negocios orientados al mercado local con demanda recurrente.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Supermanzanas 59–70: la zona residencial en auge
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -146,7 +146,7 @@ export default function ArticlePage() {
             Proyectos como <Link href="/desarrollos/gardens" className="text-accent hover:underline">Quattro Plaza Center Gardens</Link> están estratégicamente ubicados para capturar este mercado residencial en crecimiento, con diseño de plaza que genera tráfico propio.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Av. Huayacán: zona consolidada de alta densidad residencial
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -159,7 +159,7 @@ export default function ArticlePage() {
             <strong>Por qué invertir aquí:</strong> alta densidad poblacional ya consolidada, demanda de servicios comprobada y precios de local todavía por debajo de los corredores del centro. Es una de las zonas con mejor relación precio-demanda de Cancún hoy.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Plazas comerciales: la ubicación dentro de la ubicación
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -172,7 +172,7 @@ export default function ArticlePage() {
             Para comparar las opciones disponibles en Cancún, visita <Link href="/locales-comerciales-cancun" className="text-accent hover:underline">nuestra página de locales comerciales</Link>.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Qué zona elegir según tu tipo de negocio?
           </h2>
           <div className="space-y-4 mb-10">
@@ -192,7 +192,7 @@ export default function ArticlePage() {
             ))}
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Errores comunes al elegir una zona en Cancún
           </h2>
           <ul className="space-y-3 mb-8 text-ink-2">
@@ -202,7 +202,7 @@ export default function ArticlePage() {
             <li className="flex gap-2"><span className="text-accent font-bold">→</span> <span><strong>No considerar el crecimiento futuro:</strong> Las zonas que parecen "vacías" hoy pueden ser las más saturadas en 3 años.</span></li>
           </ul>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Conclusión: la zona correcta multiplica tus posibilidades de éxito
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -213,7 +213,7 @@ export default function ArticlePage() {
           </p>
 
           {/* Related articles */}
-          <h2 className="font-serif italic text-2xl text-ink mt-16 mb-6">Artículos relacionados</h2>
+          <h2 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal leading-[1.05] tracking-tight text-ink mt-16 mb-6">Artículos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
             {[
               { slug: 'como-invertir-en-locales-comerciales-en-cancun', title: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa', img: '/blog/AdobeStock_663402090.jpeg' },

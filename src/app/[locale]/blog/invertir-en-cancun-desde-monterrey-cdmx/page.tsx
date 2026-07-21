@@ -71,7 +71,7 @@ export default function ArticlePage() {
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10">
           <div className="container-wrap">
             <p className="eyebrow eyebrow-accent mb-3">Inversión desde el Norte</p>
-            <h1 className="font-serif italic text-3xl md:text-5xl text-white max-w-3xl leading-tight">
+            <h1 className="h-display text-[clamp(28px,4.5vw,52px)] text-white max-w-3xl leading-tight">
               Por Qué Invertir en Cancún desde Monterrey, CDMX o Guadalajara
             </h1>
             <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
@@ -107,7 +107,7 @@ export default function ArticlePage() {
             Ese mercado es Cancún. Y no estamos hablando del Cancún turístico de la Zona Hotelera: hablamos de los corredores comerciales donde vive y consume más de un millón de residentes permanentes, con una demanda de locales comerciales que supera con creces la oferta disponible.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             El problema de invertir en tu propia ciudad
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -117,7 +117,7 @@ export default function ArticlePage() {
             Cancún tiene la ecuación inversa: precios de entrada bajos, rentas altas en relación al valor del inmueble y una plusvalía histórica que ha superado el 12% anual en los últimos cinco años. Es el mercado que Monterrey y CDMX fueron hace 20 años.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Comparativa: rendimientos por ciudad
           </h2>
           <p className="text-ink-2 leading-relaxed mb-6">
@@ -151,7 +151,7 @@ export default function ArticlePage() {
             Fuente: estimaciones de mercado basadas en datos de Lamudi, Inmuebles24 y operaciones propias de Tresor Real Estate. 2025–2026.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Por qué Cancún crece más rápido que tu ciudad?
           </h2>
 
@@ -183,7 +183,7 @@ export default function ArticlePage() {
             La conectividad de Cancún con Mérida, Playa del Carmen, Tulum y la Riviera Maya a través del Tren Maya amplía el radio de influencia económica de la ciudad. Los inversionistas que entran hoy están comprando antes de que ese efecto se refleje plenamente en los precios.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Se puede invertir en Cancún sin vivir allá?
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -211,7 +211,7 @@ export default function ArticlePage() {
             ))}
           </ol>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Y quién administra el local cuando no estoy?
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -221,7 +221,7 @@ export default function ArticlePage() {
             Con ese modelo, un local en <Link href="/desarrollos/gardens" className="text-accent hover:underline">Quattro Plaza Center Gardens</Link> puede generar flujo de caja positivo desde el primer mes de operación, completamente remoto desde tu ciudad.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             El argumento financiero en números concretos
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -257,7 +257,7 @@ export default function ArticlePage() {
             ))}
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Quattro Plaza Center: la opción concreta para el inversionista foráneo
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -271,7 +271,7 @@ export default function ArticlePage() {
             Enganche desde $147,000 MXN y mensualidades sin intereses durante la obra. Un asesor te atiende por Zoom, WhatsApp o presencialmente si decides hacer la visita.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             La ventana de oportunidad se cierra
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -282,7 +282,7 @@ export default function ArticlePage() {
           </p>
 
           {/* Related articles */}
-          <h2 className="font-serif italic text-2xl text-ink mt-16 mb-6">Artículos relacionados</h2>
+          <h2 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal leading-[1.05] tracking-tight text-ink mt-16 mb-6">Artículos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
             {[
               { slug: 'como-invertir-en-locales-comerciales-en-cancun', title: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa 2026', img: '/blog/AdobeStock_663402090.jpeg' },

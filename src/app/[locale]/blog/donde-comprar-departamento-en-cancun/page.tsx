@@ -65,7 +65,7 @@ export default function ArticlePage() {
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10">
           <div className="container-wrap">
             <p className="eyebrow eyebrow-accent mb-3">Comparativa de Zonas</p>
-            <h1 className="font-serif italic text-3xl md:text-5xl text-white max-w-3xl leading-tight">
+            <h1 className="h-display text-[clamp(28px,4.5vw,52px)] text-white max-w-3xl leading-tight">
               Zona Hotelera vs. Puerto Cancún vs. Av. Huayacán: ¿Dónde Comprar Departamento en Cancún?
             </h1>
             <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
@@ -101,7 +101,7 @@ export default function ArticlePage() {
             En esta guía comparamos las tres con datos reales de precio, plusvalía y desarrollos activos, para que elijas con criterio y no solo por el render más bonito.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Comparativa rápida
           </h2>
           <div className="overflow-x-auto mb-10 -mx-6 px-6 md:mx-0 md:px-0">
@@ -137,7 +137,7 @@ export default function ArticlePage() {
             </table>
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Zona Hotelera: inventario limitado, plusvalía sostenida
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -155,7 +155,7 @@ export default function ArticlePage() {
             </ul>
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Puerto Cancún: el segmento de lujo con marina propia
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -173,7 +173,7 @@ export default function ArticlePage() {
             </ul>
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Av. Huayacán: la zona de mayor crecimiento y mayor oferta
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -226,7 +226,7 @@ export default function ArticlePage() {
             </div>
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Cómo decidir según tu objetivo
           </h2>
           <div className="space-y-4 mb-10">
@@ -243,7 +243,7 @@ export default function ArticlePage() {
             ))}
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Preguntas frecuentes
           </h2>
           <div className="space-y-4 mb-10">
@@ -259,7 +259,7 @@ export default function ArticlePage() {
             ))}
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Conclusión
           </h2>
           <p className="text-ink-2 leading-relaxed mb-8">
@@ -269,7 +269,7 @@ export default function ArticlePage() {
           </p>
 
           {/* Related articles */}
-          <h2 className="font-serif italic text-2xl text-ink mt-16 mb-6">Artículos relacionados</h2>
+          <h2 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal leading-[1.05] tracking-tight text-ink mt-16 mb-6">Artículos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
             {[
               { slug: 'desarrollos-inmobiliarios-en-cancun', title: 'Desarrollos Inmobiliarios en Cancún 2026: Guía Completa y Proyectos Destacados', img: '/renders/long-island/01.jpg' },
@@ -289,7 +289,16 @@ export default function ArticlePage() {
 
       <div className="px-6">
         <div className="max-w-3xl mx-auto">
-          <BlogCTA title="Compara zonas y encuentra tu departamento ideal en Cancún" />
+          <BlogCTA
+            eyebrow="Tresor Real Estate"
+            title="Compara zonas y encuentra tu departamento ideal en Cancún"
+            subtitle="Habla con un asesor hoy. Departamentos en Zona Hotelera, Puerto Cancún y Av. Huayacán."
+            image="/desarrollos/villalta/portada3.jpg"
+            imageAlt="Departamentos en Cancún — Villalta Laguna"
+            primaryHref="/cancun"
+            primaryLabel="Ver catálogo de departamentos"
+            whatsappMessage="Hola, me interesa un departamento en Cancún"
+          />
         </div>
       </div>
     </>

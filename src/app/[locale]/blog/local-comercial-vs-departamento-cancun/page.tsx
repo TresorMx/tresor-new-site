@@ -73,7 +73,7 @@ export default function ArticlePage() {
         <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10">
           <div className="container-wrap">
             <p className="eyebrow eyebrow-accent mb-3">Análisis de Inversión</p>
-            <h1 className="font-serif italic text-3xl md:text-5xl text-white max-w-3xl leading-tight">
+            <h1 className="h-display text-[clamp(28px,4.5vw,52px)] text-white max-w-3xl leading-tight">
               Local Comercial vs Departamento en Cancún: ¿Qué Conviene Más como Inversión?
             </h1>
             <div className="flex items-center gap-4 mt-4 text-white/60 text-sm">
@@ -109,7 +109,7 @@ export default function ArticlePage() {
             En este análisis comparamos ambas opciones de forma objetiva, con datos reales del mercado de Cancún en 2026.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Tabla comparativa: local comercial vs departamento en Cancún
           </h2>
           <div className="overflow-x-auto mb-10 rounded-xl border border-line">
@@ -133,7 +133,7 @@ export default function ArticlePage() {
             </table>
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Rendimiento por renta: los locales ganan por amplio margen
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -146,7 +146,7 @@ export default function ArticlePage() {
             La diferencia se amplia si consideramos que los contratos comerciales son más largos (2–5 años) y tienen cláusulas de incremento de renta ligadas a la inflación, lo que protege el rendimiento real del inversionista.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Plusvalía: ambos suben, pero los locales más en zonas emergentes
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -159,7 +159,7 @@ export default function ArticlePage() {
             Para entender los precios actuales del mercado de locales, lee nuestro análisis sobre <Link href="/blog/cuanto-cuesta-un-local-comercial-en-cancun" className="text-accent hover:underline">cuánto cuesta un local comercial en Cancún</Link>.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             Gestión del inmueble: locales requieren menos trabajo
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -172,7 +172,7 @@ export default function ArticlePage() {
             Para el inversionista que no quiere pasar horas respondiendo reportes de mantenimiento, el local comercial es la opción de menor estrés operativo.
           </p>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Dónde gana el departamento?
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -185,7 +185,7 @@ export default function ArticlePage() {
             <li className="flex gap-2"><span className="text-accent font-bold">→</span> <span><strong>Uso personal como alternativa:</strong> Si el negocio de renta no funciona, puedes habitarlo tú mismo o prestarlo a familiares.</span></li>
           </ul>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             ¿Para qué perfil de inversionista es cada opción?
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
@@ -213,7 +213,7 @@ export default function ArticlePage() {
             </div>
           </div>
 
-          <h2 className="font-serif italic text-3xl text-ink mt-12 mb-6">
+          <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">
             El veredicto: para inversión pura, el local comercial gana
           </h2>
           <p className="text-ink-2 leading-relaxed mb-4">
@@ -227,7 +227,7 @@ export default function ArticlePage() {
           </p>
 
           {/* Related articles */}
-          <h2 className="font-serif italic text-2xl text-ink mt-16 mb-6">Artículos relacionados</h2>
+          <h2 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal leading-[1.05] tracking-tight text-ink mt-16 mb-6">Artículos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
             {[
               { slug: 'como-invertir-en-locales-comerciales-en-cancun', title: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa', img: '/blog/AdobeStock_663402090.jpeg' },
