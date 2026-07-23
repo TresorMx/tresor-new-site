@@ -185,34 +185,35 @@ export default function ValmiraLanding() {
         <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/45 to-transparent" />
 
         <div className="container-wrap relative z-10 grid items-center gap-9 pb-12 pt-14 md:gap-10 md:py-24 lg:grid-cols-[1.05fr_minmax(340px,430px)] lg:gap-14">
-          {/* copy */}
-          <div className="text-white">
+          {/* copy — en móvil todo centrado; en desktop alineado a la izquierda */}
+          <div className="text-center text-white md:text-left">
+            <p className="eyebrow eyebrow-accent font-bold">Gran Vía, Av. Huayacán</p>
             <Image
               src="/desarrollos/Valmira/logovalmira.svg"
               alt="Valmira"
-              width={200} height={47}
+              width={220} height={52}
               priority
-              className="h-8 w-auto md:h-11"
+              className="mx-auto mt-3 h-14 w-auto md:mx-0 md:mt-4 md:h-12"
             />
             <h1 className="mt-5 h-display text-[clamp(30px,5.2vw,66px)] text-white md:mt-6">
               Departamentos equipados en Cancún con <span className="text-accent">entrega inmediata</span>
             </h1>
 
-            {/* ganchos chips */}
-            <div className="mt-5 flex flex-wrap gap-2 md:mt-6 md:gap-2.5">
+            {/* ganchos chips — una sola línea en móvil (sin ícono para que quepan) */}
+            <div className="mt-5 flex flex-nowrap justify-center gap-1.5 md:mt-6 md:flex-wrap md:justify-start md:gap-2.5">
               {['0% de enganche', 'Totalmente equipado', 'Entrega inmediata'].map((g) => (
-                <span key={g} className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11.5px] font-semibold text-white backdrop-blur-md md:px-3.5 md:text-[12px]">
-                  <Check size={13} strokeWidth={3} className="text-accent" /> {g}
+                <span key={g} className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/20 bg-white/10 px-2.5 py-1.5 text-[10px] font-semibold text-white backdrop-blur-md md:px-3.5 md:text-[12px]">
+                  <Check size={13} strokeWidth={3} className="hidden text-accent md:block" /> {g}
                 </span>
               ))}
             </div>
 
-            <div className="mt-6 flex items-end gap-3 md:mt-7">
+            <div className="mt-6 flex items-end justify-center gap-3 md:mt-7 md:justify-start">
               <span className="text-[12px] font-medium uppercase tracking-caps text-white/60 md:text-[13px]">Desde</span>
               <span className="h-display text-[clamp(24px,3.4vw,40px)] text-white leading-none">$2,595,000 MXN</span>
             </div>
             <p className="mt-2 text-[13px] font-light text-white/70 md:text-[14px]">
-              2 y 3 recámaras · desde 87 m² · Gran Vía, Av. Huayacán
+              2 y 3 recámaras · desde 87 m²
             </p>
           </div>
 
