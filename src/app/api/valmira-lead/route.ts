@@ -36,8 +36,9 @@ interface UTM {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { firstName, phone, tipologia, utm } = body as {
+    const { firstName, email, phone, tipologia, utm } = body as {
       firstName: string;
+      email?: string;
       phone: string;
       tipologia?: string;
       utm?: UTM;
@@ -75,6 +76,7 @@ export async function POST(req: NextRequest) {
       upsertGHLContact({
         firstName: first || firstName,
         lastName: rest.join(' '),
+        ...(email ? { email } : {}),
         phone,
         source: 'agenda',
         tags: ['Tresor Web', 'valmira-urban', 'Valmira Landing', channel],
@@ -87,6 +89,7 @@ export async function POST(req: NextRequest) {
       saveLeadToSanity({
         source: 'form',
         fullName: firstName,
+        ...(email ? { email } : {}),
         phone,
         plazaSlug: 'valmira-urban',
         message: notes,
@@ -107,6 +110,7 @@ export async function POST(req: NextRequest) {
               </div>
               <table style="width:100%;border-collapse:collapse;font-size:14px;">
                 <tr><td style="padding:8px 0;color:#6B6863;">Nombre</td><td style="text-align:right;font-weight:600;">${firstName}</td></tr>
+                <tr><td style="padding:8px 0;color:#6B6863;">Email</td><td style="text-align:right;">${email ? `<a href="mailto:${email}">${email}</a>` : '—'}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Teléfono</td><td style="text-align:right;"><a href="tel:${phone}">${phone}</a></td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Tipología</td><td style="text-align:right;font-weight:600;">${tipologiaLabel ?? '—'}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Canal</td><td style="text-align:right;font-weight:600;">${channel}</td></tr>

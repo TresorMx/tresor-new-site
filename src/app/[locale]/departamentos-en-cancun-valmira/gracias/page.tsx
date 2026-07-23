@@ -22,7 +22,7 @@ export default function ValmiraGracias() {
   return (
     <section className="relative flex min-h-[100svh] items-center justify-center overflow-hidden bg-ink px-6 py-16 text-white">
       <Image
-        src="/desarrollos/Valmira/galeria-valmira/VistaDesarrollo.jpg"
+        src="/desarrollos/Valmira/portadaValmira.jpg"
         alt="Valmira Cancún"
         fill priority sizes="100vw"
         className="object-cover opacity-25"

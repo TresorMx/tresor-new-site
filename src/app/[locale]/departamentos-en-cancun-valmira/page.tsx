@@ -8,6 +8,8 @@ import {
   Plane, Train, MapPin, Check, ChevronDown,
 } from 'lucide-react';
 import Chatbot from '@/components/Chatbot';
+import VirtualTourModal from '@/components/ficha/VirtualTourModal';
+import LocationMap from '@/components/LocationMap';
 
 /* ─────────────── datos reales de Valmira ─────────────── */
 const WA = '529984045602';
@@ -71,8 +73,6 @@ const UBICACION = [
   { icon: MapPin, label: 'Sobre Av. Huayacán, dentro de Gran Vía' },
 ];
 
-const MAP_EMBED = 'https://maps.google.com/maps?q=21.0753984,-86.8860978&z=14&output=embed';
-
 const FAQS = [
   { q: '¿Cuánto cuesta un departamento en Valmira, Cancún?', a: 'Los departamentos en Valmira tienen precio desde $2,595,000 MXN para la tipología de 2 recámaras (87 m²). La tipología de 3 recámaras es de 109 m². Precios y condiciones de pago sujetos a cambio sin previo aviso; un asesor te confirma el precio y plan de pago vigente.' },
   { q: '¿Los departamentos son de entrega inmediata?', a: 'Sí. Valmira es un desarrollo de entrega inmediata: los departamentos están listos para habitar o rentar desde el primer día, sin esperar a que termine la construcción.' },
@@ -128,15 +128,16 @@ function readUTM(): UTM {
 export default function ValmiraLanding() {
   const formRef = useRef<HTMLDivElement>(null);
   const utmRef = useRef<UTM>({});
-  const [form, setForm] = useState({ firstName: '', phone: '', tipologia: '' });
+  const [form, setForm] = useState({ firstName: '', email: '', phone: '', tipologia: '' });
   const [tab, setTab] = useState('2rec');
+  const [tourUrl, setTourUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
 
   useEffect(() => { utmRef.current = readUTM(); }, []);
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
-  const valid = form.firstName.trim() && form.phone.trim();
+  const valid = form.firstName.trim() && form.email.trim() && form.phone.trim();
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
   async function submit(e: React.FormEvent) {
@@ -150,6 +151,7 @@ export default function ValmiraLanding() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           firstName: form.firstName,
+          email: form.email,
           phone: form.phone,
           tipologia: form.tipologia || undefined,
           utm: utmRef.current,
@@ -174,7 +176,7 @@ export default function ValmiraLanding() {
       {/* ═════════ HERO ═════════ */}
       <section className="relative flex min-h-[92svh] items-center overflow-hidden bg-ink">
         <Image
-          src="/desarrollos/Valmira/galeria-valmira/VistaDesarrollo.jpg"
+          src="/desarrollos/Valmira/portadaValmira.jpg"
           alt="Valmira — departamentos en venta en Cancún con entrega inmediata"
           fill priority sizes="100vw"
           className="object-cover"
@@ -185,10 +187,14 @@ export default function ValmiraLanding() {
         <div className="container-wrap relative z-10 grid items-center gap-10 py-24 lg:grid-cols-[1.05fr_minmax(340px,430px)] lg:gap-14">
           {/* copy */}
           <div className="text-white">
-            <div className="flex items-center gap-3">
-              <span className="eyebrow eyebrow-accent font-bold">Urban Homes · Cancún</span>
-            </div>
-            <h1 className="mt-4 h-display text-[clamp(34px,5.2vw,66px)] text-white">
+            <Image
+              src="/desarrollos/Valmira/logovalmira.svg"
+              alt="Valmira"
+              width={200} height={47}
+              priority
+              className="h-9 w-auto md:h-11"
+            />
+            <h1 className="mt-6 h-display text-[clamp(34px,5.2vw,66px)] text-white">
               Departamentos equipados en Cancún con <span className="text-accent">entrega inmediata</span>
             </h1>
 
@@ -235,7 +241,7 @@ export default function ValmiraLanding() {
       </section>
 
       {/* ═════════ GANCHOS STRIP ═════════ */}
-      <section className="bg-bg-soft py-14 md:py-16">
+      <section className="relative z-10 -mt-10 rounded-t-[2.5rem] bg-bg-soft py-14 md:py-16">
         <div className="container-wrap grid grid-cols-2 gap-4 lg:grid-cols-4">
           {GANCHOS.map(({ icon: Icon, label, sub }) => (
             <div key={label} className="flex flex-col items-start gap-3 rounded-[24px] bg-white p-6">
@@ -310,10 +316,10 @@ export default function ValmiraLanding() {
                   Agenda tu visita <ArrowRight size={13} strokeWidth={2.5} />
                 </button>
                 {activeTipo.matterport && (
-                  <a href={activeTipo.matterport} target="_blank" rel="noopener noreferrer"
+                  <button onClick={() => setTourUrl(activeTipo.matterport)}
                     className="inline-flex items-center gap-2 rounded-full border border-ink/15 px-6 py-3 text-[12px] font-bold uppercase tracking-[0.18em] text-ink transition hover:border-ink/40">
                     <Play size={13} strokeWidth={2} className="fill-current" /> Recorrido virtual
-                  </a>
+                  </button>
                 )}
               </div>
             </div>
@@ -352,14 +358,8 @@ export default function ValmiraLanding() {
               ))}
             </ul>
           </div>
-          <div className="relative aspect-[16/11] overflow-hidden rounded-[28px] border border-line bg-white">
-            <iframe
-              src={MAP_EMBED}
-              title="Ubicación de Valmira en Cancún"
-              className="absolute inset-0 h-full w-full"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <div className="overflow-hidden rounded-[28px] border border-line bg-white [&>div]:h-[440px] [&>div]:rounded-none [&>div]:border-0">
+            <LocationMap lat={21.0753984} lng={-86.8860978} zoom={14} address="Gran Vía, Av. Huayacán, Cancún" />
           </div>
         </div>
       </section>
@@ -375,9 +375,10 @@ export default function ValmiraLanding() {
         </div>
       </section>
 
-      {/* ═════════ CTA FINAL ═════════ */}
-      <section className="relative overflow-hidden bg-bg-deep py-24 text-white">
-        <div className="container-wrap relative z-10 text-center">
+      {/* ═════════ CIERRE OSCURO (CTA + footer) — mismo patrón que el Footer del sitio:
+              bloque oscuro que se desliza sobre la sección clara con top redondeado ═════════ */}
+      <footer data-nav="dark" className="relative z-10 -mt-10 overflow-hidden rounded-t-[2.5rem] bg-bg-deep pt-24 text-white">
+        <div className="container-wrap text-center">
           <span className="eyebrow eyebrow-accent font-bold">Entrega inmediata · Unidades limitadas</span>
           <h2 className="mx-auto mt-5 h-display text-[clamp(28px,4vw,56px)] text-white max-w-3xl">
             Tu departamento en Cancún, listo para estrenar
@@ -394,20 +395,19 @@ export default function ValmiraLanding() {
               <MessageCircle size={14} strokeWidth={2} /> WhatsApp
             </a>
           </div>
-        </div>
-      </section>
 
-      {/* ═════════ FOOTER MÍNIMO ═════════ */}
-      <footer className="bg-ink py-10 text-white/50">
-        <div className="container-wrap flex flex-col items-center gap-5 text-center">
-          <Image src="/logos/LogoTresor.svg" alt="Tresor Real Estate" width={130} height={34} className="h-8 w-auto opacity-90" />
-          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px]">
-            <a href="tel:+529984045602" className="inline-flex items-center gap-2 transition hover:text-white"><Phone size={14} /> +52 998 404 5602</a>
-            <a href={waLink('Hola, me interesa Valmira en Cancún.')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-white"><MessageCircle size={14} /> WhatsApp</a>
+          <div className="mx-auto mt-20 h-px w-24" style={{ background: 'linear-gradient(to right, transparent, #FAB413, transparent)' }} />
+
+          <div className="flex flex-col items-center gap-5 pb-12 pt-10">
+            <Image src="/logos/LogoTresor.svg" alt="Tresor Real Estate" width={130} height={34} className="h-8 w-auto opacity-90" />
+            <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-white/60">
+              <a href="tel:+529984045602" className="inline-flex items-center gap-2 transition hover:text-white"><Phone size={14} /> +52 998 404 5602</a>
+              <a href={waLink('Hola, me interesa Valmira en Cancún.')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-white"><MessageCircle size={14} /> WhatsApp</a>
+            </div>
+            <p className="max-w-2xl text-[11px] leading-relaxed text-white/35">
+              Valmira es un desarrollo de Urban Homes; Tresor Real Estate participa como comercializador. Imágenes de carácter ilustrativo. * Precios y condiciones de pago sujetos a cambio sin previo aviso. Consulta términos y disponibilidad con un asesor. © {new Date().getFullYear()} Tresor Real Estate.
+            </p>
           </div>
-          <p className="max-w-2xl text-[11px] leading-relaxed text-white/35">
-            Valmira es un desarrollo de Urban Homes; Tresor Real Estate participa como comercializador. Imágenes de carácter ilustrativo. * Precios y condiciones de pago sujetos a cambio sin previo aviso. Consulta términos y disponibilidad con un asesor. © {new Date().getFullYear()} Tresor Real Estate.
-          </p>
         </div>
       </footer>
 
@@ -420,6 +420,9 @@ export default function ValmiraLanding() {
 
       {/* Chatbot exclusivo de Valmira */}
       <Chatbot devSlug="valmira-urban" landing />
+
+      {/* Recorrido virtual en popup (mismo modal que las fichas) */}
+      <VirtualTourModal url={tourUrl} onClose={() => setTourUrl(null)} title="Valmira · Recorrido virtual" />
     </>
   );
 }
@@ -442,7 +445,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 function FormCard({
   form, set, valid, loading, err, submit,
 }: {
-  form: { firstName: string; phone: string; tipologia: string };
+  form: { firstName: string; email: string; phone: string; tipologia: string };
   set: (k: string, v: string) => void;
   valid: boolean | string;
   loading: boolean;
@@ -459,6 +462,11 @@ function FormCard({
         <input
           required type="text" placeholder="Tu nombre"
           value={form.firstName} onChange={(e) => set('firstName', e.target.value)}
+          className="appearance-none rounded-2xl border border-line bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-ink-4"
+        />
+        <input
+          required type="email" placeholder="Correo electrónico"
+          value={form.email} onChange={(e) => set('email', e.target.value)}
           className="appearance-none rounded-2xl border border-line bg-white px-4 py-3 text-[14px] outline-none transition-colors focus:border-ink-4"
         />
         <input
