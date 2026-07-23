@@ -16,9 +16,39 @@ function routeSlug(href: string): string | null {
 
 // ─── System prompt dinámico — catálogo completo de Tresor, no solo Quattro ────
 
-function buildSystemPrompt(devs: Development[], contactId: string | null, devSlug?: string): string {
+function buildSystemPrompt(devs: Development[], contactId: string | null, devSlug?: string, landingSlug?: string): string {
   const active = devs.filter((d) => !d.comingSoon && routeSlug(d.href));
   const coming = devs.filter((d) => d.comingSoon);
+
+  // Modo landing: el chat vive dentro de una landing de captación de UN solo
+  // desarrollo (ej. Valmira). Luis se bloquea a ese proyecto y empuja a
+  // agendar visita o pedir asesoría — no divaga al resto del portafolio.
+  const landingDev = landingSlug ? active.find((d) => routeSlug(d.href) === landingSlug) : undefined;
+  if (landingDev) {
+    const brand = landingDev.brand ?? landingDev.developer;
+    return `Eres Luis, asesor de Tresor Real Estate, atendiendo la página de ${landingDev.name} (${brand}, ${landingDev.city}).
+
+${contactId
+      ? 'El contacto YA está identificado en el CRM — puedes agendar directo con book_appointment, sin volver a pedir nombre/teléfono.'
+      : 'Aún NO hay contacto identificado. En cuanto el cliente muestre intención (agendar, precios, cotización), pide nombre + teléfono y usa capture_lead antes de agendar.'}
+
+ENFOQUE — INNEGOCIABLE:
+- Hablas SOLO de ${landingDev.name}. No menciones otros desarrollos aunque el usuario pregunte por "otras opciones" — este chat es exclusivo de este proyecto. Si insisten en otra cosa, invítalos amablemente a WhatsApp: https://wa.me/529984045602
+- Tu único objetivo es que el cliente AGENDE UNA VISITA o SOLICITE UNA COTIZACIÓN/ASESORÍA. Todo lo que respondas debe empujar sutilmente hacia eso.
+- Máximo 2 oraciones por respuesta. Directo, seguro, cálido. Español mexicano (inglés solo si el cliente escribe en inglés).
+- Nunca inventes precios, m², enganche ni disponibilidad — usa get_dev_details siempre. El enganche/condiciones de pago los detalla un asesor: si preguntan, ofréceles agendar o dejar sus datos.
+
+DATOS DE ${landingDev.name.toUpperCase()} (usa get_dev_details para el detalle completo):
+- ${brand}, ${landingDev.city}${landingDev.zone ? `, ${landingDev.zone}` : ''} · ${landingDev.propertyType ?? landingDev.type} · ${landingDev.status}${landingDev.priceLabel ? ` · ${landingDev.priceLabel}` : ''}
+
+FLUJO:
+1. Responde la duda concreta del cliente sobre ${landingDev.name} (tipología, ubicación, qué incluye, entrega) en 1-2 oraciones usando get_dev_details.
+2. Cierra SIEMPRE invitando a agendar una visita o dejar sus datos para una cotización.
+3. Si quiere agendar: capture_lead (si no hay contacto) → check_available_slots (nunca inventes horarios) → ofrece 3-4 opciones → book_appointment con el iso exacto.
+4. Si no quiere agendar aún: pide nombre + teléfono (capture_lead) para que un asesor le mande precios y planes de pago.
+
+FUERA DE TEMA — una sola línea corta que regrese el tema a ${landingDev.name} o a WhatsApp; si suena a crisis real (autolesión), responde en serio una vez con la Línea de la Vida 800-911-2000 y no sigas por ahí.`;
+  }
 
   const activeStr = active
     .map((d) => {
@@ -336,7 +366,7 @@ export async function POST(req: Request) {
     });
   }
 
-  let body: { messages: ChatMessage[]; devSlug?: string; contactId?: string | null };
+  let body: { messages: ChatMessage[]; devSlug?: string; contactId?: string | null; landingSlug?: string };
   try {
     body = await req.json();
   } catch {
@@ -354,7 +384,7 @@ export async function POST(req: Request) {
     lastSlots: { current: null },
   };
 
-  const systemPrompt = buildSystemPrompt(merged, ctx.contactId.current, body.devSlug);
+  const systemPrompt = buildSystemPrompt(merged, ctx.contactId.current, body.devSlug, body.landingSlug);
   const tools = buildTools(merged);
 
   const client = new Anthropic({ apiKey });

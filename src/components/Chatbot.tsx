@@ -50,8 +50,12 @@ function MessageContent({ content, isUser }: { content: string; isUser: boolean 
   );
 }
 
-export default function Chatbot({ devSlug }: { devSlug?: string }) {
+export default function Chatbot({ devSlug, landing = false }: { devSlug?: string; landing?: boolean }) {
   const t = useTranslations('chatbot');
+  // Modo landing: el chat vive en una landing de captación de un solo
+  // desarrollo (ej. Valmira) — Luis se bloquea a ese proyecto y empuja
+  // agendar/cotizar (ver landingSlug en /api/chat).
+  const landingSlug = landing ? devSlug : undefined;
   const [open, setOpen] = useState(false);
   const [stage, setStage] = useState<'form' | 'chat'>('form');
   const [leadForm, setLeadForm] = useState({ fullName: '', phone: '' });
@@ -94,7 +98,9 @@ export default function Chatbot({ devSlug }: { devSlug?: string }) {
       }
     } catch {}
     const firstName = leadForm.fullName.split(' ')[0];
-    const welcome = devSlug && devName
+    const welcome = landing && devName
+      ? `¡Gracias, ${firstName}! Soy Luis, asesor de ${devName}. ¿Quieres agendar una visita o que te mande precios y planes de pago?`
+      : devSlug && devName
       ? `¡Gracias, ${firstName}! Vi que estás viendo ${devName} — ¿qué te gustaría saber?`
       : `¡Gracias, ${firstName}! ¿En qué te puedo ayudar?`;
     setMessages([{ role: 'assistant', content: welcome }]);
@@ -109,7 +115,7 @@ export default function Chatbot({ devSlug }: { devSlug?: string }) {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: nextMessages, devSlug, contactId }),
+        body: JSON.stringify({ messages: nextMessages, devSlug, contactId, landingSlug }),
       });
       const data = await res.json();
       if (data.contactId) setContactId(data.contactId);
@@ -276,7 +282,9 @@ export default function Chatbot({ devSlug }: { devSlug?: string }) {
                     si no hay slots de cita pendientes por elegir */}
                 {messages.length === 1 && !loading && !pendingSlots && (
                   <div className="flex flex-col gap-2 pl-8">
-                    {(devSlug && devName
+                    {(landing && devName
+                      ? ['Quiero agendar una visita', 'Mándame precios y planes', '¿Qué incluye equipado?']
+                      : devSlug && devName
                       ? ['Ver disponibilidad', 'Precio y planes de pago', `Agendar visita a ${devName}`]
                       : ['¿Qué tienen disponible?', 'Quiero cotizar', 'Quiero agendar una visita']
                     ).map((suggestion) => (
