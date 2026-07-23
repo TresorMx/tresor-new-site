@@ -399,7 +399,7 @@ export default function ValmiraLanding() {
           <div className="mx-auto mt-20 h-px w-24" style={{ background: 'linear-gradient(to right, transparent, #FAB413, transparent)' }} />
 
           <div className="flex flex-col items-center gap-5 pb-12 pt-10">
-            <Image src="/logos/LogoTresor.svg" alt="Tresor Real Estate" width={130} height={34} className="h-8 w-auto opacity-90" />
+            <Image src="/logos/LogoTresor.svg" alt="Tresor Real Estate" width={169} height={44} className="h-[42px] w-auto opacity-90" />
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-white/60">
               <a href="tel:+529984045602" className="inline-flex items-center gap-2 transition hover:text-white"><Phone size={14} /> +52 998 404 5602</a>
               <a href={waLink('Hola, me interesa Valmira en Cancún.')} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 transition hover:text-white"><MessageCircle size={14} /> WhatsApp</a>
