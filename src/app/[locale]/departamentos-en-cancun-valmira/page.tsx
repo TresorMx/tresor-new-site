@@ -174,17 +174,17 @@ export default function ValmiraLanding() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(JSONLD) }} />
 
       {/* ═════════ HERO ═════════ */}
-      <section className="relative flex min-h-[92svh] items-center overflow-hidden bg-ink">
+      <section className="relative overflow-hidden bg-ink md:flex md:min-h-[92svh] md:items-center">
         <Image
           src="/desarrollos/Valmira/portadaValmira.jpg"
           alt="Valmira — departamentos en venta en Cancún con entrega inmediata"
           fill priority sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/85 to-ink/45" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/45 to-transparent" />
 
-        <div className="container-wrap relative z-10 grid items-center gap-10 py-24 lg:grid-cols-[1.05fr_minmax(340px,430px)] lg:gap-14">
+        <div className="container-wrap relative z-10 grid items-center gap-9 pb-12 pt-14 md:gap-10 md:py-24 lg:grid-cols-[1.05fr_minmax(340px,430px)] lg:gap-14">
           {/* copy */}
           <div className="text-white">
             <Image
@@ -192,39 +192,28 @@ export default function ValmiraLanding() {
               alt="Valmira"
               width={200} height={47}
               priority
-              className="h-9 w-auto md:h-11"
+              className="h-8 w-auto md:h-11"
             />
-            <h1 className="mt-6 h-display text-[clamp(34px,5.2vw,66px)] text-white">
+            <h1 className="mt-5 h-display text-[clamp(30px,5.2vw,66px)] text-white md:mt-6">
               Departamentos equipados en Cancún con <span className="text-accent">entrega inmediata</span>
             </h1>
 
             {/* ganchos chips */}
-            <div className="mt-6 flex flex-wrap gap-2.5">
+            <div className="mt-5 flex flex-wrap gap-2 md:mt-6 md:gap-2.5">
               {['0% de enganche', 'Totalmente equipado', 'Entrega inmediata'].map((g) => (
-                <span key={g} className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-[12px] font-semibold text-white backdrop-blur-md">
+                <span key={g} className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-[11.5px] font-semibold text-white backdrop-blur-md md:px-3.5 md:text-[12px]">
                   <Check size={13} strokeWidth={3} className="text-accent" /> {g}
                 </span>
               ))}
             </div>
 
-            <div className="mt-7 flex items-end gap-3">
-              <span className="text-[13px] font-medium uppercase tracking-caps text-white/60">Desde</span>
-              <span className="h-display text-[clamp(26px,3.4vw,40px)] text-white leading-none">$2,595,000 MXN</span>
+            <div className="mt-6 flex items-end gap-3 md:mt-7">
+              <span className="text-[12px] font-medium uppercase tracking-caps text-white/60 md:text-[13px]">Desde</span>
+              <span className="h-display text-[clamp(24px,3.4vw,40px)] text-white leading-none">$2,595,000 MXN</span>
             </div>
-            <p className="mt-2 text-[14px] font-light text-white/70">
-              2 y 3 recámaras · desde 87 m² · Gran Vía, sobre Av. Huayacán
+            <p className="mt-2 text-[13px] font-light text-white/70 md:text-[14px]">
+              2 y 3 recámaras · desde 87 m² · Gran Vía, Av. Huayacán
             </p>
-
-            {/* CTAs (visibles sobre todo en móvil, donde el form queda abajo) */}
-            <div className="mt-8 flex flex-wrap gap-3 lg:hidden">
-              <button onClick={scrollToForm} className="inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-ink transition hover:brightness-95">
-                Agenda tu visita <ArrowRight size={14} strokeWidth={2.5} />
-              </button>
-              <a href={waLink('Hola, me interesa Valmira en Cancún. Quiero más información.')} target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-white transition hover:border-white/60">
-                <MessageCircle size={14} strokeWidth={2} /> WhatsApp
-              </a>
-            </div>
           </div>
 
           {/* form glass */}
@@ -398,7 +387,7 @@ export default function ValmiraLanding() {
 
           <div className="mx-auto mt-20 h-px w-24" style={{ background: 'linear-gradient(to right, transparent, #FAB413, transparent)' }} />
 
-          <div className="flex flex-col items-center gap-5 pb-12 pt-10">
+          <div className="flex flex-col items-center gap-5 pb-28 pt-10 lg:pb-12">
             <Image src="/logos/LogoTresor.svg" alt="Tresor Real Estate" width={169} height={44} className="h-[42px] w-auto opacity-90" />
             <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] text-white/60">
               <a href="tel:+529984045602" className="inline-flex items-center gap-2 transition hover:text-white"><Phone size={14} /> +52 998 404 5602</a>
@@ -412,8 +401,13 @@ export default function ValmiraLanding() {
       </footer>
 
       {/* Sticky móvil */}
-      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-ink/95 px-4 py-3 backdrop-blur-md lg:hidden">
-        <button onClick={scrollToForm} className="flex w-full items-center justify-center gap-2 rounded-full bg-accent py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-ink">
+      <div className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2.5 border-t border-white/10 bg-ink/95 px-4 py-3 backdrop-blur-md lg:hidden">
+        <a href={waLink('Hola, me interesa Valmira en Cancún. Quiero más información.')} target="_blank" rel="noopener noreferrer"
+          aria-label="WhatsApp"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white">
+          <MessageCircle size={20} strokeWidth={2} />
+        </a>
+        <button onClick={scrollToForm} className="flex flex-1 items-center justify-center gap-2 rounded-full bg-accent py-3.5 text-[12px] font-bold uppercase tracking-[0.18em] text-ink">
           Agenda tu visita <ArrowRight size={14} strokeWidth={2.5} />
         </button>
       </div>
