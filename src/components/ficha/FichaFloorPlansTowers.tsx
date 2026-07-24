@@ -143,9 +143,9 @@ export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale,
                     <button
                       key={fp.slug}
                       onClick={() => setZoom(fp)}
-                      className="group flex flex-col rounded-[20px] bg-white p-3 text-left shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(0,0,0,0.12)]"
+                      className="group flex flex-col rounded-[20px] bg-[#F6F5F2] p-3 text-left transition-all duration-300 hover:-translate-y-1"
                     >
-                      <div className="relative aspect-[1.3/1] w-full overflow-hidden rounded-[14px] bg-[#F6F5F2]">
+                      <div className="relative aspect-[1.3/1] w-full overflow-hidden rounded-[14px] bg-white">
                         {fp.image && (
                           <Image src={fp.image} alt={(isEs ? fp.label.es : fp.label.en ?? fp.label.es) ?? ''} fill sizes="(max-width:640px) 100vw, 220px" className="object-contain p-3 transition-transform duration-500 group-hover:scale-[1.05]" />
                         )}

@@ -1685,6 +1685,7 @@ export const developments: Development[] = [
       '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AEREADETALLE02.jpg',
       '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_FACHADA04.jpg',
     ],
+    galleryTourUrl: 'https://my.matterport.com/show/?m=JM56Q2CtX2f',
     amenitiesGallery: [
       '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AMENIDADES01.jpg',
       '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AMENIDADES03.jpg',
