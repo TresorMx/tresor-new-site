@@ -128,6 +128,11 @@ export interface FloorPlanTypology {
   specs: FloorPlanSpec[];     // flexible por tipología — cada una trae lo que aplica
   virtualTourUrl?: string;    // si existe, se muestra el botón "Tour virtual"
   order?: number;
+  // Solo para desarrollos con planos agrupados por torre (ej. Vellmari) —
+  // FichaFloorPlansTowers lo usa para el selector interactivo de torre. El
+  // resto de las fichas ignora este campo.
+  tower?: 'sur' | 'norte';
+  area?: string;              // superficie ya formateada (ej. "250 m²"), para la card del grid
 }
 
 // Módulo editorial genérico — eyebrow + título + descripción + imagen
@@ -1647,11 +1652,13 @@ export const developments: Development[] = [
     developer: 'Urban Homes',
     brand: 'Urban Homes',
     city: 'Puerto Cancún',
+    zone: 'Puerto Cancún',
+    zoneEn: 'Puerto Cancún',
     type: 'Residencial',
     intent: ['vivir', 'invertir'],
     status: 'Preventa',
     image: '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_FACHADA01_.jpg',
-    href: '#',
+    href: '/desarrollos/vellmari-urban',
     featured: true,
     logo: '/desarrollos/Vellmari/logo.png',
     logoScale: 1.2,
@@ -1663,6 +1670,94 @@ export const developments: Development[] = [
       'Condominios exclusivos frente a la marina de Puerto Cancún, con amenidades de primer nivel en la zona residencial más cotizada del Caribe mexicano.',
     descriptionEn:
       'Exclusive condominiums facing the Puerto Cancún marina, with first-class amenities in the most sought-after residential area of the Mexican Caribbean.',
+    // ── Capa de ficha (contenido de la presentación oficial de Urban Homes) ──
+    heroRender: '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_FACHADA01_.jpg',
+    heroLogoScale: 1.1,
+    tagline: { es: 'Residencias de lujo frente a la marina de Puerto Cancún', en: 'Luxury residences facing the Puerto Cancún marina' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Puerto Cancún' },
+      { label: 'Residencias', labelEn: 'Residences', value: '98 exclusivas', valueEn: '98 exclusive' },
+      { label: 'Superficie', labelEn: 'Size', value: '169 a 714 m²', valueEn: '169 to 714 sqm' },
+    ],
+    gallery: [
+      '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_FACHADA02.jpg',
+      '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_FACHADA03.jpg',
+      '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AEREADETALLE02.jpg',
+      '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_FACHADA04.jpg',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AMENIDADES01.jpg',
+      '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AMENIDADES03.jpg',
+      '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AMENIDADES05.jpg',
+      '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AMENIDADES07.jpg',
+    ],
+    projectTitle: { es: '98 residencias de lujo', en: '98 luxury residences' },
+    projectTitleMuted: { es: 'en el corazón de Puerto Cancún', en: 'in the heart of Puerto Cancún' },
+    projectBody: [
+      {
+        es: 'es un desarrollo de Urban Homes: una obra de arte arquitectónica con **98 exclusivas residencias** en el corazón de Puerto Cancún, la zona residencial más cotizada del Caribe mexicano, para vivir una experiencia de lujo frente al mar.',
+        en: 'is a development by Urban Homes: an architectural work of art with **98 exclusive residences** in the heart of Puerto Cancún, the most sought-after residential area of the Mexican Caribbean, for a luxury experience by the sea.',
+      },
+      {
+        es: 'Dos torres frente a la marina, con tipologías desde **169 m² hasta 714 m²** y penthouses de doble vista, rodeadas de campo de golf, plaza comercial y las mejores playas del mar Caribe.',
+        en: 'Two towers facing the marina, with layouts from **169 sqm up to 714 sqm** and dual-view penthouses, surrounded by a golf course, a shopping plaza and the best beaches of the Caribbean Sea.',
+      },
+    ],
+    location: { lat: 21.1616, lng: -86.8098, address: 'Puerto Cancún, Cancún, Q. Roo' },
+    locationBullets: [
+      { es: 'Dentro de Puerto Cancún, frente a la marina', en: 'Inside Puerto Cancún, facing the marina' },
+      { es: 'Campo de golf de 18 hoyos y plaza comercial', en: '18-hole golf course and shopping plaza' },
+      { es: 'A minutos de la Zona Hotelera y el aeropuerto', en: 'Minutes from the Hotel Zone and the airport' },
+    ],
+    contentBlocks: [
+      {
+        eyebrow: { es: '— El entorno', en: '— The setting' },
+        title: { es: 'Puerto Cancún', en: 'Puerto Cancún' },
+        titleMuted: { es: 'el nuevo estilo de vida del paraíso', en: 'the new lifestyle of paradise' },
+        description: {
+          es: 'Un desarrollo turístico planeado por FONATUR sobre **327 hectáreas**, con campo de golf de 18 hoyos, marina privada para embarcaciones y una plaza comercial de primer nivel — con ubicación estratégica cerca de la Zona Hotelera y del aeropuerto internacional de Cancún.',
+          en: 'A tourism development planned by FONATUR across **327 hectares**, with an 18-hole golf course, a private marina for boats and a first-class shopping plaza — strategically located near the Hotel Zone and Cancún\'s international airport.',
+        },
+        image: '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AEREA01.jpg',
+        layout: 'side-by-side',
+        imagePosition: 'right',
+      },
+    ],
+    amenities: [
+      { key: 'muelle', labelOverride: 'Marina' },
+      { key: 'alberca-infinity', labelOverride: 'Albercas' },
+      { key: 'sauna', labelOverride: 'Spa' },
+      { key: 'gym' },
+      { key: 'cancha-padel' },
+      { key: 'coworking', labelOverride: 'Business Center' },
+      { key: 'ludoteca', labelOverride: "Kid's Club" },
+      { key: 'lounge-bar' },
+    ],
+    // Floor plans agrupados por torre — FichaFloorPlansTowers usa `tower` y
+    // `area`. Torre Sur (izq en torres.jpg) y Torre Norte (der). Sin recámaras
+    // en los archivos ni en la presentación: la card muestra código + m² y el
+    // plano completo se ve en el modal.
+    floorPlans: [
+      // Torre Sur (6)
+      { slug: 'sur-c', tower: 'sur', area: '169 m²', label: { es: 'Tipo C', en: 'Type C' }, image: '/desarrollos/Vellmari/floorplans/Torre_Sur_C_169m.jpg', specs: [] },
+      { slug: 'sur-a', tower: 'sur', area: '248 m²', label: { es: 'Tipo A', en: 'Type A' }, image: '/desarrollos/Vellmari/floorplans/Torre_Sur_A_248m.jpg', specs: [] },
+      { slug: 'sur-d', tower: 'sur', area: '303 m²', label: { es: 'Tipo D', en: 'Type D' }, image: '/desarrollos/Vellmari/floorplans/Torre_Sur_D_303m.jpg', specs: [] },
+      { slug: 'sur-f', tower: 'sur', area: '311 m²', label: { es: 'Tipo F', en: 'Type F' }, image: '/desarrollos/Vellmari/floorplans/Torre_Sur_F_311m.jpg', specs: [] },
+      { slug: 'sur-3a', tower: 'sur', area: '366 m²', label: { es: 'Tipo 3A', en: 'Type 3A' }, image: '/desarrollos/Vellmari/floorplans/Torre_Sur_3A_366m.jpg', specs: [] },
+      { slug: 'sur-ph3', tower: 'sur', area: '714 m²', label: { es: 'PH3', en: 'PH3' }, image: '/desarrollos/Vellmari/floorplans/Torre_Sur_PH3_714m.jpg', specs: [] },
+      // Torre Norte (11)
+      { slug: 'norte-c', tower: 'norte', area: '172 m²', label: { es: 'Tipo C', en: 'Type C' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_C_172m.jpg', specs: [] },
+      { slug: 'norte-g', tower: 'norte', area: '172 m²', label: { es: 'Tipo G', en: 'Type G' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_G_172m.jpg', specs: [] },
+      { slug: 'norte-a', tower: 'norte', area: '250 m²', label: { es: 'Tipo A', en: 'Type A' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_A_250m.jpg', specs: [] },
+      { slug: 'norte-h', tower: 'norte', area: '250 m²', label: { es: 'Tipo H', en: 'Type H' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_H_250m.jpg', specs: [] },
+      { slug: 'norte-e', tower: 'norte', area: '324 m²', label: { es: 'Tipo E', en: 'Type E' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_E_324m.jpg', specs: [] },
+      { slug: 'norte-f', tower: 'norte', area: '324 m²', label: { es: 'Tipo F', en: 'Type F' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_F_324m.jpg', specs: [] },
+      { slug: 'norte-1a-garden', tower: 'norte', area: '338 m²', label: { es: 'Garden 1A', en: 'Garden 1A' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_1A_Garden_338m.jpg', specs: [] },
+      { slug: 'norte-3h', tower: 'norte', area: '366 m²', label: { es: 'Tipo 3H', en: 'Type 3H' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_3H_366m.jpg', specs: [] },
+      { slug: 'norte-11f', tower: 'norte', area: '400 m²', label: { es: 'Tipo 11F', en: 'Type 11F' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_11F_400m.jpg', specs: [] },
+      { slug: 'norte-ph1', tower: 'norte', area: '445 m²', label: { es: 'PH1', en: 'PH1' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_PH1_445m.jpg', specs: [] },
+      { slug: 'norte-ph2', tower: 'norte', area: '535 m²', label: { es: 'PH2', en: 'PH2' }, image: '/desarrollos/Vellmari/floorplans/Torre_Norte_PH2_535m.jpg', specs: [] },
+    ],
   },
   {
     slug: 'la-selva-urban',

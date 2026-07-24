@@ -23,6 +23,7 @@ import PixelViewContent from '@/components/PixelViewContent';
 import FichaDeveloper from '@/components/ficha/FichaDeveloper';
 import FichaAmenities from '@/components/ficha/FichaAmenities';
 import FichaFloorPlans from '@/components/ficha/FichaFloorPlans';
+import FichaFloorPlansTowers from '@/components/ficha/FichaFloorPlansTowers';
 import ReservaRapidaForm from '@/components/ficha/ReservaRapidaForm';
 import RelatedDevelopments from '@/components/ficha/RelatedDevelopments';
 import FichaContentBlock from '@/components/ficha/FichaContentBlock';
@@ -254,6 +255,9 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   const hasGallery = galleryImages.length > 0;
   const hasAmenities = (dev.amenities?.length ?? 0) > 0;
   const hasSalesPartnerFloorPlans = !plaza && (dev.floorPlans?.length ?? 0) > 0;
+  // Vellmari: planos agrupados por torre (todos traen `tower`) — usa el
+  // selector interactivo de torres en vez del módulo de tipologías normal.
+  const useTowerFloorPlans = hasSalesPartnerFloorPlans && (dev.floorPlans?.every((fp) => fp.tower) ?? false);
   const hasContentBlocks = (dev.contentBlocks?.length ?? 0) > 0;
   const sectionOrder = [
     'developer', 'project', 'location', 'contentBlocks', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta',
@@ -565,14 +569,24 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
 
       {/* ═════ 5b. TIPOLOGÍAS (Sales Partner, sin inventario propio) ═════ */}
       {hasSalesPartnerFloorPlans && dev.floorPlans && (
-        <FichaFloorPlans
-          floorPlans={dev.floorPlans}
-          locale={locale}
-          gray={stripe.floorPlans}
-          ctaLabels={dev.ctaLabels}
-          isAsesor={isAsesor}
-          devSlug={slug}
-        />
+        useTowerFloorPlans ? (
+          <FichaFloorPlansTowers
+            floorPlans={dev.floorPlans}
+            towersImage="/desarrollos/Vellmari/torres.jpg"
+            locale={locale}
+            gray={stripe.floorPlans}
+            ctaLabels={dev.ctaLabels}
+          />
+        ) : (
+          <FichaFloorPlans
+            floorPlans={dev.floorPlans}
+            locale={locale}
+            gray={stripe.floorPlans}
+            ctaLabels={dev.ctaLabels}
+            isAsesor={isAsesor}
+            devSlug={slug}
+          />
+        )
       )}
 
       {/* ═════ 6. APARTADO EN LÍNEA — asesor: cotizador (Quattro) o apartado
