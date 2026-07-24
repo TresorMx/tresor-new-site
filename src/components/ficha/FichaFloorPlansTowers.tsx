@@ -21,11 +21,14 @@ const TOWER_META: Record<Tower, { es: string; en: string }> = {
 };
 const TOWER_ORDER: Tower[] = ['sur', 'norte'];
 
-// Bandas verticales (full-height) sobre `towersImage` para el spotlight —
-// Sur = torre izquierda, Norte = torre derecha (confirmado). % del ancho.
-const BANDS: Record<Tower, { left: number; width: number }> = {
-  sur: { left: 14, width: 34 },
-  norte: { left: 49, width: 35 },
+// Zoom + pan por torre sobre `towersImage` — Sur = torre izquierda, Norte =
+// torre derecha (confirmado). objectPosition/scale medidos a ojo sobre
+// torresmitad.jpg (948×1010) para que cada torre quede completa y centrada,
+// sin recortes ni overlay oscuro encima.
+const FOCUS: Record<'default' | Tower, { x: number; y: number; scale: number }> = {
+  default: { x: 50, y: 42, scale: 1 },
+  sur: { x: 33, y: 40, scale: 1.85 },
+  norte: { x: 69, y: 38, scale: 2.05 },
 };
 
 interface Props {
@@ -42,7 +45,10 @@ export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale,
   const [hovered, setHovered] = useState<Tower | null>(null);
   const [zoom, setZoom] = useState<FloorPlanTypology | null>(null);
 
-  const spotlight = hovered ?? selected; // torre resaltada en la foto
+  // Una vez seleccionada una torre, la foto sigue a `selected` (tabs incluidos);
+  // el hover solo manda antes de elegir, en la pantalla "Selecciona una torre".
+  const spotlight = selected ?? hovered;
+  const focus = FOCUS[spotlight ?? 'default'];
   const scheduleLabel =
     (isEs ? ctaLabels?.scheduleVisit?.es : ctaLabels?.scheduleVisit?.en ?? ctaLabels?.scheduleVisit?.es) ??
     (isEs ? 'Agendar una visita' : 'Schedule a visit');
@@ -70,20 +76,13 @@ export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale,
                 src={towersImage}
                 alt={isEs ? 'Torres de Vellmari en Puerto Cancún' : 'Vellmari towers in Puerto Cancún'}
                 fill priority sizes="(max-width:1024px) 100vw, 420px"
-                className="object-cover"
+                className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.76,0,0.24,1)]"
+                style={{
+                  objectPosition: `${focus.x}% ${focus.y}%`,
+                  transform: `scale(${focus.scale})`,
+                  transformOrigin: `${focus.x}% ${focus.y}%`,
+                }}
               />
-              {/* Banda-spotlight de la torre activa (dim del resto + outline) */}
-              {spotlight && (
-                <span
-                  aria-hidden
-                  className="absolute inset-y-0 rounded-[2px] ring-[1.5px] ring-inset ring-white/90 transition-[left,width] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
-                  style={{
-                    left: `${BANDS[spotlight].left}%`,
-                    width: `${BANDS[spotlight].width}%`,
-                    boxShadow: '0 0 0 9999px rgba(12,12,14,0.55)',
-                  }}
-                />
-              )}
               {/* Caption discreto de la torre resaltada */}
               {spotlight && (
                 <span className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/95 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-ink shadow-sm">
