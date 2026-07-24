@@ -51,6 +51,11 @@ const nextConfig = {
       { source: '/tresor', destination: '/quattro-plaza-center', permanent: true },
       { source: '/en/tresor', destination: '/en/quattro-plaza-center', permanent: true },
 
+      // Vellmari — el slug pasó de 'vellmari-urban' a 'vellmari-puerto-cancun'
+      // (URL más limpia y con keyword). 301 para no perder la vieja.
+      { source: '/desarrollos/vellmari-urban', destination: '/desarrollos/vellmari-puerto-cancun', permanent: true },
+      { source: '/en/desarrollos/vellmari-urban', destination: '/en/desarrollos/vellmari-puerto-cancun', permanent: true },
+
       // /drive/desarrollos solo (sin nada después) no es una página real —
       // manda a home en vez de dejar un 404 que invite a curiosear qué más
       // hay bajo /drive. /drive sí es una página real ahora (índice abierto,

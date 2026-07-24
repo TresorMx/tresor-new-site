@@ -2,33 +2,34 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { X, Maximize2, Calendar } from 'lucide-react';
+import { X, Maximize2, Calendar, ArrowRight, ChevronRight } from 'lucide-react';
 import { Link } from '@/navigation';
 import { cn } from '@/lib/utils';
+import SlidingTabs from '@/components/ui/SlidingTabs';
 import type { FloorPlanTypology, I18nText } from '@/lib/developments';
 
 // Módulo de floor plans EXCLUSIVO de Vellmari — los planos se dividen en dos
-// torres (Sur / Norte) y son muchos (17), así que en vez de los chips
-// genéricos de FichaFloorPlans se usa un selector interactivo: la foto de las
-// dos torres con hotspots; al elegir una torre se despliega su grid de
-// tipologías; al hacer click en una, se abre el plano en grande. Cero chips.
+// torres (Sur / Norte). En vez de los chips genéricos, un explorador de dos
+// columnas: a la izquierda la foto de las torres (spotlight sobre la torre
+// activa), a la derecha se elige una torre y se despliegan sus tipologías en
+// un grid de 2 columnas con scroll; al hacer click, el plano se abre en modal.
 type Tower = 'sur' | 'norte';
 
 const TOWER_META: Record<Tower, { es: string; en: string }> = {
   sur: { es: 'Torre Sur', en: 'South Tower' },
   norte: { es: 'Torre Norte', en: 'North Tower' },
 };
+const TOWER_ORDER: Tower[] = ['sur', 'norte'];
 
-// Zonas clickeables sobre `towersImage` (torres.jpg) en porcentajes —
-// confirmado por el cliente: Torre Sur = torre izquierda, Torre Norte = torre
-// central/derecha. Ajustables sin tocar la lógica.
-const HOTSPOTS: Record<Tower, { left: number; top: number; width: number; height: number }> = {
-  sur: { left: 10.5, top: 4, width: 19.5, height: 66 },
-  norte: { left: 30, top: 9, width: 17.5, height: 61 },
+// Bandas verticales (full-height) sobre `towersImage` para el spotlight —
+// Sur = torre izquierda, Norte = torre derecha (confirmado). % del ancho.
+const BANDS: Record<Tower, { left: number; width: number }> = {
+  sur: { left: 14, width: 34 },
+  norte: { left: 49, width: 35 },
 };
 
 interface Props {
-  floorPlans: FloorPlanTypology[]; // cada uno con `tower` y `area`
+  floorPlans: FloorPlanTypology[]; // cada uno con `tower`, `area` y specs
   towersImage: string;
   locale: string;
   gray?: boolean;
@@ -37,15 +38,18 @@ interface Props {
 
 export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale, gray = false, ctaLabels }: Props) {
   const isEs = locale !== 'en';
-  const [tower, setTower] = useState<Tower | null>(null);
+  const [selected, setSelected] = useState<Tower | null>(null);
+  const [hovered, setHovered] = useState<Tower | null>(null);
   const [zoom, setZoom] = useState<FloorPlanTypology | null>(null);
 
+  const spotlight = hovered ?? selected; // torre resaltada en la foto
   const scheduleLabel =
     (isEs ? ctaLabels?.scheduleVisit?.es : ctaLabels?.scheduleVisit?.en ?? ctaLabels?.scheduleVisit?.es) ??
     (isEs ? 'Agendar una visita' : 'Schedule a visit');
 
   const count = (tw: Tower) => floorPlans.filter((fp) => fp.tower === tw).length;
-  const plans = tower ? floorPlans.filter((fp) => fp.tower === tower) : [];
+  const plans = selected ? floorPlans.filter((fp) => fp.tower === selected) : [];
+  const towerName = (tw: Tower) => (isEs ? TOWER_META[tw].es : TOWER_META[tw].en);
 
   return (
     <section className={`${gray ? 'bg-[#FAFAFA]' : 'bg-bg'} py-20 md:py-28`} id="floor-plans">
@@ -56,136 +60,123 @@ export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale,
             {isEs ? 'Elige tu ' : 'Choose your '}
             <span className="text-ink-3">{isEs ? 'torre' : 'tower'}</span>
           </h2>
-          <p className="mt-4 text-[15px] font-light leading-relaxed text-ink-3">
-            {isEs
-              ? 'Dos torres frente a la marina de Puerto Cancún. Selecciona una para ver sus tipologías y planos.'
-              : 'Two towers facing the Puerto Cancún marina. Select one to explore its layouts and floor plans.'}
-          </p>
         </div>
 
-        {/* ── Foto interactiva de las torres ── */}
-        <div className="mt-10 overflow-hidden rounded-[24px] border border-line bg-white">
-          <div className="relative aspect-[16/9] w-full">
-            <Image src={towersImage} alt={isEs ? 'Torres de Vellmari en Puerto Cancún' : 'Vellmari towers in Puerto Cancún'} fill priority sizes="100vw" className="object-cover" />
-
-            {/* Hotspots — solo desktop (en móvil se usan los botones de abajo) */}
-            {(['sur', 'norte'] as Tower[]).map((tw) => {
-              const h = HOTSPOTS[tw];
-              const selected = tower === tw;
-              return (
-                <button
-                  key={tw}
-                  onClick={() => setTower(tw)}
-                  aria-label={isEs ? TOWER_META[tw].es : TOWER_META[tw].en}
-                  className="group absolute hidden md:block"
-                  style={{ left: `${h.left}%`, top: `${h.top}%`, width: `${h.width}%`, height: `${h.height}%` }}
-                >
-                  {/* Marco/overlay que aparece en hover o cuando está activa */}
-                  <span
-                    className={cn(
-                      'absolute inset-0 rounded-[14px] border-2 transition-all duration-300',
-                      selected
-                        ? 'border-accent bg-accent/10 shadow-[0_0_0_9999px_rgba(14,14,14,0.35)]'
-                        : 'border-transparent bg-ink/0 group-hover:border-white/80 group-hover:bg-white/10',
-                    )}
-                  />
-                  {/* Etiqueta flotante */}
-                  <span
-                    className={cn(
-                      'absolute left-1/2 top-3 -translate-x-1/2 whitespace-nowrap rounded-full px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] backdrop-blur-md transition-all duration-300',
-                      selected
-                        ? 'bg-accent text-ink'
-                        : 'bg-black/45 text-white opacity-0 group-hover:opacity-100',
-                    )}
-                  >
-                    {isEs ? TOWER_META[tw].es : TOWER_META[tw].en}
-                  </span>
-                </button>
-              );
-            })}
-
-            {/* Hint inicial (desktop, sin selección) */}
-            {!tower && (
-              <div className="pointer-events-none absolute inset-x-0 bottom-4 hidden justify-center md:flex">
-                <span className="rounded-full bg-black/50 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-white backdrop-blur-md">
-                  {isEs ? 'Haz click en una torre' : 'Click a tower'}
+        <div className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,420px)_1fr] lg:gap-12">
+          {/* ── IZQUIERDA: foto de las torres con spotlight ── */}
+          <div className="lg:sticky lg:top-24 lg:self-start">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[24px] border border-line lg:aspect-[0.9/1]">
+              <Image
+                src={towersImage}
+                alt={isEs ? 'Torres de Vellmari en Puerto Cancún' : 'Vellmari towers in Puerto Cancún'}
+                fill priority sizes="(max-width:1024px) 100vw, 420px"
+                className="object-cover"
+              />
+              {/* Banda-spotlight de la torre activa (dim del resto + outline) */}
+              {spotlight && (
+                <span
+                  aria-hidden
+                  className="absolute inset-y-0 rounded-[2px] ring-[1.5px] ring-inset ring-white/90 transition-[left,width] duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
+                  style={{
+                    left: `${BANDS[spotlight].left}%`,
+                    width: `${BANDS[spotlight].width}%`,
+                    boxShadow: '0 0 0 9999px rgba(12,12,14,0.55)',
+                  }}
+                />
+              )}
+              {/* Caption discreto de la torre resaltada */}
+              {spotlight && (
+                <span className="absolute bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-white/95 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-ink shadow-sm">
+                  {towerName(spotlight)}
                 </span>
+              )}
+            </div>
+          </div>
+
+          {/* ── DERECHA: selector → grid de planos ── */}
+          <div>
+            {!selected ? (
+              <div className="flex h-full flex-col justify-center">
+                <p className="text-[13px] font-semibold uppercase tracking-[0.18em] text-ink-3">
+                  {isEs ? 'Selecciona una torre' : 'Select a tower'}
+                </p>
+                <div className="mt-5 flex flex-col gap-3">
+                  {TOWER_ORDER.map((tw) => (
+                    <button
+                      key={tw}
+                      onMouseEnter={() => setHovered(tw)}
+                      onMouseLeave={() => setHovered(null)}
+                      onFocus={() => setHovered(tw)}
+                      onBlur={() => setHovered(null)}
+                      onClick={() => setSelected(tw)}
+                      className="group flex items-center justify-between gap-4 rounded-[18px] bg-white px-6 py-5 text-left shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-all duration-300 hover:shadow-[0_16px_40px_rgba(0,0,0,0.10)] focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                    >
+                      <span>
+                        <span className="block font-sans text-[clamp(18px,2vw,24px)] font-medium leading-tight text-ink">
+                          {towerName(tw)}
+                        </span>
+                        <span className="mt-1 block text-[13px] text-ink-3">
+                          {count(tw)} {isEs ? 'tipologías' : 'layouts'} · {isEs ? 'ver planos' : 'view floor plans'}
+                        </span>
+                      </span>
+                      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-ink/[0.05] text-ink transition-all duration-300 group-hover:bg-accent group-hover:text-ink">
+                        <ChevronRight size={18} strokeWidth={2} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="flex h-full flex-col">
+                <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+                  <SlidingTabs
+                    activeIndex={TOWER_ORDER.indexOf(selected)}
+                    onChange={(i) => setSelected(TOWER_ORDER[i])}
+                    items={TOWER_ORDER.map((tw) => ({ key: tw, label: towerName(tw) }))}
+                  />
+                  <span className="text-[13px] text-ink-3">
+                    {plans.length} {isEs ? 'tipologías' : 'layouts'}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:max-h-[560px] lg:overflow-y-auto lg:pr-1 no-scrollbar">
+                  {plans.map((fp) => (
+                    <button
+                      key={fp.slug}
+                      onClick={() => setZoom(fp)}
+                      className="group flex flex-col rounded-[20px] bg-white p-3 text-left shadow-[0_2px_10px_rgba(0,0,0,0.04)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_44px_rgba(0,0,0,0.12)]"
+                    >
+                      <div className="relative aspect-[1.3/1] w-full overflow-hidden rounded-[14px] bg-[#F6F5F2]">
+                        {fp.image && (
+                          <Image src={fp.image} alt={(isEs ? fp.label.es : fp.label.en ?? fp.label.es) ?? ''} fill sizes="(max-width:640px) 100vw, 220px" className="object-contain p-3 transition-transform duration-500 group-hover:scale-[1.05]" />
+                        )}
+                        <span className="absolute right-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-full bg-white/0 text-ink opacity-0 shadow-sm backdrop-blur-md transition-all duration-300 group-hover:bg-white/90 group-hover:opacity-100">
+                          <Maximize2 size={14} strokeWidth={2} />
+                        </span>
+                      </div>
+                      <div className="px-2 pb-1 pt-4">
+                        <div className="font-sans text-[16px] font-semibold text-ink">
+                          {isEs ? fp.label.es : fp.label.en ?? fp.label.es}
+                        </div>
+                        <div className="mt-3 flex flex-col gap-1.5 border-t border-line pt-3">
+                          {fp.area && (
+                            <SpecRow label={isEs ? 'Área total' : 'Total area'} value={fp.area} />
+                          )}
+                          {fp.specs?.map((s) => (
+                            <SpecRow key={s.key} label={isEs ? s.label.es : s.label.en ?? s.label.es} value={s.value} />
+                          ))}
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
-
-          {/* Selector segmentado — visible siempre en móvil, y en desktop una
-              vez que ya se eligió una torre (para cambiar sin apuntar a la foto) */}
-          <div className={cn('flex items-center gap-2 border-t border-line p-3', tower ? 'md:flex' : 'md:hidden')}>
-            {(['sur', 'norte'] as Tower[]).map((tw) => {
-              const selected = tower === tw;
-              return (
-                <button
-                  key={tw}
-                  onClick={() => setTower(tw)}
-                  className={cn(
-                    'flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-[12px] font-bold uppercase tracking-[0.14em] transition-all',
-                    selected ? 'bg-ink text-white' : 'bg-ink/[0.05] text-ink-3 hover:bg-ink/[0.09] hover:text-ink',
-                  )}
-                >
-                  {isEs ? TOWER_META[tw].es : TOWER_META[tw].en}
-                  <span className={cn('rounded-full px-2 py-0.5 text-[10px]', selected ? 'bg-white/20 text-white' : 'bg-ink/10 text-ink-3')}>
-                    {count(tw)}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
         </div>
-
-        {/* ── Grid de tipologías de la torre elegida ── */}
-        {tower && (
-          <div className="mt-8">
-            <div className="mb-6 flex items-center justify-between">
-              <h3 className="font-sans text-[clamp(18px,2vw,26px)] font-medium">
-                {isEs ? TOWER_META[tower].es : TOWER_META[tower].en}
-                <span className="ml-2 text-ink-3">
-                  · {plans.length} {isEs ? 'tipologías' : 'layouts'}
-                </span>
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-              {plans.map((fp) => (
-                <button
-                  key={fp.slug}
-                  onClick={() => setZoom(fp)}
-                  className="group flex flex-col overflow-hidden rounded-[18px] border border-line bg-white text-left transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_40px_rgba(0,0,0,0.10)]"
-                >
-                  <div className="relative aspect-[1.2/1] w-full overflow-hidden bg-[#FAFAFA]">
-                    {fp.image && (
-                      <Image src={fp.image} alt={(isEs ? fp.label.es : fp.label.en ?? fp.label.es) ?? ''} fill sizes="(max-width:640px) 50vw, 25vw" className="object-contain p-4 transition-transform duration-500 group-hover:scale-[1.04]" />
-                    )}
-                    <span className="absolute right-2.5 top-2.5 flex h-8 w-8 items-center justify-center rounded-full bg-ink/0 text-ink opacity-0 backdrop-blur-md transition-all duration-300 group-hover:bg-white/85 group-hover:opacity-100">
-                      <Maximize2 size={14} strokeWidth={2} />
-                    </span>
-                  </div>
-                  <div className="flex items-center justify-between gap-2 border-t border-line px-4 py-3">
-                    <span className="text-[13px] font-semibold text-ink">
-                      {isEs ? fp.label.es : fp.label.en ?? fp.label.es}
-                    </span>
-                    {fp.area && <span className="shrink-0 text-[12px] font-medium tabular-nums text-ink-3">{fp.area}</span>}
-                  </div>
-                </button>
-              ))}
-            </div>
-
-            <div className="mt-10 flex justify-center">
-              <Link href="#aparta" className="btn border-0 bg-accent text-ink hover:brightness-95">
-                <Calendar size={15} strokeWidth={1.8} />
-                {scheduleLabel}
-              </Link>
-            </div>
-          </div>
-        )}
       </div>
 
-      {/* ── Modal del plano en grande ── */}
+      {/* ── Modal del plano ── */}
       {zoom && (
         <div
           className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm md:p-8"
@@ -195,10 +186,10 @@ export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale,
             className="relative flex max-h-full w-full max-w-4xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-between border-b border-line px-5 py-3">
+            <div className="flex items-center justify-between gap-4 border-b border-line px-5 py-3.5">
               <div>
                 <div className="text-[10.5px] uppercase tracking-[0.18em] text-ink-3">
-                  {zoom.tower ? (isEs ? TOWER_META[zoom.tower].es : TOWER_META[zoom.tower].en) : ''}
+                  {zoom.tower ? towerName(zoom.tower) : ''}
                 </div>
                 <div className="text-[16px] font-semibold text-ink">
                   {isEs ? zoom.label.es : zoom.label.en ?? zoom.label.es}
@@ -208,21 +199,50 @@ export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale,
               <button
                 onClick={() => setZoom(null)}
                 aria-label={isEs ? 'Cerrar' : 'Close'}
-                className="flex h-9 w-9 items-center justify-center rounded-full text-ink-3 transition-colors hover:bg-ink/5 hover:text-ink"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-ink-3 transition-colors hover:bg-ink/5 hover:text-ink"
               >
                 <X size={18} strokeWidth={1.8} />
               </button>
             </div>
-            <div className="relative min-h-0 flex-1 bg-[#FAFAFA]">
+
+            <div className="relative min-h-0 flex-1 bg-[#F6F5F2]">
               {zoom.image && (
-                <div className="relative h-[70vh] w-full">
+                <div className="relative h-[58vh] w-full">
                   <Image src={zoom.image} alt={(isEs ? zoom.label.es : zoom.label.en ?? zoom.label.es) ?? ''} fill sizes="100vw" className="object-contain p-4 md:p-8" />
                 </div>
               )}
+            </div>
+
+            <div className="flex flex-wrap items-center justify-between gap-4 border-t border-line px-5 py-4">
+              <div className="flex flex-wrap gap-x-6 gap-y-1 text-[13px]">
+                {zoom.specs?.map((s) => (
+                  <span key={s.key} className="text-ink-3">
+                    {isEs ? s.label.es : s.label.en ?? s.label.es}: <span className="font-medium text-ink">{s.value}</span>
+                  </span>
+                ))}
+              </div>
+              <Link
+                href="#aparta"
+                onClick={() => setZoom(null)}
+                className="btn border-0 bg-accent text-ink hover:brightness-95"
+              >
+                <Calendar size={15} strokeWidth={1.8} />
+                {scheduleLabel}
+                <ArrowRight size={14} strokeWidth={1.8} />
+              </Link>
             </div>
           </div>
         </div>
       )}
     </section>
+  );
+}
+
+function SpecRow({ label, value }: { label?: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between text-[12.5px]">
+      <span className="text-ink-3">{label}</span>
+      <span className="font-medium text-ink tabular-nums">{value}</span>
+    </div>
   );
 }

@@ -572,7 +572,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
         useTowerFloorPlans ? (
           <FichaFloorPlansTowers
             floorPlans={dev.floorPlans}
-            towersImage="/desarrollos/Vellmari/torres.jpg"
+            towersImage="/desarrollos/Vellmari/torresmitad.jpg"
             locale={locale}
             gray={stripe.floorPlans}
             ctaLabels={dev.ctaLabels}
