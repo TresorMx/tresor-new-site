@@ -15,7 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/quattro-plaza-center' : 'https://www.tresor.mx/en/quattro-plaza-center' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/quattro-plaza-center' : 'https://www.tresor.mx/en/quattro-plaza-center',
+      languages: {
+        es: 'https://www.tresor.mx/quattro-plaza-center',
+        en: 'https://www.tresor.mx/en/quattro-plaza-center',
+        'x-default': 'https://www.tresor.mx/quattro-plaza-center',
+      },
+    },
     openGraph: {
       title,
       description,

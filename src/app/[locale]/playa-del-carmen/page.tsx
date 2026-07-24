@@ -15,7 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/playa-del-carmen' : 'https://www.tresor.mx/en/playa-del-carmen' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/playa-del-carmen' : 'https://www.tresor.mx/en/playa-del-carmen',
+      languages: {
+        es: 'https://www.tresor.mx/playa-del-carmen',
+        en: 'https://www.tresor.mx/en/playa-del-carmen',
+        'x-default': 'https://www.tresor.mx/playa-del-carmen',
+      },
+    },
     openGraph: {
       title,
       description,

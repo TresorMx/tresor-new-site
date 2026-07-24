@@ -15,7 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/lotes-residenciales' : 'https://www.tresor.mx/en/lotes-residenciales' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/lotes-residenciales' : 'https://www.tresor.mx/en/lotes-residenciales',
+      languages: {
+        es: 'https://www.tresor.mx/lotes-residenciales',
+        en: 'https://www.tresor.mx/en/lotes-residenciales',
+        'x-default': 'https://www.tresor.mx/lotes-residenciales',
+      },
+    },
     openGraph: {
       title,
       description,

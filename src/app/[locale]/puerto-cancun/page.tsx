@@ -15,7 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/puerto-cancun' : 'https://www.tresor.mx/en/puerto-cancun' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/puerto-cancun' : 'https://www.tresor.mx/en/puerto-cancun',
+      languages: {
+        es: 'https://www.tresor.mx/puerto-cancun',
+        en: 'https://www.tresor.mx/en/puerto-cancun',
+        'x-default': 'https://www.tresor.mx/puerto-cancun',
+      },
+    },
     openGraph: {
       title,
       description,

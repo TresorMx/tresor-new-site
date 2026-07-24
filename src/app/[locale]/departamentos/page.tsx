@@ -15,7 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/departamentos' : 'https://www.tresor.mx/en/departamentos' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/departamentos' : 'https://www.tresor.mx/en/departamentos',
+      languages: {
+        es: 'https://www.tresor.mx/departamentos',
+        en: 'https://www.tresor.mx/en/departamentos',
+        'x-default': 'https://www.tresor.mx/departamentos',
+      },
+    },
     openGraph: {
       title,
       description,

@@ -17,7 +17,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/urban-homes' : 'https://www.tresor.mx/en/urban-homes' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/urban-homes' : 'https://www.tresor.mx/en/urban-homes',
+      languages: {
+        es: 'https://www.tresor.mx/urban-homes',
+        en: 'https://www.tresor.mx/en/urban-homes',
+        'x-default': 'https://www.tresor.mx/urban-homes',
+      },
+    },
     openGraph: {
       title,
       description,

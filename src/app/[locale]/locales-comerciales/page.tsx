@@ -15,7 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/locales-comerciales' : 'https://www.tresor.mx/en/locales-comerciales' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/locales-comerciales' : 'https://www.tresor.mx/en/locales-comerciales',
+      languages: {
+        es: 'https://www.tresor.mx/locales-comerciales',
+        en: 'https://www.tresor.mx/en/locales-comerciales',
+        'x-default': 'https://www.tresor.mx/locales-comerciales',
+      },
+    },
     openGraph: {
       title,
       description,

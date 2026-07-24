@@ -16,7 +16,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/comercializacion' : 'https://www.tresor.mx/en/comercializacion' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/comercializacion' : 'https://www.tresor.mx/en/comercializacion',
+      languages: {
+        es: 'https://www.tresor.mx/comercializacion',
+        en: 'https://www.tresor.mx/en/comercializacion',
+        'x-default': 'https://www.tresor.mx/comercializacion',
+      },
+    },
     openGraph: {
       title,
       description: isEs

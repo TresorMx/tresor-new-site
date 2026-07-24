@@ -20,7 +20,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/desarrollo' : 'https://www.tresor.mx/en/desarrollo' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/desarrollo' : 'https://www.tresor.mx/en/desarrollo',
+      languages: {
+        es: 'https://www.tresor.mx/desarrollo',
+        en: 'https://www.tresor.mx/en/desarrollo',
+        'x-default': 'https://www.tresor.mx/desarrollo',
+      },
+    },
     openGraph: {
       title,
       description: isEs

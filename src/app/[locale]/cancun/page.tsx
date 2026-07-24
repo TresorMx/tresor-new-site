@@ -15,7 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/cancun' : 'https://www.tresor.mx/en/cancun' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/cancun' : 'https://www.tresor.mx/en/cancun',
+      languages: {
+        es: 'https://www.tresor.mx/cancun',
+        en: 'https://www.tresor.mx/en/cancun',
+        'x-default': 'https://www.tresor.mx/cancun',
+      },
+    },
     openGraph: {
       title,
       description,

@@ -15,7 +15,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/tulum' : 'https://www.tresor.mx/en/tulum' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/tulum' : 'https://www.tresor.mx/en/tulum',
+      languages: {
+        es: 'https://www.tresor.mx/tulum',
+        en: 'https://www.tresor.mx/en/tulum',
+        'x-default': 'https://www.tresor.mx/tulum',
+      },
+    },
     openGraph: {
       title,
       description,

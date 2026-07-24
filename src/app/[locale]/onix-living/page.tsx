@@ -17,7 +17,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   return {
     title,
     description,
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/onix-living' : 'https://www.tresor.mx/en/onix-living' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/onix-living' : 'https://www.tresor.mx/en/onix-living',
+      languages: {
+        es: 'https://www.tresor.mx/onix-living',
+        en: 'https://www.tresor.mx/en/onix-living',
+        'x-default': 'https://www.tresor.mx/onix-living',
+      },
+    },
     openGraph: {
       title,
       description,

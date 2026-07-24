@@ -24,6 +24,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       : ['invest in cancun', 'cancun real estate investment', 'commercial property cancun investor', 'remote real estate investment mexico'],
     alternates: {
       canonical: isEs ? 'https://www.tresor.mx/invertir-en-cancun' : 'https://www.tresor.mx/en/invertir-en-cancun',
+      languages: {
+        es: 'https://www.tresor.mx/invertir-en-cancun',
+        en: 'https://www.tresor.mx/en/invertir-en-cancun',
+        'x-default': 'https://www.tresor.mx/invertir-en-cancun',
+      },
     },
     openGraph: {
       title: isEs

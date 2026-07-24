@@ -13,7 +13,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     keywords: isEs
       ? ['locales comerciales en cancun', 'locales comerciales cancun', 'local comercial en venta cancun', 'venta de locales comerciales cancun', 'local comercial cancun', 'locales en venta cancun', 'plaza comercial cancun', 'inversion local comercial cancun', 'local comercial preventa cancun', 'quattro plaza center']
       : ['commercial spaces cancun', 'commercial property for sale cancun', 'retail space cancun', 'commercial plaza cancun investment', 'quattro plaza center'],
-    alternates: { canonical: isEs ? 'https://www.tresor.mx/locales-comerciales-cancun' : 'https://www.tresor.mx/en/locales-comerciales-cancun' },
+    alternates: {
+      canonical: isEs ? 'https://www.tresor.mx/locales-comerciales-cancun' : 'https://www.tresor.mx/en/locales-comerciales-cancun',
+      languages: {
+        es: 'https://www.tresor.mx/locales-comerciales-cancun',
+        en: 'https://www.tresor.mx/en/locales-comerciales-cancun',
+        'x-default': 'https://www.tresor.mx/locales-comerciales-cancun',
+      },
+    },
     openGraph: {
       title,
       description: isEs
