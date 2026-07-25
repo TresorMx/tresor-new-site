@@ -24,6 +24,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/desarrollo`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE}/locales-comerciales-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.98 },
     { url: `${SITE}/departamentos-en-cancun-valmira`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${SITE}/departamentos-en-puerto-cancun-vellmari`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/invertir-en-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/rewards`,    lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE}/brokers`,    lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
@@ -67,6 +68,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const blogSlugs = [
+    'vivir-en-puerto-cancun',
     'donde-comprar-departamento-en-cancun',
     'desarrollos-inmobiliarios-en-cancun',
     'como-invertir-en-locales-comerciales-en-cancun',

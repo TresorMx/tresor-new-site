@@ -27,6 +27,15 @@ export const metadata: Metadata = {
 
 const articles = [
   {
+    slug: 'vivir-en-puerto-cancun',
+    title: 'Vivir en Puerto Cancún: Guía Completa de la Zona Más Exclusiva de Cancún (2026)',
+    description:
+      'Qué es Puerto Cancún, cómo es vivir dentro de sus 327 hectáreas con marina privada y campo de golf, cuánto cuesta entrar y qué residencias hay disponibles hoy.',
+    image: '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AEREA01.jpg',
+    readTime: '10 min',
+    date: '24 de julio de 2026',
+  },
+  {
     slug: 'donde-comprar-departamento-en-cancun',
     title: 'Zona Hotelera vs. Puerto Cancún vs. Av. Huayacán: ¿Dónde Comprar Departamento en Cancún?',
     description:
