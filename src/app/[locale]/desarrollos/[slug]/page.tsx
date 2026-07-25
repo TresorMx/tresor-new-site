@@ -14,7 +14,7 @@ import { verifySession, ASESOR_COOKIE } from '@/lib/asesor/session';
 import MasterPlan from '@/components/MasterPlan';
 import Gallery from '@/components/Gallery';
 import FloorPlans from '@/components/FloorPlans';
-import LocationMap from '@/components/LocationMap';
+import FichaLocationMap from '@/components/ficha/FichaLocationMap';
 import QuoteWizard from '@/components/QuoteWizard';
 import AgendaWidget from '@/components/AgendaWidget';
 import AgendaReservaTabs from '@/components/AgendaReservaTabs';
@@ -527,7 +527,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           </div>
           {location && (
             <div>
-              <LocationMap lat={location.lat} lng={location.lng} address={location.address} />
+              <FichaLocationMap lat={location.lat} lng={location.lng} address={location.address} image={location.image} locale={locale} />
             </div>
           )}
         </div>

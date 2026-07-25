@@ -103,6 +103,11 @@ export default defineType({
         { name: 'lat', type: 'number', title: 'Latitud' },
         { name: 'lng', type: 'number', title: 'Longitud' },
         { name: 'address', type: 'string', title: 'Dirección completa' },
+        {
+          name: 'image', type: 'image', title: 'Imagen de ubicación (opcional)',
+          description: 'Si la subes, la ficha muestra esta imagen en vez del mapa interactivo, con un botón "Ver Google Maps" que abre el mapa real en una ventana emergente. Si la dejas vacía, se muestra el mapa interactivo de siempre. Proporción recomendada 1920×1080 (16:9).',
+          options: { hotspot: true },
+        },
       ],
     }),
     defineField({ name: 'priceLabel', title: 'Precio (texto)', type: 'string', group: 'basic', description: 'Ej: "Desde $2,650,000 MXN + IVA". Se muestra tal cual en el card y en la ficha.' }),

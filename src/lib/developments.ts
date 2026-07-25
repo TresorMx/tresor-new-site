@@ -227,7 +227,14 @@ export interface Development {
   amenitiesGallery?: string[];     // fotos curadas para la columna vertical
                                     // del módulo Amenidades (1 o varias).
   amenities?: Amenity[];           // → módulo Amenidades (si existe)
-  location?: { lat: number; lng: number; address: string }; // → módulo Mapa
+  location?: {
+    lat: number; lng: number; address: string;
+    // Si viene, el módulo Mapa muestra esta foto (16:9) + botón "Ver Google
+    // Maps" en vez del mapa interactivo embebido; el mapa real se abre en
+    // popup (LocationModal) al hacer click. Sin imagen, se queda el mapa
+    // interactivo de siempre — este campo es 100% opcional.
+    image?: string;
+  }; // → módulo Mapa
   locationBullets?: I18nText[];    // 3 puntos de venta bajo el mapa (íconos fijos en UI)
   floorPlans?: FloorPlanTypology[]; // → módulo Floor Plans (si length > 0). Flexible:
                                     // cada tipología trae SUS PROPIOS specs (un local
