@@ -240,7 +240,11 @@ export default defineType({
           },
           { name: 'virtualTourUrl', title: 'Link de tour virtual', type: 'url', description: 'Si lo llenas, aparece el botón "Tour virtual". Si lo dejas vacío, no aparece.' },
           {
-            name: 'tower', title: 'Torre', type: 'string', group: 'floorplans',
+            // Sin `group` aquí: este campo vive DENTRO del objeto de la
+            // tipología (item de un array), no es un campo de nivel raíz del
+            // documento — `group` solo aplica ahí y ponerlo en un campo
+            // anidado es lo que tumbaba el structure tool del Studio.
+            name: 'tower', title: 'Torre', type: 'string',
             description: 'Solo para desarrollos con los planos divididos por torre (hoy Vellmari). Si TODAS las tipologías tienen torre, la ficha muestra el explorador interactivo de torres en vez de las pestañas. Déjalo vacío en el resto de los desarrollos.',
             options: { list: [{ title: 'Torre Sur', value: 'sur' }, { title: 'Torre Norte', value: 'norte' }], layout: 'radio', direction: 'horizontal' },
           },
