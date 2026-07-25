@@ -3,23 +3,29 @@ import Image from 'next/image';
 import BlogArticlesGrid from '@/components/blog/BlogArticlesGrid';
 
 export const metadata: Metadata = {
-  title: 'Blog Tresor Real Estate — Inversión Inmobiliaria en Cancún y la Riviera Maya',
+  // `absolute` es obligatorio aquí: el layout del blog aplica la plantilla
+  // '%s | Tresor Real Estate Blog', y sin esto el título salía con la marca
+  // repetida tres veces y pasado de 100 caracteres (se truncaba en Google).
+  title: {
+    absolute: 'Blog Inmobiliario de Cancún y la Riviera Maya | Tresor Real Estate',
+  },
   description:
-    'Artículos, análisis y guías para invertir con éxito en Cancún y la Riviera Maya: departamentos, locales comerciales, lotes residenciales y preventa.',
+    'Análisis del mercado inmobiliario en Cancún, Puerto Cancún, Playa del Carmen y Tulum: precios por zona, guías de preventa y qué revisar antes de comprar.',
   keywords: [
-    'blog tresor real estate',
-    'inversión inmobiliaria cancun',
     'blog inmobiliario cancun',
+    'mercado inmobiliario cancun',
+    'inversión inmobiliaria riviera maya',
     'guia comprar propiedad cancun',
-    'locales comerciales cancun 2026',
+    'precios departamentos cancun por zona',
+    'comprar en preventa cancun',
   ],
   alternates: {
     canonical: 'https://www.tresor.mx/blog',
   },
   openGraph: {
-    title: 'Blog Tresor Real Estate — Inversión Inmobiliaria en Cancún y la Riviera Maya',
+    title: 'Blog Inmobiliario de Cancún y la Riviera Maya — Tresor Real Estate',
     description:
-      'Artículos expertos sobre inversión inmobiliaria en Cancún y la Riviera Maya: precios, zonas, preventa y análisis del mercado.',
+      'Precios por zona, guías de preventa y análisis del mercado inmobiliario en Cancún, Puerto Cancún, Playa del Carmen y Tulum.',
     url: 'https://www.tresor.mx/blog',
     images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
@@ -111,15 +117,41 @@ const articles = [
 
 const jsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'ItemList',
-  name: 'Blog — Tresor Real Estate',
-  url: 'https://www.tresor.mx/blog',
-  itemListElement: articles.map((a, i) => ({
-    '@type': 'ListItem',
-    position: i + 1,
-    url: `https://www.tresor.mx/blog/${a.slug}`,
-    name: a.title,
-  })),
+  '@graph': [
+    {
+      '@type': 'Blog',
+      '@id': 'https://www.tresor.mx/blog#blog',
+      name: 'Blog Inmobiliario de Cancún y la Riviera Maya',
+      description:
+        'Análisis del mercado inmobiliario en Cancún, Puerto Cancún, Playa del Carmen y Tulum: precios por zona, guías de preventa y qué revisar antes de comprar.',
+      url: 'https://www.tresor.mx/blog',
+      inLanguage: 'es-MX',
+      publisher: {
+        '@type': 'Organization',
+        name: 'Tresor Real Estate',
+        url: 'https://www.tresor.mx',
+        logo: 'https://www.tresor.mx/logos/LogoTresor-ink.svg',
+      },
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://www.tresor.mx' },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.tresor.mx/blog' },
+      ],
+    },
+    {
+      '@type': 'ItemList',
+      name: 'Artículos del blog inmobiliario de Tresor Real Estate',
+      url: 'https://www.tresor.mx/blog',
+      itemListElement: articles.map((a, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        url: `https://www.tresor.mx/blog/${a.slug}`,
+        name: a.title,
+      })),
+    },
+  ],
 };
 
 export default function BlogPage() {
@@ -139,7 +171,7 @@ export default function BlogPage() {
         <div className="absolute inset-0 animate-hero-zoom">
           <Image
             src="/blog/AdobeStock_656227413.jpeg"
-            alt="Blog Tresor Real Estate — Inversión inmobiliaria en Cancún"
+            alt="Vista aérea de Cancún y el mar Caribe — análisis del mercado inmobiliario"
             fill
             priority
             sizes="100vw"
@@ -148,12 +180,14 @@ export default function BlogPage() {
         </div>
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
-          <span className="eyebrow eyebrow-accent font-bold">— Blog</span>
-          <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">
-            Blog Tresor Real Estate
+          <span className="eyebrow eyebrow-accent font-bold">— Análisis y guías</span>
+          <h1 className="mt-5 h-display max-w-4xl text-[clamp(38px,6.4vw,80px)] text-white">
+            El mercado inmobiliario de Cancún,{' '}
+            <span className="text-white/45">explicado</span>
           </h1>
-          <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">
-            Análisis, guías y consejos para invertir con éxito en Cancún, Tulum, Playa del Carmen y Puerto Cancún.
+          <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white/75">
+            Precios reales por zona, guías de preventa y análisis sin humo — para que compares
+            con criterio antes de comprar en Cancún, Puerto Cancún, Playa del Carmen o Tulum.
           </p>
         </div>
       </section>
