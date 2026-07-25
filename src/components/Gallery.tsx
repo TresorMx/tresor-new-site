@@ -6,8 +6,17 @@ import { ChevronLeft, ChevronRight, Orbit } from 'lucide-react';
 import VirtualTourModal from '@/components/ficha/VirtualTourModal';
 
 export default function Gallery({
-  images, alt, gray = true, tourUrl,
-}: { images: string[]; alt: string; gray?: boolean; tourUrl?: string }) {
+  images, alt, gray = true, tourUrl, title, eyebrow,
+}: {
+  images: string[];
+  alt: string;
+  gray?: boolean;
+  tourUrl?: string;
+  // La ficha usa el nombre del desarrollo como encabezado; una landing puede
+  // querer su propio copy sin ensuciar el alt de las imágenes.
+  title?: string;
+  eyebrow?: string;
+}) {
   const [active, setActive] = useState(0);
   const [tourOpen, setTourOpen] = useState(false);
 
@@ -20,8 +29,8 @@ export default function Gallery({
         {/* Header */}
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <span className="eyebrow eyebrow-accent block font-bold">— Galería</span>
-            <h2 className="mt-3 h-display text-[clamp(24px,3.2vw,48px)]">{alt}</h2>
+            <span className="eyebrow eyebrow-accent block font-bold">{eyebrow ?? '— Galería'}</span>
+            <h2 className="mt-3 h-display text-[clamp(24px,3.2vw,48px)]">{title ?? alt}</h2>
           </div>
           {tourUrl ? (
             <button

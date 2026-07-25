@@ -8,6 +8,7 @@ import {
   ShoppingBag, Ship,
 } from 'lucide-react';
 import Chatbot from '@/components/Chatbot';
+import Gallery from '@/components/Gallery';
 import LocationMap from '@/components/LocationMap';
 import RevealOnScroll from '@/components/RevealOnScroll';
 import FichaFloorPlansTowers from '@/components/ficha/FichaFloorPlansTowers';
@@ -36,21 +37,22 @@ const AMENIDADES = [
   { icon: Wine,      label: 'Lounge bar' },
 ];
 
-const AMENIDADES_FOTOS = [
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES09.jpg`, alt: 'Alberca infinity frente al mar Caribe — Vellmari Puerto Cancún', big: true },
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES02.jpg`, alt: 'Fire pit lounge al atardecer — Vellmari Puerto Cancún' },
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES04.jpg`, alt: 'Terraza con pérgola y comedor exterior — Vellmari' },
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES06-.jpg`, alt: 'Alberca principal con muro de agua — Vellmari' },
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES07.jpg`, alt: 'Beach club con camastros frente a la laguna — Vellmari' },
+// Una sola galería en slider (mismo componente que las fichas) — arquitectura
+// y amenidades juntas, ordenadas por impacto para que el primer frame venda.
+const GALERIA = [
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_FACHADA04.jpg`,
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES09.jpg`,
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES06-.jpg`,
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES02.jpg`,
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES07.jpg`,
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_AMENIDADES04.jpg`,
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_FACHADA03.jpg`,
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_AEREADETALLE02.jpg`,
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_AEREADETALLE04.jpg`,
+  `${IMG}/ENTREGAFINAL_CADU_VELMARI_FACHADA02.jpg`,
 ];
 
-const GALERIA = [
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_FACHADA04.jpg`, alt: 'Torres de Vellmari al atardecer desde la marina de Puerto Cancún', big: true },
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_FACHADA03.jpg`, alt: 'Detalle arquitectónico de la fachada — Vellmari Puerto Cancún' },
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_AEREADETALLE02.jpg`, alt: 'Vista aérea de las albercas y áreas comunes — Vellmari' },
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_FACHADA02.jpg`, alt: 'Acceso principal con caseta de vigilancia — Vellmari' },
-  { src: `${IMG}/ENTREGAFINAL_CADU_VELMARI_AEREADETALLE04.jpg`, alt: 'Áreas verdes y canchas — Vellmari Puerto Cancún' },
-];
+const TOUR_URL = 'https://my.matterport.com/show/?m=JM56Q2CtX2f';
 
 const ENTORNO = [
   { icon: Ship,        label: 'Marina privada para embarcaciones' },
@@ -371,26 +373,8 @@ export default function VellmariLanding({ floorPlans }: { floorPlans: FloorPlanT
             </h2>
           </RevealOnScroll>
 
-          {/* mosaico de fotos */}
-          <div className="mt-12 grid gap-4 md:grid-cols-3 md:grid-rows-2">
-            {AMENIDADES_FOTOS.map((g) => (
-              <div
-                key={g.src}
-                className={`group relative overflow-hidden rounded-[24px] bg-bg-soft ${
-                  g.big ? 'md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto' : 'aspect-[4/3]'
-                }`}
-              >
-                <Image
-                  src={g.src} alt={g.alt} fill
-                  sizes="(max-width:768px) 100vw, 33vw"
-                  className="object-cover transition-transform duration-[900ms] ease-soft group-hover:scale-[1.04]"
-                />
-              </div>
-            ))}
-          </div>
-
           {/* lista de amenidades */}
-          <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+          <div className="mt-12 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
             {AMENIDADES.map(({ icon: Icon, label }) => (
               <div key={label} className="flex items-center gap-3 rounded-[20px] bg-bg-soft px-5 py-4">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-ink">
@@ -402,6 +386,16 @@ export default function VellmariLanding({ floorPlans }: { floorPlans: FloorPlanT
           </div>
         </div>
       </section>
+
+      {/* ═════════ GALERÍA (slider, mismo componente que las fichas) ═════════ */}
+      <Gallery
+        images={GALERIA}
+        alt="Vellmari — Puerto Cancún"
+        eyebrow="— Galería"
+        title="Arquitectura y amenidades"
+        tourUrl={TOUR_URL}
+        gray
+      />
 
       {/* ═════════ BANNER CTA 2 ═════════ */}
       <CtaBanner
@@ -426,38 +420,8 @@ export default function VellmariLanding({ floorPlans }: { floorPlans: FloorPlanT
         />
       </div>
 
-      {/* ═════════ GALERÍA ═════════ */}
-      <section className="bg-white py-24 md:py-32">
-        <div className="container-wrap">
-          <RevealOnScroll className="max-w-2xl">
-            <span className="eyebrow eyebrow-accent font-bold">— Galería</span>
-            <h2 className="mt-5 h-display text-[clamp(28px,3.6vw,52px)] text-ink">
-              Arquitectura pensada<br />
-              <span className="text-ink-3">para el Caribe</span>
-            </h2>
-          </RevealOnScroll>
-
-          <div className="mt-12 grid gap-4 md:grid-cols-3 md:grid-rows-2">
-            {GALERIA.map((g) => (
-              <div
-                key={g.src}
-                className={`group relative overflow-hidden rounded-[24px] bg-bg-soft ${
-                  g.big ? 'md:col-span-2 md:row-span-2 aspect-[4/3] md:aspect-auto' : 'aspect-[4/3]'
-                }`}
-              >
-                <Image
-                  src={g.src} alt={g.alt} fill
-                  sizes="(max-width:768px) 100vw, 33vw"
-                  className="object-cover transition-transform duration-[900ms] ease-soft group-hover:scale-[1.04]"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ═════════ FAQ ═════════ */}
-      <section className="bg-bg-soft py-24 md:py-32">
+      <section className="bg-white py-24 md:py-32">
         <div className="container-wrap max-w-3xl">
           <span className="eyebrow eyebrow-accent font-bold">— Preguntas frecuentes</span>
           <h2 className="mt-5 h-display text-[clamp(28px,3.6vw,52px)] text-ink">
