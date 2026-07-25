@@ -8,6 +8,13 @@ import DriveHeader from '@/components/drive/DriveHeader';
 // (Urban Homes/La Selva y los que sigan), mismo patrón que quattroplaza-web.
 // No toca el /cotizador standalone (embebido en GHL vía iframe), que no
 // vive bajo /asesores/.
+// Landings de captación pagada — se sirven "bare" (sin chrome del sitio),
+// junto con sus sub-rutas (/gracias). Agregar aquí cada landing nueva.
+const LANDINGS = [
+  '/departamentos-en-cancun-valmira',
+  '/departamentos-en-puerto-cancun-vellmari',
+];
+
 export default function ChromeGate({
   header,
   footer,
@@ -21,13 +28,12 @@ export default function ChromeGate({
 }) {
   const pathname = usePathname();
   // Herramientas a pantalla completa (cotizador de asesor) y landings de
-  // captación pagada (Valmira) — sin header/footer/nav ni el chatbot genérico
-  // (FloatingLayer): nada que distraiga de convertir. La landing de Valmira
-  // renderiza su PROPIO chatbot (exclusivo del proyecto) dentro de la página.
+  // captación pagada — sin header/footer/nav ni el chatbot genérico
+  // (FloatingLayer): nada que distraiga de convertir. Cada landing renderiza
+  // su PROPIO chatbot (exclusivo del proyecto) dentro de la página.
   const bare =
     (pathname?.includes('/asesores/') && pathname?.endsWith('/cotizador')) ||
-    pathname === '/departamentos-en-cancun-valmira' ||
-    pathname?.startsWith('/departamentos-en-cancun-valmira/');
+    LANDINGS.some((l) => pathname === l || pathname?.startsWith(`${l}/`));
 
   if (bare) {
     return <main className="min-h-screen">{children}</main>;

@@ -37,9 +37,13 @@ interface Props {
   locale: string;
   gray?: boolean;
   ctaLabels?: { scheduleVisit?: I18nText };
+  // En la ficha el CTA del modal lleva al bloque #aparta; en una landing de
+  // captación no existe esa sección, así que se le pasa un handler para
+  // hacer scroll al formulario propio de la landing.
+  onCtaClick?: () => void;
 }
 
-export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale, gray = false, ctaLabels }: Props) {
+export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale, gray = false, ctaLabels, onCtaClick }: Props) {
   const isEs = locale !== 'en';
   const [selected, setSelected] = useState<Tower | null>(null);
   const [hovered, setHovered] = useState<Tower | null>(null);
@@ -220,15 +224,27 @@ export default function FichaFloorPlansTowers({ floorPlans, towersImage, locale,
                   </span>
                 ))}
               </div>
-              <Link
-                href="#aparta"
-                onClick={() => setZoom(null)}
-                className="btn border-0 bg-accent text-ink hover:brightness-95"
-              >
-                <Calendar size={15} strokeWidth={1.8} />
-                {scheduleLabel}
-                <ArrowRight size={14} strokeWidth={1.8} />
-              </Link>
+              {onCtaClick ? (
+                <button
+                  type="button"
+                  onClick={() => { setZoom(null); onCtaClick(); }}
+                  className="btn border-0 bg-accent text-ink hover:brightness-95"
+                >
+                  <Calendar size={15} strokeWidth={1.8} />
+                  {scheduleLabel}
+                  <ArrowRight size={14} strokeWidth={1.8} />
+                </button>
+              ) : (
+                <Link
+                  href="#aparta"
+                  onClick={() => setZoom(null)}
+                  className="btn border-0 bg-accent text-ink hover:brightness-95"
+                >
+                  <Calendar size={15} strokeWidth={1.8} />
+                  {scheduleLabel}
+                  <ArrowRight size={14} strokeWidth={1.8} />
+                </Link>
+              )}
             </div>
           </div>
         </div>
