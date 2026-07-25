@@ -15,19 +15,20 @@ import LocationModal from '@/components/LocationModal';
 // 100% opcional — un desarrollo sin `location.image` se comporta exactamente
 // igual que antes de este componente existir.
 export default function FichaLocationMap({
-  lat, lng, address, image, locale,
+  lat, lng, address, image, mapStyle, locale,
 }: {
   lat: number;
   lng: number;
   address: string;
   image?: string;
+  mapStyle?: 'tresor' | 'earth';
   locale: string;
 }) {
   const [open, setOpen] = useState(false);
   const isEs = locale !== 'en';
 
   if (!image) {
-    return <LocationMap lat={lat} lng={lng} address={address} />;
+    return <LocationMap lat={lat} lng={lng} address={address} mapStyle={mapStyle} />;
   }
 
   return (
@@ -57,6 +58,7 @@ export default function FichaLocationMap({
         lng={lng}
         address={address}
         title={isEs ? 'Ubicación' : 'Location'}
+        mapStyle={mapStyle}
       />
     </>
   );

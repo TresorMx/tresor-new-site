@@ -3,7 +3,12 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Google Maps con estilo blanco editorial y pin custom con el logo Quattro.
+ * Google Maps con dos estilos (elegidos en Sanity por desarrollo/plaza):
+ *   - 'tresor' (default): blanco editorial minimalista, el de siempre.
+ *   - 'earth': satélite + etiquetas (mapTypeId 'hybrid', el look "Google
+ *     Earth"). Los estilos custom de Maps solo aplican a tiles vectoriales
+ *     (roadmap/terrain), así que en modo earth se omiten — no tienen efecto
+ *     sobre imagen satelital.
  * Carga la JS API on-demand (sin Next/Script para mantenerlo client-side).
  *
  * Requiere NEXT_PUBLIC_GMAPS_API_KEY en .env.local.
@@ -14,12 +19,14 @@ export default function LocationMap({
   zoom = 16,
   address,
   pinSvgUrl = '/logos/mark.svg',
+  mapStyle = 'tresor',
 }: {
   lat: number;
   lng: number;
   zoom?: number;
   address?: string;
   pinSvgUrl?: string;
+  mapStyle?: 'tresor' | 'earth';
 }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -34,6 +41,7 @@ export default function LocationMap({
 
     let cancelled = false;
     const loader = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&v=weekly&libraries=marker`;
+    const isEarth = mapStyle === 'earth';
 
     function init() {
       if (cancelled || !ref.current) return;
@@ -42,7 +50,9 @@ export default function LocationMap({
         zoom,
         disableDefaultUI: true,
         zoomControl: true,
-        styles: WHITE_EDITORIAL_STYLE,
+        ...(isEarth
+          ? { mapTypeId: 'hybrid' }
+          : { styles: WHITE_EDITORIAL_STYLE }),
       });
       // Pulso animado debajo del pin
       const pulseSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
@@ -90,7 +100,7 @@ export default function LocationMap({
     return () => {
       cancelled = true;
     };
-  }, [lat, lng, zoom, address, pinSvgUrl]);
+  }, [lat, lng, zoom, address, pinSvgUrl, mapStyle]);
 
   return <div ref={ref} className="h-[420px] w-full rounded-lg overflow-hidden border border-line bg-bg-soft" />;
 }

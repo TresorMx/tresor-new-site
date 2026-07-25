@@ -8,7 +8,7 @@ import LocationMap from '@/components/LocationMap';
 // nueva) pero envolviendo el mapa blanco editorial (LocationMap) en vez de
 // un iframe — para "Cómo llegar" en vez de mandar a Google Maps de golpe.
 export default function LocationModal({
-  open, onClose, lat, lng, address, title,
+  open, onClose, lat, lng, address, title, mapStyle,
 }: {
   open: boolean;
   onClose: () => void;
@@ -16,6 +16,7 @@ export default function LocationModal({
   lng: number;
   address: string;
   title?: string;
+  mapStyle?: 'tresor' | 'earth';
 }) {
   useEffect(() => {
     if (!open) return;
@@ -68,7 +69,7 @@ export default function LocationModal({
           </div>
         </div>
         <div className="p-4">
-          <LocationMap lat={lat} lng={lng} address={address} />
+          <LocationMap lat={lat} lng={lng} address={address} mapStyle={mapStyle} />
         </div>
       </div>
     </div>

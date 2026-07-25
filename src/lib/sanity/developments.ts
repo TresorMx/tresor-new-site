@@ -26,7 +26,7 @@ const DEVELOPMENT_FIELDS = `
   intent,
   city,
   zone,
-  location{ lat, lng, address, "image": image.asset->url },
+  location{ lat, lng, address, "image": image.asset->url, mapStyle },
   priceLabel,
   description,
   logoScale,

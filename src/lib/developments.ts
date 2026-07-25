@@ -234,6 +234,9 @@ export interface Development {
     // popup (LocationModal) al hacer click. Sin imagen, se queda el mapa
     // interactivo de siempre — este campo es 100% opcional.
     image?: string;
+    // Estilo del mapa interactivo real (directo o en popup) — 'tresor'
+    // (editorial blanco, default) o 'earth' (satélite + etiquetas).
+    mapStyle?: 'tresor' | 'earth';
   }; // → módulo Mapa
   locationBullets?: I18nText[];    // 3 puntos de venta bajo el mapa (íconos fijos en UI)
   floorPlans?: FloorPlanTypology[]; // → módulo Floor Plans (si length > 0). Flexible:

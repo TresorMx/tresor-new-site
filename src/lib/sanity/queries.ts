@@ -63,7 +63,7 @@ const PLAZA_FIELDS = `
     label, labelEn, area, frente, fondo, order,
     "image": image.asset->url
   },
-  location{ lat, lng, address, "image": image.asset->url },
+  location{ lat, lng, address, "image": image.asset->url, mapStyle },
   unitSpecsTemplate,
   paymentPlans,
   "units": units[]->{${UNIT_FIELDS}}

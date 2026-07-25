@@ -527,7 +527,7 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
           </div>
           {location && (
             <div>
-              <FichaLocationMap lat={location.lat} lng={location.lng} address={location.address} image={location.image} locale={locale} />
+              <FichaLocationMap lat={location.lat} lng={location.lng} address={location.address} image={location.image} mapStyle={location.mapStyle} locale={locale} />
             </div>
           )}
         </div>

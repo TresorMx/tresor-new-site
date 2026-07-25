@@ -108,6 +108,18 @@ export default defineType({
           description: 'Si la subes, la ficha muestra esta imagen en vez del mapa interactivo, con un botón "Ver Google Maps" que abre el mapa real en una ventana emergente. Si la dejas vacía, se muestra el mapa interactivo de siempre. Proporción recomendada 1920×1080 (16:9).',
           options: { hotspot: true },
         },
+        {
+          name: 'mapStyle', type: 'string', title: 'Estilo del mapa interactivo',
+          description: 'Aplica al mapa real (el que se ve directo o el que abre el botón "Ver Google Maps"). "Tresor" es el editorial blanco de siempre; "Earth" es vista satelital con etiquetas, como Google Earth.',
+          options: {
+            list: [
+              { title: 'Tresor (editorial)', value: 'tresor' },
+              { title: 'Earth (satélite)', value: 'earth' },
+            ],
+            layout: 'radio', direction: 'horizontal',
+          },
+          initialValue: 'tresor',
+        },
       ],
     }),
     defineField({ name: 'priceLabel', title: 'Precio (texto)', type: 'string', group: 'basic', description: 'Ej: "Desde $2,650,000 MXN + IVA". Se muestra tal cual en el card y en la ficha.' }),
