@@ -52,8 +52,13 @@ export default function FloatingLayer() {
   if (!isAsesor && !isBroker) return <Chatbot devSlug={fichaMatch?.[1]} />;
 
   const base = isAsesor ? '/asesores' : '/brokers/drive';
-  const alreadyInDrive = pathname === base || pathname.startsWith(`${base}/`);
-  if (alreadyInDrive) return null;
+  // Solo el ÍNDICE (/asesores, /brokers/drive) no necesita el botón — ya es
+  // "todos los drives". Una ficha de Drive específica (/asesores/{slug}) SÍ
+  // lo necesita: es la única forma de volver al índice sin editar la URL a
+  // mano. Antes se usaba startsWith(`${base}/`), que también apagaba el
+  // botón dentro de cada ficha de Drive, dejando sin salida al asesor.
+  const alreadyAtDriveIndex = pathname === base;
+  if (alreadyAtDriveIndex) return null;
 
   const href = fichaMatch ? `${base}/${fichaMatch[1]}` : base;
   const label = fichaMatch ? 'Drive de Ventas' : 'Todos los drives';
