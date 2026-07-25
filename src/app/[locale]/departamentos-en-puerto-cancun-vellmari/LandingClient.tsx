@@ -406,7 +406,6 @@ export default function VellmariLanding({ floorPlans }: { floorPlans: FloorPlanT
         text="Un asesor especializado te comparte disponibilidad real por torre, precios y planes de pago."
         cta="Ver disponibilidad"
         onClick={scrollToForm}
-        align="left"
       />
 
       {/* ═════════ FLOOR PLANS (explorador por torre) ═════════ */}
@@ -505,7 +504,7 @@ export default function VellmariLanding({ floorPlans }: { floorPlans: FloorPlanT
 
 /* ─────────────── banner CTA full-width ─────────────── */
 function CtaBanner({
-  image, alt, eyebrow, title, text, cta, onClick, align = 'center',
+  image, alt, eyebrow, title, text, cta, onClick,
 }: {
   image: string;
   alt: string;
@@ -514,20 +513,18 @@ function CtaBanner({
   text: string;
   cta: string;
   onClick: () => void;
-  align?: 'center' | 'left';
 }) {
-  const left = align === 'left';
   return (
     <section className="relative isolate flex min-h-[62vh] items-center overflow-hidden bg-ink py-24 md:min-h-[70vh] md:py-32">
       <Image src={image} alt={alt} fill sizes="100vw" className="object-cover" />
-      <div className={`absolute inset-0 ${left ? 'bg-gradient-to-r from-ink/90 via-ink/60 to-ink/20' : 'bg-ink/55'}`} />
+      <div className="absolute inset-0 bg-ink/55" />
       <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
 
       <div className="container-wrap relative z-10">
-        <RevealOnScroll className={left ? 'max-w-2xl' : 'mx-auto max-w-3xl text-center'}>
+        <RevealOnScroll className="mx-auto max-w-3xl text-center">
           <span className="eyebrow eyebrow-accent font-bold">{eyebrow}</span>
           <h2 className="mt-5 h-display text-[clamp(28px,4vw,58px)] text-white">{title}</h2>
-          <p className={`mt-5 max-w-xl text-[15px] font-light leading-relaxed text-white/70 md:text-[16px] ${left ? '' : 'mx-auto'}`}>
+          <p className="mx-auto mt-6 max-w-2xl text-[16px] font-normal leading-relaxed text-white/85 md:text-[18px]">
             {text}
           </p>
           <button onClick={onClick} className="btn btn-lg mt-9 border-0 bg-accent text-ink hover:brightness-95">
