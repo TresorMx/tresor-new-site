@@ -48,7 +48,7 @@ const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 
 // Los 4 pilotos ya armados en estático. Agregar más slugs aquí conforme se
 // vayan terminando fichas nuevas.
-const TARGET_SLUGS = ['olivia-wow-condos', 'koa-onix', 'zienna-onix', 'blume-urban', 'esther-wow-condos', 'ximena-wow-condos', 'loreta-wow-condos', 'valmira-urban', 'villalta-onix', 'xaviera-wow-condos'];
+const TARGET_SLUGS = ['olivia-wow-condos', 'koa-onix', 'zienna-onix', 'blume-urban', 'esther-wow-condos', 'ximena-wow-condos', 'loreta-wow-condos', 'valmira-urban', 'villalta-onix', 'xaviera-wow-condos', 'vellmari-puerto-cancun'];
 
 type SanityImage = { _type: 'image'; asset: { _type: 'reference'; _ref: string } };
 
@@ -183,6 +183,11 @@ async function migrateDevelopment(dev: Development, devDocId: string) {
       shortLabelEn: fp.shortLabel?.en,
       specs,
       virtualTourUrl: fp.virtualTourUrl,
+      // Agrupación por torre (hoy solo Vellmari) — sin esto, migrar el
+      // desarrollo tumbaría el explorador interactivo de torres, porque la
+      // ficha lo activa solo si TODAS las tipologías traen `tower`.
+      tower: fp.tower,
+      area: fp.area,
     };
     if (img) fpDoc.image = img;
     stripUndefined(fpDoc);

@@ -1957,6 +1957,17 @@ let _mergedDevCache: Development[] | null = null;
 let _mergedDevCacheTs = 0;
 const DEV_CACHE_TTL = 60_000; // 1 minuto
 
+// Quita solo las claves con `undefined` (deja pasar `null`, que en Studio
+// significa "el editor vació este campo a propósito" y sí debe ganarle al
+// estático). Ver el comentario del merge en loadMergedDevelopments.
+// El tipo se conserva (T y no Partial<T>) porque solo se quitan claves cuyo
+// valor era undefined — un campo requerido de Development nunca lo es.
+function definedOnly<T extends object>(obj: T): T {
+  return Object.fromEntries(
+    Object.entries(obj).filter(([, v]) => v !== undefined),
+  ) as T;
+}
+
 async function loadMergedDevelopments(): Promise<Development[]> {
   if (!USE_SANITY_DEV) return developments;
 
@@ -1996,7 +2007,14 @@ async function loadMergedDevelopments(): Promise<Development[]> {
       // entero. `devFields` con un valor explícito (incluido `null`, si un
       // editor limpió el campo en Studio) sigue ganando; solo lo que Sanity
       // nunca preguntó (undefined) cae de vuelta al default estático.
-      bySlug.set(sd.slug, { ...staticEntry, ...devFields, developer: developerId });
+      //
+      // El spread NO basta para eso: `{...a, ...b}` con `b.x === undefined`
+      // deja `x` en undefined y PISA el estático. normalizeDevelopment
+      // devuelve undefined para cada array vacío (`floorPlans.length ? … :
+      // undefined`, y lo mismo para contentBlocks/gallery/amenities…), así
+      // que un documento de Sanity a medio llenar borraba el contenido rico
+      // del estático. Por eso se filtran los undefined y no el null.
+      bySlug.set(sd.slug, { ...staticEntry, ...definedOnly(devFields), developer: developerId });
     }
 
     _mergedDevCache = Array.from(bySlug.values());

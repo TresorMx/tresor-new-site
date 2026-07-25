@@ -61,7 +61,7 @@ const DEVELOPMENT_FIELDS = `
     label, labelEn, shortLabel, shortLabelEn,
     "image": image.asset->url,
     "specs": specs[]{ "key": _key, label, labelEn, value },
-    virtualTourUrl
+    virtualTourUrl, tower, area
   },
   "contentBlocks": contentBlocks[]{
     eyebrow, eyebrowEn, title, titleEn, titleMuted, titleMutedEn,
@@ -139,6 +139,10 @@ function normalizeDevelopment(raw: any): Development & { developerDocId?: string
       value: s.value,
     })),
     virtualTourUrl: fp.virtualTourUrl,
+    // Solo Vellmari por ahora — si TODAS las tipologías traen torre, la ficha
+    // usa el explorador interactivo en vez de las pestañas genéricas.
+    tower: fp.tower ?? undefined,
+    area: fp.area ?? undefined,
   }));
 
   const contentBlocks: ContentBlock[] = (raw.contentBlocks ?? []).map((cb: any) => ({

@@ -239,8 +239,14 @@ export default defineType({
             }],
           },
           { name: 'virtualTourUrl', title: 'Link de tour virtual', type: 'url', description: 'Si lo llenas, aparece el botón "Tour virtual". Si lo dejas vacío, no aparece.' },
+          {
+            name: 'tower', title: 'Torre', type: 'string', group: 'floorplans',
+            description: 'Solo para desarrollos con los planos divididos por torre (hoy Vellmari). Si TODAS las tipologías tienen torre, la ficha muestra el explorador interactivo de torres en vez de las pestañas. Déjalo vacío en el resto de los desarrollos.',
+            options: { list: [{ title: 'Torre Sur', value: 'sur' }, { title: 'Torre Norte', value: 'norte' }], layout: 'radio', direction: 'horizontal' },
+          },
+          { name: 'area', title: 'Superficie (para la tarjeta del explorador)', type: 'string', description: 'Solo se usa con el explorador de torres. Ya formateada — ej: "250 m²".' },
         ],
-        preview: { select: { title: 'label', subtitle: 'shortLabel', media: 'image' } },
+        preview: { select: { title: 'label', subtitle: 'area', media: 'image' } },
       }],
     }),
 
