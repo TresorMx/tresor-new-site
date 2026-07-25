@@ -58,7 +58,10 @@ export default function ArticlePage() {
       />
 
       {/* Hero */}
-      <div className="relative h-[55vh] min-h-[400px] overflow-hidden">
+      <div
+        data-nav="dark"
+        className="relative -mt-[72px] h-[55vh] min-h-[400px] overflow-hidden"
+      >
         <Image
           src="/blog/AdobeStock_841077811.jpeg"
           alt="Invertir en Cancún desde Monterrey CDMX o Guadalajara — Quattro Plaza Center"
@@ -68,7 +71,7 @@ export default function ArticlePage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/40 to-transparent" />
-        <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10">
+        <div className="absolute inset-0 flex flex-col justify-end px-6 pb-10 pt-[104px]">
           <div className="container-wrap">
             <p className="eyebrow eyebrow-accent mb-3">Inversión desde el Norte</p>
             <h1 className="h-display text-[clamp(28px,4.5vw,52px)] text-white max-w-3xl leading-tight">
