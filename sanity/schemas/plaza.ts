@@ -163,8 +163,20 @@ export default defineType({
         { name: 'address', type: 'string', title: 'Dirección completa' },
         {
           name: 'image', type: 'image', title: 'Imagen de ubicación (opcional)',
-          description: 'Si la subes, la ficha muestra esta imagen en vez del mapa interactivo, con un botón "Ver Google Maps" que abre el mapa real en una ventana emergente. Si la dejas vacía, se muestra el mapa interactivo de siempre. Proporción recomendada 1920×1080 (16:9).',
+          description: 'Si la subes, la ficha muestra esta imagen en vez del mapa interactivo, con un botón "Ver Google Maps" que abre el mapa real en una ventana emergente. Si la dejas vacía, se muestra el mapa interactivo de siempre.',
           options: { hotspot: true },
+        },
+        {
+          name: 'imageAspect', type: 'string', title: 'Proporción de la imagen de ubicación',
+          description: 'Elige según cómo recortaste tu imagen. Panorámica: 1920×1080 (16:9). Cuadrada: 1080×1080 (1:1).',
+          options: {
+            list: [
+              { title: 'Panorámica — 1920×1080 (16:9)', value: '16:9' },
+              { title: 'Cuadrada — 1080×1080 (1:1)', value: '1:1' },
+            ],
+            layout: 'radio', direction: 'horizontal',
+          },
+          initialValue: '16:9',
         },
         {
           name: 'mapStyle', type: 'string', title: 'Estilo del mapa interactivo',

@@ -100,7 +100,7 @@ export interface Plaza {
   logoDark?: string;
   masterPlanImage?: string;
   masterPlanLevel2?: string;
-  location?: { lat: number; lng: number; address: string; image?: string; mapStyle?: 'tresor' | 'earth' };
+  location?: { lat: number; lng: number; address: string; image?: string; imageAspect?: '16:9' | '1:1'; mapStyle?: 'tresor' | 'earth' };
   highlights?: { label: string; labelEn?: string; value: string; valueEn?: string }[];
   /** Campos de local que aplican PARA ESTA PLAZA (definidos en admin) */
   unitSpecsTemplate?: UnitSpecTemplate[];
