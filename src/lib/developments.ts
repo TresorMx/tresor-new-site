@@ -14,7 +14,7 @@ import type { AmenityKey } from '@/lib/amenities';
 export type { I18nText };
 
 export type City = 'Cancún' | 'Puerto Cancún' | 'Puerto Morelos' | 'Playa del Carmen' | 'Tulum';
-export type PropertyType = 'Departamento' | 'Casa' | 'Lote Residencial' | 'Local Comercial';
+export type PropertyType = 'Departamento' | 'Casa' | 'Lote Residencial' | 'Local Comercial' | 'Bodega';
 export type DevType = 'Residencial' | 'Comercial' | 'Lotes' | 'Mixto';
 export type Intent = 'vivir' | 'invertir' | 'negocio';
 export type DevStatus = 'Preventa' | 'En obra' | 'Entrega inmediata' | 'Próximamente';
@@ -32,7 +32,7 @@ export type SalesStage = 'Preventa' | 'Lanzamiento' | 'Últimas unidades' | 'Ent
 export type Relationship = 'develop' | 'sales-partner' | 'listings' | 'rentals';
 
 // Desarrolladores (Tresor + socios actuales)
-export type DeveloperId = 'Tresor' | 'Live' | 'Onix' | 'Urban Homes';
+export type DeveloperId = 'Tresor' | 'Live' | 'Onix' | 'Urban Homes' | 'Grupo Roa';
 // Alias retro-compat: el código actual usa `Developer` como el id.
 export type Developer = DeveloperId;
 
@@ -91,6 +91,16 @@ export const developers: Record<DeveloperId, DeveloperEntity> = {
       es: 'Más de 18 años de experiencia en Quintana Roo, 22 desarrollos y más de 5,000 viviendas entregadas en Puerto Cancún, Playa del Carmen y Tulum respaldan a Urban Homes como referente del estándar de vida de lujo en la zona más exclusiva de Cancún.',
       en: 'More than 18 years of experience in Quintana Roo, 22 developments and over 5,000 homes delivered in Puerto Cancún, Playa del Carmen and Tulum position Urban Homes as the benchmark for luxury living in Cancún\'s most exclusive area.',
     },
+  },
+  // Sin `credentials`: no tenemos copy verificado de trayectoria de Grupo Roa
+  // (años de experiencia, # de proyectos) — mejor omitirlo que inventar cifras.
+  // FichaDeveloper ya soporta credentials ausente (solo muestra el eyebrow).
+  'Grupo Roa': {
+    id: 'Grupo Roa',
+    name: 'Grupo Roa',
+    logoDark: '/listings/lindavista/logo-lindavista-dark.png',
+    logoWhite: '/listings/lindavista/logo-lindavista-white-2048x358.png',
+    blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
   },
 };
 
@@ -1943,6 +1953,177 @@ export const developments: Development[] = [
     descriptionEn:
       'Luxury apartments steps from the Caribbean Sea and Playa del Carmen\'s famous Fifth Avenue. Full details coming soon.',
   },
+  // ── LISTINGS — inventario de terceros que Tresor comercializa (no es
+  // developer propio ni Sales Partner de un desarrollo residencial/de lujo).
+  // Plaza Lindavista (Grupo Roa) tiene dos productos con lógica comercial
+  // distinta —renta de locales/oficinas y venta de bodegas— así que son DOS
+  // entradas de `development` independientes, cada una con su propia ficha,
+  // en vez de forzarlas a convivir en una sola. Contenido real sacado del
+  // brochure oficial (público/listings/lindavista) y lindavistacancun.com —
+  // sin coordenadas verificadas, `location` se deja vacío a propósito (ver
+  // descripción del campo en el schema de Sanity).
+  {
+    slug: 'lindavista-locales',
+    name: 'Renta de Locales',
+    relationship: 'rentals',
+    developer: 'Grupo Roa',
+    brand: 'Plaza Lindavista',
+    city: 'Cancún',
+    zone: 'Av. López Portillo',
+    type: 'Comercial',
+    intent: ['invertir'],
+    status: 'Entrega inmediata',
+    image: '/listings/lindavista/01-scaled.jpg',
+    href: '/desarrollos/lindavista-locales',
+    featured: false,
+    logo: '/listings/lindavista/logo-lindavista-white-2048x358.png',
+    badge: 'En Renta',
+    propertyType: 'Local Comercial',
+    priceLabel: 'Renta desde $19,076 MXN/mes',
+    priceLabelEn: 'Rent from $19,076 MXN/month',
+    description:
+      'Locales comerciales y oficinas en renta en Plaza Lindavista, sobre Av. López Portillo — 40 espacios desde 52 hasta 267 m², con más de 130 cajones de estacionamiento.',
+    descriptionEn:
+      'Retail spaces and offices for rent at Plaza Lindavista, on Av. López Portillo — 40 spaces from 52 to 267 sqm, with over 130 parking spots.',
+    heroRender: '/listings/lindavista/04-scaled.jpg',
+    tagline: { es: 'Locales comerciales y oficinas en renta sobre Av. López Portillo', en: 'Retail spaces and offices for rent on Av. López Portillo' },
+    highlights: [
+      { label: 'Espacios', labelEn: 'Spaces', value: '40 locales y oficinas', valueEn: '40 retail spaces & offices' },
+      { label: 'Superficie', labelEn: 'Size', value: '52 a 267 m²', valueEn: '52 to 267 sqm' },
+      { label: 'Estacionamiento', labelEn: 'Parking', value: '+130 cajones', valueEn: '130+ spots' },
+    ],
+    gallery: [
+      '/listings/lindavista/01-scaled.jpg',
+      '/listings/lindavista/04-scaled.jpg',
+      '/listings/lindavista/New-Project.png',
+    ],
+    projectTitle: { es: 'Más que una plaza comercial', en: 'More than a commercial plaza' },
+    projectTitleMuted: { es: 'en el oriente de Cancún', en: 'in eastern Cancún' },
+    projectBody: [
+      {
+        es: 'Plaza Lindavista es un punto de encuentro de ideas y experiencias comerciales — un espacio al aire libre para la comunidad, al oriente de Cancún, con **32 locales comerciales** de 60 a 268 m² distribuidos en dos niveles y **8 oficinas** con terraza.',
+        en: 'Plaza Lindavista is a meeting point for commercial ideas and experiences — an open-air space for the community in eastern Cancún, with **32 retail spaces** from 60 to 268 sqm across two levels and **8 offices** with terrace.',
+      },
+      {
+        es: 'Sobre la Av. López Portillo, la vialidad con mayor flujo de transporte y automóviles de la ciudad, con conexión directa a la Av. Nichupté y la Av. Andrés Quintana Roo.',
+        en: 'On Av. López Portillo, the city\'s busiest transportation corridor, with direct access to Av. Nichupté and Av. Andrés Quintana Roo.',
+      },
+    ],
+    locationBullets: [
+      { es: 'Sobre Av. López Portillo, con conexión directa a Av. Nichupté y Av. Andrés Quintana Roo', en: 'On Av. López Portillo, with direct access to Av. Nichupté and Av. Andrés Quintana Roo' },
+      { es: 'A 15 min de Cancún Centro y 20 min del Aeropuerto Internacional de Cancún', en: '15 min from downtown Cancún and 20 min from Cancún International Airport' },
+      { es: 'Diseño abierto y ventilado, con más de 130 cajones de estacionamiento', en: 'Open, ventilated design with over 130 parking spots' },
+    ],
+    contentBlocks: [
+      {
+        eyebrow: { es: '— Ubicación', en: '— Location' },
+        title: { es: 'Ubicación', en: 'Location' },
+        titleMuted: { es: 'estratégica en el oriente de Cancún', en: 'strategic, in eastern Cancún' },
+        description: {
+          es: 'Plaza Lindavista se encuentra en el corazón de una de las principales avenidas de la ciudad con mayor flujo de rutas de transporte y automóviles, la Av. López Portillo. Cancún Centro está a 15 min, el aeropuerto a 20 min y la Zona Hotelera a 25 min.',
+          en: 'Plaza Lindavista sits at the heart of one of the city\'s busiest transportation corridors, Av. López Portillo. Downtown Cancún is 15 min away, the airport 20 min, and the Hotel Zone 25 min.',
+        },
+        image: '/listings/lindavista/New-Project.png',
+        layout: 'side-by-side',
+        imagePosition: 'right',
+      },
+    ],
+    amenities: [
+      { key: 'seguridad-24-7' },
+      { key: 'areas-verdes' },
+      { key: 'estacionamiento-visitas' },
+      { key: 'area-infantil' },
+    ],
+    // Tipologías agrupadas por banda de superficie a partir de los 40
+    // espacios reales del plano oficial (32 locales + 8 oficinas) — no hay
+    // foto/renta por unidad individual, así que se agrupan por tamaño en vez
+    // de listar las 40 una por una.
+    floorPlans: [
+      { slug: 'local-60', label: { es: 'Local Tipo A', en: 'Retail Unit Type A' }, area: '60 m²', image: '/listings/lindavista/plano-locales-pb.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '60 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '20 locales' }] },
+      { slug: 'local-74', label: { es: 'Local Tipo B', en: 'Retail Unit Type B' }, area: '74 m²', image: '/listings/lindavista/plano-locales-1n.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '74 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '2 locales' }] },
+      { slug: 'local-esquina', label: { es: 'Local Esquina', en: 'Corner Retail Unit' }, area: '133 a 268 m²', image: '/listings/lindavista/plano-locales-pb.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '133 a 268 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '9 locales' }] },
+      { slug: 'oficina', label: { es: 'Oficina con terraza', en: 'Office with terrace' }, area: '55 a 138 m²', image: '/listings/lindavista/plano-oficinas.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '55 a 138 m²' }, { key: 'precio', label: { es: 'Renta', en: 'Rent' }, value: 'Desde $19,076 MXN/mes IVA incluido' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '8 oficinas' }] },
+    ],
+  },
+  {
+    slug: 'lindavista-bodegas',
+    name: 'Bodegas en Venta',
+    relationship: 'listings',
+    developer: 'Grupo Roa',
+    brand: 'Storage Lindavista',
+    city: 'Cancún',
+    zone: 'Av. López Portillo',
+    type: 'Comercial',
+    intent: ['invertir'],
+    status: 'Entrega inmediata',
+    image: '/listings/lindavista/storage-entrada.jpg',
+    href: '/desarrollos/lindavista-bodegas',
+    featured: false,
+    logo: '/listings/lindavista/logo-lindavista-white-2048x358.png',
+    badge: 'En Venta',
+    propertyType: 'Bodega',
+    priceLabel: 'Desde $5,334,252 MXN IVA incluido',
+    priceLabelEn: 'From $5,334,252 MXN, VAT included',
+    description:
+      '17 ofibodegas industriales desde 171.92 m² en Plaza Lindavista, con seguridad y acceso controlado 24/7 — el espacio ideal para almacenar, distribuir y vender en Cancún y la Riviera Maya.',
+    descriptionEn:
+      '17 industrial office-warehouses from 171.92 sqm at Plaza Lindavista, with 24/7 security and controlled access — the ideal space to store, distribute and sell across Cancún and the Riviera Maya.',
+    heroRender: '/listings/lindavista/storage-entrada.jpg',
+    tagline: { es: 'Ofibodegas industriales en venta sobre Av. López Portillo', en: 'Industrial office-warehouses for sale on Av. López Portillo' },
+    highlights: [
+      { label: 'Bodegas', labelEn: 'Warehouses', value: '17 unidades', valueEn: '17 units' },
+      { label: 'Superficie', labelEn: 'Size', value: '172 a 556 m²', valueEn: '172 to 556 sqm' },
+      { label: 'Desde', labelEn: 'From', value: '$5,334,252 MXN', valueEn: '$5,334,252 MXN' },
+    ],
+    gallery: [
+      '/listings/lindavista/storage-entrada.jpg',
+      '/listings/lindavista/bodegas-exterior.jpg',
+      '/listings/lindavista/04-scaled.jpg',
+    ],
+    projectTitle: { es: 'El espacio perfecto', en: 'The perfect space' },
+    projectTitleMuted: { es: 'para almacenar tus sueños empresariales', en: 'to store your business dreams' },
+    projectBody: [
+      {
+        es: 'Storage Lindavista son **17 ofibodegas industriales** desde 171.92 m² hasta 555.87 m², pensadas para almacenar, distribuir y vender fácilmente en Cancún y la Riviera Maya.',
+        en: 'Storage Lindavista is **17 industrial office-warehouses** from 171.92 sqm up to 555.87 sqm, built to store, distribute and sell across Cancún and the Riviera Maya.',
+      },
+      {
+        es: 'Seguridad y accesibilidad: custodiamos tu inversión con vigilancia y control de acceso, en un desarrollo con cancelería y puerta enrollable de diseño estándar en cada módulo.',
+        en: 'Security and accessibility: your investment is protected with surveillance and access control, in a development with standard-design glazing and roll-up doors in every unit.',
+      },
+    ],
+    locationBullets: [
+      { es: 'Seguridad y acceso controlado 24/7', en: '24/7 security and controlled access' },
+      { es: 'Sobre Av. López Portillo, a 15 min de Cancún Centro y 20 min del aeropuerto', en: 'On Av. López Portillo, 15 min from downtown Cancún and 20 min from the airport' },
+      { es: 'La construcción del módulo de oficina dentro de cada bodega corre por cuenta del cliente', en: 'Building out the office module inside each unit is the buyer\'s responsibility' },
+    ],
+    contentBlocks: [
+      {
+        eyebrow: { es: '— Seguridad y accesibilidad', en: '— Security and accessibility' },
+        title: { es: 'Almacena, distribuye', en: 'Store, distribute' },
+        titleMuted: { es: 'y vende fácilmente en Cancún y la Riviera Maya', en: 'and sell easily across Cancún and the Riviera Maya' },
+        description: {
+          es: 'Custodiamos tu visión y aseguramos tu paz: cada módulo cuenta con cancelería exterior con película anti-desprendimiento, tubería de PVC para instalaciones eléctricas e hidráulicas, y techumbre de lámina termoacústica.',
+          en: 'We protect your vision and your peace of mind: every unit includes exterior glazing with anti-shatter film, PVC piping for electrical and hydraulic installations, and thermo-acoustic sheet roofing.',
+        },
+        image: '/listings/lindavista/bodegas-exterior.jpg',
+        layout: 'side-by-side',
+        imagePosition: 'left',
+      },
+    ],
+    amenities: [
+      { key: 'seguridad-24-7' },
+      { key: 'estacionamiento-visitas' },
+    ],
+    // Agrupadas por banda de superficie a partir de las 17 bodegas reales
+    // del plano oficial (B1-B17) — sin foto/precio por unidad individual.
+    floorPlans: [
+      { slug: 'bodega-compacta', label: { es: 'Bodega Compacta', en: 'Compact Warehouse' }, area: '172 a 200 m²', image: '/listings/lindavista/plano-bodegas.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '171.92 a 200.80 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '4 bodegas' }] },
+      { slug: 'bodega-estandar', label: { es: 'Bodega Estándar', en: 'Standard Warehouse' }, area: '228 m²', image: '/listings/lindavista/plano-bodegas.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '228.35 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '6 bodegas' }] },
+      { slug: 'bodega-grande', label: { es: 'Bodega Grande', en: 'Large Warehouse' }, area: '246 a 283 m²', image: '/listings/lindavista/plano-bodegas.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '246.09 a 283.68 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '6 bodegas' }] },
+      { slug: 'bodega-esquina', label: { es: 'Bodega Esquina', en: 'Corner Warehouse' }, area: '555.87 m²', image: '/listings/lindavista/plano-bodegas.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '555.87 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '1 bodega' }] },
+    ],
+  },
 ];
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -2058,6 +2239,16 @@ export async function getDevelopDevelopmentsAsync(): Promise<Development[]> {
 
 export async function getSalesPartnerDevelopmentsAsync(): Promise<Development[]> {
   return (await getMergedDevelopmentsAsync()).filter((d) => d.relationship === 'sales-partner');
+}
+
+// "Listings" = inventario de terceros que Tresor comercializa por fuera de
+// developer/sales-partner (reventa/listado y renta) — junta 'listings' y
+// 'rentals', los dos valores de Relationship reservados para esto desde
+// antes de que existiera la sección. Landing: /listings.
+export async function getListingsDevelopmentsAsync(): Promise<Development[]> {
+  return (await getMergedDevelopmentsAsync()).filter(
+    (d) => d.relationship === 'listings' || d.relationship === 'rentals',
+  );
 }
 
 export async function getFeaturedDevelopmentsAsync(): Promise<Development[]> {

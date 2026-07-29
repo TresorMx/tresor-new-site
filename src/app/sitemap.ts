@@ -45,7 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // /invertir-en-cancun, que ya estaban en staticRoutes).
   const keywordLandingSlugs = [
     'cancun', 'puerto-cancun', 'playa-del-carmen', 'tulum',
-    'departamentos', 'locales-comerciales', 'lotes-residenciales',
+    'departamentos', 'locales-comerciales', 'lotes-residenciales', 'listings',
   ];
   const keywordLandingRoutes: MetadataRoute.Sitemap = keywordLandingSlugs.flatMap((slug) => [
     { url: `${SITE}/${slug}`,    lastModified: now, changeFrequency: 'weekly' as const, priority: 0.85 },

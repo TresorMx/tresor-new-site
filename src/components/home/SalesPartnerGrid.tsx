@@ -18,6 +18,7 @@ const TYPE_LABELS: Record<PropertyType, string> = {
   'Casa': 'Casas',
   'Lote Residencial': 'Lotes residenciales',
   'Local Comercial': 'Locales comerciales',
+  'Bodega': 'Bodegas',
 };
 
 interface FilterState {

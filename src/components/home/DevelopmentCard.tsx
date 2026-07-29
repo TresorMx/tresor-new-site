@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import { Link } from '@/navigation';
-import { MapPin, Store, Home, Building2, LandPlot, type LucideIcon } from 'lucide-react';
+import { MapPin, Store, Home, Building2, LandPlot, Warehouse, type LucideIcon } from 'lucide-react';
 import { formatPrice, developers, type Development, type PropertyType } from '@/lib/developments';
 import AsesorDriveLink from '@/components/asesor/AsesorDriveLink';
 
@@ -14,6 +14,7 @@ const PROPERTY_ICONS: Record<PropertyType, LucideIcon> = {
   Casa: Home,
   'Lote Residencial': LandPlot,
   'Local Comercial': Store,
+  Bodega: Warehouse,
 };
 
 // `badge`/`status` son valores fijos en español (enum DevStatus o texto

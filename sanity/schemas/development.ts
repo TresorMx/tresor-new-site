@@ -86,7 +86,7 @@ export default defineType({
     defineField({ name: 'featured', title: 'Destacado en el home', type: 'boolean', group: 'basic', initialValue: true }),
     defineField({
       name: 'propertyType', title: 'Tipo de propiedad', type: 'string', group: 'basic',
-      options: { list: ['Departamento', 'Casa', 'Lote Residencial', 'Local Comercial'] },
+      options: { list: ['Departamento', 'Casa', 'Lote Residencial', 'Local Comercial', 'Bodega'] },
       description: 'Define el ícono del card (edificio, casa, terreno, tienda).',
     }),
     defineField({
