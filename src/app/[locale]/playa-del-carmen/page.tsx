@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import CategoryHero from '@/components/category/CategoryHero';
 import CategoryGridSection from '@/components/category/CategoryGridSection';
-import { getMergedDevelopmentsAsync } from '@/lib/developments';
+import { getMergedDevelopmentsAsync, isListingRelationship } from '@/lib/developments';
 
 export const dynamic = 'force-dynamic';
 
@@ -37,7 +37,7 @@ export default async function PlayaDelCarmenPage({ params }: { params: Promise<{
   const { locale } = await params;
   const isEs = locale !== 'en';
   const all = await getMergedDevelopmentsAsync();
-  const developments = all.filter((d) => d.city === 'Playa del Carmen');
+  const developments = all.filter((d) => d.city === 'Playa del Carmen' && !isListingRelationship(d.relationship));
 
   return (
     <>

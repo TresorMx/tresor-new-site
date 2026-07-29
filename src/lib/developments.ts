@@ -31,6 +31,17 @@ export type SalesStage = 'Preventa' | 'Lanzamiento' | 'Últimas unidades' | 'Ent
 //  - rentals:       (futuro) propiedades en renta
 export type Relationship = 'develop' | 'sales-partner' | 'listings' | 'rentals';
 
+// Listings/Rentas (Plaza Lindavista y lo que siga) es su propia categoría de
+// negocio, con su propia landing (/listings) — NO debe colarse en las
+// landings por ciudad/tipo (/cancun, /locales-comerciales, etc.), que
+// filtran solo por city/propertyType y no tienen forma de excluirlo por su
+// cuenta. Un desarrollo con propertyType 'Local Comercial' y city 'Cancún'
+// (como "Renta de Locales y Oficina") calzaría en AMBAS landings sin este
+// check explícito.
+export function isListingRelationship(r: Relationship): boolean {
+  return r === 'listings' || r === 'rentals';
+}
+
 // Desarrolladores (Tresor + socios actuales)
 export type DeveloperId = 'Tresor' | 'Live' | 'Onix' | 'Urban Homes' | 'Grupo Roa';
 // Alias retro-compat: el código actual usa `Developer` como el id.
