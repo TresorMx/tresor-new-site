@@ -1984,7 +1984,7 @@ export const developments: Development[] = [
     description:
       'Locales comerciales y oficinas en renta en Plaza Lindavista, sobre Av. López Portillo — 40 espacios desde 52 hasta 267 m², con más de 130 cajones de estacionamiento.',
     descriptionEn:
-      'Retail spaces and offices for rent at Plaza Lindavista, on Av. López Portillo — 40 spaces from 52 to 267 sqm, with over 130 parking spots.',
+      'Retail spaces and offices for rent at Plaza Lindavista, on Av. López Portillo — 40 spaces from 52 to 267 sqm, with over 130 parking spots and 24/7 security.',
     heroRender: '/listings/lindavista/04-scaled.jpg',
     tagline: { es: 'Locales comerciales y oficinas en renta sobre Av. López Portillo', en: 'Retail spaces and offices for rent on Av. López Portillo' },
     highlights: [
@@ -2065,9 +2065,9 @@ export const developments: Development[] = [
     priceLabel: 'Desde $5,334,252 MXN IVA incluido',
     priceLabelEn: 'From $5,334,252 MXN, VAT included',
     description:
-      '17 ofibodegas industriales desde 171.92 m² en Plaza Lindavista, con seguridad y acceso controlado 24/7 — el espacio ideal para almacenar, distribuir y vender en Cancún y la Riviera Maya.',
+      '17 ofibodegas industriales en venta en Plaza Lindavista, desde 171.92 m², con seguridad y acceso controlado 24/7 — ideal para almacenar y distribuir en Cancún y la Riviera Maya.',
     descriptionEn:
-      '17 industrial office-warehouses from 171.92 sqm at Plaza Lindavista, with 24/7 security and controlled access — the ideal space to store, distribute and sell across Cancún and the Riviera Maya.',
+      '17 industrial office-warehouses for sale at Plaza Lindavista, from 171.92 sqm, with 24/7 security and controlled access — ideal to store and distribute goods.',
     heroRender: '/listings/lindavista/storage-entrada.jpg',
     tagline: { es: 'Ofibodegas industriales en venta sobre Av. López Portillo', en: 'Industrial office-warehouses for sale on Av. López Portillo' },
     highlights: [
