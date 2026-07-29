@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useLocale } from 'next-intl';
 import { Link } from '@/navigation';
 import { MapPin, Store, Home, Building2, LandPlot, Warehouse, type LucideIcon } from 'lucide-react';
-import { formatPrice, developers, type Development, type PropertyType } from '@/lib/developments';
+import { formatPrice, developers, fichaSlugFromHref, type Development, type PropertyType } from '@/lib/developments';
 import AsesorDriveLink from '@/components/asesor/AsesorDriveLink';
 
 // Ícono por tipo de propiedad (fuente única — replicar en Sanity: al elegir el
@@ -50,7 +50,7 @@ export default function DevelopmentCard({
   const brandName = dev.brand ?? developers[dev.developer]?.name ?? 'Tresor Real Estate';
   // Slug de ruta para el Drive de Ventas (mismo slug de la ficha). Los
   // "próximamente" (href '#') no tienen drive.
-  const driveSlug = dev.href.startsWith('/desarrollos/') ? dev.href.slice('/desarrollos/'.length) : null;
+  const driveSlug = fichaSlugFromHref(dev.href);
   const badgeRaw = dev.badge ?? dev.status;
   const badge = isEs ? badgeRaw : (STATUS_LABEL_EN[badgeRaw] ?? badgeRaw);
   const zone = (isEs ? dev.zone : dev.zoneEn ?? dev.zone);

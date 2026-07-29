@@ -186,7 +186,15 @@ function normalizeDevelopment(raw: any): Development & { developerDocId?: string
     intent: raw.intent ?? [],
     status: raw.status,
     image: raw.image ?? '',
-    href: `/desarrollos/${raw.slug}`,
+    // Listings/Rentas (Plaza Lindavista y lo que siga) vive bajo /listings/,
+    // no /desarrollos/ — ver fichaSlugFromHref en developments.ts. `href` no
+    // es un campo de Sanity, se computa aquí; sin este check, CUALQUIER dev
+    // migrado con relationship listings/rentals recibía la URL equivocada
+    // sin importar lo que dijera el estático (el spread del merge no puede
+    // arreglarlo: esto es un string real, no un `undefined`).
+    href: raw.relationship === 'listings' || raw.relationship === 'rentals'
+      ? `/listings/${raw.slug}`
+      : `/desarrollos/${raw.slug}`,
     featured: raw.featured ?? true,
     logo: raw.logo,
     description: raw.description,

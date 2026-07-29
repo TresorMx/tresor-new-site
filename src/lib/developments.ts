@@ -1974,7 +1974,7 @@ export const developments: Development[] = [
     intent: ['invertir'],
     status: 'Entrega inmediata',
     image: '/listings/lindavista/01-scaled.jpg',
-    href: '/desarrollos/lindavista-locales',
+    href: '/listings/lindavista-locales',
     featured: false,
     logo: '/listings/lindavista/logo-lindavista-white-2048x358.png',
     badge: 'En Renta',
@@ -2057,7 +2057,7 @@ export const developments: Development[] = [
     intent: ['invertir'],
     status: 'Entrega inmediata',
     image: '/listings/lindavista/storage-entrada.jpg',
-    href: '/desarrollos/lindavista-bodegas',
+    href: '/listings/lindavista-bodegas',
     featured: false,
     logo: '/listings/lindavista/logo-lindavista-white-2048x358.png',
     badge: 'En Venta',
@@ -2255,11 +2255,6 @@ export async function getFeaturedDevelopmentsAsync(): Promise<Development[]> {
   return (await getMergedDevelopmentsAsync()).filter((d) => d.featured);
 }
 
-export async function getAllDevelopmentRouteSlugsAsync(): Promise<string[]> {
-  const merged = await getMergedDevelopmentsAsync();
-  return merged.filter((d) => !d.comingSoon).map((d) => plazaSlugFromHref(d.href)).filter((s): s is string => Boolean(s));
-}
-
 // ── Selectores por relación (cada sección del home filtra de aquí) ──
 // Sincrónicos, sobre el cache ya calentado por el layout (ver arriba). Son
 // FUNCIONES (no arrays precalculados) a propósito: si fueran `const`, se
@@ -2303,24 +2298,38 @@ export function formatPrice(d: Development, isEs = true): string | null {
 // SIEMPRE debe reflejar el mínimo disponible real (Sanity/ficha), no un
 // número capturado a mano en este archivo. Sales Partner y "próximamente"
 // no tienen inventario propio, así que se quedan con su priceLabel estático.
-function plazaSlugFromHref(href: string): string | null {
-  const match = href.match(/^\/desarrollos\/([^/]+)$/);
-  return match ? match[1] : null;
+// Fuente única para "¿esta href es una ficha real, y cuál es su slug?" — toda
+// ficha vive bajo /desarrollos/{slug}, salvo Listings (Plaza Lindavista y lo
+// que siga) que vive bajo /listings/{slug} para no mezclarse con el
+// portafolio de desarrollo/Sales Partner. driveDev.ts, driveGroups.ts,
+// DevelopmentCard.tsx, chat/route.ts y dev-name/route.ts importan esto en vez
+// de reimplementar su propio regex — si se agrega un prefijo nuevo, es el
+// único lugar que hay que tocar.
+const FICHA_PREFIXES = ['/desarrollos/', '/listings/'] as const;
+export function fichaSlugFromHref(href: string): string | null {
+  for (const prefix of FICHA_PREFIXES) {
+    if (href.startsWith(prefix)) return href.slice(prefix.length) || null;
+  }
+  return null;
 }
 
-// Slugs de ruta de TODOS los desarrollos con ficha propia bajo /desarrollos/
-// (Tresor + Sales Partner), para generateStaticParams. "Próximamente" y sin
-// href real (#) quedan fuera — no tienen página que generar.
-export function allDevelopmentRouteSlugs(): string[] {
+// Slugs de ruta con ficha propia, PARA UN prefijo dado — usado por
+// generateStaticParams de cada carpeta de ruta (/desarrollos/[slug],
+// /listings/[slug]): cada una solo debe pre-generar SUS PROPIOS slugs, no
+// los del otro prefijo (si no, /desarrollos/[slug] también pre-generaría
+// 'lindavista-locales' con contenido real, duplicando la ficha en dos URLs).
+// "Próximamente" y sin href real (#) quedan fuera — no tienen página que
+// generar.
+export function developmentRouteSlugsForPrefix(prefix: (typeof FICHA_PREFIXES)[number]): string[] {
   return developments
-    .filter((d) => !d.comingSoon)
-    .map((d) => plazaSlugFromHref(d.href))
+    .filter((d) => !d.comingSoon && d.href.startsWith(prefix))
+    .map((d) => fichaSlugFromHref(d.href))
     .filter((s): s is string => Boolean(s));
 }
 
 export async function withLivePrice(dev: Development): Promise<Development> {
   if (dev.relationship !== 'develop' || dev.comingSoon) return dev;
-  const plazaSlug = plazaSlugFromHref(dev.href);
+  const plazaSlug = fichaSlugFromHref(dev.href);
   if (!plazaSlug) return dev;
 
   const plaza = await getPlazaBySlugAsync(plazaSlug);
@@ -2386,7 +2395,7 @@ export async function getDevelopment(routeSlug: string): Promise<Development | u
   // `base` sale del catálogo fusionado (estático + Sanity `development`) —
   // si el Studio tiene un doc para este slug, GANA sobre developments.ts.
   const catalog = await getMergedDevelopmentsAsync();
-  const base = catalog.find((d) => plazaSlugFromHref(d.href) === routeSlug);
+  const base = catalog.find((d) => fichaSlugFromHref(d.href) === routeSlug);
   if (!base) return undefined;
 
   // Data rica de ficha Tresor (hoy Plaza/plazas.json, ya Sanity vía queries.ts).

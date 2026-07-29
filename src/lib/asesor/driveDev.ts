@@ -1,4 +1,4 @@
-import { getMergedDevelopmentsAsync, developers } from '@/lib/developments';
+import { getMergedDevelopmentsAsync, developers, fichaSlugFromHref } from '@/lib/developments';
 import { fetchDriveAssetsPresence } from '@/lib/sanity/drive';
 import { STATIC_FILES } from '@/lib/asesor/driveStaticFiles';
 import type { DriveDev } from '@/components/asesor/AsesorDrive';
@@ -6,13 +6,9 @@ import type { DriveDev } from '@/components/asesor/AsesorDrive';
 // Armado del DriveDev de un desarrollo — usado tanto por /asesores/[slug]
 // como por /brokers/drive/[slug] (mismo Drive real para ambos).
 
-function routeSlug(href: string): string | null {
-  return href.startsWith('/desarrollos/') ? href.slice('/desarrollos/'.length) : null;
-}
-
 export async function findDevBySlug(slug: string) {
   const all = await getMergedDevelopmentsAsync();
-  return all.find((d) => routeSlug(d.href) === slug) ?? null;
+  return all.find((d) => fichaSlugFromHref(d.href) === slug) ?? null;
 }
 
 export async function buildDriveDev(slug: string): Promise<DriveDev | null> {

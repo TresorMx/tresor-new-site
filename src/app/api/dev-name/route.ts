@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getMergedDevelopmentsAsync } from '@/lib/developments';
+import { getMergedDevelopmentsAsync, fichaSlugFromHref } from '@/lib/developments';
 
 export const runtime = 'nodejs';
 
@@ -11,7 +11,7 @@ export async function GET(req: NextRequest) {
   if (!slug) return NextResponse.json({ error: 'slug requerido' }, { status: 400 });
 
   const devs = await getMergedDevelopmentsAsync();
-  const dev = devs.find((d) => d.href === `/desarrollos/${slug}`);
+  const dev = devs.find((d) => fichaSlugFromHref(d.href) === slug);
   if (!dev) return NextResponse.json({ error: 'not found' }, { status: 404 });
 
   return NextResponse.json({ name: dev.name });

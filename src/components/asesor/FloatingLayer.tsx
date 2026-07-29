@@ -47,7 +47,10 @@ export default function FloatingLayer() {
   // chat de Luis no tiene nada que hacer ahí.
   if (pathname === '/drive' || pathname.startsWith('/drive/')) return null;
 
-  const fichaMatch = pathname.match(/^\/desarrollos\/([^/]+)/);
+  // Ficha real bajo /desarrollos/{slug} O /listings/{slug} (Plaza Lindavista
+  // y lo que siga vive en su propio prefijo — ver fichaSlugFromHref en
+  // src/lib/developments.ts, la misma distinción de prefijos).
+  const fichaMatch = pathname.match(/^\/(?:desarrollos|listings)\/([^/]+)/);
 
   if (!isAsesor && !isBroker) return <Chatbot devSlug={fichaMatch?.[1]} />;
 

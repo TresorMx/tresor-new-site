@@ -56,6 +56,13 @@ const nextConfig = {
       { source: '/desarrollos/vellmari-urban', destination: '/desarrollos/vellmari-puerto-cancun', permanent: true },
       { source: '/en/desarrollos/vellmari-urban', destination: '/en/desarrollos/vellmari-puerto-cancun', permanent: true },
 
+      // Listings (Plaza Lindavista) vive en /listings/{slug}, no en
+      // /desarrollos/{slug} — estuvo ahí ~1 día antes de mover el prefijo.
+      { source: '/desarrollos/lindavista-locales', destination: '/listings/lindavista-locales', permanent: true },
+      { source: '/en/desarrollos/lindavista-locales', destination: '/en/listings/lindavista-locales', permanent: true },
+      { source: '/desarrollos/lindavista-bodegas', destination: '/listings/lindavista-bodegas', permanent: true },
+      { source: '/en/desarrollos/lindavista-bodegas', destination: '/en/listings/lindavista-bodegas', permanent: true },
+
       // /drive/desarrollos solo (sin nada después) no es una página real —
       // manda a home en vez de dejar un 404 que invite a curiosear qué más
       // hay bajo /drive. /drive sí es una página real ahora (índice abierto,

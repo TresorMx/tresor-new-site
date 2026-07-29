@@ -1,6 +1,6 @@
 import type { MetadataRoute } from 'next';
 import { getActivePlazasAsync } from '@/lib/data';
-import { getAllDevelopmentRouteSlugsAsync } from '@/lib/developments';
+import { getMergedDevelopmentsAsync } from '@/lib/developments';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tresor.mx';
 
@@ -9,12 +9,21 @@ export const dynamic = 'force-dynamic';
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const plazas = await getActivePlazasAsync();
-  // Todos los desarrollos con ficha real bajo /desarrollos/ (Tresor + Sales
-  // Partner) — no solo los que tienen Plaza en Sanity. Si el sitemap solo
-  // trae Tresor, Google nunca descubre las fichas de Sales Partner.
-  const plazaSlugs = new Set(plazas.map((p) => p.slug));
-  const devSlugs = new Set(await getAllDevelopmentRouteSlugsAsync());
-  const allSlugs = Array.from(new Set([...plazaSlugs, ...devSlugs]));
+  // Todos los desarrollos con ficha real (Tresor + Sales Partner + Listings)
+  // — no solo los que tienen Plaza en Sanity. Si el sitemap solo trae
+  // Tresor, Google nunca descubre las demás fichas. Se usa `d.href` TAL
+  // CUAL en vez de reconstruir `/desarrollos/${slug}` a mano — Listings
+  // (Plaza Lindavista) vive bajo /listings/, no /desarrollos/, y reconstruir
+  // el prefijo a mano generaba la URL equivocada.
+  const merged = await getMergedDevelopmentsAsync();
+  const devHrefs = new Set(
+    merged
+      .filter((d) => !d.comingSoon)
+      .map((d) => d.href)
+      .filter((h) => h.startsWith('/desarrollos/') || h.startsWith('/listings/')),
+  );
+  for (const p of plazas) devHrefs.add(`/desarrollos/${p.slug}`);
+  const allHrefs = Array.from(devHrefs);
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE,                 lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
@@ -52,15 +61,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/en/${slug}`, lastModified: now, changeFrequency: 'weekly' as const, priority: 0.65 },
   ]);
 
-  const plazaRoutes: MetadataRoute.Sitemap = allSlugs.flatMap((slug) => [
+  const plazaRoutes: MetadataRoute.Sitemap = allHrefs.flatMap((href) => [
     {
-      url: `${SITE}/desarrollos/${slug}`,
+      url: `${SITE}${href}`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.95,
     },
     {
-      url: `${SITE}/en/desarrollos/${slug}`,
+      url: `${SITE}/en${href}`,
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.75,

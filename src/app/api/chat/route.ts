@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import Anthropic from '@anthropic-ai/sdk';
-import { getMergedDevelopmentsAsync, withLivePrices, type Development } from '@/lib/developments';
+import { getMergedDevelopmentsAsync, withLivePrices, fichaSlugFromHref as routeSlug, type Development } from '@/lib/developments';
 import { getPlazaBySlugAsync } from '@/lib/data';
 import { upsertGHLContact } from '@/lib/ghl';
 import { saveLeadToSanity } from '@/lib/sanity/saveLead';
@@ -8,11 +8,6 @@ import { fetchFreeSlotsForDate, createGHLAppointment, GHL_CALENDAR_CONFIGURED } 
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-function routeSlug(href: string): string | null {
-  const match = href.match(/^\/desarrollos\/([^/]+)$/);
-  return match ? match[1] : null;
-}
 
 // ─── System prompt dinámico — catálogo completo de Tresor, no solo Quattro ────
 
