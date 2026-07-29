@@ -179,8 +179,9 @@ const nextConfig = {
       { source: '/desarrollos', destination: '/#portafolio', permanent: true },
       { source: '/proyectos', destination: '/#portafolio', permanent: true },
 
-      // Listings/Rentas — funcionalidad retirada del sitio por ahora
-      { source: '/listings', destination: '/', permanent: true },
+      // /listings ahora es una sección real (ver src/app/[locale]/listings) —
+      // ya NO redirige a casa. Los slugs viejos de la funcionalidad retirada
+      // (WordPress) siguen sin equivalente, así que esos sí van al home.
       { source: '/listings/isola', destination: '/', permanent: true },
       { source: '/rentas', destination: '/', permanent: true },
       { source: '/rentas/isola', destination: '/', permanent: true },
