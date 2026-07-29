@@ -259,11 +259,15 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
   // selector interactivo de torres en vez del módulo de tipologías normal.
   const useTowerFloorPlans = hasSalesPartnerFloorPlans && (dev.floorPlans?.every((fp) => fp.tower) ?? false);
   const hasContentBlocks = (dev.contentBlocks?.length ?? 0) > 0;
+  // Listings/Rentas (ej. Plaza Lindavista) son inventario de terceros sin
+  // trayectoria de "desarrollador" que mostrar — Tresor solo comercializa,
+  // no hay credenciales que dar. El resto de las fichas sí lo muestra.
+  const showDeveloper = dev.relationship !== 'listings' && dev.relationship !== 'rentals';
   const sectionOrder = [
     'developer', 'project', 'location', 'contentBlocks', 'gallery', 'amenities', 'floorPlans', 'masterPlan', 'cta',
   ] as const;
   const sectionActive: Record<(typeof sectionOrder)[number], boolean> = {
-    developer: true,
+    developer: showDeveloper,
     project: true,
     location: true,
     contentBlocks: hasContentBlocks,
@@ -395,8 +399,9 @@ export default async function PlazaPage({ params }: { params: Promise<{ slug: st
         </div>
       </section>
 
-      {/* ═════ DESARROLLADOR — data-driven desde el registro `developers` ═════ */}
-      <FichaDeveloper developer={developer} locale={locale} gray={stripe.developer} />
+      {/* ═════ DESARROLLADOR — data-driven desde el registro `developers`.
+          Se omite en Listings/Rentas (ver showDeveloper). ═════ */}
+      {showDeveloper && <FichaDeveloper developer={developer} locale={locale} gray={stripe.developer} />}
 
       {/* ═════ 1. EL PROYECTO ═════ */}
       <section className={`${stripe.project ? 'bg-[#FAFAFA]' : 'bg-bg'} py-20 md:py-28`}>

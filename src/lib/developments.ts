@@ -1964,7 +1964,7 @@ export const developments: Development[] = [
   // descripción del campo en el schema de Sanity).
   {
     slug: 'lindavista-locales',
-    name: 'Renta de Locales',
+    name: 'Renta de Locales y Oficina',
     relationship: 'rentals',
     developer: 'Grupo Roa',
     brand: 'Plaza Lindavista',
