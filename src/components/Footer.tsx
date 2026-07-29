@@ -57,6 +57,7 @@ export default async function Footer() {
             </h4>
             <ul className="flex flex-col gap-3 text-[13px] text-white/85 md:text-[14px]">
               <li><Link href="/#portafolio" className="hover:text-accent">{t('developments')}</Link></li>
+              <li><Link href="/listings" className="hover:text-accent">{t('listings')}</Link></li>
             </ul>
           </div>
 

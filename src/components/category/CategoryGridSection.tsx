@@ -11,6 +11,11 @@ export default function CategoryGridSection({
   developments,
   showDeveloperFilter = true,
   showStatusFilter = true,
+  // Apagado por default: las landings por tipo (/departamentos, etc.) ya
+  // vienen pre-filtradas a un solo tipo, así que el filtro sería inútil ahí.
+  // /listings sí lo prende — mezcla Local Comercial, Bodega y lo que se
+  // agregue después, es la única landing de categoría donde el tipo varía.
+  showTypeFilter = false,
   forceDriveLink = false,
 }: {
   eyebrow: string;
@@ -18,6 +23,7 @@ export default function CategoryGridSection({
   developments: Development[];
   showDeveloperFilter?: boolean;
   showStatusFilter?: boolean;
+  showTypeFilter?: boolean;
   // Landings espejo /drive/* — ver DevelopmentCard.
   forceDriveLink?: boolean;
 }) {
@@ -32,7 +38,7 @@ export default function CategoryGridSection({
           developments={developments}
           showDeveloperFilter={showDeveloperFilter}
           showCityFilter={false}
-          showTypeFilter={false}
+          showTypeFilter={showTypeFilter}
           showStatusFilter={showStatusFilter}
           forceDriveLink={forceDriveLink}
         >

@@ -8,10 +8,10 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale !== 'en';
-  const title = isEs ? 'Listings: Locales, Oficinas y Bodegas en Cancún' : 'Listings: Retail, Offices and Warehouses in Cancún';
+  const title = isEs ? 'Listings en Cancún: Renta y Venta con Disponibilidad Real' : 'Listings in Cancún: Rent and Sale with Real Availability';
   const description = isEs
-    ? 'Inventario de terceros que Tresor comercializa en Cancún: locales y oficinas en renta, bodegas industriales en venta. Disponibilidad real, sin intermediarios.'
-    : 'Third-party inventory commercialized by Tresor in Cancún: retail spaces and offices for rent, industrial warehouses for sale. Real availability, no middlemen.';
+    ? 'Departamentos, locales, oficinas y bodegas en Cancún con disponibilidad real, en renta o en venta.'
+    : 'Apartments, retail spaces, offices and warehouses in Cancún with real availability, for rent or sale.';
   return {
     title,
     description,
@@ -42,19 +42,21 @@ export default async function ListingsPage({ params }: { params: Promise<{ local
     <>
       <CategoryHero
         image="/listings/lindavista/04-scaled.jpg"
-        imageAlt={isEs ? 'Locales, oficinas y bodegas en renta y venta en Cancún' : 'Retail, offices and warehouses for rent and sale in Cancún'}
+        imageAlt={isEs ? 'Departamentos, locales, oficinas y bodegas en renta y venta en Cancún' : 'Apartments, retail, offices and warehouses for rent and sale in Cancún'}
         eyebrow={isEs ? '— Propiedades' : '— Properties'}
         title={isEs ? 'Listings' : 'Listings'}
         subtitle={
           isEs
-            ? 'Inventario de terceros que Tresor comercializa en Cancún: locales, oficinas y bodegas con disponibilidad real, en renta o en venta.'
-            : 'Third-party inventory commercialized by Tresor in Cancún: retail, offices and warehouses with real availability, for rent or sale.'
+            ? 'Departamentos, locales, oficinas y bodegas con disponibilidad real, en renta o en venta.'
+            : 'Apartments, retail, offices and warehouses with real availability, for rent or sale.'
         }
       />
       <CategoryGridSection
         eyebrow={isEs ? 'Listings' : 'Listings'}
         title={isEs ? <>Renta y venta con <span className="text-ink-3">disponibilidad real</span></> : <>Rent and sale with <span className="text-ink-3">real availability</span></>}
         developments={developments}
+        showDeveloperFilter={false}
+        showTypeFilter
       />
     </>
   );

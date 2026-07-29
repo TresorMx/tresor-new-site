@@ -5,7 +5,7 @@ import { Link } from '@/navigation';
 import Image from 'next/image';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePathname, useRouter } from '@/navigation';
-import { ChevronDown, ArrowUpRight, ArrowRight, Building2, LandPlot, Store, Warehouse, MapPin, Phone, Mail, Globe, Lock, LogOut } from 'lucide-react';
+import { ChevronDown, ArrowUpRight, ArrowRight, Building2, LandPlot, Store, MapPin, Phone, Mail, Globe, Lock, LogOut } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { getDevelopDevelopments, countByCity, type City } from '@/lib/developments';
 import { useAsesor } from '@/components/asesor/context';
@@ -25,7 +25,6 @@ const propertyTypes = [
   { icon: Store, titleKey: 'typeLocalesTitle', descKey: 'typeLocalesDesc', href: '/locales-comerciales' },
   { icon: Building2, titleKey: 'typeDeptosTitle', descKey: 'typeDeptosDesc', href: '/departamentos' },
   { icon: LandPlot, titleKey: 'typeLotesTitle', descKey: 'typeLotesDesc', href: '/lotes-residenciales' },
-  { icon: Warehouse, titleKey: 'typeListingsTitle', descKey: 'typeListingsDesc', href: '/listings' },
 ] as const;
 
 // Todas las ciudades del portafolio; en el menú solo se muestran las que tienen
