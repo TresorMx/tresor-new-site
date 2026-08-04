@@ -13,14 +13,22 @@ export const runtime = 'nodejs';
 // Island/Gardens) para no romper nada mientras se termina de subir todo.
 
 export async function GET(req: Request) {
-  const cookieStore = await cookies();
-  if (!verifySession(cookieStore.get(ASESOR_COOKIE)?.value)) {
-    return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
-  }
-
   const { searchParams } = new URL(req.url);
   const dev = searchParams.get('dev') ?? '';
   const doc = searchParams.get('doc') ?? '';
+
+  const cookieStore = await cookies();
+  if (!verifySession(cookieStore.get(ASESOR_COOKIE)?.value)) {
+    // Este link se abre con click directo (target="_blank"), no con fetch —
+    // un JSON pelón era un callejón sin salida. Pasa esto casi siempre
+    // porque el estado `isAsesor` del cliente (AsesorProvider) es un booleano
+    // que se calienta UNA vez al cargar el layout raíz y no se vuelve a
+    // revalidar solo por navegar con <Link>; si la cookie real expiró o
+    // cambió mientras tanto, el Drive se ve "logueado" pero cada descarga
+    // 401. `?reauth=1` le dice a AsesorGate que limpie ese estado viejo y
+    // reabra el login, en vez de dejar al asesor sin ninguna acción posible.
+    return NextResponse.redirect(new URL(`/asesores/${encodeURIComponent(dev)}?reauth=1`, req.url));
+  }
 
   let url: string | null = null;
   try {
