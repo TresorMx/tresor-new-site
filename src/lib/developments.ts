@@ -43,7 +43,7 @@ export function isListingRelationship(r: Relationship): boolean {
 }
 
 // Desarrolladores (Tresor + socios actuales)
-export type DeveloperId = 'Tresor' | 'Live' | 'Onix' | 'Urban Homes' | 'Grupo Roa';
+export type DeveloperId = 'Tresor' | 'Live' | 'Onix' | 'Urban Homes' | 'Grupo Roa' | 'Eleva Capital Group';
 // Alias retro-compat: el código actual usa `Developer` como el id.
 export type Developer = DeveloperId;
 
@@ -111,6 +111,15 @@ export const developers: Record<DeveloperId, DeveloperEntity> = {
     name: 'Grupo Roa',
     logoDark: '/listings/lindavista/logo-lindavista-dark.png',
     logoWhite: '/listings/lindavista/logo-lindavista-white-2048x358.png',
+    blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
+  },
+  // Sin `credentials`: no tenemos copy verificado de trayectoria de Eleva
+  // Capital Group — mejor omitirlo que inventar cifras (mismo criterio que
+  // Grupo Roa).
+  'Eleva Capital Group': {
+    id: 'Eleva Capital Group',
+    name: 'Eleva Capital Group',
+    logoDark: '/listings/cuore/desarrollador-logo.webp',
     blockLabel: { es: 'Desarrollado por', en: 'Developed by' },
   },
 };
@@ -218,6 +227,11 @@ export interface Development {
                         // visualmente y conviene reducirlos. En Sanity será un campo.
   comingSoon?: boolean; // si true, el CTA del card se muestra desactivado (gris)
                         // porque el desarrollo aún no tiene página/venta activa.
+  listingsFullFicha?: boolean; // solo aplica con relationship 'listings'/'rentals':
+                        // por default esa categoría oculta desarrollador/amenidades/
+                        // floorplans (inventario de terceros tipo Lindavista, sin esa
+                        // info curada). Si true, la ficha SÍ los muestra — para un
+                        // desarrollo real con ficha completa que igual vive bajo /listings/.
 
   // ─── Capa de ficha (todo opcional; el módulo se enciende si el dato existe) ───
   heroRender?: string;              // foto grande del hero de la ficha
@@ -2133,6 +2147,159 @@ export const developments: Development[] = [
       { slug: 'bodega-estandar', label: { es: 'Bodega Estándar', en: 'Standard Warehouse' }, area: '228 m²', image: '/listings/lindavista/plano-bodegas.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '228.35 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '6 bodegas' }] },
       { slug: 'bodega-grande', label: { es: 'Bodega Grande', en: 'Large Warehouse' }, area: '246 a 283 m²', image: '/listings/lindavista/plano-bodegas.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '246.09 a 283.68 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '6 bodegas' }] },
       { slug: 'bodega-esquina', label: { es: 'Bodega Esquina', en: 'Corner Warehouse' }, area: '555.87 m²', image: '/listings/lindavista/plano-bodegas.jpg', specs: [{ key: 'area', label: { es: 'Área', en: 'Size' }, value: '555.87 m²' }, { key: 'disp', label: { es: 'Disponibilidad', en: 'Availability' }, value: '1 bodega' }] },
+    ],
+  },
+  // Cuore vive bajo /listings/ (relationship 'listings') pero SÍ es una
+  // ficha completa propia (desarrollador, amenidades, tipologías) — a
+  // diferencia de Lindavista, que es inventario de terceros sin esa
+  // trayectoria curada. `listingsFullFicha: true` reactiva esos módulos
+  // solo para este desarrollo (ver el comentario del campo en Development).
+  {
+    slug: 'cuore',
+    name: 'Cuore Cumbres Cancún',
+    relationship: 'listings',
+    listingsFullFicha: true,
+    developer: 'Eleva Capital Group',
+    brand: 'Cuore',
+    city: 'Cancún',
+    zone: 'Cumbres',
+    type: 'Residencial',
+    intent: ['vivir', 'invertir'],
+    status: 'Preventa',
+    image: '/listings/cuore/galeria/cuore-cumbres-cancun-atardecer.webp',
+    href: '/listings/cuore',
+    featured: true,
+    logo: '/listings/cuore/logo-cuore.webp',
+    badge: 'Preventa',
+    propertyType: 'Departamento',
+    priceLabel: 'Desde $4,600,000 MXN',
+    priceLabelEn: 'From $4,600,000 MXN',
+    description:
+      'Departamentos de 1 a 3 recámaras en Cumbres Cancún, en un torre con plaza comercial propia, amenidades de nivel resort y conectividad inmediata al resto de la ciudad.',
+    descriptionEn:
+      '1 to 3-bedroom apartments in Cumbres Cancún, in a tower with its own retail plaza, resort-level amenities and immediate connectivity to the rest of the city.',
+    // ── Capa de ficha ──
+    heroRender: '/listings/cuore/galeria/cuore-cumbres-cancun-atardecer.webp',
+    tagline: { es: 'The New Art of City Living, en el corazón de Cumbres', en: 'The New Art of City Living, in the heart of Cumbres' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Cumbres Cancún' },
+      { label: 'Tipología', labelEn: 'Property type', value: '1 a 3 Rec y PH', valueEn: '1 to 3 Bed & PH' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 65.97 m²', valueEn: 'From 65.97 sqm' },
+    ],
+    gallery: [
+      '/listings/cuore/galeria/fachada/CUORE_Fachada_01.jpg',
+      '/listings/cuore/galeria/fachada/CUORE_Fachada_02.jpg',
+      '/listings/cuore/galeria/fachada/CUORE_Fachada_Nocturna.jpg',
+    ],
+    amenitiesGallery: [
+      '/listings/cuore/galeria/amenidades/cuore-residencial-alberca-1.jpg',
+      '/listings/cuore/galeria/amenidades/cuore-residencial-gym.jpg',
+      '/listings/cuore/galeria/amenidades/cuore-residencial-lobby-lounge.jpg',
+      '/listings/cuore/galeria/amenidades/cuore-residencial-terraza-bar.jpg',
+    ],
+    projectTitle: { es: 'Puedes tenerlo todo', en: 'You can have it all' },
+    projectTitleMuted: { es: 'en Cumbres Cancún', en: 'in Cumbres Cancún' },
+    projectBody: [
+      {
+        es: 'La mejor calidad de vida en el corazón residencial de Cancún: Cuore está rodeado de escuelas, restaurantes, cine, supermercados, bancos, cafeterías, gimnasios y múltiples servicios esenciales, con una conectividad inigualable que sitúa a solo minutos del aeropuerto, universidades y la vibrante Zona Hotelera.',
+        en: 'The best quality of life in the residential heart of Cancún: Cuore is surrounded by schools, restaurants, a movie theater, supermarkets, banks, cafés, gyms and multiple essential services, with unmatched connectivity minutes from the airport, universities and the vibrant Hotel Zone.',
+      },
+      {
+        es: '102 departamentos residenciales de 1 a 3 recámaras y Penthouses, con una plaza comercial propia en planta baja — **the new art of city living**.',
+        en: '102 residential apartments from 1 to 3 bedrooms plus Penthouses, with its own ground-floor retail plaza — **the new art of city living**.',
+      },
+    ],
+    location: {
+      lat: 21.1110297,
+      lng: -86.8420251,
+      address: 'Cumbres Cancún, Quintana Roo',
+    },
+    locationBullets: [
+      { es: 'Dentro de Cumbres Cancún, una de las zonas residenciales de mayor plusvalía de la ciudad', en: 'Inside Cumbres Cancún, one of the city\'s highest-value residential areas' },
+      { es: 'A minutos del aeropuerto, universidades y la Zona Hotelera', en: 'Minutes from the airport, universities and the Hotel Zone' },
+      { es: 'Plaza comercial propia en planta baja, con restaurantes y servicios', en: 'Its own ground-floor retail plaza, with restaurants and services' },
+    ],
+    amenities: [
+      { key: 'gym', labelOverride: 'Gimnasio Equipado' },
+      { key: 'coworking', labelOverride: 'Co-Work' },
+      { key: 'asadores' },
+      { key: 'pet-park', labelOverride: 'Área para Mascotas' },
+      { key: 'area-lounge', labelOverride: 'Sala Lounge' },
+      { key: 'camastros', labelOverride: 'Asoleadero' },
+      { key: 'area-infantil', labelOverride: 'Juegos en Exterior' },
+      { key: 'alberca-familiar', labelOverride: 'Chapoteadero' },
+    ],
+    floorPlans: [
+      {
+        slug: 'a1',
+        label: { es: 'A1 · 2 Recámaras + Den' },
+        image: '/listings/cuore/floorplans/A1.png',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '2 + Den' },
+          { key: 'banos', label: { es: 'Baños' }, value: '2' },
+          { key: 'areaTotal', label: { es: 'Área' }, value: 'Desde 133.20 m²' },
+        ],
+      },
+      {
+        slug: 'a2',
+        label: { es: 'A2 · 2 Recámaras' },
+        image: '/listings/cuore/floorplans/A2.png',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '2' },
+          { key: 'banos', label: { es: 'Baños' }, value: '2.5' },
+          { key: 'areaTotal', label: { es: 'Área' }, value: 'Desde 124.67 m²' },
+        ],
+      },
+      {
+        slug: 'c',
+        label: { es: 'C · 1 Recámara' },
+        image: '/listings/cuore/floorplans/C1.png',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '1' },
+          { key: 'banos', label: { es: 'Baños' }, value: '1' },
+          { key: 'areaTotal', label: { es: 'Área' }, value: 'Desde 65.97 m²' },
+        ],
+      },
+      {
+        slug: 'b1',
+        label: { es: 'B1 · 1 Recámara' },
+        image: '/listings/cuore/floorplans/B1.png',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '1' },
+          { key: 'banos', label: { es: 'Baños' }, value: '1.5' },
+          { key: 'areaTotal', label: { es: 'Área' }, value: 'Desde 80.97 m²' },
+        ],
+      },
+      {
+        slug: 'b2',
+        label: { es: 'B2 · 1 Recámara' },
+        image: '/listings/cuore/floorplans/B2.png',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '1' },
+          { key: 'banos', label: { es: 'Baños' }, value: '1.5' },
+          { key: 'areaTotal', label: { es: 'Área' }, value: 'Desde 88.20 m²' },
+        ],
+      },
+      {
+        slug: 'gh',
+        label: { es: 'GH · 3 Recámaras' },
+        image: '/listings/cuore/floorplans/GH.png',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '3' },
+          { key: 'banos', label: { es: 'Baños' }, value: '3.5' },
+          { key: 'areaTotal', label: { es: 'Área' }, value: 'Desde 346.43 m²' },
+        ],
+      },
+      {
+        slug: 'ph',
+        label: { es: 'PH · 3 Recámaras' },
+        image: '/listings/cuore/floorplans/PH.png',
+        specs: [
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '3' },
+          { key: 'banos', label: { es: 'Baños' }, value: '3.5' },
+          { key: 'areaTotal', label: { es: 'Área' }, value: '283.46 m²' },
+        ],
+      },
     ],
   },
 ];

@@ -178,7 +178,7 @@ export async function FichaPage({ params }: { params: Promise<{ slug: string; lo
   // trayectoria de "desarrollador" que mostrar, sin amenidades curadas ni
   // tipologías propias en la ficha pública — Tresor solo comercializa. El
   // resto de las fichas no cambia.
-  const isListing = dev.relationship === 'listings' || dev.relationship === 'rentals';
+  const isListing = (dev.relationship === 'listings' || dev.relationship === 'rentals') && !dev.listingsFullFicha;
   const showDeveloper = !isListing;
   const showAmenities = !isListing;
   const showFloorPlans = !isListing;
