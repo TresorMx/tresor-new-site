@@ -96,10 +96,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'invertir-en-cancun-desde-monterrey-cdmx',
   ];
 
+  // Artículos en inglés — solo bajo /en/, igual que /en/condos-for-sale-*:
+  // la ruta sin prefijo redirige ahí, así que listarla sería listar un redirect.
+  const blogSlugsEn = [
+    'buying-property-in-mexico-as-a-foreigner',
+    'best-areas-to-buy-in-cancun',
+    'closing-costs-when-buying-property-in-mexico',
+    'pre-construction-vs-move-in-ready-cancun',
+  ];
+
   const blogRoutes: MetadataRoute.Sitemap = [
     { url: `${SITE}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${SITE}/en/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     ...blogSlugs.map((slug) => ({
       url: `${SITE}/blog/${slug}`,
+      lastModified: now,
+      changeFrequency: 'monthly' as const,
+      priority: 0.85,
+    })),
+    ...blogSlugsEn.map((slug) => ({
+      url: `${SITE}/en/blog/${slug}`,
       lastModified: now,
       changeFrequency: 'monthly' as const,
       priority: 0.85,

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useLocale } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Loader2 } from 'lucide-react';
@@ -20,7 +21,21 @@ const PAGE_SIZE = 6;
 // reveal instantáneo se siente roto en un grid de este tamaño.
 const LOAD_DELAY_MS = 500;
 
-export default function BlogArticlesGrid({ articles }: { articles: BlogArticle[] }) {
+// `basePath`: el índice en inglés vive en /en/blog y sus artículos también,
+// así que el prefijo no puede estar hardcodeado a /blog.
+export default function BlogArticlesGrid({
+  articles,
+  basePath = '/blog',
+}: {
+  articles: BlogArticle[];
+  basePath?: string;
+}) {
+  // Los textos de UI se derivan del locale, igual que en SalesPartnerGrid —
+  // en /en/blog salían en español ("Leer artículo", "Ver más artículos").
+  const isEs = useLocale() !== 'en';
+  const readLabel = isEs ? 'Leer artículo' : 'Read article';
+  const moreLabel = isEs ? 'Ver más artículos' : 'Load more articles';
+  const loadingLabel = isEs ? 'Cargando…' : 'Loading…';
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [loading, setLoading] = useState(false);
 
@@ -45,7 +60,7 @@ export default function BlogArticlesGrid({ articles }: { articles: BlogArticle[]
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {visible.map((article) => (
             <div key={article.slug} className="grid grid-cols-1 gap-3 rounded-[28px] bg-white p-3">
-              <Link href={`/blog/${article.slug}`} className="group relative aspect-video overflow-hidden rounded-[20px]">
+              <Link href={`${basePath}/${article.slug}`} className="group relative aspect-video overflow-hidden rounded-[20px]">
                 <Image
                   src={article.image}
                   alt={article.title}
@@ -61,7 +76,7 @@ export default function BlogArticlesGrid({ articles }: { articles: BlogArticle[]
                   <span>{article.readTime} de lectura</span>
                 </div>
                 <h2 className="mt-3 font-sans text-[clamp(18px,1.8vw,28px)] font-medium leading-[1.15] text-ink">
-                  <Link href={`/blog/${article.slug}`} className="hover:text-accent transition-colors">
+                  <Link href={`${basePath}/${article.slug}`} className="hover:text-accent transition-colors">
                     {article.title}
                   </Link>
                 </h2>
@@ -69,10 +84,10 @@ export default function BlogArticlesGrid({ articles }: { articles: BlogArticle[]
                   {article.description}
                 </p>
                 <Link
-                  href={`/blog/${article.slug}`}
+                  href={`${basePath}/${article.slug}`}
                   className="mt-5 inline-flex w-fit items-center gap-2.5 rounded-full bg-accent px-6 py-3 text-[11px] font-bold uppercase tracking-[0.2em] text-ink transition-all hover:brightness-95"
                 >
-                  Leer artículo
+                  {readLabel}
                 </Link>
               </div>
             </div>
@@ -87,7 +102,7 @@ export default function BlogArticlesGrid({ articles }: { articles: BlogArticle[]
               className="inline-flex items-center gap-2.5 rounded-full border border-ink/15 bg-white px-8 py-4 text-[11px] font-bold uppercase tracking-[0.2em] text-ink transition-all hover:border-ink/30 disabled:opacity-60"
             >
               {loading && <Loader2 size={14} strokeWidth={2.5} className="animate-spin" />}
-              {loading ? 'Cargando…' : 'Ver más artículos'}
+              {loading ? loadingLabel : moreLabel}
             </button>
           </div>
         )}

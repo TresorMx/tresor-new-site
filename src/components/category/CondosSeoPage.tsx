@@ -214,6 +214,25 @@ export default function CondosSeoPage({
             always review the structure, costs and timing with your own attorney and a licensed
             Mexican notary before signing.
           </p>
+
+          {/* Enlace al cluster de guías: cierra el circuito en los dos
+              sentidos (los artículos ya apuntan aquí) y le da al lector la
+              versión larga de lo que este bloque resume. */}
+          <div className="mt-10 flex flex-wrap gap-3">
+            {[
+              { href: '/blog/buying-property-in-mexico-as-a-foreigner', label: 'Full guide: buying as a foreigner' },
+              { href: '/blog/closing-costs-when-buying-property-in-mexico', label: 'What closing costs to budget for' },
+              { href: '/blog/pre-construction-vs-move-in-ready-cancun', label: 'Pre-construction vs. move-in ready' },
+            ].map(({ href, label }) => (
+              <Link
+                key={href}
+                href={href}
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2.5 text-[13px] font-medium text-ink transition-colors hover:border-ink/25 hover:text-accent"
+              >
+                {label} <ArrowRight size={13} strokeWidth={2.2} />
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -2,36 +2,72 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import BlogArticlesGrid from '@/components/blog/BlogArticlesGrid';
 
-export const metadata: Metadata = {
-  // `absolute` es obligatorio aquí: el layout del blog aplica la plantilla
-  // '%s | Tresor Real Estate Blog', y sin esto el título salía con la marca
-  // repetida tres veces y pasado de 100 caracteres (se truncaba en Google).
-  title: {
-    absolute: 'Blog Inmobiliario de Cancún y la Riviera Maya | Tresor Real Estate',
-  },
-  description:
-    'Análisis del mercado inmobiliario en Cancún, Puerto Cancún, Playa del Carmen y Tulum: precios por zona, guías de preventa y qué revisar antes de comprar.',
-  keywords: [
-    'blog inmobiliario cancun',
-    'mercado inmobiliario cancun',
-    'inversión inmobiliaria riviera maya',
-    'guia comprar propiedad cancun',
-    'precios departamentos cancun por zona',
-    'comprar en preventa cancun',
-  ],
-  alternates: {
-    canonical: 'https://www.tresor.mx/blog',
-  },
-  openGraph: {
-    title: 'Blog Inmobiliario de Cancún y la Riviera Maya — Tresor Real Estate',
+const META = {
+  es: {
+    title: 'Blog Inmobiliario de Cancún y la Riviera Maya | Tresor Real Estate',
     description:
+      'Análisis del mercado inmobiliario en Cancún, Puerto Cancún, Playa del Carmen y Tulum: precios por zona, guías de preventa y qué revisar antes de comprar.',
+    keywords: [
+      'blog inmobiliario cancun',
+      'mercado inmobiliario cancun',
+      'inversión inmobiliaria riviera maya',
+      'guia comprar propiedad cancun',
+      'precios departamentos cancun por zona',
+      'comprar en preventa cancun',
+    ],
+    ogTitle: 'Blog Inmobiliario de Cancún y la Riviera Maya — Tresor Real Estate',
+    ogDescription:
       'Precios por zona, guías de preventa y análisis del mercado inmobiliario en Cancún, Puerto Cancún, Playa del Carmen y Tulum.',
-    url: 'https://www.tresor.mx/blog',
-    images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
   },
-};
+  en: {
+    title: 'Buying Property in Cancún: Guides for Foreign Buyers | Tresor Real Estate',
+    description:
+      'Plain-English guides to buying real estate in Cancún and the Riviera Maya: how foreigners take title, what closing costs to budget for, which areas fit which buyer, and pre-construction vs. move-in ready.',
+    keywords: [
+      'buying property in cancun',
+      'cancun real estate guide',
+      'buying property in mexico as a foreigner',
+      'fideicomiso mexico',
+      'closing costs mexico real estate',
+      'best areas to buy in cancun',
+    ],
+    ogTitle: 'Buying Property in Cancún — Guides for Foreign Buyers',
+    ogDescription:
+      'How foreigners take title in Mexico, what closing costs to budget for, and which part of Cancún actually fits what you want.',
+  },
+} as const;
 
-const articles = [
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
+  const isEs = locale !== 'en';
+  const m = isEs ? META.es : META.en;
+  const url = isEs ? 'https://www.tresor.mx/blog' : 'https://www.tresor.mx/en/blog';
+  return {
+    // `absolute` es obligatorio aquí: el layout del blog aplica la plantilla
+    // '%s | Tresor Real Estate Blog', y sin esto el título salía con la marca
+    // repetida tres veces y pasado de 100 caracteres (se truncaba en Google).
+    title: { absolute: m.title },
+    description: m.description,
+    keywords: [...m.keywords],
+    alternates: {
+      canonical: url,
+      languages: {
+        es: 'https://www.tresor.mx/blog',
+        en: 'https://www.tresor.mx/en/blog',
+        'x-default': 'https://www.tresor.mx/blog',
+      },
+    },
+    openGraph: {
+      title: m.ogTitle,
+      description: m.ogDescription,
+      url,
+      locale: isEs ? 'es_MX' : 'en_US',
+      images: [{ url: '/ogfinal.jpg', width: 1200, height: 630 }],
+    },
+  };
+}
+
+const articlesEs = [
   {
     slug: 'vivir-en-puerto-cancun',
     title: 'Vivir en Puerto Cancún: Guía Completa de la Zona Más Exclusiva de Cancún (2026)',
@@ -115,46 +151,103 @@ const articles = [
   },
 ];
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@graph': [
-    {
-      '@type': 'Blog',
-      '@id': 'https://www.tresor.mx/blog#blog',
-      name: 'Blog Inmobiliario de Cancún y la Riviera Maya',
-      description:
-        'Análisis del mercado inmobiliario en Cancún, Puerto Cancún, Playa del Carmen y Tulum: precios por zona, guías de preventa y qué revisar antes de comprar.',
-      url: 'https://www.tresor.mx/blog',
-      inLanguage: 'es-MX',
-      publisher: {
-        '@type': 'Organization',
-        name: 'Tresor Real Estate',
-        url: 'https://www.tresor.mx',
-        logo: 'https://www.tresor.mx/logos/LogoTresor-ink.svg',
-      },
-    },
-    {
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://www.tresor.mx' },
-        { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://www.tresor.mx/blog' },
-      ],
-    },
-    {
-      '@type': 'ItemList',
-      name: 'Artículos del blog inmobiliario de Tresor Real Estate',
-      url: 'https://www.tresor.mx/blog',
-      itemListElement: articles.map((a, i) => ({
-        '@type': 'ListItem',
-        position: i + 1,
-        url: `https://www.tresor.mx/blog/${a.slug}`,
-        name: a.title,
-      })),
-    },
-  ],
-};
 
-export default function BlogPage() {
+// Artículos en INGLÉS. Viven en /en/blog/{slug} y su ruta sin prefijo
+// redirige ahí (ver el page.tsx de cada uno) — igual que /condos-for-sale-*.
+// No son traducciones de los de español: atacan las búsquedas del comprador
+// extranjero, que son otras.
+const articlesEn = [
+  {
+    slug: 'buying-property-in-mexico-as-a-foreigner',
+    title: 'Can Foreigners Buy Property in Mexico? The Complete 2026 Guide',
+    description:
+      'Yes — and here is exactly how. The restricted zone, the fideicomiso bank trust, what a Mexican notary actually does, and the step-by-step process for buying a condo in Cancún.',
+    image: '/desarrollos/Blume/BLUME-Drone-1.jpg',
+    readTime: '9 min',
+    date: 'August 6, 2026',
+  },
+  {
+    slug: 'best-areas-to-buy-in-cancun',
+    title: 'The Best Areas to Buy in Cancún: An Honest Comparison (2026)',
+    description:
+      'Puerto Cancún, the Hotel Zone, Av. Huayacán, Vía Cumbres and Lausana compared on price, buyer profile and trade-offs.',
+    image: '/desarrollos/villalta/portada3.jpg',
+    readTime: '8 min',
+    date: 'August 6, 2026',
+  },
+  {
+    slug: 'closing-costs-when-buying-property-in-mexico',
+    title: 'Closing Costs When Buying Property in Mexico: What to Budget For',
+    description:
+      'Acquisition tax, notary fees, registry, appraisal and the bank trust: every line item that lands on top of the purchase price, and how to get a reliable estimate.',
+    image: '/blog/AdobeStock_887006964.jpeg',
+    readTime: '7 min',
+    date: 'August 6, 2026',
+  },
+  {
+    slug: 'pre-construction-vs-move-in-ready-cancun',
+    title: 'Pre-Construction vs. Move-In Ready in Cancún: Which Is Right for You?',
+    description:
+      'Pre-construction gets you a lower price and the pick of the inventory but you wait. An honest comparison of the trade-offs, risks and payment structures.',
+    image: '/blog/AdobeStock_841077811.jpeg',
+    readTime: '7 min',
+    date: 'August 6, 2026',
+  },
+];
+
+function buildJsonLd(isEs: boolean, articles: typeof articlesEs | typeof articlesEn) {
+  const base = isEs ? 'https://www.tresor.mx/blog' : 'https://www.tresor.mx/en/blog';
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Blog',
+        '@id': `${base}#blog`,
+        name: isEs
+          ? 'Blog Inmobiliario de Cancún y la Riviera Maya'
+          : 'Buying Property in Cancún — Guides for Foreign Buyers',
+        description: isEs
+          ? 'Análisis del mercado inmobiliario en Cancún, Puerto Cancún, Playa del Carmen y Tulum: precios por zona, guías de preventa y qué revisar antes de comprar.'
+          : 'Plain-English guides to buying real estate in Cancún and the Riviera Maya: taking title as a foreigner, closing costs, areas and buying stages.',
+        url: base,
+        inLanguage: isEs ? 'es-MX' : 'en-US',
+        publisher: {
+          '@type': 'Organization',
+          name: 'Tresor Real Estate',
+          url: 'https://www.tresor.mx',
+          logo: 'https://www.tresor.mx/logos/LogoTresor-ink.svg',
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: isEs ? 'Inicio' : 'Home', item: isEs ? 'https://www.tresor.mx' : 'https://www.tresor.mx/en' },
+          { '@type': 'ListItem', position: 2, name: 'Blog', item: base },
+        ],
+      },
+      {
+        '@type': 'ItemList',
+        name: isEs
+          ? 'Artículos del blog inmobiliario de Tresor Real Estate'
+          : 'Cancún real estate guides by Tresor Real Estate',
+        url: base,
+        itemListElement: articles.map((a, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          url: `${base}/${a.slug}`,
+          name: a.title,
+        })),
+      },
+    ],
+  };
+}
+
+export default async function BlogPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const isEs = locale !== 'en';
+  const articles = isEs ? articlesEs : articlesEn;
+  const jsonLd = buildJsonLd(isEs, articles);
+
   return (
     <>
       <script
@@ -171,7 +264,9 @@ export default function BlogPage() {
         <div className="absolute inset-0 animate-hero-zoom">
           <Image
             src="/blog/AdobeStock_656227413.jpeg"
-            alt="Vista aérea de Cancún y el mar Caribe — análisis del mercado inmobiliario"
+            alt={isEs
+              ? 'Vista aérea de Cancún y el mar Caribe — análisis del mercado inmobiliario'
+              : 'Aerial view of Cancún and the Caribbean Sea — real estate market analysis'}
             fill
             priority
             sizes="100vw"
@@ -180,19 +275,25 @@ export default function BlogPage() {
         </div>
         <div className="absolute inset-0 bg-black/55" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
-          <span className="eyebrow eyebrow-accent font-bold">— Análisis y guías</span>
+          <span className="eyebrow eyebrow-accent font-bold">
+            {isEs ? '— Análisis y guías' : '— Guides and analysis'}
+          </span>
           <h1 className="mt-5 h-display max-w-4xl text-[clamp(38px,6.4vw,80px)] text-white">
-            El mercado inmobiliario de Cancún,{' '}
-            <span className="text-white/45">explicado</span>
+            {isEs ? (
+              <>El mercado inmobiliario de Cancún, <span className="text-white/45">explicado</span></>
+            ) : (
+              <>Buying property in Cancún, <span className="text-white/45">explained</span></>
+            )}
           </h1>
           <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white/75">
-            Precios reales por zona, guías de preventa y análisis sin humo — para que compares
-            con criterio antes de comprar en Cancún, Puerto Cancún, Playa del Carmen o Tulum.
+            {isEs
+              ? 'Precios reales por zona, guías de preventa y análisis sin humo — para que compares con criterio antes de comprar en Cancún, Puerto Cancún, Playa del Carmen o Tulum.'
+              : 'How foreigners take title, what closing costs to budget for and which area actually fits you — straight answers, so you can compare properly before you buy.'}
           </p>
         </div>
       </section>
 
-      <BlogArticlesGrid articles={articles} />
+      <BlogArticlesGrid articles={articles} basePath={isEs ? '/blog' : '/en/blog'} />
     </>
   );
 }
