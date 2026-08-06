@@ -8,10 +8,13 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale !== 'en';
-  const title = isEs ? 'Propiedades en Venta en Puerto Cancún' : 'Properties for Sale in Puerto Cancún';
+  // Todo el inventario de Puerto Cancún es departamento, así que "Condos for
+  // Sale in Puerto Cancún" es literal, no un estiramiento — y es la búsqueda
+  // exacta del comprador extranjero para esta zona.
+  const title = isEs ? 'Propiedades en Venta en Puerto Cancún' : 'Condos for Sale in Puerto Cancún — Marina & Golf';
   const description = isEs
     ? 'Departamentos de lujo en Puerto Cancún, el enclave residencial más exclusivo de la ciudad, frente al mar Caribe y la marina.'
-    : "Luxury apartments in Puerto Cancún, the city's most exclusive residential enclave, facing the Caribbean Sea and the marina.";
+    : "Luxury condos for sale in Puerto Cancún, the city's most exclusive gated community — an 18-hole golf course, private marina, beach club and the Caribbean Sea at your door.";
   return {
     title,
     description,

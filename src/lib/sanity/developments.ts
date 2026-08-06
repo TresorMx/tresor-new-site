@@ -14,6 +14,8 @@ import { sanityClient } from './client';
 import type { Development, ContentBlock, Amenity, FloorPlanTypology, I18nText } from '../developments';
 
 const DEVELOPMENT_FIELDS = `
+  _createdAt,
+  _updatedAt,
   "slug": slug.current,
   name,
   "developerDocId": developer->_id,
@@ -229,6 +231,11 @@ function normalizeDevelopment(raw: any): Development & { developerDocId?: string
     seoTitle: i18n(raw.seoTitle, raw.seoTitleEn),
     seoDescription: i18n(raw.seoDescription, raw.seoDescriptionEn),
     seoImage: raw.seoImage || undefined,
+    // Fechas reales del documento en Studio para el JSON-LD de la ficha —
+    // sustituyen al `datePosted` hardcodeado que había antes. Se emiten tal
+    // cual las da Sanity (ISO 8601), que es el formato que espera schema.org.
+    datePosted: raw._createdAt || undefined,
+    dateModified: raw._updatedAt || undefined,
   };
 }
 

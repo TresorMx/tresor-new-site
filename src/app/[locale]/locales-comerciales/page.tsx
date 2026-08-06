@@ -8,10 +8,10 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale !== 'en';
-  const title = isEs ? 'Locales Comerciales en Venta en Cancún' : 'Commercial Spaces for Sale in Cancún';
+  const title = isEs ? 'Locales Comerciales en Venta en Cancún' : 'Commercial Space for Sale in Cancún';
   const description = isEs
     ? 'Locales comerciales en preventa en plazas premium de Cancún. Alto retorno, ubicaciones estratégicas y desarrolladores con trayectoria comprobada.'
-    : 'Pre-sale commercial spaces in premium plazas in Cancún. High returns, strategic locations and developers with a proven track record.';
+    : 'Retail and commercial space for sale in premium Cancún shopping plazas. Strategic high-traffic locations from developers with a proven track record.';
   return {
     title,
     description,

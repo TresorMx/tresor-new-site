@@ -28,6 +28,7 @@ import ReservaRapidaForm from '@/components/ficha/ReservaRapidaForm';
 import RelatedDevelopments from '@/components/ficha/RelatedDevelopments';
 import FichaContentBlock from '@/components/ficha/FichaContentBlock';
 import { getDevelopment, developers, getReservationAmount, getMergedDevelopmentsAsync, fichaSeoTitle } from '@/lib/developments';
+import type { City } from '@/lib/developments';
 import { OBJECT_POSITION_MOBILE, OBJECT_POSITION_DESKTOP } from '@/lib/heroImagePosition';
 
 // Cuerpo compartido de la ficha pública — usado por
@@ -43,6 +44,31 @@ import { OBJECT_POSITION_MOBILE, OBJECT_POSITION_DESKTOP } from '@/lib/heroImage
 // — mientras tanto, "Cotizar" en fichas de Quattro (con `plaza`) manda al
 // cotizador real de quattroplaza.mx, en pestaña nueva.
 const QUATTRO_COTIZADOR_URL = 'https://www.quattroplaza.mx/cotizador';
+
+// Código postal por ciudad para el `PostalAddress` del JSON-LD. Antes había
+// un '77500' hardcodeado para TODOS los desarrollos — o sea, a las fichas de
+// Tulum y Playa del Carmen les declarábamos un CP de Cancún. Es el CP
+// central de cada localidad (cada una abarca varios); la ubicación fina la
+// da `geo`, que sí es exacta. Puerto Morelos no tiene desarrollos hoy, pero
+// se deja mapeado para que no vuelva a caer en un default equivocado.
+const POSTAL_CODE_BY_CITY: Record<City, string> = {
+  'Cancún': '77500',
+  'Puerto Cancún': '77500',
+  'Puerto Morelos': '77580',
+  'Playa del Carmen': '77710',
+  'Tulum': '77780',
+};
+
+// Landing de ciudad a la que apunta el breadcrumb. `null` = no existe esa
+// página; en ese caso el breadcrumb se salta el nivel de ciudad en vez de
+// enlazar a un 404.
+const CITY_LANDING_SLUG: Record<City, string | null> = {
+  'Cancún': 'cancun',
+  'Puerto Cancún': 'puerto-cancun',
+  'Puerto Morelos': null,
+  'Playa del Carmen': 'playa-del-carmen',
+  'Tulum': 'tulum',
+};
 
 export async function generateFichaMetadata({
   params,
@@ -149,9 +175,14 @@ export async function FichaPage({ params }: { params: Promise<{ slug: string; lo
   // El home card sí dice "Desde $X MXN" (dev.priceLabel tal cual). En la
   // ficha es redundante — la etiqueta "Precio base" de abajo ya lo aclara —
   // así que se quita el prefijo solo aquí, sin tocar el campo compartido.
+  // En inglés usa `priceLabelEn`: antes siempre tomaba `priceLabel` (español),
+  // así que en /en/ se leía "Renta desde $19,076 MXN/mes" — texto en español
+  // en plena ficha en inglés. Se quita el prefijo "desde"/"from" en cualquiera
+  // de los dos idiomas.
+  const rawPriceLabel = (isEs ? dev.priceLabel : dev.priceLabelEn ?? dev.priceLabel) ?? undefined;
   const priceCell = plaza
     ? (minPrice ? `${formatMXN(minPrice)} MXN` : '—')
-    : (dev.priceLabel?.replace(/^desde\s+/i, '') ?? '—');
+    : (rawPriceLabel?.replace(/^(desde|from)\s+/i, '') ?? '—');
 
   // Galería: Sanity (plaza) → modelo unificado (dev) → fallback local legado
   // (solo para los dos Quattro históricos que aún no tienen `gallery` cargada).
@@ -186,31 +217,113 @@ export async function FichaPage({ params }: { params: Promise<{ slug: string; lo
   // JSON-LD — RealEstateListing siempre; FAQPage solo para fichas Tresor
   // (el copy de "apartado reembolsable de $50,000" etc. es específico de
   // plaza comercial y sería falso/engañoso en una ficha de Sales Partner).
+  //
+  // La descripción respeta el idioma: antes salía SIEMPRE en español
+  // (`dev.description`), también en /en/ — o sea, Google leía español en las
+  // páginas en inglés justo donde más pesa.
+  const jsonLdDescription = isEs
+    ? (dev.description ?? dev.tagline?.es)
+    : (dev.descriptionEn ?? dev.description ?? dev.tagline?.en ?? dev.tagline?.es);
+
+  // Recámaras para `numberOfRooms`: se DERIVA de las tipologías reales, no se
+  // inventa. Toma el entero inicial del valor (así "2 + Den" cuenta como 2) y
+  // si ninguna tipología lo trae, el campo se omite — mejor sin dato que con
+  // uno inventado.
+  // Se filtra por la ETIQUETA y no por `key`: en los desarrollos ya migrados a
+  // Sanity, `key` es el _key autogenerado del array ("sp0", "sp1"…) porque el
+  // schema de Studio no guarda un identificador semántico. Filtrar por
+  // key === 'recamaras' solo funcionaba en los estáticos.
+  const bedroomCounts = (dev.floorPlans ?? [])
+    .flatMap((fp) => fp.specs ?? [])
+    .filter((s) => /rec[áa]mara|bedroom/i.test(`${s.label?.es ?? ''} ${s.label?.en ?? ''}`))
+    .map((s) => parseInt(String(s.value), 10))
+    .filter((n) => Number.isFinite(n) && n > 0);
+  const minBeds = bedroomCounts.length ? Math.min(...bedroomCounts) : null;
+  const maxBeds = bedroomCounts.length ? Math.max(...bedroomCounts) : null;
+
+  // Precio para el schema. `minPrice` solo existe en fichas Tresor (se calcula
+  // del inventario en vivo), así que TODAS las de Sales Partner salían sin
+  // `offers` — sin precio, Google no puede mostrar el resultado enriquecido.
+  // Para esas se toma el número del `priceLabel` que ya se publica en la
+  // página, así el schema y lo que ve el usuario siempre coinciden.
+  // Se excluyen las rentas: su precio es mensual y mezclarlo con precios de
+  // venta en el mismo campo sería engañoso.
+  const priceFromLabel = (() => {
+    if (minPrice) return null;
+    const label = dev.priceLabel ?? '';
+    if (!label || /\/\s*mes|\/\s*month/i.test(label)) return null;
+    const match = label.replace(/,/g, '').match(/\$\s*(\d+(?:\.\d+)?)/);
+    const n = match ? Number(match[1]) : NaN;
+    return Number.isFinite(n) && n > 0 ? n : null;
+  })();
+  const schemaPrice = minPrice ?? priceFromLabel;
+
+  // Miga: Inicio → Ciudad → Desarrollo. El nivel de ciudad solo entra si esa
+  // ciudad tiene landing propia (ver CITY_LANDING_SLUG), para no enlazar a
+  // una URL que no existe.
+  const localePrefix = isEs ? '' : '/en';
+  const fichaCity = (plaza?.city ?? dev.city) as City;
+  const fichaCitySlug = CITY_LANDING_SLUG[fichaCity] ?? null;
+  const breadcrumbItems = [
+    { '@type': 'ListItem', position: 1, name: isEs ? 'Inicio' : 'Home', item: `${SITE}${localePrefix}` },
+    ...(fichaCitySlug
+      ? [{ '@type': 'ListItem', position: 2, name: fichaCity, item: `${SITE}${localePrefix}/${fichaCitySlug}` }]
+      : []),
+    {
+      '@type': 'ListItem',
+      position: fichaCitySlug ? 3 : 2,
+      name: dev.name,
+      item: `${SITE}${localePrefix}${dev.href}`,
+    },
+  ];
+
   const jsonLd: object[] = [
     {
       '@context': 'https://schema.org',
       '@type': 'RealEstateListing',
-      name: `${dev.name} — ${dev.city}`,
-      description: dev.description ?? dev.tagline?.es,
-      url: `${SITE}${dev.href}`,
+      name: heroH1, // mismo texto que <title> y <h1>, ya localizado
+      description: jsonLdDescription,
+      url: `${SITE}${isEs ? dev.href : `/en${dev.href}`}`,
       image: heroImg?.startsWith('http') ? heroImg : `${SITE}${heroImg}`,
-      datePosted: '2024-01-01',
+      inLanguage: isEs ? 'es-MX' : 'en-US',
+      // Fechas reales del documento en Sanity. Si el desarrollo aún no está
+      // migrado a Studio no hay dato, y se omite en vez de inventarlo (antes
+      // TODOS emitían un '2024-01-01' fijo, que además ya envejeció).
+      datePosted: dev.datePosted,
+      dateModified: dev.dateModified,
       validThrough: dev.deliveryWindow ? `${dev.deliveryWindow}` : '2027-12-31',
-      offers: minPrice ? {
+      ...(minBeds ? { numberOfRooms: minBeds === maxBeds ? `${minBeds}` : `${minBeds}-${maxBeds}` } : {}),
+      offers: schemaPrice ? {
         '@type': 'Offer',
-        price: minPrice,
+        price: schemaPrice,
         priceCurrency: 'MXN',
         availability: 'https://schema.org/InStock',
         seller: { '@type': 'Organization', name: developer.name },
+        // Solo `minPrice`: el sitio publica precio "desde" y no tenemos un
+        // máximo verificado. Declarar un maxPrice inventado que no coincida
+        // con lo que ve el usuario es structured data engañoso.
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          minPrice: schemaPrice,
+          priceCurrency: 'MXN',
+          valueAddedTaxIncluded: false,
+        },
       } : undefined,
       address: {
         '@type': 'PostalAddress',
         addressLocality: plaza?.city ?? dev.city,
         addressRegion: plaza?.state ?? 'Quintana Roo',
-        postalCode: '77500',
+        postalCode: POSTAL_CODE_BY_CITY[(plaza?.city ?? dev.city) as City] ?? undefined,
         addressCountry: 'MX',
       },
       geo: location ? { '@type': 'GeoCoordinates', latitude: location.lat, longitude: location.lng } : undefined,
+    },
+    // Breadcrumbs: Google los usa para la miga que muestra en el resultado en
+    // vez de la URL cruda. No existían en ninguna ficha.
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: breadcrumbItems,
     },
   ];
 

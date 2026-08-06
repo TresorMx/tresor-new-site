@@ -8,10 +8,13 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale !== 'en';
-  const title = isEs ? 'Propiedades en Venta en Cancún' : 'Properties for Sale in Cancún';
+  // Cancún es la única ciudad con inventario mixto (departamentos, locales,
+  // lotes y bodegas), así que el título no puede decir solo "Condos" sin ser
+  // inexacto — se nombran los tres tipos, con condos al frente.
+  const title = isEs ? 'Propiedades en Venta en Cancún' : 'Real Estate in Cancún — Condos, Commercial Space & Lots';
   const description = isEs
     ? 'Departamentos, locales comerciales y lotes residenciales en las zonas de mayor crecimiento de Cancún. Preventa y entrega inmediata.'
-    : 'Apartments, commercial spaces and residential lots in the fastest-growing areas of Cancún. Pre-sale and immediate delivery.';
+    : 'Condos, commercial space and residential lots for sale in the fastest-growing areas of Cancún. Pre-construction and move-in ready, with financing options for foreign buyers.';
   return {
     title,
     description,
@@ -49,7 +52,7 @@ export default async function CancunPage({ params }: { params: Promise<{ locale:
         subtitle={
           isEs
             ? 'Departamentos, locales comerciales y lotes residenciales en las zonas de mayor crecimiento y plusvalía de la ciudad.'
-            : "Apartments, commercial spaces and residential lots in the city's fastest-growing, highest-value areas."
+            : "Condos, commercial space and residential lots in the city's fastest-growing, highest-value areas."
         }
       />
       <CategoryGridSection

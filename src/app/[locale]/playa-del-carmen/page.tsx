@@ -8,10 +8,10 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale !== 'en';
-  const title = isEs ? 'Propiedades en Venta en Playa del Carmen' : 'Properties for Sale in Playa del Carmen';
+  const title = isEs ? 'Propiedades en Venta en Playa del Carmen' : 'Condos for Sale in Playa del Carmen';
   const description = isEs
     ? 'Departamentos en preventa y entrega inmediata en Playa del Carmen, a pasos de la Quinta Avenida y el mar Caribe.'
-    : 'Pre-sale and immediate-delivery apartments in Playa del Carmen, steps from Fifth Avenue and the Caribbean Sea.';
+    : 'Pre-construction and move-in ready condos for sale in Playa del Carmen, steps from Fifth Avenue and the Caribbean Sea.';
   return {
     title,
     description,

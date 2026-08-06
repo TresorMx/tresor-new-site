@@ -88,7 +88,7 @@ export async function generateMetadata({
     },
     description: isEs
       ? 'Desarrollador y comercializador inmobiliario en Cancún y la Riviera Maya. Departamentos, locales comerciales y lotes residenciales en preventa y entrega inmediata.'
-      : 'Real estate developer and broker in Cancún and the Riviera Maya. Apartments, commercial units and residential lots in pre-sale and immediate delivery.',
+      : 'Real estate developer and broker in Cancún and the Riviera Maya. Condos, commercial space and residential lots for sale — pre-construction and move-in ready.',
     keywords: isEs
       ? [
           'Tresor Real Estate',
@@ -101,7 +101,18 @@ export async function generateMetadata({
           'Riviera Maya bienes raíces',
           'Quattro Plaza Center',
         ]
-      : ['Tresor Real Estate', 'real estate Cancún', 'apartments for sale Cancún', 'commercial units Cancún', 'Riviera Maya real estate'],
+      : [
+          'Tresor Real Estate',
+          'condos for sale Cancun',
+          'condos for sale Puerto Cancun',
+          'Cancun real estate',
+          'Puerto Cancun real estate',
+          'buy property in Cancun Mexico',
+          'Riviera Maya real estate',
+          'Tulum condos for sale',
+          'Playa del Carmen condos for sale',
+          'commercial space for sale Cancun',
+        ],
     authors: [{ name: 'Tresor Real Estate' }],
     creator: 'Tresor Real Estate',
     publisher: 'Tresor Real Estate',
@@ -123,7 +134,7 @@ export async function generateMetadata({
         : 'Tresor Real Estate | Real Estate in Cancún and Riviera Maya',
       description: isEs
         ? 'Departamentos, locales comerciales y lotes residenciales en Cancún y la Riviera Maya. Preventa y entrega inmediata.'
-        : 'Apartments, commercial units and residential lots in Cancún and the Riviera Maya. Pre-sale and immediate delivery.',
+        : 'Condos, commercial space and residential lots in Cancún and the Riviera Maya. Pre-construction and move-in ready.',
       images: [{ url: '/ogfinal.jpg', width: 1200, height: 630, alt: 'Tresor Real Estate' }],
     },
     twitter: {

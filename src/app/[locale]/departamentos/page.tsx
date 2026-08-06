@@ -8,10 +8,13 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale !== 'en';
-  const title = isEs ? 'Departamentos en Venta en Cancún y Riviera Maya' : 'Apartments for Sale in Cancún and the Riviera Maya';
+  // EN dice "Condos", no "Apartments": para el comprador de EE.UU./Canadá un
+  // apartment es lo que renta y un condo lo que compra — la búsqueda real es
+  // "condos for sale cancun". Ver PROPERTY_TYPE_EN en src/lib/developments.ts.
+  const title = isEs ? 'Departamentos en Venta en Cancún y Riviera Maya' : 'Condos for Sale in Cancún and the Riviera Maya';
   const description = isEs
     ? 'Departamentos en preventa y entrega inmediata en Cancún, Tulum, Playa del Carmen y Puerto Cancún. Inversión inmobiliaria con las desarrolladoras más sólidas de Quintana Roo.'
-    : "Pre-sale and immediate-delivery apartments in Cancún, Tulum, Playa del Carmen and Puerto Cancún. Real estate investment with Quintana Roo's most solid developers.";
+    : "Browse condos for sale in Cancún, Tulum, Playa del Carmen and Puerto Cancún — pre-construction and move-in ready. Beachfront, marina and golf communities from Quintana Roo's most established developers.";
   return {
     title,
     description,

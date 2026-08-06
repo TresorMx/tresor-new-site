@@ -314,6 +314,14 @@ export interface Development {
   seoTitle?: I18nText;
   seoDescription?: I18nText;
   seoImage?: string; // override de la imagen al compartir (WhatsApp/redes) — si no está, cae a heroRender/image
+  // Fechas ISO reales para el JSON-LD (`datePosted`/`dateModified` de
+  // RealEstateListing). Salen de Sanity (`_createdAt`/`_updatedAt`), no se
+  // escriben a mano: antes el JSON-LD emitía un `datePosted: '2024-01-01'`
+  // hardcodeado para TODOS los desarrollos — una fecha falsa y ya vieja, que
+  // es justo lo que Google usa para medir frescura. Si no hay dato real, la
+  // ficha omite el campo en vez de inventarlo.
+  datePosted?: string;
+  dateModified?: string;
 }
 
 export const developments: Development[] = [
@@ -2537,11 +2545,20 @@ export function getReservationAmount(dev: Development): number {
   return dev.relationship === 'develop' ? 50000 : 25000;
 }
 
-const PROPERTY_TYPE_EN: Record<string, string> = {
-  Departamento: 'Apartments',
+// OJO — esto define la keyword de TODOS los títulos en inglés (título de
+// <title> y de <h1> de cada ficha), así que no es una traducción literal
+// sino la palabra que el comprador realmente busca:
+//   · "Condos", no "Apartments" — en inglés de EE.UU./Canadá un apartment
+//     es lo que RENTAS y un condo lo que COMPRAS. Quien invierte en Cancún
+//     busca "condos for sale cancun"; con "Apartments" no aparecíamos.
+//   · "Commercial Space", no "Commercial Units" — es el término con
+//     volumen de búsqueda real.
+const PROPERTY_TYPE_EN: Record<PropertyType, string> = {
+  Departamento: 'Condos',
   Casa: 'Homes',
   'Lote Residencial': 'Residential Lots',
-  'Local Comercial': 'Commercial Units',
+  'Local Comercial': 'Commercial Space',
+  Bodega: 'Warehouses',
 };
 
 // SEO: título de <title> Y del <h1> de la ficha — misma función para los
@@ -2553,9 +2570,12 @@ export function fichaSeoTitle(dev: Development, plaza: Plaza | null | undefined,
   const city = plaza?.city ?? dev.city;
   const kindEs = dev.propertyType ?? 'Desarrollo';
   const kindEn = dev.propertyType ? (PROPERTY_TYPE_EN[dev.propertyType] ?? dev.propertyType) : 'Development';
+  // Los listados en renta decían "en Venta" / "for Sale" en su propio título
+  // (Plaza Lindavista, que se RENTA), porque el fallback asumía venta siempre.
+  const isRental = dev.relationship === 'rentals';
   const fallback = isEs
-    ? `${dev.name} — ${kindEs} en Venta en ${city}`
-    : `${dev.name} — ${kindEn} for Sale in ${city}`;
+    ? `${dev.name} — ${kindEs} en ${isRental ? 'Renta' : 'Venta'} en ${city}`
+    : `${dev.name} — ${kindEn} for ${isRental ? 'Rent' : 'Sale'} in ${city}`;
   return isEs
     ? (plaza?.seoTitle ?? dev.seoTitle?.es ?? fallback)
     : (plaza?.seoTitleEn ?? dev.seoTitle?.en ?? dev.seoTitle?.es ?? fallback);

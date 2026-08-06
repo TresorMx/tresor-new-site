@@ -8,10 +8,10 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale !== 'en';
-  const title = isEs ? 'Propiedades en Venta en Tulum' : 'Properties for Sale in Tulum';
+  const title = isEs ? 'Propiedades en Venta en Tulum' : 'Condos for Sale in Tulum, Mexico';
   const description = isEs
     ? 'Departamentos en preventa en Tulum, el destino de mayor crecimiento de México. Aldea Zamá y las zonas de mayor plusvalía.'
-    : "Pre-sale apartments in Tulum, Mexico's fastest-growing destination. Aldea Zamá and the highest-value areas.";
+    : "Pre-construction condos for sale in Tulum, Mexico's fastest-growing destination — Aldea Zamá and the highest-appreciation areas of the Riviera Maya.";
   return {
     title,
     description,
