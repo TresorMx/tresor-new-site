@@ -13,6 +13,7 @@ import DriveHeader from '@/components/drive/DriveHeader';
 const LANDINGS = [
   '/departamentos-en-cancun-valmira',
   '/departamentos-en-puerto-cancun-vellmari',
+  '/luxury-condos-puerto-cancun', // Vellmari en inglés (Google Ads US/CA)
 ];
 
 export default function ChromeGate({
@@ -27,13 +28,18 @@ export default function ChromeGate({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  // `usePathname` de next/navigation trae el prefijo de locale (/en/...), y
+  // las rutas de LANDINGS están escritas sin él. Sin quitarlo, la MISMA
+  // landing servida bajo /en/ salía con header y footer — justo el chrome que
+  // una página de pauta no debe tener.
+  const path = pathname?.replace(/^\/en(?=\/|$)/, '') || '/';
   // Herramientas a pantalla completa (cotizador de asesor) y landings de
   // captación pagada — sin header/footer/nav ni el chatbot genérico
   // (FloatingLayer): nada que distraiga de convertir. Cada landing renderiza
   // su PROPIO chatbot (exclusivo del proyecto) dentro de la página.
   const bare =
     (pathname?.includes('/asesores/') && pathname?.endsWith('/cotizador')) ||
-    LANDINGS.some((l) => pathname === l || pathname?.startsWith(`${l}/`));
+    LANDINGS.some((l) => path === l || path.startsWith(`${l}/`));
 
   if (bare) {
     return <main className="min-h-screen">{children}</main>;

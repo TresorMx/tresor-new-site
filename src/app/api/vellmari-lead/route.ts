@@ -22,6 +22,22 @@ const PROPOSITO_LABELS: Record<string, string> = {
   segunda: 'Segunda residencia',
 };
 
+// Landing en inglés (/luxury-condos-puerto-cancun): mismos `value` en el
+// form, etiquetas en inglés y en pies cuadrados — así el asesor lee la nota
+// del CRM en el idioma en el que va a dar seguimiento, sin traducir mentalmente.
+const SUPERFICIE_LABELS_EN: Record<string, string> = {
+  '169-250': 'Residence 1,819 – 2,690 sq ft (169 – 250 m²)',
+  '250-400': 'Residence 2,690 – 4,306 sq ft (250 – 400 m²)',
+  ph: 'Penthouse 4,790 – 7,686 sq ft (445 – 714 m²)',
+  abierto: 'Open to options',
+};
+
+const PROPOSITO_LABELS_EN: Record<string, string> = {
+  vivir: 'Primary residence',
+  inversion: 'Investment / rental',
+  segunda: 'Second home',
+};
+
 function deriveChannel(utm?: UTM): string {
   const src = (utm?.utm_source ?? '').toLowerCase();
   if (utm?.fbclid || /meta|facebook|instagram|\big\b|fb/.test(src)) return 'Ads Meta';
@@ -43,22 +59,31 @@ interface UTM {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { firstName, email, phone, superficie, proposito, utm } = body as {
+    const { firstName, email, phone, superficie, proposito, utm, lang } = body as {
       firstName: string;
       email?: string;
       phone: string;
       superficie?: string;
       proposito?: string;
       utm?: UTM;
+      lang?: 'es' | 'en';
     };
 
     if (!firstName || !phone) {
       return NextResponse.json({ error: 'Faltan campos requeridos' }, { status: 400 });
     }
 
+    // El lead viene de la landing en inglés: se etiqueta para que el CRM lo
+    // rutee a un asesor que hable inglés. Llamarle en español a un comprador
+    // que llegó por un anuncio en inglés mata la conversión.
+    const isEn = lang === 'en';
     const channel = deriveChannel(utm);
-    const superficieLabel = superficie ? SUPERFICIE_LABELS[superficie] ?? superficie : undefined;
-    const propositoLabel = proposito ? PROPOSITO_LABELS[proposito] ?? proposito : undefined;
+    const superficieLabel = superficie
+      ? (isEn ? SUPERFICIE_LABELS_EN : SUPERFICIE_LABELS)[superficie] ?? superficie
+      : undefined;
+    const propositoLabel = proposito
+      ? (isEn ? PROPOSITO_LABELS_EN : PROPOSITO_LABELS)[proposito] ?? proposito
+      : undefined;
     const [first, ...rest] = firstName.trim().split(' ');
 
     const utmSummary = utm
@@ -69,9 +94,10 @@ export async function POST(req: NextRequest) {
       : '';
 
     const notes = [
-      'Vellmari Landing',
-      superficieLabel ? `Interés: ${superficieLabel}` : null,
-      propositoLabel ? `Propósito: ${propositoLabel}` : null,
+      isEn ? 'Vellmari Landing EN' : 'Vellmari Landing',
+      isEn ? '🇺🇸 HABLA INGLÉS — asignar asesor en inglés' : null,
+      superficieLabel ? `${isEn ? 'Interest' : 'Interés'}: ${superficieLabel}` : null,
+      propositoLabel ? `${isEn ? 'Purpose' : 'Propósito'}: ${propositoLabel}` : null,
       `Canal: ${channel}`,
       utmSummary || null,
     ]
@@ -90,7 +116,8 @@ export async function POST(req: NextRequest) {
         tags: [
           'Tresor Web',
           'vellmari-puerto-cancun',
-          'Vellmari Landing',
+          isEn ? 'Vellmari Landing EN' : 'Vellmari Landing',
+          ...(isEn ? ['English'] : []),
           channel,
           ...(propositoLabel ? [propositoLabel] : []),
         ],
@@ -116,11 +143,12 @@ export async function POST(req: NextRequest) {
         await resend.emails.send({
           from: `Tresor Real Estate <${process.env.RESEND_FROM_EMAIL ?? 'hello@tresor.mx'}>`,
           to: process.env.LEADS_EMAIL_TO ?? 'david.baena@gmail.com',
-          subject: `💎 Nuevo lead Vellmari (${channel}) — ${firstName}`,
+          subject: `💎 Nuevo lead Vellmari${isEn ? ' 🇺🇸 EN' : ''} (${channel}) — ${firstName}`,
           html: `
             <div style="font-family:-apple-system,BlinkMacSystemFont,sans-serif;max-width:540px;margin:0 auto;color:#0E0E0E;">
               <div style="border-bottom:2px solid #FAB413;padding-bottom:12px;margin-bottom:20px;">
-                <h2 style="margin:0;font-size:20px;">💎 Nuevo lead · Vellmari Landing</h2>
+                <h2 style="margin:0;font-size:20px;">💎 Nuevo lead · Vellmari Landing${isEn ? ' 🇺🇸 EN' : ''}</h2>
+                ${isEn ? '<p style="margin:8px 0 0;font-size:13px;font-weight:700;color:#B45309;">Habla inglés — asignar asesor en inglés.</p>' : ''}
               </div>
               <table style="width:100%;border-collapse:collapse;font-size:14px;">
                 <tr><td style="padding:8px 0;color:#6B6863;">Nombre</td><td style="text-align:right;font-weight:600;">${firstName}</td></tr>
