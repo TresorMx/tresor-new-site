@@ -344,13 +344,18 @@ export default function VellmariEnLanding({ floorPlans }: { floorPlans: FloorPla
             </p>
           </RevealOnScroll>
 
-          <div className="mt-12 grid gap-4 lg:grid-cols-2 lg:gap-6">
-            <RevealOnScroll>
-              <div className="relative aspect-[16/11] overflow-hidden rounded-[28px] bg-white">
+          {/* La columna izquierda se estira al alto de la derecha (lista +
+              mapa) en desktop: con `aspect-[16/11]` la foto se imponía su
+              propia altura e ignoraba el stretch del grid, quedando corta.
+              En lg se suelta el aspect y toma h-full; el grid le da algo más
+              de ancho para que la foto no se recorte de más al crecer. */}
+          <div className="mt-12 grid gap-4 lg:grid-cols-[1.15fr_1fr] lg:gap-6">
+            <RevealOnScroll className="lg:h-full">
+              <div className="relative aspect-[16/11] overflow-hidden rounded-[28px] bg-white lg:aspect-auto lg:h-full">
                 <Image
                   src={`${IMG}/ENTREGAFINAL_CADU_VELMARI_AEREA01.jpg`}
                   alt="Aerial view of Puerto Cancún — marina, golf course and beaches"
-                  fill sizes="(max-width:1024px) 100vw, 50vw"
+                  fill sizes="(max-width:1024px) 100vw, 55vw"
                   className="object-cover"
                 />
               </div>
