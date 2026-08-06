@@ -201,7 +201,11 @@ export default function VellmariLanding({ floorPlans }: { floorPlans: FloorPlanT
             className="object-cover"
           />
         </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/75 to-ink/25" />
+        {/* En mobile el logo/título caen en la franja superior del gradiente,
+            donde `to-ink/25` casi no oscurece — se leían casi directo sobre
+            la foto. Se refuerza esa franja solo hasta lg (donde entra el
+            segundo overlay horizontal de abajo y ya no hace falta). */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/80 to-ink/55 lg:to-ink/25" />
         <div className="absolute inset-0 lg:bg-gradient-to-r lg:from-ink lg:via-ink/60 lg:to-transparent" />
 
         <div className="container-wrap relative z-10 grid items-center gap-10 pb-14 pt-16 lg:grid-cols-[1.05fr_minmax(360px,440px)] lg:gap-16 lg:py-28">
