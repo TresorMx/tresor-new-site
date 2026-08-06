@@ -20,7 +20,9 @@ const PROPERTY_ICONS: Record<PropertyType, LucideIcon> = {
 // `badge`/`status` son valores fijos en español (enum DevStatus o texto
 // libre por desarrollo) — sin esto, el badge del card se quedaba en
 // español aunque el resto del sitio estuviera en inglés.
-const STATUS_LABEL_EN: Record<string, string> = {
+// Exportado: SalesPartnerGrid lo reusa para el dropdown de estatus, cuyas
+// opciones son los mismos valores en español que el badge del card.
+export const STATUS_LABEL_EN: Record<string, string> = {
   'Preventa': 'Pre-Sale',
   'Lanzamiento': 'Launch',
   'En obra': 'Under Construction',

@@ -46,9 +46,9 @@ export default async function DepartamentosPage({ params }: { params: Promise<{ 
     <>
       <CategoryHero
         image="/desarrollo-corporativo/LuxuryL.jpg"
-        imageAlt={isEs ? 'Departamentos en venta en Cancún y Riviera Maya' : 'Apartments for sale in Cancún and the Riviera Maya'}
+        imageAlt={isEs ? 'Departamentos en venta en Cancún y Riviera Maya' : 'Condos for sale in Cancún and the Riviera Maya'}
         eyebrow={isEs ? '— Propiedades' : '— Properties'}
-        title={isEs ? 'Departamentos' : 'Apartments'}
+        title={isEs ? 'Departamentos' : 'Condos'}
         subtitle={
           isEs
             ? 'Preventa y entrega inmediata en Cancún, Tulum, Playa del Carmen y Puerto Cancún — con las desarrolladoras más sólidas de la región.'
@@ -56,7 +56,7 @@ export default async function DepartamentosPage({ params }: { params: Promise<{ 
         }
       />
       <CategoryGridSection
-        eyebrow={isEs ? 'Departamentos' : 'Apartments'}
+        eyebrow={isEs ? 'Departamentos' : 'Condos'}
         title={isEs ? <>Encuentra tu <span className="text-ink-3">próximo hogar o inversión</span></> : <>Find your <span className="text-ink-3">next home or investment</span></>}
         developments={developments}
       />

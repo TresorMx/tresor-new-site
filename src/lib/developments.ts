@@ -450,7 +450,7 @@ export const developments: Development[] = [
     description:
       'Departamentos en preventa de 1, 2 y 3 recámaras en Vía Cumbres, la zona de mayor crecimiento y plusvalía de Cancún, con amenidades de primer nivel.',
     descriptionEn:
-      'Pre-sale 1, 2 and 3-bedroom apartments in Vía Cumbres, Cancún\'s fastest-growing, highest-value area, with first-class amenities.',
+      'Pre-sale 1, 2 and 3-bedroom condos in Vía Cumbres, Cancún\'s fastest-growing, highest-value area, with first-class amenities.',
     // ── Apartado en línea ──
     reservationEnabled: true,
     reservationAmount: 25000,
@@ -479,7 +479,7 @@ export const developments: Development[] = [
       },
       {
         es: 'Departamentos desde **67 m²**, con opciones de 1, 2 y 3 recámaras y penthouses con rooftop propio, pensados para quienes buscan vivir o invertir a minutos del aeropuerto y de la Zona Hotelera.',
-        en: 'Apartments from **67 sqm**, with 1, 2 and 3-bedroom options plus penthouses with private rooftops, designed for those looking to live or invest minutes from the airport and the Hotel Zone.',
+        en: 'Condos from **67 sqm**, with 1, 2 and 3-bedroom options plus penthouses with private rooftops, designed for those looking to live or invest minutes from the airport and the Hotel Zone.',
       },
     ],
     locationBullets: [
@@ -617,7 +617,7 @@ export const developments: Development[] = [
     description:
       'Uno de los desarrollos más exclusivos de Cancún: departamentos de lujo de 1, 2 y 3 recámaras en Vía Cumbres, con diseño y amenidades de primer nivel.',
     descriptionEn:
-      'One of Cancún\'s most exclusive developments: luxury 1, 2 and 3-bedroom apartments in Vía Cumbres, with first-class design and amenities.',
+      'One of Cancún\'s most exclusive developments: luxury 1, 2 and 3-bedroom condos in Vía Cumbres, with first-class design and amenities.',
     // ── Apartado en línea ──
     reservationEnabled: true,
     reservationAmount: 25000,
@@ -652,7 +652,7 @@ export const developments: Development[] = [
       },
       {
         es: 'Departamentos de 1 a 3 recámaras, además de **Garden Houses y Penthouses**, pensados para brindar amplitud, iluminación natural y una distribución eficiente de cada espacio — para quienes buscan vivir o invertir con tranquilidad, seguridad y conectividad.',
-        en: 'Apartments from 1 to 3 bedrooms, plus **Garden Houses and Penthouses**, designed for spaciousness, natural light and an efficient layout in every unit — for those looking to live or invest with peace of mind, security and connectivity.',
+        en: 'Condos from 1 to 3 bedrooms, plus **Garden Houses and Penthouses**, designed for spaciousness, natural light and an efficient layout in every unit — for those looking to live or invest with peace of mind, security and connectivity.',
       },
     ],
     locationBullets: [
@@ -766,7 +766,7 @@ export const developments: Development[] = [
     description:
       'Preventa de departamentos desde 76 m² con vistas abiertas al paseo Lausana y al campo de golf, dentro del exclusivo Lausana Residencial en Cancún.',
     descriptionEn:
-      'Pre-sale apartments from 76 sqm with open views of the Lausana promenade and the golf course, inside the exclusive Lausana Residencial in Cancún.',
+      'Pre-sale condos from 76 sqm with open views of the Lausana promenade and the golf course, inside the exclusive Lausana Residencial in Cancún.',
     // ── Apartado en línea ──
     reservationEnabled: true,
     reservationAmount: 25000,
@@ -800,7 +800,7 @@ export const developments: Development[] = [
       },
       {
         es: 'Departamentos de 1 a 3 recámaras, además de **Garden Houses y Penthouses de doble altura**, con alberca infinity frente al lago, gimnasio, spa y kids club — pensados para quienes buscan vivir o invertir con la tranquilidad de una comunidad diseñada para todas las edades.',
-        en: 'Apartments from 1 to 3 bedrooms, plus **double-height Garden Houses and Penthouses**, with an infinity pool facing the lake, a gym, spa and kids club — designed for those looking to live or invest with the peace of mind of a community built for every age.',
+        en: 'Condos from 1 to 3 bedrooms, plus **double-height Garden Houses and Penthouses**, with an infinity pool facing the lake, a gym, spa and kids club — designed for those looking to live or invest with the peace of mind of a community built for every age.',
       },
     ],
     locationBullets: [
@@ -924,7 +924,7 @@ export const developments: Development[] = [
     description:
       'Preventa de departamentos desde 39 m² con vistas espectaculares al paseo Lausana y al campo de golf, en un entorno residencial de excepción en Cancún.',
     descriptionEn:
-      'Pre-sale apartments from 39 sqm with spectacular views of the Lausana promenade and the golf course, in an exceptional residential setting in Cancún.',
+      'Pre-sale condos from 39 sqm with spectacular views of the Lausana promenade and the golf course, in an exceptional residential setting in Cancún.',
     // ── Apartado en línea (piloto Sales Partner) ──
     reservationEnabled: true,
     reservationAmount: 25000,
@@ -963,7 +963,7 @@ export const developments: Development[] = [
       },
       {
         es: 'Departamentos desde **76 m²**, pensados para quienes buscan vivir o invertir en un entorno residencial de excepción, con amenidades de primer nivel y a minutos de las zonas de mayor crecimiento de la ciudad.',
-        en: 'Apartments from **76 sqm**, designed for those looking to live or invest in an exceptional residential setting, with first-class amenities minutes from the city\'s fastest-growing areas.',
+        en: 'Condos from **76 sqm**, designed for those looking to live or invest in an exceptional residential setting, with first-class amenities minutes from the city\'s fastest-growing areas.',
       },
     ],
     locationBullets: [
@@ -1135,7 +1135,7 @@ export const developments: Development[] = [
     description:
       'En Aldea Zamá, corazón de Tulum —el destino de mayor crecimiento de México—, Xaviera ofrece exclusivos departamentos de 1 a 3 recámaras.',
     descriptionEn:
-      'In Aldea Zamá, the heart of Tulum —Mexico\'s fastest-growing destination—, Xaviera offers exclusive 1 to 3-bedroom apartments.',
+      'In Aldea Zamá, the heart of Tulum —Mexico\'s fastest-growing destination—, Xaviera offers exclusive 1 to 3-bedroom condos.',
     // ── Capa de ficha ──
     heroRender: '/desarrollos/xaviera/fotos/1. Fachada de Noche.jpg',
     tagline: { es: 'Solo 20 condominios exclusivos en Aldea Premium, Tulum' },
@@ -1241,7 +1241,7 @@ export const developments: Development[] = [
     description:
       'Departamentos de 1, 2 y 3 recámaras con diseño exclusivo y amenidades de lujo, en la zona residencial de mayor crecimiento y proyección de Cancún.',
     descriptionEn:
-      '1, 2 and 3-bedroom apartments with exclusive design and luxury amenities, in Cancún\'s fastest-growing, highest-potential residential area.',
+      '1, 2 and 3-bedroom condos with exclusive design and luxury amenities, in Cancún\'s fastest-growing, highest-potential residential area.',
     // ── Capa de ficha (contenido tomado de koatowers.com) ──
     heroRender: '/desarrollos/koa/Copia-de-FF_01.jpg', // misma foto que el card
     heroLogoScale: 0.6,
@@ -1273,7 +1273,7 @@ export const developments: Development[] = [
     projectBody: [
       {
         es: 'son departamentos de 1, 2 y 3 recámaras en Av. Prolongación La Luna, a un costado de Areka Towers, diseñados para un alto potencial de plusvalía con **escrituración garantizada**.',
-        en: 'is a collection of 1, 2 and 3-bedroom apartments on Av. Prolongación La Luna, next to Areka Towers, designed for high appreciation potential with **guaranteed title deed delivery**.',
+        en: 'is a collection of 1, 2 and 3-bedroom condos on Av. Prolongación La Luna, next to Areka Towers, designed for high appreciation potential with **guaranteed title deed delivery**.',
       },
       {
         es: '**Alberca infinity**, asadores en rooftop, gimnasio climatizado y cancha de pádel — amenidades pensadas para vivir e invertir en una de las zonas de mayor crecimiento de Cancún.',
@@ -1380,7 +1380,7 @@ export const developments: Development[] = [
     description:
       'Residencial de lujo que redefine el estándar de vida en la Zona Hotelera de Cancún: departamentos de 1, 2 y 3 recámaras con vistas increíbles al mar.',
     descriptionEn:
-      'A luxury residential development that redefines the standard of living in Cancún\'s Hotel Zone: 1, 2 and 3-bedroom apartments with breathtaking ocean views.',
+      'A luxury residential development that redefines the standard of living in Cancún\'s Hotel Zone: 1, 2 and 3-bedroom condos with breathtaking ocean views.',
     // ── Capa de ficha ──
     heroRender: '/desarrollos/villalta/portada2.jpg',
     // El edificio y la alberca quedan hasta abajo de la foto — bottom evita
@@ -1411,7 +1411,7 @@ export const developments: Development[] = [
       },
       {
         es: 'Departamentos de 1, 2 y 3 recámaras dentro de la Zona Hotelera, a un costado de la Laguna Nichupté — un oasis de tranquilidad con amenidades pensadas para vivir o invertir con total confianza.',
-        en: '1, 2 and 3-bedroom apartments inside the Hotel Zone, next to the Nichupté Lagoon — a haven of tranquility with amenities designed to live or invest with total confidence.',
+        en: '1, 2 and 3-bedroom condos inside the Hotel Zone, next to the Nichupté Lagoon — a haven of tranquility with amenities designed to live or invest with total confidence.',
       },
     ],
     location: { lat: 21.1499493, lng: -86.8160737, address: 'Villalta Laguna, Zona Hotelera, Cancún, Q. Roo' },
@@ -1601,7 +1601,7 @@ export const developments: Development[] = [
     description:
       'Departamentos de 2 y 3 recámaras dentro de Zienna Residencial, sobre Av. Huayacán, la zona con mayor plusvalía y crecimiento inmobiliario de Cancún.',
     descriptionEn:
-      '2 and 3-bedroom apartments inside Zienna Residencial, on Huayacán Ave., Cancún\'s highest-value, fastest-growing real estate area.',
+      '2 and 3-bedroom condos inside Zienna Residencial, on Huayacán Ave., Cancún\'s highest-value, fastest-growing real estate area.',
   },
 
   // ── SALES PARTNER · Urban Homes ──
@@ -1628,7 +1628,7 @@ export const developments: Development[] = [
     description:
       'Departamentos de lujo de 2 y 3 recámaras sobre Av. Huayacán, dentro de la exclusiva comunidad Gran Vía, en una zona de alta plusvalía de Cancún.',
     descriptionEn:
-      'Luxury 2 and 3-bedroom apartments on Huayacán Ave., inside the exclusive Gran Vía community, in a high-value area of Cancún.',
+      'Luxury 2 and 3-bedroom condos on Huayacán Ave., inside the exclusive Gran Vía community, in a high-value area of Cancún.',
     // ── Capa de ficha ──
     heroRender: '/desarrollos/Valmira/galeria-valmira/VistaDesarrollo.jpg',
     heroLogoScale: 0.7,
@@ -1659,7 +1659,7 @@ export const developments: Development[] = [
       },
       {
         es: 'Departamentos de 2 y 3 recámaras desde **87 m²**, con cocina integral equipada, walk-in closet y **acabados premium importados** — pensados para quienes buscan vivir o invertir con la certeza de un desarrollo ya entregado.',
-        en: 'Apartments with 2 and 3 bedrooms from **87 sqm**, with a fully equipped kitchen, walk-in closet and **imported premium finishes** — designed for those looking to live or invest with the certainty of an already-delivered development.',
+        en: 'Condos with 2 and 3 bedrooms from **87 sqm**, with a fully equipped kitchen, walk-in closet and **imported premium finishes** — designed for those looking to live or invest with the certainty of an already-delivered development.',
       },
     ],
     locationBullets: [
@@ -1838,7 +1838,7 @@ export const developments: Development[] = [
     description:
       'Departamentos de entrega inmediata de 2 y 3 recámaras en el corazón de la Riviera Maya, con amenidades de excepción y diseño contemporáneo de autor.',
     descriptionEn:
-      'Ready-to-move-in 2 and 3-bedroom apartments in the heart of the Riviera Maya, with exceptional amenities and signature contemporary design.',
+      'Ready-to-move-in 2 and 3-bedroom condos in the heart of the Riviera Maya, with exceptional amenities and signature contemporary design.',
   },
   {
     slug: 'sanam-urban',
@@ -1861,7 +1861,7 @@ export const developments: Development[] = [
     description:
       'Departamentos de 2 y 3 recámaras en una comunidad privada en el corazón de Tulum, a diez minutos de la playa, entre naturaleza, diseño y confort.',
     descriptionEn:
-      '2 and 3-bedroom apartments in a private community in the heart of Tulum, ten minutes from the beach, amid nature, design and comfort.',
+      '2 and 3-bedroom condos in a private community in the heart of Tulum, ten minutes from the beach, amid nature, design and comfort.',
   },
   {
     slug: 'blume-urban',
@@ -1984,7 +1984,7 @@ export const developments: Development[] = [
     description:
       'Departamentos de lujo a unos pasos del mar Caribe y de la célebre Quinta Avenida de Playa del Carmen. Muy pronto revelaremos todos los detalles.',
     descriptionEn:
-      'Luxury apartments steps from the Caribbean Sea and Playa del Carmen\'s famous Fifth Avenue. Full details coming soon.',
+      'Luxury condos steps from the Caribbean Sea and Playa del Carmen\'s famous Fifth Avenue. Full details coming soon.',
   },
   // ── LISTINGS — inventario de terceros que Tresor comercializa (no es
   // developer propio ni Sales Partner de un desarrollo residencial/de lujo).
@@ -2185,7 +2185,7 @@ export const developments: Development[] = [
     description:
       'Departamentos de 1 a 3 recámaras en Cumbres Cancún, en un torre con plaza comercial propia, amenidades de nivel resort y conectividad inmediata al resto de la ciudad.',
     descriptionEn:
-      '1 to 3-bedroom apartments in Cumbres Cancún, in a tower with its own retail plaza, resort-level amenities and immediate connectivity to the rest of the city.',
+      '1 to 3-bedroom condos in Cumbres Cancún, in a tower with its own retail plaza, resort-level amenities and immediate connectivity to the rest of the city.',
     // ── Capa de ficha ──
     heroRender: '/listings/cuore/galeria/cuore-cumbres-cancun-atardecer.webp',
     tagline: { es: 'The New Art of City Living, en el corazón de Cumbres', en: 'The New Art of City Living, in the heart of Cumbres' },
@@ -2214,7 +2214,7 @@ export const developments: Development[] = [
       },
       {
         es: '102 departamentos residenciales de 1 a 3 recámaras y Penthouses, con una plaza comercial propia en planta baja — **the new art of city living**.',
-        en: '102 residential apartments from 1 to 3 bedrooms plus Penthouses, with its own ground-floor retail plaza — **the new art of city living**.',
+        en: '102 residential condos from 1 to 3 bedrooms plus Penthouses, with its own ground-floor retail plaza — **the new art of city living**.',
       },
     ],
     location: {

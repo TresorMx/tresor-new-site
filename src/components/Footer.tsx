@@ -1,10 +1,16 @@
 import { Link } from '@/navigation';
 import Image from 'next/image';
-import { getTranslations } from 'next-intl/server';
+import { getTranslations, getLocale } from 'next-intl/server';
 import { ArrowRight } from 'lucide-react';
 
 export default async function Footer() {
   const t = await getTranslations('footer');
+  // Las páginas de "condos for sale" son contenido SOLO en inglés (la
+  // variante /es redirige), así que sus links solo se muestran en el footer
+  // en inglés — enlazarlas desde el footer español mandaría al usuario a un
+  // redirect a otro idioma. Aquí sí valen mucho: el footer aparece en todas
+  // las páginas /en/, así que es lo que les da enlaces internos de verdad.
+  const isEn = (await getLocale()) === 'en';
 
   return (
     <footer data-nav="dark" className="relative z-10 -mt-10 overflow-hidden rounded-t-[2.5rem] bg-bg-deep pt-24 text-bg">
@@ -58,6 +64,12 @@ export default async function Footer() {
             <ul className="flex flex-col gap-3 text-[13px] text-white/85 md:text-[14px]">
               <li><Link href="/#portafolio" className="hover:text-accent">{t('developments')}</Link></li>
               <li><Link href="/listings" className="hover:text-accent">{t('listings')}</Link></li>
+              {isEn && (
+                <>
+                  <li><Link href="/condos-for-sale-cancun" className="hover:text-accent">Condos for Sale in Cancún</Link></li>
+                  <li><Link href="/condos-for-sale-puerto-cancun" className="hover:text-accent">Condos in Puerto Cancún</Link></li>
+                </>
+              )}
             </ul>
           </div>
 

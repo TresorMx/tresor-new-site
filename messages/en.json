@@ -18,7 +18,7 @@
     "viewAllPortfolio": "View full portfolio",
     "typeLocalesTitle": "Commercial Spaces",
     "typeLocalesDesc": "Premium plazas and retail spaces",
-    "typeDeptosTitle": "Apartments",
+    "typeDeptosTitle": "Condos",
     "typeDeptosDesc": "1, 2, and 3-bedroom residences",
     "typeLotesTitle": "Residential Lots",
     "typeLotesDesc": "Land in high-value areas",
@@ -231,7 +231,7 @@
   "footer": {
     "claim": "We build spaces that help businesses grow.",
     "developmentBy1": "+25 real estate projects",
-    "developmentBy2": "+2,000 homes and apartments",
+    "developmentBy2": "+2,000 homes and condos",
     "developments": "Developments",
     "listings": "Listings",
     "contact": "Useful Links",

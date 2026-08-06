@@ -37,6 +37,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Versión en inglés de la landing de Vellmari (Google Ads US/CA). Sin
     // /en/ a propósito: es su URL canónica, ver el layout de esa ruta.
     { url: `${SITE}/luxury-condos-puerto-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+    // Páginas de contenido en inglés que atacan "condos for sale in {ciudad}".
+    // Solo la variante /en/: la ruta sin prefijo redirige ahí (contenido
+    // únicamente en inglés), así que listar ambas sería listar un redirect.
+    { url: `${SITE}/en/condos-for-sale-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${SITE}/en/condos-for-sale-puerto-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/invertir-en-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/rewards`,    lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE}/brokers`,    lastModified: now, changeFrequency: 'monthly', priority: 0.5 },

@@ -1,8 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
+import { useLocale } from 'next-intl';
 import { ChevronDown, Check } from 'lucide-react';
-import DevelopmentCard from '@/components/home/DevelopmentCard';
+import DevelopmentCard, { STATUS_LABEL_EN } from '@/components/home/DevelopmentCard';
 import { developers, type Development, type City, type PropertyType, type DevStatus } from '@/lib/developments';
 
 const CITY_LABELS: Record<City, string> = {
@@ -20,6 +21,23 @@ const TYPE_LABELS: Record<PropertyType, string> = {
   'Local Comercial': 'Locales comerciales',
   'Bodega': 'Bodegas',
 };
+
+// Los filtros estaban hardcodeados en español y se veían así en TODAS las
+// landings en inglés ("ESTATUS", "TODOS", "PREVENTA", "LIMPIAR"). Mismo
+// criterio de términos que el resto del sitio en inglés: Departamento →
+// "Condos", Local Comercial → "Commercial Space" (ver PROPERTY_TYPE_EN).
+const TYPE_LABELS_EN: Record<PropertyType, string> = {
+  'Departamento': 'Condos',
+  'Casa': 'Homes',
+  'Lote Residencial': 'Residential lots',
+  'Local Comercial': 'Commercial space',
+  'Bodega': 'Warehouses',
+};
+
+const UI_LABELS = {
+  es: { developer: 'Desarrollador', city: 'Ciudad', type: 'Tipo de propiedad', status: 'Estatus', all: 'Todos', clear: 'Limpiar' },
+  en: { developer: 'Developer', city: 'City', type: 'Property type', status: 'Status', all: 'All', clear: 'Clear' },
+} as const;
 
 interface FilterState {
   developer: string | null;
@@ -62,6 +80,7 @@ export function FilterDropdown<T extends string>({
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const allLabel = UI_LABELS[useLocale() === 'en' ? 'en' : 'es'].all;
 
   useEffect(() => {
     if (!open) return;
@@ -113,7 +132,7 @@ export function FilterDropdown<T extends string>({
             active === null ? 'bg-ink/[0.04] text-ink' : 'text-ink/60 hover:text-ink'
           }`}
         >
-          Todos
+          {allLabel}
           {active === null && <Check size={14} strokeWidth={2.5} className="text-accent" style={{ display: 'inline' }} />}
         </button>
         {options.map((opt) => (
@@ -145,6 +164,8 @@ export default function SalesPartnerGrid({
   forceDriveLink = false,
   children,
 }: Props) {
+  const isEs = useLocale() !== 'en';
+  const ui = UI_LABELS[isEs ? 'es' : 'en'];
   const [filters, setFilters] = useState<FilterState>({
     developer: null,
     city: null,
@@ -208,7 +229,7 @@ export default function SalesPartnerGrid({
         <div className="flex flex-wrap items-center gap-2">
           {showDeveloperFilter && devOptions.length >= 1 && (
             <FilterDropdown
-              label="Desarrollador"
+              label={ui.developer}
               options={devOptions}
               active={filters.developer}
               onSelect={(v) => setFilter('developer', v)}
@@ -216,7 +237,7 @@ export default function SalesPartnerGrid({
           )}
           {showCityFilter && cityOptions.length >= 1 && (
             <FilterDropdown
-              label="Ciudad"
+              label={ui.city}
               options={cityOptions}
               active={filters.city}
               onSelect={(v) => setFilter('city', v)}
@@ -225,19 +246,20 @@ export default function SalesPartnerGrid({
           )}
           {showTypeFilter && typeOptions.length >= 1 && (
             <FilterDropdown
-              label="Tipo de propiedad"
+              label={ui.type}
               options={typeOptions}
               active={filters.propertyType}
               onSelect={(v) => setFilter('propertyType', v)}
-              labelMap={TYPE_LABELS}
+              labelMap={isEs ? TYPE_LABELS : TYPE_LABELS_EN}
             />
           )}
           {showStatusFilter && statusOptions.length >= 1 && (
             <FilterDropdown
-              label="Estatus"
+              label={ui.status}
               options={statusOptions}
               active={filters.status}
               onSelect={(v) => setFilter('status', v)}
+              labelMap={isEs ? undefined : STATUS_LABEL_EN}
             />
           )}
 
@@ -254,7 +276,7 @@ export default function SalesPartnerGrid({
                 onClick={clearAll}
                 className="whitespace-nowrap px-1 text-[10px] font-bold uppercase tracking-[0.18em] text-ink/35 transition-colors hover:text-accent"
               >
-                Limpiar
+                {ui.clear}
               </button>
             </div>
           </div>

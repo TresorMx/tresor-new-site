@@ -210,7 +210,7 @@ export default async function LocaleLayout({
     image: `${SITE_URL}/og/home.jpg`,
     description: isEsLd
       ? 'Desarrollador y comercializador inmobiliario en Cancún y la Riviera Maya. Departamentos, locales comerciales y lotes residenciales en preventa y entrega inmediata.'
-      : 'Real estate developer and marketing agent in Cancún and the Riviera Maya. Apartments, commercial spaces, and residential lots in pre-sale and ready to move in.',
+      : 'Real estate developer and marketing agent in Cancún and the Riviera Maya. Condos, commercial space and residential lots in pre-construction and ready to move in.',
     telephone: '+52-998-404-5602',
     email: 'hello@tresor.mx',
     address: {
@@ -239,7 +239,7 @@ export default async function LocaleLayout({
             { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Lotes residenciales en venta en Cancún', description: 'Lotes y macrolotes residenciales en las zonas de mayor plusvalía de Cancún.' } },
           ]
         : [
-            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Apartments for sale in Cancún and the Riviera Maya', description: 'Apartments in pre-sale and ready to move in, in Cancún, Tulum, Playa del Carmen, and Puerto Cancún.' } },
+            { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Condos for sale in Cancún and the Riviera Maya', description: 'Condos in pre-construction and ready to move in, in Cancún, Tulum, Playa del Carmen, and Puerto Cancún.' } },
             { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Commercial spaces for sale in Cancún', description: 'Commercial spaces in pre-sale in premium plazas in Cancún, from 32 sqm.' } },
             { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Residential lots for sale in Cancún', description: 'Residential lots and macro-lots in the highest-value areas of Cancún.' } },
           ],
