@@ -15,6 +15,7 @@ const LANDINGS = [
   '/departamentos-en-puerto-cancun-vellmari',
   '/luxury-condos-puerto-cancun', // Vellmari en inglés (Google Ads US/CA)
   '/portafolio-cancun',           // multi-producto (Ads + Meta + mailing)
+  '/departamentos-en-cancun-loreta', // Loreta Wow Condos (Meta + Google Ads)
 ];
 
 export default function ChromeGate({

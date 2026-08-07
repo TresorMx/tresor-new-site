@@ -34,6 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/locales-comerciales-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.98 },
     { url: `${SITE}/departamentos-en-cancun-valmira`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/departamentos-en-puerto-cancun-vellmari`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${SITE}/departamentos-en-cancun-loreta`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     // Versión en inglés de la landing de Vellmari (Google Ads US/CA). Sin
     // /en/ a propósito: es su URL canónica, ver el layout de esa ruta.
     { url: `${SITE}/luxury-condos-puerto-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
