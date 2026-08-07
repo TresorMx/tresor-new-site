@@ -252,11 +252,16 @@ export default function PortafolioLanding({ developments }: { developments: Deve
         </div>
       </section>
 
-      {/* ═════════ LOS 6 DESARROLLOS ═════════ */}
+      {/* ═════════ LOS 6 DESARROLLOS ═════════
+          Sin el -mt-10/rounded-t que trae CategoryGridSection: ese overlap
+          está pensado para montarse sobre una IMAGEN de hero (donde se ve
+          bien recortar la esquina sobre la foto), no sobre una barra de
+          texto — aquí se comía casi todo el padding inferior de CIFRAS y el
+          label quedaba pegado a la esquina redondeada. */}
       <section
         id="portafolio"
         data-nav="light"
-        className="relative z-10 -mt-10 scroll-mt-16 rounded-t-[2.5rem] py-20 md:py-28"
+        className="relative z-10 scroll-mt-16 py-20 md:py-28"
         style={{ backgroundImage: 'linear-gradient(180deg, #f7f8fa 0%, #f2f3f5 55%, #eceef1 100%)' }}
       >
         <div className="container-wrap">
