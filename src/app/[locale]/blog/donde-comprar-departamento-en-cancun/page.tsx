@@ -126,7 +126,7 @@ export default function ArticlePage() {
                 </tr>
                 <tr className="border-b border-line">
                   <td className="py-3 pr-4 font-semibold text-ink">Puerto Cancún</td>
-                  <td className="py-3 pr-4">Desde $14,800,000 MXN</td>
+                  <td className="py-3 pr-4">Desde $15,289,000 MXN</td>
                   <td className="py-3 pr-4">Lujo residencial, marina y estilo de vida</td>
                   <td className="py-3">El enclave más exclusivo de la ciudad</td>
                 </tr>
@@ -252,7 +252,7 @@ export default function ArticlePage() {
           <div className="space-y-4 mb-10">
             {[
               { q: '¿Cuál zona de Cancún tiene mejor plusvalía?', a: 'Puerto Cancún tiene la plusvalía histórica más alta por su acceso restringido y oferta limitada. La Zona Hotelera le sigue de cerca por la misma razón: terreno disponible casi nulo. Av. Huayacán tiene menor precio base pero mayor proyección de crecimiento porcentual, al ser una zona todavía en expansión.' },
-              { q: '¿Es más barato comprar departamento en Av. Huayacán que en la Zona Hotelera?', a: 'Sí, considerablemente. El precio de entrada en Av. Huayacán arranca desde $2,595,000 MXN, frente a $5,000,000 MXN en la Zona Hotelera y $14,800,000 MXN en Puerto Cancún.' },
+              { q: '¿Es más barato comprar departamento en Av. Huayacán que en la Zona Hotelera?', a: 'Sí, considerablemente. El precio de entrada en Av. Huayacán arranca desde $2,595,000 MXN, frente a $5,000,000 MXN en la Zona Hotelera y $15,289,000 MXN en Puerto Cancún.' },
               { q: '¿Qué zona conviene más para renta vacacional en plataformas como Airbnb?', a: 'La Zona Hotelera y Puerto Cancún tienen la demanda turística más consistente por cercanía directa a playa. Av. Huayacán funciona mejor para renta residencial de largo plazo que para renta vacacional de corto plazo.' },
             ].map((item, i) => (
               <div key={i} className="p-4 bg-bg-soft rounded-xl border border-line">

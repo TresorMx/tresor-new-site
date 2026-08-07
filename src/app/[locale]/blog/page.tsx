@@ -263,10 +263,10 @@ export default async function BlogPage({ params }: { params: Promise<{ locale: s
       >
         <div className="absolute inset-0 animate-hero-zoom">
           <Image
-            src="/blog/AdobeStock_656227413.jpeg"
+            src="/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AEREA01.jpg"
             alt={isEs
-              ? 'Vista aérea de Cancún y el mar Caribe — análisis del mercado inmobiliario'
-              : 'Aerial view of Cancún and the Caribbean Sea — real estate market analysis'}
+              ? 'Vista aérea de Puerto Cancún — marina, campo de golf y el mar Caribe'
+              : 'Aerial view of Puerto Cancún — marina, golf course and the Caribbean Sea'}
             fill
             priority
             sizes="100vw"

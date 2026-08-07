@@ -14,6 +14,7 @@ const LANDINGS = [
   '/departamentos-en-cancun-valmira',
   '/departamentos-en-puerto-cancun-vellmari',
   '/luxury-condos-puerto-cancun', // Vellmari en inglés (Google Ads US/CA)
+  '/portafolio-cancun',           // multi-producto (Ads + Meta + mailing)
 ];
 
 export default function ChromeGate({

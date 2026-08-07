@@ -59,7 +59,7 @@ const FAQS = [
   },
   {
     q: '¿Cuánto cuesta vivir en Puerto Cancún?',
-    a: 'Es el ticket de entrada más alto de Cancún. Hoy las residencias en el mercado dentro de la zona arrancan alrededor de $14,800,000 MXN y superan los $19,000,000 MXN según el desarrollo y la superficie. A eso hay que sumar la cuota de mantenimiento, que varía según el condominio y las amenidades — conviene confirmarla proyecto por proyecto con un asesor antes de decidir.',
+    a: 'Es el ticket de entrada más alto de Cancún. Hoy las residencias en el mercado dentro de la zona arrancan alrededor de $15,289,000 MXN y superan los $19,000,000 MXN según el desarrollo y la superficie. A eso hay que sumar la cuota de mantenimiento, que varía según el condominio y las amenidades — conviene confirmarla proyecto por proyecto con un asesor antes de decidir.',
   },
   {
     q: '¿Por qué Puerto Cancún tiene tanta plusvalía?',
@@ -204,7 +204,7 @@ export default function ArticlePage() {
                   ['Amenidades de zona', 'Marina privada, golf de 18 hoyos, plaza comercial'],
                   ['Ubicación', 'Entre el centro de Cancún y el inicio de la Zona Hotelera'],
                   ['Acceso', 'Controlado, con vigilancia'],
-                  ['Precio de entrada (2026)', 'Desde ~$14,800,000 MXN'],
+                  ['Precio de entrada (2026)', 'Desde ~$15,289,000 MXN'],
                   ['Perfil', 'Residencia principal de alto patrimonio, segunda residencia y inversión patrimonial'],
                 ].map(([k, v]) => (
                   <tr key={k} className="border-b border-line">
@@ -235,7 +235,7 @@ export default function ArticlePage() {
             Puerto Cancún tiene el ticket de entrada más alto de la ciudad, y no por casualidad: la oferta es estructuralmente finita. Al ser un polígono cerrado con plan maestro, no puede expandirse ni densificarse libremente. Cada torre nueva reduce el suelo disponible y no hay forma de crear más.
           </p>
           <p className="text-ink-2 leading-relaxed mb-6">
-            Hoy, las residencias activas dentro de la zona arrancan alrededor de <strong className="text-ink font-semibold">$14,800,000 MXN</strong> y superan los <strong className="text-ink font-semibold">$19,000,000 MXN</strong> según el desarrollo, la superficie y el nivel. Un punto que suele pasarse por alto: además del precio de compra hay que considerar la cuota de mantenimiento, que cambia bastante entre condominios según las amenidades que operan. Conviene pedirla por escrito, proyecto por proyecto, antes de comparar.
+            Hoy, las residencias activas dentro de la zona arrancan alrededor de <strong className="text-ink font-semibold">$15,289,000 MXN</strong> y superan los <strong className="text-ink font-semibold">$19,000,000 MXN</strong> según el desarrollo, la superficie y el nivel. Un punto que suele pasarse por alto: además del precio de compra hay que considerar la cuota de mantenimiento, que cambia bastante entre condominios según las amenidades que operan. Conviene pedirla por escrito, proyecto por proyecto, antes de comparar.
           </p>
 
           <h2 className={H2}>Qué se puede comprar hoy en Puerto Cancún</h2>
@@ -249,7 +249,7 @@ export default function ArticlePage() {
                 name: 'Vellmari',
                 tag: 'Preventa',
                 href: '/desarrollos/vellmari-puerto-cancun',
-                price: 'Desde $14,800,000 MXN',
+                price: 'Desde $15,289,000 MXN',
                 desc: '98 residencias en dos torres frente a la marina, de 169 a 714 m², con penthouses de doble vista.',
                 img: '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_FACHADA04.jpg',
               },

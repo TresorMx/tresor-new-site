@@ -919,8 +919,8 @@ export const developments: Development[] = [
     logoScale: 0.8,
     badge: 'Preventa',
     propertyType: 'Departamento',
-    priceLabel: 'Desde $2,613,000 MXN',
-    priceLabelEn: 'From $2,613,000 MXN',
+    priceLabel: 'Desde $3,100,000 MXN',
+    priceLabelEn: 'From $3,100,000 MXN',
     description:
       'Preventa de departamentos desde 39 m² con vistas espectaculares al paseo Lausana y al campo de golf, en un entorno residencial de excepción en Cancún.',
     descriptionEn:
@@ -1375,8 +1375,8 @@ export const developments: Development[] = [
     logo: '/desarrollos/villalta/LogoVillalta.svg',
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
-    priceLabel: 'Desde $5,000,000 MXN',
-    priceLabelEn: 'From $5,000,000 MXN',
+    priceLabel: 'Desde $7,730,000 MXN',
+    priceLabelEn: 'From $7,730,000 MXN',
     description:
       'Residencial de lujo que redefine el estándar de vida en la Zona Hotelera de Cancún: departamentos de 1, 2 y 3 recámaras con vistas increíbles al mar.',
     descriptionEn:
@@ -1720,8 +1720,8 @@ export const developments: Development[] = [
     logoScale: 1.2,
     badge: 'Preventa',
     propertyType: 'Departamento',
-    priceLabel: 'Desde $14,800,000 MXN',
-    priceLabelEn: 'From $14,800,000 MXN',
+    priceLabel: 'Desde $15,289,000 MXN',
+    priceLabelEn: 'From $15,289,000 MXN',
     description:
       'Condominios exclusivos frente a la marina de Puerto Cancún, con amenidades de primer nivel en la zona residencial más cotizada del Caribe mexicano.',
     descriptionEn:

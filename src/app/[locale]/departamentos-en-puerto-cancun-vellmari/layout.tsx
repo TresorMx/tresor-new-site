@@ -6,7 +6,7 @@ const OG = '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AEREA03.jpg';
 export const metadata: Metadata = {
   title: 'Departamentos de Lujo en Puerto Cancún · Frente a la Marina — Vellmari | Urban Homes',
   description:
-    'Residencias de lujo en Puerto Cancún desde $14,800,000 MXN. 98 exclusivas residencias de 169 a 714 m² en dos torres frente a la marina, con golf, spa y amenidades de primer nivel. Agenda tu visita privada.',
+    'Residencias de lujo en Puerto Cancún desde $15,289,000 MXN. 98 exclusivas residencias de 169 a 714 m² en dos torres frente a la marina, con golf, spa y amenidades de primer nivel. Agenda tu visita privada.',
   keywords: [
     'departamentos en puerto cancun',
     'departamentos de lujo en cancun',
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Departamentos de Lujo en Puerto Cancún — Vellmari',
     description:
-      '98 residencias exclusivas de 169 a 714 m² frente a la marina de Puerto Cancún. Desde $14,800,000 MXN. Urban Homes.',
+      '98 residencias exclusivas de 169 a 714 m² frente a la marina de Puerto Cancún. Desde $15,289,000 MXN. Urban Homes.',
     url: URL,
     images: [{ url: OG, width: 1200, height: 630 }],
     locale: 'es_MX',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Departamentos de Lujo en Puerto Cancún — Vellmari',
     description:
-      '98 residencias exclusivas de 169 a 714 m² frente a la marina de Puerto Cancún. Desde $14,800,000 MXN.',
+      '98 residencias exclusivas de 169 a 714 m² frente a la marina de Puerto Cancún. Desde $15,289,000 MXN.',
     images: [OG],
   },
 };

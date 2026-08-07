@@ -51,7 +51,7 @@ const FAQS: EnFaq[] = [
   },
   {
     q: 'Which area is cheapest to buy into?',
-    a: 'The inland residential corridors. In our current portfolio, condos on Av. Huayacán start around $2,595,000 MXN and in Lausana around $2,613,000 MXN, against roughly $14,800,000 MXN for the entry point in Puerto Cancún.',
+    a: 'The inland residential corridors. In our current portfolio, condos on Av. Huayacán start around $2,595,000 MXN and in Lausana around $2,613,000 MXN, against roughly $15,289,000 MXN for the entry point in Puerto Cancún.',
   },
   {
     q: 'Which area is best for rental income?',
@@ -125,7 +125,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           </thead>
           <tbody className="text-ink-2">
             {[
-              ['Puerto Cancún', 'from ~$14,800,000 MXN', 'Second home, marina and golf lifestyle, scarcity'],
+              ['Puerto Cancún', 'from ~$15,289,000 MXN', 'Second home, marina and golf lifestyle, scarcity'],
               ['Hotel Zone', 'from ~$5,000,000 MXN', 'Beach access and vacation-rental demand'],
               ['Av. Huayacán', 'from ~$2,595,000 MXN', 'Lowest entry price, city growth corridor'],
               ['Vía Cumbres', 'from ~$3,500,000 MXN', 'Planned community, families, airport access'],

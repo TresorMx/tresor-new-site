@@ -64,7 +64,7 @@ const ENTORNO = [
 const FAQS = [
   {
     q: '¿Cuánto cuesta un departamento en Vellmari, Puerto Cancún?',
-    a: 'Las residencias en Vellmari tienen precio desde $14,800,000 MXN. Las superficies van de 169 m² hasta 714 m² en los penthouses, por lo que el precio depende de la tipología y la torre. Precios y condiciones de pago sujetos a cambio sin previo aviso; un asesor te confirma el precio y plan de pago vigente.',
+    a: 'Las residencias en Vellmari tienen precio desde $15,289,000 MXN. Las superficies van de 169 m² hasta 714 m² en los penthouses, por lo que el precio depende de la tipología y la torre. Precios y condiciones de pago sujetos a cambio sin previo aviso; un asesor te confirma el precio y plan de pago vigente.',
   },
   {
     q: '¿Cuántas residencias tiene el desarrollo?',
@@ -114,7 +114,7 @@ const JSONLD = {
     {
       '@type': 'Offer',
       name: 'Departamentos en venta en Puerto Cancún — Vellmari',
-      price: 14800000,
+      price: 15289000,
       priceCurrency: 'MXN',
       availability: 'https://schema.org/InStock',
       url: 'https://www.tresor.mx/departamentos-en-puerto-cancun-vellmari',
@@ -241,7 +241,7 @@ export default function VellmariLanding({ floorPlans }: { floorPlans: FloorPlanT
 
             <div className="mt-9 flex items-end justify-center gap-3 lg:justify-start">
               <span className="pb-1 text-[11px] font-medium uppercase tracking-caps text-white/50">Desde</span>
-              <span className="h-display text-[clamp(26px,3.4vw,42px)] leading-none text-white">$14,800,000 MXN</span>
+              <span className="h-display text-[clamp(26px,3.4vw,42px)] leading-none text-white">$15,289,000 MXN</span>
             </div>
           </div>
 
