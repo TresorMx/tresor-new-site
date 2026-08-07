@@ -18,6 +18,28 @@ import type { Development } from '@/lib/developments';
 
 const HERO = '/desarrollos/villalta/portada2.jpg';
 
+// Categorías del formulario. Tres opciones convierten mejor que seis: el que
+// llega del anuncio no siempre sabe qué desarrollo quiere, pero sí sabe qué
+// TIPO de producto busca.
+const CATEGORIAS = [
+  { v: 'local', l: 'Local Comercial' },
+  { v: 'departamento', l: 'Departamento Residencial' },
+  { v: 'luxury', l: 'Luxury Condo' },
+] as const;
+
+// Qué categoría le corresponde a cada desarrollo. NO se puede derivar del
+// `propertyType` del catálogo: Villalta y Vellmari son 'Departamento' ahí,
+// igual que Valmira u Olivia — "Luxury Condo" es una distinción comercial,
+// no de tipo de propiedad. Por eso el mapa es explícito.
+const DEV_CATEGORIA: Record<string, string> = {
+  'quattro-gardens': 'local',
+  'valmira-urban': 'departamento',
+  'olivia-wow-condos': 'departamento',
+  'loreta-wow-condos': 'departamento',
+  'villalta-onix': 'luxury',
+  'vellmari-puerto-cancun': 'luxury',
+};
+
 const CIFRAS = [
   { value: '6', label: 'Desarrollos activos' },
   { value: '3', label: 'Tipos de propiedad' },
@@ -93,7 +115,7 @@ function readUTM(): UTM {
 export default function PortafolioLanding({ developments }: { developments: Development[] }) {
   const formRef = useRef<HTMLDivElement>(null);
   const utmRef = useRef<UTM>({});
-  const [form, setForm] = useState({ firstName: '', email: '', phone: '', interes: '', presupuesto: '' });
+  const [form, setForm] = useState({ firstName: '', email: '', phone: '', categoria: '', desarrollo: '', presupuesto: '' });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
 
@@ -103,11 +125,19 @@ export default function PortafolioLanding({ developments }: { developments: Deve
   const valid = Boolean(form.firstName.trim() && form.email.trim() && form.phone.trim());
   const scrollToForm = () => formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-  // Click en "Me interesa" de una card: preselecciona ese desarrollo en el
-  // formulario y baja hasta él. El lead llega al CRM ya calificado con el
-  // proyecto que le llamó la atención, sin salir del embudo hacia la ficha.
+  // Click en "Me interesa" de una card: marca la categoría que corresponde y
+  // guarda APARTE el desarrollo exacto. El formulario se ve simple (3
+  // opciones) pero el CRM igual recibe qué proyecto le llamó la atención —
+  // sin sacar al usuario del embudo hacia la ficha.
+  // Elegir categoría a mano borra el desarrollo que hubiera dejado una card:
+  // si el usuario cambia de opinión, mandar al CRM el proyecto anterior sería
+  // peor que no mandar ninguno.
+  const pickCategoria = (v: string) => {
+    setForm((f) => ({ ...f, categoria: v, desarrollo: '' }));
+  };
+
   const pickAndScroll = (slug: string) => {
-    set('interes', slug);
+    setForm((f) => ({ ...f, categoria: DEV_CATEGORIA[slug] ?? '', desarrollo: slug }));
     scrollToForm();
   };
 
@@ -124,7 +154,8 @@ export default function PortafolioLanding({ developments }: { developments: Deve
           firstName: form.firstName,
           email: form.email,
           phone: form.phone,
-          interes: form.interes || undefined,
+          categoria: form.categoria || undefined,
+          desarrollo: form.desarrollo || undefined,
           presupuesto: form.presupuesto || undefined,
           utm: utmRef.current,
         }),
@@ -145,7 +176,7 @@ export default function PortafolioLanding({ developments }: { developments: Deve
       loading={loading}
       err={err}
       submit={submit}
-      developments={developments}
+      onPickCategoria={pickCategoria}
     />
   );
 
@@ -441,15 +472,15 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 
 /* ─────────────── formulario ─────────────── */
 function FormCard({
-  form, set, valid, loading, err, submit, developments,
+  form, set, valid, loading, err, submit, onPickCategoria,
 }: {
-  form: { firstName: string; email: string; phone: string; interes: string; presupuesto: string };
+  form: { firstName: string; email: string; phone: string; categoria: string; desarrollo: string; presupuesto: string };
   set: (k: string, v: string) => void;
   valid: boolean;
   loading: boolean;
   err: string;
   submit: (e: React.FormEvent) => void;
-  developments: Development[];
+  onPickCategoria: (v: string) => void;
 }) {
   const chip = (active: boolean) =>
     `rounded-xl border px-2 py-2.5 text-[11.5px] font-semibold transition ${
@@ -457,10 +488,6 @@ function FormCard({
         ? 'border-accent bg-accent text-ink'
         : 'border-white/15 bg-white/[0.07] text-white/75 hover:border-white/35 hover:text-white'
     }`;
-
-  // Nombre corto para el chip — el nombre completo del desarrollo no cabe.
-  const shortName = (d: Development) =>
-    d.name.replace(/\s*(Wow Condos|Plaza Center|Living|Laguna)\s*/gi, ' ').replace(/\s+/g, ' ').trim();
 
   return (
     <div className="rounded-[28px] border border-white/12 bg-ink/75 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl md:p-7">
@@ -489,15 +516,23 @@ function FormCard({
 
         <div className="pt-1">
           <p className="mb-2 text-[10.5px] uppercase tracking-caps text-white/45">¿Qué te interesa?</p>
-          <div className="grid grid-cols-2 gap-2">
-            {developments.map((d) => (
-              <button key={d.slug} type="button" onClick={() => set('interes', d.slug)} className={chip(form.interes === d.slug)}>
-                {shortName(d)}
+          {/* Una columna: "Departamento Residencial" no cabe en media sin
+              partirse en dos líneas, y a pantalla completa son más fáciles de
+              tocar en móvil. Elegir a mano limpia el desarrollo que hubiera
+              dejado el botón "Me interesa" de una card — el usuario está
+              cambiando de opinión, y mandar al CRM un proyecto que ya no
+              corresponde sería peor que no mandar ninguno. */}
+          <div className="grid grid-cols-1 gap-2">
+            {CATEGORIAS.map(({ v, l }) => (
+              <button
+                key={v}
+                type="button"
+                onClick={() => onPickCategoria(v)}
+                className={chip(form.categoria === v)}
+              >
+                {l}
               </button>
             ))}
-            <button type="button" onClick={() => set('interes', 'explorar')} className={`${chip(form.interes === 'explorar')} col-span-2`}>
-              Aún estoy explorando
-            </button>
           </div>
         </div>
 

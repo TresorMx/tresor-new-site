@@ -8,20 +8,33 @@ export const dynamic = 'force-dynamic';
 
 // Landing multi-producto /portafolio-cancun (Google Ads + Meta + mailing).
 // A diferencia de las landings de un solo desarrollo (Valmira, Vellmari),
-// aquí el lead elige QUÉ le interesa de 6 opciones — ese dato es la
-// calificación más valiosa del formulario, así que viaja al CRM como tag
-// propio y no enterrado en las notas.
+// aquí el lead califica en dos niveles y ambos viajan como tag propio, no
+// enterrados en las notas:
+//   · `categoria`  — lo que elige en el formulario (Local / Departamento /
+//                    Luxury). Siempre presente si contestó.
+//   · `desarrollo` — el proyecto exacto, solo si entró por el botón "Me
+//                    interesa" de una card. Es la señal más fuerte cuando
+//                    existe, porque indica qué le llamó la atención.
 
-// Etiquetas legibles por slug. La clave es el slug real del catálogo, así el
-// tag que llega a GHL coincide con el que ya usan las fichas.
-const INTERES_LABELS: Record<string, string> = {
-  'quattro-gardens': 'Quattro Plaza Gardens — Locales comerciales',
-  'valmira-urban': 'Valmira — Departamentos',
-  'olivia-wow-condos': 'Olivia Wow Condos — Departamentos',
-  'loreta-wow-condos': 'Loreta Wow Condos — Departamentos',
-  'villalta-onix': 'Villalta — Departamentos',
-  'vellmari-puerto-cancun': 'Vellmari — Luxury condos',
-  explorar: 'Abierto a explorar opciones',
+// Categoría elegida en el formulario (3 opciones).
+const CATEGORIA_LABELS: Record<string, string> = {
+  local: 'Local Comercial',
+  departamento: 'Departamento Residencial',
+  luxury: 'Luxury Condo',
+};
+
+// Desarrollo exacto. Solo llega si el lead entró por el botón "Me interesa"
+// de una card — el formulario por sí solo pide categoría, no proyecto. Es la
+// señal más valiosa cuando existe, así que va como tag propio.
+// Las claves son los slugs reales del catálogo, para que el tag coincida con
+// el que ya usan las fichas.
+const DESARROLLO_LABELS: Record<string, string> = {
+  'quattro-gardens': 'Quattro Plaza Gardens',
+  'valmira-urban': 'Valmira',
+  'olivia-wow-condos': 'Olivia Wow Condos',
+  'loreta-wow-condos': 'Loreta Wow Condos',
+  'villalta-onix': 'Villalta',
+  'vellmari-puerto-cancun': 'Vellmari',
 };
 
 const PRESUPUESTO_LABELS: Record<string, string> = {
@@ -53,11 +66,12 @@ function deriveChannel(utm?: UTM): string {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { firstName, email, phone, interes, presupuesto, utm } = body as {
+    const { firstName, email, phone, categoria, desarrollo, presupuesto, utm } = body as {
       firstName: string;
       email?: string;
       phone: string;
-      interes?: string;
+      categoria?: string;
+      desarrollo?: string;
       presupuesto?: string;
       utm?: UTM;
     };
@@ -67,7 +81,8 @@ export async function POST(req: NextRequest) {
     }
 
     const channel = deriveChannel(utm);
-    const interesLabel = interes ? INTERES_LABELS[interes] ?? interes : undefined;
+    const categoriaLabel = categoria ? CATEGORIA_LABELS[categoria] ?? categoria : undefined;
+    const desarrolloLabel = desarrollo ? DESARROLLO_LABELS[desarrollo] ?? desarrollo : undefined;
     const presupuestoLabel = presupuesto ? PRESUPUESTO_LABELS[presupuesto] ?? presupuesto : undefined;
     const [first, ...rest] = firstName.trim().split(' ');
 
@@ -77,7 +92,8 @@ export async function POST(req: NextRequest) {
 
     const notes = [
       'Portafolio Cancún Landing',
-      interesLabel ? `Interés: ${interesLabel}` : null,
+      categoriaLabel ? `Interés: ${categoriaLabel}` : null,
+      desarrolloLabel ? `Desarrollo: ${desarrolloLabel}` : null,
       presupuestoLabel ? `Presupuesto: ${presupuestoLabel}` : null,
       `Canal: ${channel}`,
       utmSummary || null,
@@ -96,10 +112,11 @@ export async function POST(req: NextRequest) {
           'Tresor Web',
           'Portafolio Cancún',
           channel,
-          // El desarrollo de interés como tag propio: permite armar
+          // Categoría y desarrollo como tags propios: permiten armar
           // audiencias y rutear al asesor correcto sin leer la nota.
-          ...(interes && interes !== 'explorar' ? [interes] : []),
-          ...(interesLabel ? [interesLabel] : []),
+          ...(categoriaLabel ? [categoriaLabel] : []),
+          ...(desarrollo ? [desarrollo] : []),
+          ...(desarrolloLabel ? [desarrolloLabel] : []),
         ],
         customFields: {
           fuente_de_contacto: 'digital',
@@ -112,7 +129,7 @@ export async function POST(req: NextRequest) {
         fullName: firstName,
         ...(email ? { email } : {}),
         phone,
-        ...(interes && interes !== 'explorar' ? { plazaSlug: interes } : {}),
+        ...(desarrollo ? { plazaSlug: desarrollo } : {}),
         message: notes,
       }),
     ]);
@@ -133,7 +150,8 @@ export async function POST(req: NextRequest) {
                 <tr><td style="padding:8px 0;color:#6B6863;">Nombre</td><td style="text-align:right;font-weight:600;">${firstName}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Email</td><td style="text-align:right;">${email ? `<a href="mailto:${email}">${email}</a>` : '—'}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Teléfono</td><td style="text-align:right;"><a href="tel:${phone}">${phone}</a></td></tr>
-                <tr><td style="padding:8px 0;color:#6B6863;">Le interesa</td><td style="text-align:right;font-weight:600;">${interesLabel ?? '—'}</td></tr>
+                <tr><td style="padding:8px 0;color:#6B6863;">Le interesa</td><td style="text-align:right;font-weight:600;">${categoriaLabel ?? '—'}</td></tr>
+                <tr><td style="padding:8px 0;color:#6B6863;">Desarrollo</td><td style="text-align:right;font-weight:600;">${desarrolloLabel ?? '—'}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Presupuesto</td><td style="text-align:right;font-weight:600;">${presupuestoLabel ?? '—'}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Canal</td><td style="text-align:right;font-weight:600;">${channel}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">UTM</td><td style="text-align:right;font-size:12px;">${utmSummary || '—'}</td></tr>
