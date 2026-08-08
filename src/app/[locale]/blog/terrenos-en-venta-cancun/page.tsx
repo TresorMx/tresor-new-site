@@ -20,7 +20,7 @@ const URL = 'https://www.tresor.mx/blog/terrenos-en-venta-cancun';
 const TITLE = 'Terrenos en Venta en Cancún: Qué Revisar Antes de Comprar (2026)';
 const DESCRIPTION =
   'Guía para comprar un terreno en Cancún sin errores: uso de suelo, factibilidad de servicios, escrituración y zonas con lotes residenciales activos — con Zienna, sobre Av. Huayacán, como caso real.';
-const HERO = '/desarrollos/zienna/portadazienna.jpg';
+const HERO = '/desarrollos/zienna/CASETA_ZIENNA.jpg';
 const FECHA_ISO = '2026-08-07';
 const FECHA = '7 de agosto de 2026';
 
@@ -302,7 +302,7 @@ export default function ArticlePage() {
             eyebrow="Tresor Real Estate"
             title="¿Te interesa un lote en Zienna, Av. Huayacán?"
             subtitle="Un asesor te comparte disponibilidad real por tamaño y ubicación dentro del desarrollo, precios y planes de pago."
-            image="/desarrollos/zienna/portadazienna.jpg"
+            image="/desarrollos/zienna/CASETA_ZIENNA.jpg"
             imageAlt="Zienna — lotes residenciales sobre Av. Huayacán, Cancún"
             primaryHref="/desarrollos/zienna-onix"
             primaryLabel="Ver lotes disponibles en Zienna"

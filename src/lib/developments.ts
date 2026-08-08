@@ -1485,7 +1485,7 @@ export const developments: Development[] = [
     type: 'Lotes',
     intent: ['invertir'],
     status: 'Preventa',
-    image: '/desarrollos/zienna/portadazienna.jpg',
+    image: '/desarrollos/zienna/CASETA_ZIENNA.jpg',
     href: '/desarrollos/zienna-onix',
     featured: true,
     logo: '/desarrollos/zienna/ZiennaLogo.svg',
@@ -1498,7 +1498,7 @@ export const developments: Development[] = [
     descriptionEn:
       'A residential community on Huayacán Ave. with 604 single-family lots, a clubhouse and sports areas, in one of Cancún\'s highest-value areas.',
     // ── Capa de ficha (contenido tomado de zienna.mx) ──
-    heroRender: '/desarrollos/zienna/portadazienna.jpg', // misma foto que el card
+    heroRender: '/desarrollos/zienna/CASETA_ZIENNA.jpg', // misma foto que el card
     // La foto tiene mucho cielo vacío arriba; el acceso/portada (lo importante)
     // queda hasta abajo — bottom evita que el crop se coma la escena real.
     heroImagePosition: { mobile: 'bottom', desktop: 'bottom' },

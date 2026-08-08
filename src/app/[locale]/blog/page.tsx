@@ -73,7 +73,7 @@ const articlesEs = [
     title: 'Terrenos en Venta en Cancún: Qué Revisar Antes de Comprar (2026)',
     description:
       'Uso de suelo, factibilidad de servicios y escrituración: lo que hay que revisar antes de comprar un terreno en Cancún — con Zienna, sobre Av. Huayacán, como caso real.',
-    image: '/desarrollos/zienna/portadazienna.jpg',
+    image: '/desarrollos/zienna/CASETA_ZIENNA.jpg',
     readTime: '8 min',
     date: '7 de agosto de 2026',
   },
