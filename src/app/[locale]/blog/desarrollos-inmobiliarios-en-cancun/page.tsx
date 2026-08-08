@@ -361,8 +361,8 @@ export default function ArticlePage() {
           <h2 className="font-sans text-[clamp(20px,2.6vw,32px)] font-normal leading-[1.05] tracking-tight text-ink mt-16 mb-6">Artículos relacionados</h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-4">
             {[
+              { slug: 'terrenos-en-venta-cancun', title: 'Terrenos en Venta en Cancún: Qué Revisar Antes de Comprar', img: '/desarrollos/zienna/portadazienna.jpg' },
               { slug: 'como-invertir-en-locales-comerciales-en-cancun', title: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa', img: '/blog/AdobeStock_663402090.jpeg' },
-              { slug: 'mejores-zonas-para-negocio-en-cancun', title: 'Las Mejores Zonas para Poner un Negocio en Cancún', img: '/blog/AdobeStock_838554951.jpeg' },
               { slug: 'guia-comprar-en-preventa-cancun', title: 'Guía para Comprar en Preventa en Cancún: Todo lo que Debes Saber', img: '/blog/AdobeStock_887006964.jpeg' },
             ].map((rel) => (
               <Link key={rel.slug} href={`/blog/${rel.slug}`} className="group rounded-xl overflow-hidden border border-line hover:shadow-md transition-shadow">

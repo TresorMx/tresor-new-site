@@ -86,6 +86,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const blogSlugs = [
+    'terrenos-en-venta-cancun',
     'vivir-en-puerto-cancun',
     'donde-comprar-departamento-en-cancun',
     'desarrollos-inmobiliarios-en-cancun',
