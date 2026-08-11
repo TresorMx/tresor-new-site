@@ -28,6 +28,13 @@ const LOGO = `${IMG}/Loreta.svg`; // SVG blanco, verificado — funciona sobre f
 const CTA_BANNER_1_IMG = `${IMG}/1.-Vista-Golf_.jpg`;
 const CTA_BANNER_2_IMG = `${IMG}/10.-Alberca---Lago.jpg`;
 
+const COUNTRIES = [
+  { code: 'MX', dial: '+52', flag: '🇲🇽' },
+  { code: 'US', dial: '+1', flag: '🇺🇸' },
+  { code: 'CA', dial: '+1', flag: '🇨🇦' },
+] as const;
+const DIAL_CODES: Record<string, string> = Object.fromEntries(COUNTRIES.map((c) => [c.code, c.dial]));
+
 const GALLERY_IMAGES = [
   `${IMG}/6.-Vista-Drone-2.jpg`,
   `${IMG}/21.-Sala-comedor---3-recámaras.jpg`,
@@ -97,7 +104,7 @@ function readUTM(): UTM {
 export default function LoretaLanding({ dev }: { dev: Development }) {
   const formRef = useRef<HTMLDivElement>(null);
   const utmRef = useRef<UTM>({});
-  const [form, setForm] = useState({ firstName: '', email: '', phone: '', tipologia: '', proposito: '' });
+  const [form, setForm] = useState({ firstName: '', email: '', phone: '', phoneCountry: 'MX', tipologia: '', proposito: '' });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
 
@@ -123,7 +130,8 @@ export default function LoretaLanding({ dev }: { dev: Development }) {
         body: JSON.stringify({
           firstName: form.firstName,
           email: form.email,
-          phone: form.phone,
+          phone: `${DIAL_CODES[form.phoneCountry]} ${form.phone}`.trim(),
+          country: form.phoneCountry,
           tipologia: form.tipologia || undefined,
           proposito: form.proposito || undefined,
           utm: utmRef.current,
@@ -442,7 +450,7 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 function FormCard({
   form, set, valid, loading, err, submit,
 }: {
-  form: { firstName: string; email: string; phone: string; tipologia: string; proposito: string };
+  form: { firstName: string; email: string; phone: string; phoneCountry: string; tipologia: string; proposito: string };
   set: (k: string, v: string) => void;
   valid: boolean;
   loading: boolean;
@@ -476,11 +484,25 @@ function FormCard({
           value={form.email} onChange={(e) => set('email', e.target.value)}
           className="appearance-none rounded-2xl border border-white/10 bg-white px-4 py-3 text-[14px] text-ink outline-none transition-colors focus:border-accent"
         />
-        <input
-          required type="tel" placeholder="Teléfono / WhatsApp" autoComplete="tel"
-          value={form.phone} onChange={(e) => set('phone', e.target.value)}
-          className="appearance-none rounded-2xl border border-white/10 bg-white px-4 py-3 text-[14px] text-ink outline-none transition-colors focus:border-accent"
-        />
+        <div className="flex items-stretch overflow-hidden rounded-2xl border border-white/10 bg-white focus-within:border-accent">
+          <div className="relative shrink-0 border-r border-black/10">
+            <select
+              aria-label="País"
+              value={form.phoneCountry}
+              onChange={(e) => set('phoneCountry', e.target.value)}
+              className="h-full appearance-none bg-transparent py-3 pl-3 pr-6 text-[14px] text-ink outline-none"
+            >
+              {COUNTRIES.map((c) => (
+                <option key={c.code} value={c.code}>{c.flag} {c.dial}</option>
+              ))}
+            </select>
+          </div>
+          <input
+            required type="tel" placeholder="Teléfono / WhatsApp" autoComplete="tel"
+            value={form.phone} onChange={(e) => set('phone', e.target.value)}
+            className="min-w-0 flex-1 appearance-none bg-white px-4 py-3 text-[14px] text-ink outline-none"
+          />
+        </div>
 
         <div className="pt-1">
           <p className="mb-2 text-[10.5px] uppercase tracking-caps text-white/45">Tipología de interés</p>

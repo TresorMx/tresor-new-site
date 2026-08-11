@@ -18,6 +18,12 @@ const PROPOSITO_LABELS: Record<string, string> = {
   inversion: 'Inversión / renta',
 };
 
+const COUNTRY_LABELS: Record<string, string> = {
+  MX: 'México',
+  US: 'Estados Unidos',
+  CA: 'Canadá',
+};
+
 function deriveChannel(utm?: UTM): string {
   const src = (utm?.utm_source ?? '').toLowerCase();
   if (utm?.fbclid || /meta|facebook|instagram|\big\b|fb/.test(src)) return 'Ads Meta';
@@ -39,10 +45,11 @@ interface UTM {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { firstName, email, phone, tipologia, proposito, utm } = body as {
+    const { firstName, email, phone, country, tipologia, proposito, utm } = body as {
       firstName: string;
       email?: string;
       phone: string;
+      country?: string;
       tipologia?: string;
       proposito?: string;
       utm?: UTM;
@@ -55,6 +62,7 @@ export async function POST(req: NextRequest) {
     const channel = deriveChannel(utm);
     const tipologiaLabel = tipologia ? TIPOLOGIA_LABELS[tipologia] ?? tipologia : undefined;
     const propositoLabel = proposito ? PROPOSITO_LABELS[proposito] ?? proposito : undefined;
+    const countryLabel = country ? COUNTRY_LABELS[country] ?? country : undefined;
     const [first, ...rest] = firstName.trim().split(' ');
 
     const utmSummary = utm
@@ -63,6 +71,7 @@ export async function POST(req: NextRequest) {
 
     const notes = [
       'Loreta Landing',
+      countryLabel ? `País: ${countryLabel}` : null,
       tipologiaLabel ? `Tipología: ${tipologiaLabel}` : null,
       propositoLabel ? `Propósito: ${propositoLabel}` : null,
       `Canal: ${channel}`,
@@ -83,6 +92,7 @@ export async function POST(req: NextRequest) {
           'loreta-wow-condos',
           'Loreta Landing',
           channel,
+          ...(countryLabel ? [countryLabel] : []),
           ...(propositoLabel ? [propositoLabel] : []),
         ],
         customFields: {
@@ -117,6 +127,7 @@ export async function POST(req: NextRequest) {
                 <tr><td style="padding:8px 0;color:#6B6863;">Nombre</td><td style="text-align:right;font-weight:600;">${firstName}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Email</td><td style="text-align:right;">${email ? `<a href="mailto:${email}">${email}</a>` : '—'}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Teléfono</td><td style="text-align:right;"><a href="tel:${phone}">${phone}</a></td></tr>
+                <tr><td style="padding:8px 0;color:#6B6863;">País</td><td style="text-align:right;font-weight:600;">${countryLabel ?? '—'}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Tipología</td><td style="text-align:right;font-weight:600;">${tipologiaLabel ?? '—'}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Propósito</td><td style="text-align:right;font-weight:600;">${propositoLabel ?? '—'}</td></tr>
                 <tr><td style="padding:8px 0;color:#6B6863;">Canal</td><td style="text-align:right;font-weight:600;">${channel}</td></tr>
