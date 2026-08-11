@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import MetaPixelExtra from '@/components/MetaPixelExtra';
 
 const URL = 'https://www.tresor.mx/departamentos-en-cancun-loreta';
 const OG = '/desarrollos/loreta/7.-Piscina-Infinity_.jpg';
@@ -37,6 +38,14 @@ export const metadata: Metadata = {
   },
 };
 
+// Pixel adicional solo para esta landing (además del pixel base del sitio,
+// que ya corre en el layout raíz). Cubre también /gracias, que hereda este
+// layout, así que el evento `Lead` disparado ahí llega a ambos pixeles.
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <MetaPixelExtra pixelId="1215240240575498" />
+      {children}
+    </>
+  );
 }
