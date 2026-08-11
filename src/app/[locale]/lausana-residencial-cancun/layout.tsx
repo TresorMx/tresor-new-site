@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import MetaPixelExtra from '@/components/MetaPixelExtra';
 
 const URL = 'https://www.tresor.mx/lausana-residencial-cancun';
 const OG = '/desarrollos/olivia/10.-Parque-urbano.jpg';
@@ -29,6 +30,14 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
+// Pixel adicional solo para esta landing (además del pixel base del sitio,
+// que ya corre en el layout raíz). Cubre también /gracias, que hereda este
+// layout, así que el evento `Lead` disparado ahí llega a ambos pixeles.
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return children;
+  return (
+    <>
+      <MetaPixelExtra pixelId="1215240240575498" />
+      {children}
+    </>
+  );
 }
