@@ -578,7 +578,7 @@ function FormCard({
     }`;
 
   return (
-    <div className="rounded-[28px] border border-white/12 bg-ink/75 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl md:p-7">
+    <div className="rounded-[28px] border-[10px] border-white/20 bg-ink/75 p-6 shadow-[0_30px_80px_rgba(0,0,0,0.45)] backdrop-blur-2xl md:p-7">
       <div className="mb-5">
         <span className="eyebrow eyebrow-accent font-bold">Atención personalizada</span>
         <p className="mt-2 text-[15px] font-medium text-white">Solicita disponibilidad y precios</p>

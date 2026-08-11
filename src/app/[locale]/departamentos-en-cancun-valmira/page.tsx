@@ -448,7 +448,7 @@ function FormCard({
   submit: (e: React.FormEvent) => void;
 }) {
   return (
-    <div className="rounded-[28px] border border-white/15 bg-ink/70 p-6 shadow-[0_24px_64px_rgba(0,0,0,0.35)] backdrop-blur-2xl md:p-7">
+    <div className="rounded-[28px] border-[10px] border-white/20 bg-ink/70 p-6 shadow-[0_24px_64px_rgba(0,0,0,0.35)] backdrop-blur-2xl md:p-7">
       <div className="mb-5">
         <span className="eyebrow eyebrow-accent font-bold">Agenda tu visita</span>
         <p className="mt-1.5 text-[13px] text-white/55">Un asesor te contacta hoy · Sin compromiso</p>
