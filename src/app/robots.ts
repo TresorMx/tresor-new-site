@@ -13,7 +13,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/', '/studio/', '/cotizar', '/gracias', '/agenda/gracias', '/reserva/gracias', '/departamentos-en-cancun-valmira/gracias', '/portafolio-cancun/gracias', '/departamentos-en-cancun-loreta/gracias'],
+        disallow: ['/api/', '/studio/', '/cotizar', '/gracias', '/agenda/gracias', '/reserva/gracias', '/departamentos-en-cancun-valmira/gracias', '/portafolio-cancun/gracias', '/departamentos-en-cancun-loreta/gracias', '/lausana-residencial-cancun/gracias'],
       },
     ],
     sitemap: `${SITE}/sitemap.xml`,
