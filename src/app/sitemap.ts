@@ -41,6 +41,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Páginas de contenido en inglés que atacan "condos for sale in {ciudad}".
     // Solo la variante /en/: la ruta sin prefijo redirige ahí (contenido
     // únicamente en inglés), así que listar ambas sería listar un redirect.
+    // Página de ciudad en español, equivalente de /en/condos-for-sale-cancun.
+    // Solo /es: la variante /en redirige a la de condos, así que listarla
+    // sería listar un redirect.
+    { url: `${SITE}/departamentos-en-venta-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.98 },
     { url: `${SITE}/en/condos-for-sale-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/en/condos-for-sale-puerto-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/invertir-en-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },

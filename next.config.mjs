@@ -160,9 +160,15 @@ const nextConfig = {
       { source: '/contacto/gracias-contacto', destination: '/agenda/gracias', permanent: true },
 
       // Landings de "departamentos en venta" por ciudad/keyword → las
-      // landings reales de tipo de propiedad/ciudad
-      { source: '/departamentos-en-venta-cancun', destination: '/departamentos', permanent: true },
-      { source: '/departamentos-en-venta-cancun/amenidades', destination: '/departamentos', permanent: true },
+      // landings reales de tipo de propiedad/ciudad.
+      //
+      // OJO: /departamentos-en-venta-cancun YA NO se redirige. Esa URL del
+      // sitio anterior se recuperó como página real (la que ataca
+      // "departamentos en venta en cancún"), así que el 301 hacia
+      // /departamentos se elimina — si se dejara, la página nueva jamás
+      // sería alcanzable y además seguiríamos regalándole a /departamentos
+      // las señales históricas de una URL que lleva la keyword exacta.
+      { source: '/departamentos-en-venta-cancun/amenidades', destination: '/departamentos-en-venta-cancun', permanent: true },
       { source: '/departamentos-en-venta-cancun/gracias-por-tu-registro', destination: '/agenda/gracias', permanent: true },
       { source: '/departamentos-en-venta-tulum', destination: '/tulum', permanent: true },
 
