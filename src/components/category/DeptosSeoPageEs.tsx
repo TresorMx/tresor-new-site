@@ -104,6 +104,16 @@ export default function DeptosSeoPageEs({
 }) {
   const pageUrl = `${SITE}${canonicalPath}`;
 
+  // Las fichas que esta página lista — le dice a Google exactamente qué
+  // inventario respalda el contenido, y refuerza el enlace interno.
+  //
+  // Solo los desarrollos con ficha real: los que aún no la tienen llevan
+  // href '#' en el catálogo (hoy Bardenna en Cancún) y emitirlos generaría
+  // una URL basura "https://www.tresor.mx#" que Google lee como enlace roto.
+  // Si no queda ninguno, el ItemList se omite entero — declarar
+  // "numberOfItems: 0" le diría a Google que la colección está vacía.
+  const listed = developments.filter((d) => d.href !== '#');
+
   const jsonLd = [
     {
       '@context': 'https://schema.org',
@@ -112,18 +122,18 @@ export default function DeptosSeoPageEs({
       description: heroSubtitle,
       url: pageUrl,
       inLanguage: 'es-MX',
-      // Las fichas que esta página lista — le dice a Google exactamente qué
-      // inventario respalda el contenido, y refuerza el enlace interno.
-      mainEntity: {
-        '@type': 'ItemList',
-        numberOfItems: developments.length,
-        itemListElement: developments.map((d, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          name: d.name,
-          url: `${SITE}${d.href}`,
-        })),
-      },
+      ...(listed.length > 0 && {
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: listed.length,
+          itemListElement: listed.map((d, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: d.name,
+            url: `${SITE}${d.href}`,
+          })),
+        },
+      }),
     },
     {
       '@context': 'https://schema.org',

@@ -47,6 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/departamentos-en-venta-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.98 },
     { url: `${SITE}/en/condos-for-sale-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/en/condos-for-sale-puerto-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${SITE}/en/condos-for-sale-playa-del-carmen`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/invertir-en-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/rewards`,    lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE}/brokers`,    lastModified: now, changeFrequency: 'monthly', priority: 0.5 },

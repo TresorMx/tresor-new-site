@@ -38,7 +38,11 @@ export interface CondosRelatedLink {
 // bien establecidos del marco legal mexicano; el copy remata siempre
 // recomendando validar con notario/abogado propio, porque aquí no se da
 // asesoría legal ni fiscal.
-const BUYING_STEPS = [
+// `cityName` se inyecta porque estos pasos los comparten varias ciudades y
+// el texto mencionaba "Cancún" a pelo — correcto en /condos-for-sale-cancun
+// y en Puerto Cancún (que está dentro de Cancún), pero falso en Playa del
+// Carmen. El default mantiene intacto el copy de las páginas ya publicadas.
+const buyingSteps = (cityName: string) => [
   {
     icon: Search,
     title: 'Choose the property',
@@ -52,7 +56,7 @@ const BUYING_STEPS = [
   {
     icon: Landmark,
     title: 'Set up your bank trust',
-    body: 'Cancún sits inside the coastal "restricted zone", so foreign buyers typically hold title through a fideicomiso — a renewable 50-year bank trust — or through a Mexican corporation. It is a standard route that has been in place for decades.',
+    body: `${cityName} sits inside the coastal "restricted zone", so foreign buyers typically hold title through a fideicomiso — a renewable 50-year bank trust — or through a Mexican corporation. It is a standard route that has been in place for decades.`,
   },
   {
     icon: KeyRound,
@@ -78,6 +82,7 @@ export default function CondosSeoPage({
   relatedLinks,
   breadcrumbCity,
   breadcrumbCityHref,
+  cityName = 'Cancún',
 }: {
   canonicalPath: string;
   heroImage: string;
@@ -95,8 +100,22 @@ export default function CondosSeoPage({
   relatedLinks: CondosRelatedLink[];
   breadcrumbCity: string;
   breadcrumbCityHref: string;
+  /** Ciudad que se nombra en el bloque de proceso de compra. Default Cancún
+   *  para no alterar las páginas ya publicadas. */
+  cityName?: string;
 }) {
   const pageUrl = `${SITE}/en${canonicalPath}`;
+
+  // Las fichas que esta página lista — le dice a Google exactamente qué
+  // inventario respalda el contenido, y refuerza el enlace interno.
+  //
+  // Solo los desarrollos con ficha real: los que aún no la tienen llevan
+  // href '#' en el catálogo (hoy Bardenna, La Selva, Sanam, Favorite…) y
+  // emitirlos generaría URLs basura del tipo ".../en#" que Google lee como
+  // enlaces rotos. Si no queda ninguno, el ItemList se omite entero —
+  // declarar "numberOfItems: 0" es peor que no declarar nada, porque le
+  // estaría diciendo a Google que la colección está vacía.
+  const listed = developments.filter((d) => d.href !== '#');
 
   const jsonLd = [
     {
@@ -106,18 +125,18 @@ export default function CondosSeoPage({
       description: heroSubtitle,
       url: pageUrl,
       inLanguage: 'en-US',
-      // Las fichas que esta página lista — le dice a Google exactamente qué
-      // inventario respalda el contenido, y refuerza el enlace interno.
-      mainEntity: {
-        '@type': 'ItemList',
-        numberOfItems: developments.length,
-        itemListElement: developments.map((d, i) => ({
-          '@type': 'ListItem',
-          position: i + 1,
-          name: d.name,
-          url: `${SITE}/en${d.href}`,
-        })),
-      },
+      ...(listed.length > 0 && {
+        mainEntity: {
+          '@type': 'ItemList',
+          numberOfItems: listed.length,
+          itemListElement: listed.map((d, i) => ({
+            '@type': 'ListItem',
+            position: i + 1,
+            name: d.name,
+            url: `${SITE}/en${d.href}`,
+          })),
+        },
+      }),
     },
     {
       '@context': 'https://schema.org',
@@ -186,14 +205,14 @@ export default function CondosSeoPage({
               How foreigners buy <span className="text-ink-3">property in Mexico</span>
             </h2>
             <p className="mt-6 text-[15px] font-light leading-relaxed text-ink-2">
-              Buying in Cancún as a non-resident is a well-established process — but it works
+              Buying in {cityName} as a non-resident is a well-established process — but it works
               differently than it does in the US or Canada. This is the short version of what to
               expect.
             </p>
           </div>
 
           <ol className="mt-12 grid gap-4 md:grid-cols-2 md:gap-5">
-            {BUYING_STEPS.map(({ icon: Icon, title, body }, i) => (
+            {buyingSteps(cityName).map(({ icon: Icon, title, body }, i) => (
               <li key={title} className="rounded-[26px] bg-white p-7 md:p-8">
                 <div className="flex items-center gap-3">
                   <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent/12 text-ink">

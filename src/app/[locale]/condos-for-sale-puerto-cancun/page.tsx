@@ -84,7 +84,7 @@ const FAQS: CondosFaq[] = [
 const RELATED: CondosRelatedLink[] = [
   { href: '/condos-for-sale-cancun', label: 'Cancún', sub: 'The full picture across every zone of the city.' },
   { href: '/tulum', label: 'Tulum', sub: "Pre-construction condos in Mexico's fastest-growing destination." },
-  { href: '/playa-del-carmen', label: 'Playa del Carmen', sub: 'Condos steps from Fifth Avenue and the Caribbean Sea.' },
+  { href: '/condos-for-sale-playa-del-carmen', label: 'Playa del Carmen', sub: 'Condos steps from Fifth Avenue and the Caribbean Sea.' },
 ];
 
 export default async function CondosForSalePuertoCancunPage({ params }: { params: Promise<{ locale: string }> }) {
