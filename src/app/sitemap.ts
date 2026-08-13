@@ -51,9 +51,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/en/condos-for-sale-playa-del-carmen`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/invertir-en-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/rewards`,    lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${SITE}/brokers`,    lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
     { url: `${SITE}/privacidad`, lastModified: now, changeFrequency: 'yearly',  priority: 0.2 },
-    { url: `${SITE}/en/brokers`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
+    // /brokers y /en/brokers NO van aquí: la página tiene
+    // `robots: { index: false }` (es login/registro de asesores, no
+    // contenido) — listarla en el sitemap le manda a Google la señal
+    // contraria ("indéxame") a la del meta tag ("no me indexes"). SEMrush lo
+    // reportó como "Non-canonical URL". Nunca se debe listar una página
+    // noindex en el sitemap.
   ];
 
   // Páginas de desarrollador (trayectoria corporativa) — mismo criterio de

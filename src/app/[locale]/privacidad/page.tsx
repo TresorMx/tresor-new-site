@@ -1,9 +1,35 @@
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Política de Privacidad',
-  description: 'Conoce cómo Urban Brokers / Tresor Real Estate trata y protege tus datos personales.',
-};
+const SITE = 'https://www.tresor.mx';
+
+// El contenido de esta página es solo en español (no tiene ramas isEs/isEn
+// dentro), pero /en/privacidad existe igual como ruta — sin `alternates`
+// aquí, no tenía canonical autorreferenciado ni hreflang en ninguna de las
+// dos versiones. SEMrush lo reportó como "Non-canonical URL" y "No
+// self-referencing hreflang". Se agrega sin tocar el contenido (fuera de
+// alcance traducir la política de privacidad en este cambio).
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const isEs = locale !== 'en';
+  const url = isEs ? `${SITE}/privacidad` : `${SITE}/en/privacidad`;
+
+  return {
+    title: 'Política de Privacidad',
+    description: 'Conoce cómo Urban Brokers / Tresor Real Estate trata y protege tus datos personales.',
+    alternates: {
+      canonical: url,
+      languages: {
+        es: `${SITE}/privacidad`,
+        en: `${SITE}/en/privacidad`,
+        'x-default': `${SITE}/privacidad`,
+      },
+    },
+  };
+}
 
 const sections = [
   {

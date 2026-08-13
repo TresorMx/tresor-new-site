@@ -81,7 +81,7 @@ export default async function PlayaDelCarmenPage({ params }: { params: Promise<{
               : 'We have a page dedicated to condos in Playa del Carmen, with a breakdown of every zone, current prices and how buying works.'}
           </p>
           <Link
-            href={isEs ? '/departamentos-en-venta-playa-del-carmen' : '/en/condos-for-sale-playa-del-carmen'}
+            href={isEs ? '/departamentos-en-venta-playa-del-carmen' : '/condos-for-sale-playa-del-carmen'}
             className="btn btn-lg mt-8 border-0 bg-ink text-white hover:bg-ink/85"
           >
             {isEs ? 'Ver departamentos en Playa del Carmen' : 'View condos in Playa del Carmen'}
