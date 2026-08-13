@@ -10,6 +10,11 @@ export default async function Footer() {
   // en inglés — enlazarlas desde el footer español mandaría al usuario a un
   // redirect a otro idioma. Aquí sí valen mucho: el footer aparece en todas
   // las páginas /en/, así que es lo que les da enlaces internos de verdad.
+  //
+  // Sus equivalentes en español (/departamentos-en-venta-{ciudad}) SÍ
+  // existen como contenido real desde que se construyeron — antes de eso
+  // este bloque solo se mostraba en inglés porque el lado español no tenía
+  // nada real a qué enlazar. Ahora van los dos, cada uno en su idioma.
   const isEn = (await getLocale()) === 'en';
 
   return (
@@ -64,10 +69,16 @@ export default async function Footer() {
             <ul className="flex flex-col gap-3 text-[13px] text-white/85 md:text-[14px]">
               <li><Link href="/#portafolio" className="hover:text-accent">{t('developments')}</Link></li>
               <li><Link href="/listings" className="hover:text-accent">{t('listings')}</Link></li>
-              {isEn && (
+              {isEn ? (
                 <>
                   <li><Link href="/condos-for-sale-cancun" className="hover:text-accent">Condos for Sale in Cancún</Link></li>
                   <li><Link href="/condos-for-sale-puerto-cancun" className="hover:text-accent">Condos in Puerto Cancún</Link></li>
+                  <li><Link href="/condos-for-sale-playa-del-carmen" className="hover:text-accent">Condos in Playa del Carmen</Link></li>
+                </>
+              ) : (
+                <>
+                  <li><Link href="/departamentos-en-venta-cancun" className="hover:text-accent">Departamentos en Cancún</Link></li>
+                  <li><Link href="/departamentos-en-venta-playa-del-carmen" className="hover:text-accent">Departamentos en Playa del Carmen</Link></li>
                 </>
               )}
             </ul>
