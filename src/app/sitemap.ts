@@ -45,6 +45,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Solo /es: la variante /en redirige a la de condos, así que listarla
     // sería listar un redirect.
     { url: `${SITE}/departamentos-en-venta-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.98 },
+    { url: `${SITE}/departamentos-en-venta-playa-del-carmen`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/en/condos-for-sale-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/en/condos-for-sale-puerto-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/en/condos-for-sale-playa-del-carmen`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },

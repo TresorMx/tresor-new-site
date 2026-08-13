@@ -140,7 +140,7 @@ const FAQS: DeptosFaq[] = [
 
 const RELATED: DeptosRelatedLink[] = [
   { href: '/puerto-cancun', label: 'Puerto Cancún', sub: 'Residencias frente a la marina, dentro de una comunidad privada con campo de golf.' },
-  { href: '/playa-del-carmen', label: 'Playa del Carmen', sub: 'Departamentos a pasos de la Quinta Avenida y el mar Caribe.' },
+  { href: '/departamentos-en-venta-playa-del-carmen', label: 'Playa del Carmen', sub: 'Departamentos a pasos de la Quinta Avenida y el mar Caribe.' },
   { href: '/tulum', label: 'Tulum', sub: 'Preventa en el destino de mayor crecimiento del Caribe Mexicano.' },
 ];
 
