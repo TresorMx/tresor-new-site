@@ -56,6 +56,13 @@ const nextConfig = {
       { source: '/desarrollos/vellmari-urban', destination: '/desarrollos/vellmari-puerto-cancun', permanent: true },
       { source: '/en/desarrollos/vellmari-urban', destination: '/en/desarrollos/vellmari-puerto-cancun', permanent: true },
 
+      // La Selva — mismo criterio: 'la-selva-urban' pasó a
+      // 'la-selva-playa-del-carmen' (URL con la keyword de ciudad). La
+      // ficha se publicó con el slug viejo hace unos minutos, así que el
+      // 301 es preventivo por si Google ya la rastreó.
+      { source: '/desarrollos/la-selva-urban', destination: '/desarrollos/la-selva-playa-del-carmen', permanent: true },
+      { source: '/en/desarrollos/la-selva-urban', destination: '/en/desarrollos/la-selva-playa-del-carmen', permanent: true },
+
       // Listings (Plaza Lindavista) vive en /listings/{slug}, no en
       // /desarrollos/{slug} — estuvo ahí ~1 día antes de mover el prefijo.
       { source: '/desarrollos/lindavista-locales', destination: '/listings/lindavista-locales', permanent: true },

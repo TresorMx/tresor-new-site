@@ -6,7 +6,7 @@ import BlogCTA from '@/components/BlogCTA';
 // Estrategia de keywords (evitar canibalización con las páginas de dinero):
 //   /playa-del-carmen .................. "propiedades / departamentos EN VENTA en Playa del Carmen" (catálogo)
 //   /en/condos-for-sale-playa-del-carmen  misma keyword, en inglés, para el comprador extranjero
-//   /desarrollos/la-selva-urban ........ "La Selva"                                                 (marca)
+//   /desarrollos/la-selva-playa-del-carmen ........ "La Selva"                                                 (marca)
 //   ESTE POST .......................... "VIVIR en Playa del Carmen", "cómo es Playa del Carmen"    (informacional)
 // Por eso el H1/title/description NO usan "en venta" ni "comprar departamento": el post capta la
 // búsqueda informacional y reparte enlaces a las páginas transaccionales, en vez de competir contra ellas.
@@ -233,7 +233,7 @@ export default function ArticlePage() {
             <Link href="/urban-homes" className="text-accent hover:underline">Urban Homes</Link>, en dos momentos de compra distintos:
           </p>
           <div className="grid gap-5 sm:grid-cols-2 mb-10">
-            <Link href="/desarrollos/la-selva-urban" className="group rounded-xl overflow-hidden border border-line hover:shadow-md transition-shadow">
+            <Link href="/desarrollos/la-selva-playa-del-carmen" className="group rounded-xl overflow-hidden border border-line hover:shadow-md transition-shadow">
               <div className="relative aspect-video">
                 <Image src="/desarrollos/la-selva/aerial-acceso.avif" alt="La Selva — departamentos en Playa del Carmen" fill className="object-cover group-hover:scale-105 transition-transform duration-500" sizes="(max-width:640px) 100vw, 340px" />
                 <span className="absolute left-3 top-3 rounded-full bg-white/95 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-ink">Entrega inmediata</span>
@@ -267,7 +267,7 @@ export default function ArticlePage() {
 
           <h2 className={H2}>La Selva: la comunidad que hoy define la entrada a Playa</h2>
           <p className="text-ink-2 leading-relaxed mb-6">
-            De los proyectos activos, <Link href="/desarrollos/la-selva-urban" className="text-accent hover:underline">La Selva</Link> es el desarrollo insignia de Urban Homes en la ciudad: una comunidad completa, no solo un edificio, con departamentos de <strong className="text-ink font-semibold">2 y 3 recámaras</strong> de entrega inmediata.
+            De los proyectos activos, <Link href="/desarrollos/la-selva-playa-del-carmen" className="text-accent hover:underline">La Selva</Link> es el desarrollo insignia de Urban Homes en la ciudad: una comunidad completa, no solo un edificio, con departamentos de <strong className="text-ink font-semibold">2 y 3 recámaras</strong> de entrega inmediata.
           </p>
           <p className="text-ink-2 leading-relaxed mb-6">
             El Modelo Terra (2 recámaras, 87 m², un cajón de estacionamiento) y el Modelo Amazonas (3 recámaras, 103 m², dos cajones) vienen equipados con cocineta, walk-in closets y aire acondicionado — listos para habitar o rentar desde el primer día. La comunidad suma cinco albercas familiares, canchas de pádel y pickleball, cancha deportiva, área de juegos, pet park y vigilancia 24/7.

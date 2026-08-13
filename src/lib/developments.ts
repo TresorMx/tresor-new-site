@@ -1817,7 +1817,7 @@ export const developments: Development[] = [
     ],
   },
   {
-    slug: 'la-selva-urban',
+    slug: 'la-selva-playa-del-carmen',
     name: 'La Selva',
     relationship: 'sales-partner',
     developer: 'Urban Homes',
@@ -1828,7 +1828,7 @@ export const developments: Development[] = [
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
     image: '/desarrollos/la-selva/aerial-comunidad.avif',
-    href: '/desarrollos/la-selva-urban',
+    href: '/desarrollos/la-selva-playa-del-carmen',
     featured: true,
     logo: '/desarrollos/la-selva/LaSelva.png',
     logoScale: 0.85,
