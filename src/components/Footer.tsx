@@ -78,6 +78,7 @@ export default async function Footer() {
               ) : (
                 <>
                   <li><Link href="/departamentos-en-venta-cancun" className="hover:text-accent">Departamentos en Cancún</Link></li>
+                  <li><Link href="/departamentos-en-venta-puerto-cancun" className="hover:text-accent">Departamentos en Puerto Cancún</Link></li>
                   <li><Link href="/departamentos-en-venta-playa-del-carmen" className="hover:text-accent">Departamentos en Playa del Carmen</Link></li>
                 </>
               )}

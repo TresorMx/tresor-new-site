@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import { ArrowRight } from 'lucide-react';
+import { Link } from '@/navigation';
 import CategoryHero from '@/components/category/CategoryHero';
 import CategoryGridSection from '@/components/category/CategoryGridSection';
 import { getMergedDevelopmentsAsync, isListingRelationship } from '@/lib/developments';
@@ -60,6 +62,31 @@ export default async function PuertoCancunPage({ params }: { params: Promise<{ l
         title={isEs ? <>Propiedades en <span className="text-ink-3">Puerto Cancún</span></> : <>Properties in <span className="text-ink-3">Puerto Cancún</span></>}
         developments={developments}
       />
+
+      {/* Enlace jerárquico hub → keyword específica, mismo patrón que
+          /playa-del-carmen y /departamentos. El href va SIN el prefijo /en/:
+          el `Link` de @/navigation ya antepone el locale — escribirlo a mano
+          genera /en/en/... (bug real que reportó SEMrush). */}
+      <section className="bg-bg-soft py-20 md:py-28">
+        <div className="container-wrap max-w-3xl">
+          <span className="eyebrow eyebrow-accent font-bold">{isEs ? '— Por tipo' : '— By type'}</span>
+          <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink">
+            {isEs ? <>¿Buscas <span className="text-ink-3">solo departamentos?</span></> : <>Looking <span className="text-ink-3">only for condos?</span></>}
+          </h2>
+          <p className="mt-5 text-[15px] font-light leading-relaxed text-ink-2">
+            {isEs
+              ? 'Tenemos una página dedicada a departamentos en Puerto Cancún, con el detalle de la marina, el campo de golf y el club de playa, precios actuales y disponibilidad real por tipología.'
+              : 'We have a page dedicated to condos in Puerto Cancún, with a breakdown of the marina, golf course and beach club, current prices and real availability.'}
+          </p>
+          <Link
+            href={isEs ? '/departamentos-en-venta-puerto-cancun' : '/condos-for-sale-puerto-cancun'}
+            className="btn btn-lg mt-8 border-0 bg-ink text-white hover:bg-ink/85"
+          >
+            {isEs ? 'Ver departamentos en Puerto Cancún' : 'View condos in Puerto Cancún'}
+            <ArrowRight size={14} strokeWidth={2.2} />
+          </Link>
+        </div>
+      </section>
     </>
   );
 }

@@ -77,6 +77,7 @@ export default function DeptosSeoPageEs({
   zonas,
   zonasTitle,
   zonasTitleMuted,
+  zonasEyebrow = '— Las zonas',
   faqs,
   relatedLinks,
   breadcrumbCity,
@@ -97,6 +98,11 @@ export default function DeptosSeoPageEs({
   zonas: DeptosZona[];
   zonasTitle: string;
   zonasTitleMuted: string;
+  /** Encabezado del bloque. Default "— Las zonas" (páginas de ciudad, donde
+   *  el bloque lista colonias/corredores). Puerto Cancún es UNA sola zona,
+   *  así que ahí el bloque describe qué hay dentro de la comunidad y el
+   *  eyebrow cambia — por eso es configurable. */
+  zonasEyebrow?: string;
   faqs: DeptosFaq[];
   relatedLinks: DeptosRelatedLink[];
   breadcrumbCity: string;
@@ -200,7 +206,7 @@ export default function DeptosSeoPageEs({
       <section className="bg-bg-soft py-20 md:py-28">
         <div className="container-wrap">
           <div className="max-w-3xl">
-            <span className="eyebrow eyebrow-accent font-bold">— Las zonas</span>
+            <span className="eyebrow eyebrow-accent font-bold">{zonasEyebrow}</span>
             <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink">
               {zonasTitle} <span className="text-ink-3">{zonasTitleMuted}</span>
             </h2>
