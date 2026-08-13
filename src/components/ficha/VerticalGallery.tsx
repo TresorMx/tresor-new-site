@@ -7,13 +7,14 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 interface VerticalGalleryProps {
   images: string[];
   alt: string;
+  isEn?: boolean;
 }
 
 // Galería en formato retrato para vivir en una columna angosta (ej. junto
 // al grid de Amenidades). Etapa única con crossfade + flechas a los lados,
 // sin miniaturas. Altura acotada al máximo de la galería general (640px).
 // Con 1 sola foto, se muestra completa sin controles.
-export default function VerticalGallery({ images, alt }: VerticalGalleryProps) {
+export default function VerticalGallery({ images, alt, isEn = false }: VerticalGalleryProps) {
   const [active, setActive] = useState(0);
 
   if (images.length === 0) return null;
@@ -48,14 +49,14 @@ export default function VerticalGallery({ images, alt }: VerticalGalleryProps) {
       {/* Prev / Next — a los lados, como la galería general */}
       <button
         onClick={prev}
-        aria-label="Anterior"
+        aria-label={isEn ? 'Previous' : 'Anterior'}
         className="absolute left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-sm backdrop-blur-sm transition-all hover:scale-105 hover:bg-white"
       >
         <ChevronLeft size={18} strokeWidth={1.8} />
       </button>
       <button
         onClick={next}
-        aria-label="Siguiente"
+        aria-label={isEn ? 'Next' : 'Siguiente'}
         className="absolute right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-sm backdrop-blur-sm transition-all hover:scale-105 hover:bg-white"
       >
         <ChevronRight size={18} strokeWidth={1.8} />

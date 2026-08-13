@@ -668,7 +668,7 @@ export async function FichaPage({ params }: { params: Promise<{ slug: string; lo
       ))}
 
       {/* ═════ 3. GALERÍA (solo si hay imágenes) ═════ */}
-      {galleryImages.length > 0 && <Gallery images={galleryImages} alt={dev.name} gray={stripe.gallery} tourUrl={dev.galleryTourUrl} />}
+      {galleryImages.length > 0 && <Gallery images={galleryImages} alt={dev.name} gray={stripe.gallery} tourUrl={dev.galleryTourUrl} isEn={!isEs} />}
 
       {/* ═════ 4. AMENIDADES (módulo nuevo; solo si el desarrollo las tiene). Se
           omite en Listings/Rentas (ver showAmenities). ═════ */}

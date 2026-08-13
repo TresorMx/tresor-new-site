@@ -25,7 +25,7 @@ export default function FichaAmenities({ amenities, locale, gray = true, gallery
           {/* Texto + grid de íconos — centrado verticalmente contra la galería */}
           <div className={hasGallery ? 'flex flex-col justify-center md:col-span-2' : ''}>
             <div className="mb-12">
-              <span className="eyebrow eyebrow-accent block font-bold">— Amenidades</span>
+              <span className="eyebrow eyebrow-accent block font-bold">{isEn ? '— Amenities' : '— Amenidades'}</span>
               <h2 className="mt-5 h-display whitespace-nowrap text-[clamp(24px,3.2vw,48px)]">
                 {isEn ? (
                   <>Lifestyle <span className="text-ink-3">of its own</span></>
@@ -55,7 +55,7 @@ export default function FichaAmenities({ amenities, locale, gray = true, gallery
           {/* Galería vertical — 1 foto o varias, según el desarrollo */}
           {hasGallery && (
             <div className="md:col-span-1">
-              <VerticalGallery images={galleryImages} alt={`Amenidades ${devName}`} />
+              <VerticalGallery images={galleryImages} alt={isEn ? `Amenities ${devName}` : `Amenidades ${devName}`} isEn={isEn} />
             </div>
           )}
         </div>

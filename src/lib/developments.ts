@@ -1824,6 +1824,7 @@ export const developments: Development[] = [
     brand: 'Urban Homes',
     city: 'Playa del Carmen',
     zone: 'Zona Residencial',
+    zoneEn: 'Residential Zone',
     type: 'Residencial',
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
@@ -1846,7 +1847,7 @@ export const developments: Development[] = [
     // domine el hero al ser tan alto.
     heroRender: '/desarrollos/la-selva/aerial-acceso.avif',
     heroLogoScale: 0.85,
-    tagline: { es: 'Vive en el corazón de Playa del Carmen, a minutos del Caribe' },
+    tagline: { es: 'Vive en el corazón de Playa del Carmen, a minutos del Caribe', en: 'Live in the heart of Playa del Carmen, minutes from the Caribbean' },
     highlights: [
       { label: 'Ubicación', labelEn: 'Location', value: 'Playa del Carmen' },
       { label: 'Tipología', labelEn: 'Property type', value: '2 y 3 Recámaras', valueEn: '2 & 3 Bedroom' },
@@ -1864,43 +1865,51 @@ export const developments: Development[] = [
       '/desarrollos/la-selva/canchas-padel.avif',
       '/desarrollos/la-selva/gym.avif',
     ],
-    projectTitle: { es: 'Departamentos de 2 y 3 recámaras' },
-    projectTitleMuted: { es: 'en el centro de Playa del Carmen' },
+    projectTitle: { es: 'Departamentos de 2 y 3 recámaras', en: '2 & 3 Bedroom Condos' },
+    projectTitleMuted: { es: 'en el centro de Playa del Carmen', en: 'in the heart of Playa del Carmen' },
     projectBody: [
       {
         // Sin el nombre al inicio a propósito: la sección "El Proyecto" de la
         // ficha (_ficha.tsx) antepone `{dev.name}` automáticamente antes de
-        // este párrafo — escribirlo aquí también duplica el nombre ("La
-        // Selva La Selva es..."). Mismo criterio ya usado en Olivia.
+        // este párrafo (en ambos idiomas) — escribirlo aquí también duplica
+        // el nombre ("La Selva La Selva es..."). Mismo criterio ya usado en
+        // Olivia.
         es: 'es el desarrollo insignia de Urban Homes: una comunidad completa en el corazón de Playa del Carmen, dentro de su zona residencial de mayor crecimiento — a solo 6 minutos de Playa Xcalacoco, una de las playas más hermosas de la Riviera Maya.',
+        en: 'is the flagship development of Urban Homes: a complete community in the heart of Playa del Carmen, within its fastest-growing residential area — just 6 minutes from Playa Xcalacoco, one of the most beautiful beaches in the Riviera Maya.',
       },
       {
         es: 'A 12 minutos de la Quinta Avenida y la Plaza Quinta Alegría, con acceso directo a su vida gastronómica y nocturna. Los departamentos, de **entrega inmediata**, vienen equipados con cocineta, walk-in closets y aire acondicionado — listos para vivir o rentar desde el primer día.',
+        en: '12 minutes from Fifth Avenue and Plaza Quinta Alegría, with direct access to its dining and nightlife. The condos, **ready to move in**, come equipped with a kitchenette, walk-in closets and air conditioning — ready to live in or rent from day one.',
       },
     ],
     locationBullets: [
-      { es: 'A 6 minutos de Playa Xcalacoco' },
-      { es: 'A 12 minutos de la Quinta Avenida y Plaza Quinta Alegría' },
-      { es: 'En el corazón de la zona residencial de mayor crecimiento de Playa del Carmen' },
+      { es: 'A 6 minutos de Playa Xcalacoco', en: 'A 6-minute drive from Playa Xcalacoco' },
+      { es: 'A 12 minutos de la Quinta Avenida y Plaza Quinta Alegría', en: '12 minutes from Fifth Avenue and Plaza Quinta Alegría' },
+      { es: 'En el corazón de la zona residencial de mayor crecimiento de Playa del Carmen', en: "In the heart of Playa del Carmen's fastest-growing residential area" },
     ],
     location: { lat: 20.6702132, lng: -87.0578452, address: 'Community La Selva Residences, Playa del Carmen, Q. Roo' },
+    // Sin labelOverride: es un campo de un solo idioma en todo el catálogo
+    // (ver AMENITY_CATALOG en src/lib/amenities.ts) — usarlo aquí mostraría
+    // texto en español también en /en/. Se usan las etiquetas por default
+    // del catálogo maestro, que sí son bilingües.
     amenities: [
-      { key: 'alberca-familiar', labelOverride: '5 Albercas Familiares' },
-      { key: 'cancha-padel', labelOverride: 'Cancha de Pádel y Pickleball' },
-      { key: 'cancha-futbol', labelOverride: 'Cancha Deportiva' },
-      { key: 'area-infantil', labelOverride: 'Área de Juegos' },
+      { key: 'alberca-familiar' },
+      { key: 'cancha-padel' },
+      { key: 'cancha-futbol' },
+      { key: 'area-infantil' },
       { key: 'pet-park' },
-      { key: 'asadores', labelOverride: 'Área de Asadores' },
-      { key: 'seguridad-24-7', labelOverride: 'Vigilancia 24/7' },
+      { key: 'asadores' },
+      { key: 'seguridad-24-7' },
       { key: 'estacionamiento-visitas' },
     ],
     contentBlocks: [
       {
-        eyebrow: { es: '— Una comunidad completa' },
-        title: { es: 'Community La Selva Residences' },
-        titleMuted: { es: 'armonía entre comunidad y naturaleza' },
+        eyebrow: { es: '— Una comunidad completa', en: '— A complete community' },
+        title: { es: 'Community La Selva Residences', en: 'Community La Selva Residences' },
+        titleMuted: { es: 'armonía entre comunidad y naturaleza', en: 'harmony between community and nature' },
         description: {
           es: 'Lo que comenzó como un desarrollo se convirtió en el proyecto insignia de Urban Homes: una comunidad diseñada para la armonía entre sus residentes y la naturaleza que la rodea, con albercas, canchas deportivas y áreas verdes para todas las edades.',
+          en: 'What began as a single development became the flagship project of Urban Homes: a community designed for harmony between its residents and the nature that surrounds it, with pools, sports courts and green areas for every age.',
         },
         image: '/desarrollos/la-selva/aerial-comunidad.avif',
         imageFit: 'cover',
@@ -1911,24 +1920,27 @@ export const developments: Development[] = [
     floorPlans: [
       {
         slug: '2-recamaras',
-        label: { es: 'Modelo Terra · 2 Recámaras' },
-        shortLabel: { es: '2 Recámaras' },
+        label: { es: 'Modelo Terra · 2 Recámaras', en: 'Terra Model · 2 Bedrooms' },
+        shortLabel: { es: '2 Recámaras', en: '2 Bedrooms' },
         image: '/desarrollos/la-selva/floor-plans/2-recamaras.jpg',
         specs: [
-          { key: 'areaTotal', label: { es: 'Área total' }, value: '87 m²' },
-          { key: 'recamaras', label: { es: 'Recámaras' }, value: '2' },
-          { key: 'estacionamiento', label: { es: 'Estacionamiento' }, value: '1 cajón' },
+          { key: 'areaTotal', label: { es: 'Área total', en: 'Total area' }, value: '87 m²' },
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '2' },
+          // `value` sin traducir a propósito: FloorPlanSpec no tiene un
+          // segundo campo para inglés (ver interface), mismo patrón que ya
+          // usan el resto de las fichas del catálogo con "cajón/cajones".
+          { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '1 cajón' },
         ],
       },
       {
         slug: '3-recamaras',
-        label: { es: 'Modelo Amazonas · 3 Recámaras' },
-        shortLabel: { es: '3 Recámaras' },
+        label: { es: 'Modelo Amazonas · 3 Recámaras', en: 'Amazonas Model · 3 Bedrooms' },
+        shortLabel: { es: '3 Recámaras', en: '3 Bedrooms' },
         image: '/desarrollos/la-selva/floor-plans/3-recamaras.jpg',
         specs: [
-          { key: 'areaTotal', label: { es: 'Área total' }, value: '103 m²' },
-          { key: 'recamaras', label: { es: 'Recámaras' }, value: '3' },
-          { key: 'estacionamiento', label: { es: 'Estacionamiento' }, value: '2 cajones' },
+          { key: 'areaTotal', label: { es: 'Área total', en: 'Total area' }, value: '103 m²' },
+          { key: 'recamaras', label: { es: 'Recámaras', en: 'Bedrooms' }, value: '3' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento', en: 'Parking' }, value: '2 cajones' },
         ],
       },
     ],

@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight, Orbit } from 'lucide-react';
 import VirtualTourModal from '@/components/ficha/VirtualTourModal';
 
 export default function Gallery({
-  images, alt, gray = true, tourUrl, title, eyebrow,
+  images, alt, gray = true, tourUrl, title, eyebrow, isEn = false,
 }: {
   images: string[];
   alt: string;
@@ -16,6 +16,10 @@ export default function Gallery({
   // querer su propio copy sin ensuciar el alt de las imágenes.
   title?: string;
   eyebrow?: string;
+  // Default false a propósito: las landings de pauta que ya usan este
+  // componente (Loreta, Vellmari) son solo en español y no lo pasan — este
+  // prop es opt-in, no cambia nada para ellas.
+  isEn?: boolean;
 }) {
   const [active, setActive] = useState(0);
   const [tourOpen, setTourOpen] = useState(false);
@@ -29,7 +33,7 @@ export default function Gallery({
         {/* Header */}
         <div className="mb-10 flex items-end justify-between">
           <div>
-            <span className="eyebrow eyebrow-accent block font-bold">{eyebrow ?? '— Galería'}</span>
+            <span className="eyebrow eyebrow-accent block font-bold">{eyebrow ?? (isEn ? '— Gallery' : '— Galería')}</span>
             <h2 className="mt-3 h-display text-[clamp(24px,3.2vw,48px)]">{title ?? alt}</h2>
           </div>
           {tourUrl ? (
@@ -38,10 +42,10 @@ export default function Gallery({
               className="btn btn-outline font-semibold"
             >
               <Orbit size={15} strokeWidth={1.8} />
-              Tour Virtual
+              {isEn ? 'Virtual Tour' : 'Tour Virtual'}
             </button>
           ) : (
-            <span className="caps text-ink-3">Galería del Proyecto</span>
+            <span className="caps text-ink-3">{isEn ? 'Project Gallery' : 'Galería del Proyecto'}</span>
           )}
         </div>
 
@@ -66,14 +70,14 @@ export default function Gallery({
           {/* Prev / Next */}
           <button
             onClick={prev}
-            aria-label="Anterior"
+            aria-label={isEn ? 'Previous' : 'Anterior'}
             className="absolute left-5 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-sm backdrop-blur-sm transition-all hover:scale-105 hover:bg-white"
           >
             <ChevronLeft size={20} strokeWidth={1.8} />
           </button>
           <button
             onClick={next}
-            aria-label="Siguiente"
+            aria-label={isEn ? 'Next' : 'Siguiente'}
             className="absolute right-5 top-1/2 z-10 flex h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-ink shadow-sm backdrop-blur-sm transition-all hover:scale-105 hover:bg-white"
           >
             <ChevronRight size={20} strokeWidth={1.8} />
@@ -113,7 +117,7 @@ export default function Gallery({
         <VirtualTourModal
           url={tourOpen ? tourUrl : null}
           onClose={() => setTourOpen(false)}
-          title={`${alt} — Tour Virtual`}
+          title={`${alt} — ${isEn ? 'Virtual Tour' : 'Tour Virtual'}`}
         />
       )}
     </section>
