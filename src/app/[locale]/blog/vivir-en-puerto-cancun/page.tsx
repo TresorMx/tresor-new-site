@@ -342,7 +342,7 @@ export default function ArticlePage() {
             {[
               { slug: 'donde-comprar-departamento-en-cancun', title: 'Zona Hotelera vs. Puerto Cancún vs. Av. Huayacán: ¿Dónde Comprar Departamento en Cancún?', img: '/desarrollos/villalta/portada3.jpg' },
               { slug: 'guia-comprar-en-preventa-cancun', title: 'Guía para Comprar en Preventa en Cancún: Todo lo que Debes Saber', img: '/blog/AdobeStock_887006964.jpeg' },
-              { slug: 'invertir-en-cancun-desde-monterrey-cdmx', title: 'Por Qué Invertir en Cancún desde Monterrey, CDMX o Guadalajara', img: '/blog/AdobeStock_841077811.jpeg' },
+              { slug: 'vivir-en-playa-del-carmen', title: 'Vivir en Playa del Carmen: Guía Completa de la Riviera Maya', img: '/desarrollos/la-selva/aerial-comunidad.avif' },
             ].map((rel) => (
               <Link key={rel.slug} href={`/blog/${rel.slug}`} className="group rounded-xl overflow-hidden border border-line hover:shadow-md transition-shadow">
                 <div className="relative aspect-video">

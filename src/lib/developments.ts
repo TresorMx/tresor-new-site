@@ -1823,14 +1823,15 @@ export const developments: Development[] = [
     developer: 'Urban Homes',
     brand: 'Urban Homes',
     city: 'Playa del Carmen',
+    zone: 'Zona Residencial',
     type: 'Residencial',
     intent: ['vivir', 'invertir'],
     status: 'Entrega inmediata',
-    image: '/desarrollos/la-selva/portada.jpg',
-    href: '#',
+    image: '/desarrollos/la-selva/aerial-comunidad.avif',
+    href: '/desarrollos/la-selva-urban',
     featured: true,
-    logo: '/desarrollos/la-selva/Logo-4.png',
-    logoScale: 1.2,
+    logo: '/desarrollos/la-selva/LaSelva.png',
+    logoScale: 0.85,
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
     priceLabel: 'Desde $2,244,000 MXN',
@@ -1839,6 +1840,98 @@ export const developments: Development[] = [
       'Departamentos de entrega inmediata de 2 y 3 recámaras en el corazón de la Riviera Maya, con amenidades de excepción y diseño contemporáneo de autor.',
     descriptionEn:
       'Ready-to-move-in 2 and 3-bedroom condos in the heart of the Riviera Maya, with exceptional amenities and signature contemporary design.',
+    // ── Capa de ficha ──
+    // El logo es un lockup vertical (ícono + wordmark apilados), no un
+    // wordmark horizontal como Loreta/Olivia — 0.85 en vez de 1 para que no
+    // domine el hero al ser tan alto.
+    heroRender: '/desarrollos/la-selva/aerial-acceso.avif',
+    heroLogoScale: 0.85,
+    tagline: { es: 'Vive en el corazón de Playa del Carmen, a minutos del Caribe' },
+    highlights: [
+      { label: 'Ubicación', labelEn: 'Location', value: 'Playa del Carmen' },
+      { label: 'Tipología', labelEn: 'Property type', value: '2 y 3 Recámaras', valueEn: '2 & 3 Bedroom' },
+      { label: 'Superficie', labelEn: 'Size', value: 'Desde 87 m²', valueEn: 'From 87 sqm' },
+    ],
+    gallery: [
+      '/desarrollos/la-selva/portada.jpg',
+      '/desarrollos/la-selva/comedor.avif',
+      '/desarrollos/la-selva/recamara.avif',
+      '/desarrollos/la-selva/sala-jardin.avif',
+      '/desarrollos/la-selva/sala.avif',
+    ],
+    amenitiesGallery: [
+      '/desarrollos/la-selva/alberca.avif',
+      '/desarrollos/la-selva/canchas-padel.avif',
+      '/desarrollos/la-selva/gym.avif',
+    ],
+    projectTitle: { es: 'Departamentos de 2 y 3 recámaras' },
+    projectTitleMuted: { es: 'en el centro de Playa del Carmen' },
+    projectBody: [
+      {
+        // Sin el nombre al inicio a propósito: la sección "El Proyecto" de la
+        // ficha (_ficha.tsx) antepone `{dev.name}` automáticamente antes de
+        // este párrafo — escribirlo aquí también duplica el nombre ("La
+        // Selva La Selva es..."). Mismo criterio ya usado en Olivia.
+        es: 'es el desarrollo insignia de Urban Homes: una comunidad completa en el corazón de Playa del Carmen, dentro de su zona residencial de mayor crecimiento — a solo 6 minutos de Playa Xcalacoco, una de las playas más hermosas de la Riviera Maya.',
+      },
+      {
+        es: 'A 12 minutos de la Quinta Avenida y la Plaza Quinta Alegría, con acceso directo a su vida gastronómica y nocturna. Los departamentos, de **entrega inmediata**, vienen equipados con cocineta, walk-in closets y aire acondicionado — listos para vivir o rentar desde el primer día.',
+      },
+    ],
+    locationBullets: [
+      { es: 'A 6 minutos de Playa Xcalacoco' },
+      { es: 'A 12 minutos de la Quinta Avenida y Plaza Quinta Alegría' },
+      { es: 'En el corazón de la zona residencial de mayor crecimiento de Playa del Carmen' },
+    ],
+    location: { lat: 20.6702132, lng: -87.0578452, address: 'Community La Selva Residences, Playa del Carmen, Q. Roo' },
+    amenities: [
+      { key: 'alberca-familiar', labelOverride: '5 Albercas Familiares' },
+      { key: 'cancha-padel', labelOverride: 'Cancha de Pádel y Pickleball' },
+      { key: 'cancha-futbol', labelOverride: 'Cancha Deportiva' },
+      { key: 'area-infantil', labelOverride: 'Área de Juegos' },
+      { key: 'pet-park' },
+      { key: 'asadores', labelOverride: 'Área de Asadores' },
+      { key: 'seguridad-24-7', labelOverride: 'Vigilancia 24/7' },
+      { key: 'estacionamiento-visitas' },
+    ],
+    contentBlocks: [
+      {
+        eyebrow: { es: '— Una comunidad completa' },
+        title: { es: 'Community La Selva Residences' },
+        titleMuted: { es: 'armonía entre comunidad y naturaleza' },
+        description: {
+          es: 'Lo que comenzó como un desarrollo se convirtió en el proyecto insignia de Urban Homes: una comunidad diseñada para la armonía entre sus residentes y la naturaleza que la rodea, con albercas, canchas deportivas y áreas verdes para todas las edades.',
+        },
+        image: '/desarrollos/la-selva/aerial-comunidad.avif',
+        imageFit: 'cover',
+        layout: 'side-by-side',
+        imagePosition: 'right',
+      },
+    ],
+    floorPlans: [
+      {
+        slug: '2-recamaras',
+        label: { es: 'Modelo Terra · 2 Recámaras' },
+        shortLabel: { es: '2 Recámaras' },
+        image: '/desarrollos/la-selva/floor-plans/2-recamaras.jpg',
+        specs: [
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '87 m²' },
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '2' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento' }, value: '1 cajón' },
+        ],
+      },
+      {
+        slug: '3-recamaras',
+        label: { es: 'Modelo Amazonas · 3 Recámaras' },
+        shortLabel: { es: '3 Recámaras' },
+        image: '/desarrollos/la-selva/floor-plans/3-recamaras.jpg',
+        specs: [
+          { key: 'areaTotal', label: { es: 'Área total' }, value: '103 m²' },
+          { key: 'recamaras', label: { es: 'Recámaras' }, value: '3' },
+          { key: 'estacionamiento', label: { es: 'Estacionamiento' }, value: '2 cajones' },
+        ],
+      },
+    ],
   },
   {
     slug: 'sanam-urban',

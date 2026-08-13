@@ -91,6 +91,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const blogSlugs = [
+    'vivir-en-playa-del-carmen',
     'terrenos-en-venta-cancun',
     'vivir-en-puerto-cancun',
     'donde-comprar-departamento-en-cancun',

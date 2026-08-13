@@ -69,6 +69,15 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
 const articlesEs = [
   {
+    slug: 'vivir-en-playa-del-carmen',
+    title: 'Vivir en Playa del Carmen: Guía Completa de la Riviera Maya (2026)',
+    description:
+      'Cómo es realmente vivir en Playa del Carmen, qué zonas tienen más plusvalía, cuánto cuesta entrar y qué departamentos hay disponibles hoy en el corazón de la Riviera Maya.',
+    image: '/desarrollos/la-selva/aerial-comunidad.avif',
+    readTime: '9 min',
+    date: '13 de agosto de 2026',
+  },
+  {
     slug: 'terrenos-en-venta-cancun',
     title: 'Terrenos en Venta en Cancún: Qué Revisar Antes de Comprar (2026)',
     description:
