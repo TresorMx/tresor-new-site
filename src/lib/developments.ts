@@ -1944,6 +1944,25 @@ export const developments: Development[] = [
         ],
       },
     ],
+    // ── SEO curado a mano (sin esto cae al título automático de
+    // fichaSeoTitle: "La Selva — Departamento en Venta en Playa del Carmen").
+    // Dos mejoras sobre el automático:
+    //   · "Departamento" singular y "en Venta en" repetido se leen mal;
+    //     aquí va en plural y con la ciudad limpia.
+    //   · El automático contenía "en Venta en Playa del Carmen", casi la
+    //     frase exacta que ataca /departamentos-en-venta-playa-del-carmen.
+    //     Arrancar con la marca y quitar "en Venta" reduce ese roce — la
+    //     ficha debe ganar por NOMBRE, la de categoría por la keyword.
+    // La descripción automática caía a `description`, que dice "Riviera
+    // Maya" y nunca menciona la ciudad ni el precio; esta sí.
+    seoTitle: {
+      es: 'La Selva — Departamentos en Playa del Carmen, Entrega Inmediata',
+      en: 'La Selva — Move-In Ready Condos in Playa del Carmen',
+    },
+    seoDescription: {
+      es: 'Departamentos de 2 y 3 recámaras con entrega inmediata en Playa del Carmen, desde $2,244,000 MXN. Comunidad con albercas, pádel y pet park, a 6 min de la playa.',
+      en: '2 and 3-bedroom move-in ready condos in Playa del Carmen, from $2,244,000 MXN. A full community with pools, padel courts and a pet park, 6 min from the beach.',
+    },
   },
   {
     slug: 'sanam-urban',
