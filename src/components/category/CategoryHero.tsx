@@ -38,7 +38,14 @@ export default function CategoryHero({
     <section
       data-nav="dark"
       className="relative -mt-[72px] overflow-hidden bg-bg-deep text-bg"
-      style={{ height: 'calc(100svh - 104px - 72px)', minHeight: '440px' }}
+      // `minHeight` en vez de `height` fijo: con un h1 de 3 líneas (títulos
+      // largos tipo "Departamentos en Venta en Puerto Cancún") el contenido
+      // no cabía en la altura fija y, por el overflow-hidden, el subtítulo
+      // quedaba recortado contra la sección redondeada de abajo. Con
+      // min-height, la sección crece si hace falta en vez de recortar; en
+      // el caso normal (título de 1-2 líneas) se ve idéntico a antes porque
+      // el contenido ya cabía sobrado.
+      style={{ minHeight: 'max(440px, calc(100svh - 104px - 72px))' }}
     >
       <div className="absolute inset-0 animate-hero-zoom">
         <Image src={image} alt={imageAlt} fill priority sizes="100vw" className="scale-105 object-cover" />
