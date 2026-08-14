@@ -34,6 +34,15 @@ export default function CategoryHero({
   // misma caja. Mismo criterio que heroLogoScale en la ficha.
   logoScale?: number;
 }) {
+  // Los títulos cortos de una palabra ("Cancún", "Tulum") se ven bien al
+  // tamaño grande (hasta 88px) porque caben en 1 línea. Los títulos largos
+  // de las páginas de departamentos por ciudad ("Departamentos en Venta en
+  // Playa del Carmen", 44 caracteres) parten a 3 líneas y, al mismo tamaño,
+  // se veían apretados y gritones — mucho texto denso sin aire, mala
+  // lectura. Se reduce a un tamaño ya usado en otros heroes del sitio
+  // (LandingFooter usa el mismo clamp), no uno inventado.
+  const isLongTitle = (title?.length ?? 0) > 28;
+
   return (
     <section
       data-nav="dark"
@@ -85,7 +94,11 @@ export default function CategoryHero({
       ) : (
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
           <span className="eyebrow eyebrow-accent font-bold">{eyebrow}</span>
-          {title && <h1 className="mt-5 h-display max-w-3xl text-[clamp(40px,7vw,88px)] text-white">{title}</h1>}
+          {title && (
+            <h1 className={`mt-5 h-display max-w-3xl text-white ${isLongTitle ? 'text-[clamp(30px,4.2vw,60px)]' : 'text-[clamp(40px,7vw,88px)]'}`}>
+              {title}
+            </h1>
+          )}
           {subtitle && (
             <p className="mt-6 max-w-xl text-[15px] font-normal leading-relaxed text-white">{subtitle}</p>
           )}
