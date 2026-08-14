@@ -46,14 +46,19 @@ export default function CategoryHero({
   return (
     <section
       data-nav="dark"
-      className="relative -mt-[72px] overflow-hidden bg-bg-deep text-bg"
-      // `minHeight` en vez de `height` fijo: con un h1 de 3 líneas (títulos
-      // largos tipo "Departamentos en Venta en Puerto Cancún") el contenido
-      // no cabía en la altura fija y, por el overflow-hidden, el subtítulo
-      // quedaba recortado contra la sección redondeada de abajo. Con
-      // min-height, la sección crece si hace falta en vez de recortar; en
-      // el caso normal (título de 1-2 líneas) se ve idéntico a antes porque
-      // el contenido ya cabía sobrado.
+      // El centrado vertical (flex + justify-center) vive en la SECCIÓN, no
+      // en un div hijo con `h-full`. `h-full` es height:100%, y un
+      // porcentaje de altura solo funciona si el padre tiene una altura
+      // explícita — con solo `minHeight` (sin `height` fijo) el navegador no
+      // puede resolverlo, el hijo cae a altura automática (la del
+      // contenido) y el flex se queda centrando dentro de una caja del
+      // tamaño del propio contenido: en la práctica, sin efecto. Por eso el
+      // primer intento de este fix (min-height solo) descuadró el centrado
+      // — el contenido se iba arriba y quedaba un hueco vacío abajo, tal
+      // cual se ve en las capturas. Centrando la sección misma con flex, el
+      // centrado funciona sea cual sea la altura final (min-height o más
+      // grande si el contenido no cabe) sin depender de porcentajes.
+      className="relative -mt-[72px] flex flex-col items-center justify-center overflow-hidden bg-bg-deep px-6 pt-[72px] text-center text-bg"
       style={{ minHeight: 'max(440px, calc(100svh - 104px - 72px))' }}
     >
       <div className="absolute inset-0 animate-hero-zoom">
@@ -70,7 +75,7 @@ export default function CategoryHero({
         // si ya es blanco de origen (`logoIsWhite`, ej. Urban Homes) se usa
         // tal cual. H1 sr-only porque el logo ya cubre el rol visual del
         // título — sin esto la página se queda sin H1.
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
+        <div className="relative z-10 flex flex-col items-center">
           {title && <h1 className="sr-only">{title}</h1>}
           <div
             className="relative h-[var(--logo-h-mobile)] w-[min(70vw,260px)] md:h-[var(--logo-h-desktop)] md:w-[min(46vw,340px)]"
@@ -92,7 +97,7 @@ export default function CategoryHero({
           )}
         </div>
       ) : (
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 pt-[72px] text-center">
+        <div className="relative z-10 flex flex-col items-center">
           <span className="eyebrow eyebrow-accent font-bold">{eyebrow}</span>
           {title && (
             <h1 className={`mt-5 h-display max-w-3xl text-white ${isLongTitle ? 'text-[clamp(30px,4.2vw,60px)]' : 'text-[clamp(40px,7vw,88px)]'}`}>
