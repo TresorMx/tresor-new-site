@@ -257,7 +257,8 @@ export default function ArticlePage() {
             Puedes explorar los desarrollos disponibles filtrados por zona en nuestras landings de{' '}
             <Link href="/cancun" className="text-accent hover:underline">Cancún</Link>,{' '}
             <Link href="/puerto-cancun" className="text-accent hover:underline">Puerto Cancún</Link> y{' '}
-            <Link href="/tulum" className="text-accent hover:underline">Tulum</Link>.
+            <Link href="/tulum" className="text-accent hover:underline">Tulum</Link>, o directamente por tipo de propiedad en{' '}
+            <Link href="/departamentos-en-venta-cancun" className="text-accent hover:underline">departamentos en venta en Cancún</Link>.
           </p>
 
           <h2 className="font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink mt-12 mb-6">

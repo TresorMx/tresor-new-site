@@ -256,7 +256,7 @@ export default function ArticlePage() {
           </div>
           <p className="text-ink-2 leading-relaxed mb-8">
             Si tu objetivo es construir tu propia casa o desarrollar a tu ritmo con más margen de plusvalía, un terreno como los de Zienna tiene sentido. Si buscas renta o uso inmediato, un{' '}
-            <Link href="/departamentos" className="text-accent hover:underline">departamento en preventa o entrega inmediata</Link>{' '}
+            <Link href="/departamentos-en-venta-cancun" className="text-accent hover:underline">departamento en preventa o entrega inmediata en Cancún</Link>{' '}
             probablemente se ajusta mejor a tu objetivo.
           </p>
 

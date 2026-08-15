@@ -267,7 +267,7 @@ export default function ArticlePage() {
           </h2>
           <p className="text-ink-2 leading-relaxed mb-8">
             No existe una "mejor zona" universal — existe la zona correcta según tu objetivo real: renta vacacional, lujo residencial o vivienda propia con proyección de crecimiento. Puedes explorar el{' '}
-            <Link href="/cancun" className="text-accent hover:underline">catálogo de departamentos en Cancún</Link>{' '}
+            <Link href="/departamentos-en-venta-cancun" className="text-accent hover:underline">catálogo de departamentos en Cancún</Link>{' '}
             completo, filtrado por zona y desarrollador, y hablar con un asesor que te ayude a comparar opciones reales según tu presupuesto y objetivo de inversión.
           </p>
 

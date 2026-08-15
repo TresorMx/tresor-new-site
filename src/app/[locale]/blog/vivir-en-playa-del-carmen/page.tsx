@@ -262,7 +262,7 @@ export default function ArticlePage() {
           </div>
           <p className="text-ink-2 leading-relaxed mb-10">
             Si quieres ver el inventario completo de la ciudad, incluyendo lo que se vaya sumando, está en{' '}
-            <Link href="/playa-del-carmen" className="text-accent hover:underline">propiedades en venta en Playa del Carmen</Link>.
+            <Link href="/departamentos-en-venta-playa-del-carmen" className="text-accent hover:underline">departamentos en venta en Playa del Carmen</Link>.
           </p>
 
           <h2 className={H2}>La Selva: la comunidad que hoy define la entrada a Playa</h2>

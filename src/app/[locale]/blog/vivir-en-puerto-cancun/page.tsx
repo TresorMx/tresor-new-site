@@ -277,7 +277,7 @@ export default function ArticlePage() {
           </div>
           <p className="text-ink-2 leading-relaxed mb-10">
             Si quieres ver el inventario completo de la zona, incluyendo lo que se vaya sumando, está en{' '}
-            <Link href="/puerto-cancun" className="text-accent hover:underline">propiedades en venta en Puerto Cancún</Link>.
+            <Link href="/departamentos-en-venta-puerto-cancun" className="text-accent hover:underline">departamentos en venta en Puerto Cancún</Link>.
           </p>
 
           <h2 className={H2}>Vellmari: el proyecto que hoy marca el estándar de la zona</h2>

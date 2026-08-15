@@ -225,8 +225,11 @@ export default function ArticlePage() {
           <p className="text-ink-2 leading-relaxed mb-4">
             La clave está en elegir el proyecto correcto. Proyectos como <Link href="/desarrollos/gardens" className="text-accent hover:underline">Quattro Plaza Center Gardens</Link> y <Link href="/desarrollos/long-island" className="text-accent hover:underline">Long Island</Link> están en preventa con precios desde $1,968,600 MXN + IVA, ofreciendo una ventana de entrada excepcional para inversionistas que quieren capturar tanto la plusvalía de preventa como el flujo de renta a futuro.
           </p>
-          <p className="text-ink-2 leading-relaxed mb-8">
+          <p className="text-ink-2 leading-relaxed mb-4">
             Para conocer más sobre cómo elegir el local correcto, lee nuestra <Link href="/blog/como-invertir-en-locales-comerciales-en-cancun" className="text-accent hover:underline">Guía Completa de Inversión en Locales Comerciales en Cancún</Link>.
+          </p>
+          <p className="text-ink-2 leading-relaxed mb-8">
+            Si tu perfil se inclina más por liquidez, crédito hipotecario o uso personal, no descartes el departamento — revisa el <Link href="/departamentos-en-venta-cancun" className="text-accent hover:underline">catálogo de departamentos en venta en Cancún</Link> antes de decidir.
           </p>
 
           {/* Related articles */}
