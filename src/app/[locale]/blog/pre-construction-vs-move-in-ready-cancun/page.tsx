@@ -206,6 +206,13 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         <Link href="/en/blog/best-areas-to-buy-in-cancun" className="text-accent hover:underline">compare the areas</Link>{' '}
         before you narrow down.
       </p>
+      <p className={P}>
+        One note if move-in ready is what you are after: the finished inventory is not evenly spread
+        across the region. Right now the clearest move-in ready option we have sits in Playa del
+        Carmen rather than Cancún, at a materially lower entry price — worth a look at{' '}
+        <Link href="/en/condos-for-sale-playa-del-carmen" className="text-accent hover:underline">condos for sale in Playa del Carmen</Link>{' '}
+        before you assume the decision is only about timing.
+      </p>
       <p className="text-[13px] font-light leading-relaxed text-ink-3 mb-4">
         This article is general information, not legal, tax or investment advice. No return,
         appreciation or delivery outcome is implied or guaranteed. Review contracts and developer

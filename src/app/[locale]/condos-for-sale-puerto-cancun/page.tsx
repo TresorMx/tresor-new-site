@@ -13,6 +13,11 @@ export const dynamic = 'force-dynamic';
 // internos y TODO el inventario de la zona — es la que compite en orgánico.
 const PATH = '/condos-for-sale-puerto-cancun';
 const URL_EN = `https://www.tresor.mx/en${PATH}`;
+// El equivalente real en español NO es una traducción de esta URL, es la
+// página de departamentos de la zona. Tiene que declararse aquí: el
+// hreflang solo cuenta si es recíproco, y /departamentos-en-venta-puerto-cancun
+// ya nos declara a nosotros. Si falta este lado, Google descarta el par entero.
+const URL_ES = 'https://www.tresor.mx/departamentos-en-venta-puerto-cancun';
 
 const TITLE = 'Condos for Sale in Puerto Cancún — Marina & Golf Community';
 const DESCRIPTION =
@@ -32,7 +37,9 @@ export async function generateMetadata(): Promise<Metadata> {
     ],
     alternates: {
       canonical: URL_EN,
-      languages: { en: URL_EN, 'x-default': URL_EN },
+      // x-default apunta al español para coincidir con lo que declara la
+      // página ES; si cada lado declara un x-default distinto se contradicen.
+      languages: { en: URL_EN, es: URL_ES, 'x-default': URL_ES },
     },
     openGraph: {
       title: TITLE,

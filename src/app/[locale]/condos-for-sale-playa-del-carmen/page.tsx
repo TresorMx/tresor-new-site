@@ -11,17 +11,22 @@ export const dynamic = 'force-dynamic';
 // componente.
 //
 // NOTA DE INVENTARIO: hoy Playa del Carmen tiene solo 2 desarrollos en el
-// catálogo (La Selva, entrega inmediata; Favorite, próximamente) y ninguno
-// de los dos tiene ficha propia todavía (href '#'). Es MUCHO menos que los
-// 10 de Cancún, así que esta página se apoya más en el contenido —zonas,
-// proceso de compra, FAQ— que en el inventario. En cuanto La Selva tenga
-// ficha real, esta página gana bastante: es el enlace interno que hoy le
-// falta. Ver el filtro de href '#' en CondosSeoPage para el schema.
+// catálogo (La Selva, entrega inmediata; Favorite, próximamente). La Selva
+// YA tiene ficha propia (/desarrollos/la-selva-playa-del-carmen); Favorite
+// sigue con href '#'. Es MUCHO menos inventario que los 10 de Cancún, así
+// que esta página se apoya más en el contenido —zonas, proceso de compra,
+// FAQ— que en el catálogo. Ver el filtro de href '#' en CondosSeoPage: deja
+// fuera del schema a los desarrollos sin ficha para no emitir URLs rotas.
 //
 // Solo vive en inglés: la variante en español redirige a /playa-del-carmen,
 // que es la landing de ciudad que ya existe en ES.
 const PATH = '/condos-for-sale-playa-del-carmen';
 const URL_EN = `https://www.tresor.mx/en${PATH}`;
+// El equivalente real en español NO es una traducción de esta URL, es la
+// página de departamentos de la ciudad. Tiene que declararse aquí: el
+// hreflang solo cuenta si es recíproco, y /departamentos-en-venta-playa-del-carmen
+// ya nos declara a nosotros. Si falta este lado, Google descarta el par entero.
+const URL_ES = 'https://www.tresor.mx/departamentos-en-venta-playa-del-carmen';
 
 const TITLE = 'Condos for Sale in Playa del Carmen — Prices & Availability';
 const DESCRIPTION =
@@ -41,7 +46,9 @@ export async function generateMetadata(): Promise<Metadata> {
     ],
     alternates: {
       canonical: URL_EN,
-      languages: { en: URL_EN, 'x-default': URL_EN },
+      // x-default apunta al español para coincidir con lo que declara la
+      // página ES; si cada lado declara un x-default distinto se contradicen.
+      languages: { en: URL_EN, es: URL_ES, 'x-default': URL_ES },
     },
     openGraph: {
       title: TITLE,

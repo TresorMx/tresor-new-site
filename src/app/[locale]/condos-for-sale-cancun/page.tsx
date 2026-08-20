@@ -16,6 +16,11 @@ export const dynamic = 'force-dynamic';
 // en inglés bajo una URL española ni duplicar la página en dos URLs.
 const PATH = '/condos-for-sale-cancun';
 const URL_EN = `https://www.tresor.mx/en${PATH}`;
+// El equivalente real en español NO es una traducción de esta URL, es la
+// página de departamentos de la ciudad. Tiene que declararse aquí: el
+// hreflang solo cuenta si es recíproco, y /departamentos-en-venta-cancun
+// ya nos declara a nosotros. Si falta este lado, Google descarta el par entero.
+const URL_ES = 'https://www.tresor.mx/departamentos-en-venta-cancun';
 
 const TITLE = 'Condos for Sale in Cancún, Mexico — Prices & Availability';
 const DESCRIPTION =
@@ -35,7 +40,9 @@ export async function generateMetadata(): Promise<Metadata> {
     ],
     alternates: {
       canonical: URL_EN,
-      languages: { en: URL_EN, 'x-default': URL_EN },
+      // x-default apunta al español para coincidir con lo que declara la
+      // página ES; si cada lado declara un x-default distinto se contradicen.
+      languages: { en: URL_EN, es: URL_ES, 'x-default': URL_ES },
     },
     openGraph: {
       title: TITLE,

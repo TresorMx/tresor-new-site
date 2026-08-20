@@ -265,9 +265,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       </p>
       <p className={P}>
         If you want to see what is currently available, start with{' '}
-        <Link href="/en/condos-for-sale-cancun" className="text-accent hover:underline">condos for sale in Cancún</Link>{' '}
-        or the{' '}
-        <Link href="/en/condos-for-sale-puerto-cancun" className="text-accent hover:underline">marina community in Puerto Cancún</Link>.
+        <Link href="/en/condos-for-sale-cancun" className="text-accent hover:underline">condos for sale in Cancún</Link>,{' '}
+        the{' '}
+        <Link href="/en/condos-for-sale-puerto-cancun" className="text-accent hover:underline">marina community in Puerto Cancún</Link>, or{' '}
+        <Link href="/en/condos-for-sale-playa-del-carmen" className="text-accent hover:underline">condos for sale in Playa del Carmen</Link>{' '}
+        if you want a smaller, more walkable town.
       </p>
       <p className="text-[13px] font-light leading-relaxed text-ink-3 mb-4">
         This article is general information, not legal or tax advice. Laws and fees change, and every

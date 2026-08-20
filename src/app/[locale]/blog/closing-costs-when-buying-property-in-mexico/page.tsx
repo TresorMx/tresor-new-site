@@ -222,7 +222,11 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
           guide to buying as a foreigner
         </Link>{' '}
         covers the legal structure these costs attach to. To see what is available now, browse{' '}
-        <Link href="/en/condos-for-sale-cancun" className="text-accent hover:underline">condos for sale in Cancún</Link>.
+        <Link href="/en/condos-for-sale-cancun" className="text-accent hover:underline">condos for sale in Cancún</Link>{' '}
+        or{' '}
+        <Link href="/en/condos-for-sale-playa-del-carmen" className="text-accent hover:underline">condos for sale in Playa del Carmen</Link>{' '}
+        — and remember these percentages apply to the purchase price, so a lower entry point in Playa
+        also means a smaller closing bill.
       </p>
       <p className="text-[13px] font-light leading-relaxed text-ink-3 mb-4">
         This article is general information, not legal, tax or financial advice. Rates, fees and
