@@ -120,6 +120,24 @@ export default function DeptosSeoPageEs({
   // "numberOfItems: 0" le diría a Google que la colección está vacía.
   const listed = developments.filter((d) => d.href !== '#');
 
+  // Inventario de entrega inmediata. Search Console (13 jul – 21 ago) tiene
+  // "entrega inmediata departamentos cancún" en posición 10.1 con 0 clics:
+  // está a un empujón de página 1 y ninguna página lo trabajaba de forma
+  // explícita. Es una variante CALIFICADA de la keyword principal, así que
+  // vive como sección de esta página y NO como página aparte — una página
+  // propia competiría de frente con la que sí queremos que gane el término
+  // de cabeza.
+  //
+  // Se deriva del catálogo, no se escribe a mano: cada ciudad rinde lo suyo
+  // (Cancún → Koa, Villalta, Valmira; Puerto Cancún → Blume; Playa → La
+  // Selva). Si una ciudad no tiene inventario listo, la sección no se
+  // renderiza en vez de mentir.
+  const readyNow = developments.filter((d) => d.status === 'Entrega inmediata');
+  // El espejo: "preventa departamentos cancun" está en posición 31 con 18
+  // impresiones. Es la misma decisión vista desde el otro lado, así que se
+  // resuelve en la misma sección en vez de en dos.
+  const preSale = developments.filter((d) => d.status === 'Preventa');
+
   const jsonLd = [
     {
       '@context': 'https://schema.org',
@@ -198,6 +216,94 @@ export default function DeptosSeoPageEs({
           </div>
         </div>
       </section>
+
+      {/* ── Preventa o entrega inmediata ──
+          Ver los comentarios de `readyNow` / `preSale` arriba: es una sección
+          y no una página aparte, a propósito. No repite las cards del grid —
+          ahí ya están, con su filtro de estatus; lo que aporta es el H2 con la
+          frase exacta, la explicación del trade-off y los nombres de proyecto
+          como enlaces en prosa. */}
+      {(readyNow.length > 0 || preSale.length > 0) && (
+        <section className="bg-white py-20 md:py-28">
+          <div className="container-wrap">
+            <div className="max-w-3xl">
+              <span className="eyebrow eyebrow-accent font-bold">— Preventa o entrega inmediata</span>
+              <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink">
+                Departamentos en preventa y con entrega inmediata{' '}
+                <span className="text-ink-3">en {breadcrumbCity}</span>
+              </h2>
+              <p className="mt-7 text-[15px] font-light leading-relaxed text-ink-2">
+                Es la primera decisión real que vas a tomar, y no hay una
+                respuesta correcta en automático: depende de si lo que te sobra
+                es tiempo o certeza. Así está repartido hoy nuestro inventario
+                en {breadcrumbCity}.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-px overflow-hidden rounded-lg bg-line md:grid-cols-2">
+              {readyNow.length > 0 && (
+                <div className="bg-bg p-8">
+                  <KeyRound size={22} strokeWidth={1.3} className="text-accent" />
+                  <h3 className="mt-4 font-sans text-[19px] font-normal tracking-tight text-ink">
+                    Entrega inmediata
+                  </h3>
+                  <p className="mt-3 text-[14px] font-light leading-relaxed text-ink-2">
+                    Obra terminada. Visitas la unidad exacta que vas a comprar
+                    antes de firmar y empiezas a rentarla o a habitarla desde el
+                    primer mes. Cuesta más que la preventa, y eso es justo lo que
+                    estás comprando: certeza y flujo desde el día uno.
+                  </p>
+                  <p className="mt-5 text-[14px] font-light leading-relaxed text-ink-2">
+                    {readyNow.map((d, i) => (
+                      <span key={d.name}>
+                        {i > 0 && ', '}
+                        {d.href === '#' ? (
+                          <span className="text-ink">{d.name}</span>
+                        ) : (
+                          <Link href={d.href} className="text-accent hover:underline">
+                            {d.name}
+                          </Link>
+                        )}
+                      </span>
+                    ))}
+                    .
+                  </p>
+                </div>
+              )}
+
+              {preSale.length > 0 && (
+                <div className="bg-bg p-8">
+                  <FileSignature size={22} strokeWidth={1.3} className="text-accent" />
+                  <h3 className="mt-4 font-sans text-[19px] font-normal tracking-tight text-ink">
+                    Preventa
+                  </h3>
+                  <p className="mt-3 text-[14px] font-light leading-relaxed text-ink-2">
+                    El precio más bajo del ciclo y las mejores unidades del
+                    proyecto, a cambio de esperar la obra y de asumir el riesgo
+                    de ejecución. Aquí el historial del desarrollador importa
+                    más que el render.
+                  </p>
+                  <p className="mt-5 text-[14px] font-light leading-relaxed text-ink-2">
+                    {preSale.map((d, i) => (
+                      <span key={d.name}>
+                        {i > 0 && ', '}
+                        {d.href === '#' ? (
+                          <span className="text-ink">{d.name}</span>
+                        ) : (
+                          <Link href={d.href} className="text-accent hover:underline">
+                            {d.name}
+                          </Link>
+                        )}
+                      </span>
+                    ))}
+                    .
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── Zonas ──
           El bloque que un portal genérico no da: qué esperar de cada zona.
