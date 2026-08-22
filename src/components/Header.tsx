@@ -550,7 +550,7 @@ function PropiedadesMenu() {
         <span className="text-[12px] tracking-[0.16em] text-ink-3" style={{ fontFamily: 'Javacom, var(--font-switzer), sans-serif' }}>
           The Art of Luxury Living
         </span>
-        <Link href="/#portafolio" className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-caps text-ink transition-colors hover:text-accent">
+        <Link href="/desarrollos" className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-caps text-ink transition-colors hover:text-accent">
           {t('viewAllPortfolio')}
           <ArrowRight size={14} strokeWidth={1.8} />
         </Link>
@@ -627,7 +627,7 @@ function PropiedadesMenuMobile() {
         </div>
       </div>
 
-      <Link href="/#portafolio" className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-caps text-ink">
+      <Link href="/desarrollos" className="inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-caps text-ink">
         {t('viewAllPortfolio')}
         <ArrowRight size={14} strokeWidth={1.8} />
       </Link>

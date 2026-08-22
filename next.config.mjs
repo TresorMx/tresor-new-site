@@ -196,8 +196,13 @@ const nextConfig = {
       { source: '/politicas-de-privacidad', destination: '/privacidad', permanent: true },
       { source: '/home-tresor', destination: '/', permanent: true },
       { source: '/en/home-tresor', destination: '/en', permanent: true },
-      { source: '/desarrollos', destination: '/#portafolio', permanent: true },
-      { source: '/proyectos', destination: '/#portafolio', permanent: true },
+      // /desarrollos YA NO redirige: ahora es una página real (ver
+      // src/app/[locale]/desarrollos/page.tsx). Mandarla a un ancla del home
+      // costaba ~310 impresiones/mes del clúster "desarrollos …" en posiciones
+      // 33-47 sin un solo clic — el home no puede rankear para una consulta
+      // de categoría. /proyectos sí sigue redirigiendo, pero ahora al hub real
+      // en vez de al ancla.
+      { source: '/proyectos', destination: '/desarrollos', permanent: true },
 
       // /listings ahora es una sección real (ver src/app/[locale]/listings) —
       // ya NO redirige a casa. Los slugs viejos de la funcionalidad retirada

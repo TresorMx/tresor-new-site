@@ -67,7 +67,10 @@ export default async function Footer() {
               {t('properties')}
             </h4>
             <ul className="flex flex-col gap-3 text-[13px] text-white/85 md:text-[14px]">
-              <li><Link href="/#portafolio" className="hover:text-accent">{t('developments')}</Link></li>
+              {/* Antes iba a /#portafolio (ancla del home). Ahora /desarrollos
+                  es página real: este enlace sitewide es su principal fuente
+                  de autoridad interna. */}
+              <li><Link href="/desarrollos" className="hover:text-accent">{t('developments')}</Link></li>
               <li><Link href="/listings" className="hover:text-accent">{t('listings')}</Link></li>
               {isEn ? (
                 <>

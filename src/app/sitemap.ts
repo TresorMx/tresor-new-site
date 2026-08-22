@@ -44,6 +44,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Página de ciudad en español, equivalente de /en/condos-for-sale-cancun.
     // Solo /es: la variante /en redirige a la de condos, así que listarla
     // sería listar un redirect.
+    // Hub de todo el portafolio. Antes era un 301 a /#portafolio, por eso no
+    // estaba aquí; ahora es página real y es la que debe recibir el clúster
+    // "desarrollos …". Bilingüe, a diferencia de las de condos.
+    { url: `${SITE}/desarrollos`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
+    { url: `${SITE}/en/desarrollos`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
     { url: `${SITE}/departamentos-en-venta-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.98 },
     { url: `${SITE}/departamentos-en-venta-puerto-cancun`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },
     { url: `${SITE}/departamentos-en-venta-playa-del-carmen`, lastModified: now, changeFrequency: 'weekly', priority: 0.95 },

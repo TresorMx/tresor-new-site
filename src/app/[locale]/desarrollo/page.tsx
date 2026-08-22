@@ -13,7 +13,15 @@ import ProjectImage from '@/components/desarrollo/ProjectImage';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale !== 'en';
-  const title = isEs ? 'Desarrollo — Nuestra Trayectoria' : 'Development — Our Track Record';
+  // Título deliberadamente específico de MARCA, no de categoría. El anterior
+  // ("Desarrollo — Nuestra Trayectoria") competía semánticamente con el
+  // clúster "desarrollos …": Search Console lo tenía en posición 52 con 444
+  // impresiones y 0 clics, porque Google lo mezclaba con las búsquedas de
+  // catálogo que ahora atiende /desarrollos. Esta página no es un catálogo:
+  // es la trayectoria de Tresor COMO desarrollador, y el número es su gancho.
+  const title = isEs
+    ? 'Trayectoria de Tresor Real Estate — +3,000 Unidades Entregadas'
+    : 'Tresor Real Estate Track Record — 3,000+ Units Delivered';
   const description = isEs
     ? 'Más de 3,000 unidades entregadas en Cancún y Tulum. Conoce los proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate.'
     : 'Over 3,000 units delivered in Cancún and Tulum. Discover the luxury, residential, commercial, vacation, and master plan projects developed by Tresor Real Estate.';

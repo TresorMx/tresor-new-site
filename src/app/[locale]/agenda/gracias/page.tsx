@@ -179,7 +179,7 @@ function AgendaGraciasContent() {
               {t('backHome')}
             </Link>
             {interest && (
-              <Link href="/#portafolio" className="btn btn-lg btn-ghost-light">
+              <Link href="/desarrollos" className="btn btn-lg btn-ghost-light">
                 {t('viewDevelopment')} <ArrowRight size={14} strokeWidth={1.6} />
               </Link>
             )}
