@@ -61,6 +61,15 @@ export default async function PuertoCancunPage({ params }: { params: Promise<{ l
         eyebrow="Puerto Cancún"
         title={isEs ? <>Propiedades en <span className="text-ink-3">Puerto Cancún</span></> : <>Properties in <span className="text-ink-3">Puerto Cancún</span></>}
         developments={developments}
+        schemaUrl={isEs ? 'https://www.tresor.mx/puerto-cancun' : 'https://www.tresor.mx/en/puerto-cancun'}
+        schemaName={isEs ? 'Propiedades en Venta en Puerto Cancún' : 'Condos for Sale in Puerto Cancún — Marina & Golf'}
+        schemaDescription={
+          isEs
+            ? 'Departamentos de lujo en Puerto Cancún, el enclave residencial más exclusivo de la ciudad, frente al mar Caribe y la marina.'
+            : "Luxury condos for sale in Puerto Cancún, the city's most exclusive gated community — an 18-hole golf course, private marina, beach club and the Caribbean Sea at your door."
+        }
+        breadcrumbLabel="Puerto Cancún"
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
 
       {/* Enlace jerárquico hub → keyword específica, mismo patrón que

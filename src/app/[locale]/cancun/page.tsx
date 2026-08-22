@@ -59,6 +59,15 @@ export default async function CancunPage({ params }: { params: Promise<{ locale:
         eyebrow="Cancún"
         title={isEs ? <>Propiedades en <span className="text-ink-3">Cancún</span></> : <>Properties in <span className="text-ink-3">Cancún</span></>}
         developments={developments}
+        schemaUrl={isEs ? 'https://www.tresor.mx/cancun' : 'https://www.tresor.mx/en/cancun'}
+        schemaName={isEs ? 'Propiedades en Venta en Cancún' : 'Real Estate in Cancún — Condos, Commercial Space & Lots'}
+        schemaDescription={
+          isEs
+            ? 'Departamentos, locales comerciales y lotes residenciales en las zonas de mayor crecimiento de Cancún. Preventa y entrega inmediata.'
+            : 'Condos, commercial space and residential lots for sale in the fastest-growing areas of Cancún. Pre-construction and move-in ready, with financing options for foreign buyers.'
+        }
+        breadcrumbLabel="Cancún"
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
     </>
   );

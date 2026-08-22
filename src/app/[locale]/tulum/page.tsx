@@ -56,6 +56,15 @@ export default async function TulumPage({ params }: { params: Promise<{ locale: 
         eyebrow="Tulum"
         title={isEs ? <>Propiedades en <span className="text-ink-3">Tulum</span></> : <>Properties in <span className="text-ink-3">Tulum</span></>}
         developments={developments}
+        schemaUrl={isEs ? 'https://www.tresor.mx/tulum' : 'https://www.tresor.mx/en/tulum'}
+        schemaName={isEs ? 'Propiedades en Venta en Tulum' : 'Condos for Sale in Tulum, Mexico'}
+        schemaDescription={
+          isEs
+            ? 'Departamentos en preventa en Tulum, el destino de mayor crecimiento de México. Aldea Zamá y las zonas de mayor plusvalía.'
+            : "Pre-construction condos for sale in Tulum, Mexico's fastest-growing destination — Aldea Zamá and the highest-appreciation areas of the Riviera Maya."
+        }
+        breadcrumbLabel="Tulum"
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
     </>
   );

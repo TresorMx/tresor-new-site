@@ -56,6 +56,15 @@ export default async function LotesResidencialesPage({ params }: { params: Promi
         eyebrow={isEs ? 'Lotes Residenciales' : 'Residential Lots'}
         title={isEs ? <>Terrenos en <span className="text-ink-3">zonas de alta plusvalía</span></> : <>Land in <span className="text-ink-3">high-value areas</span></>}
         developments={developments}
+        schemaUrl={isEs ? 'https://www.tresor.mx/lotes-residenciales' : 'https://www.tresor.mx/en/lotes-residenciales'}
+        schemaName={isEs ? 'Lotes Residenciales en Venta en Cancún' : 'Residential Lots for Sale in Cancún'}
+        schemaDescription={
+          isEs
+            ? 'Lotes y macrolotes residenciales en las zonas de mayor crecimiento de Cancún. Ideal para desarrolladores e inversionistas.'
+            : "Residential lots and macro-lots in Cancún's fastest-growing areas. Ideal for developers and investors."
+        }
+        breadcrumbLabel={isEs ? 'Lotes Residenciales' : 'Residential Lots'}
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
     </>
   );

@@ -57,6 +57,15 @@ export default async function ListingsPage({ params }: { params: Promise<{ local
         developments={developments}
         showDeveloperFilter={false}
         showTypeFilter
+        schemaUrl={isEs ? 'https://www.tresor.mx/listings' : 'https://www.tresor.mx/en/listings'}
+        schemaName={isEs ? 'Listings en Cancún: Renta y Venta con Disponibilidad Real' : 'Listings in Cancún: Rent and Sale with Real Availability'}
+        schemaDescription={
+          isEs
+            ? 'Departamentos, locales, oficinas y bodegas en Cancún con disponibilidad real, en renta o en venta.'
+            : 'Apartments, retail spaces, offices and warehouses in Cancún with real availability, for rent or sale.'
+        }
+        breadcrumbLabel="Listings"
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
     </>
   );

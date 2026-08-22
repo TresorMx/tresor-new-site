@@ -65,6 +65,15 @@ export default async function LocalesComercialesPage({ params }: { params: Promi
         eyebrow={isEs ? 'Locales Comerciales' : 'Commercial Spaces'}
         title={isEs ? <>Invierte en <span className="text-ink-3">plazas de alto retorno</span></> : <>Invest in <span className="text-ink-3">high-return plazas</span></>}
         developments={developments}
+        schemaUrl={isEs ? 'https://www.tresor.mx/locales-comerciales' : 'https://www.tresor.mx/en/locales-comerciales'}
+        schemaName={isEs ? 'Locales Comerciales en Venta en Quintana Roo' : 'Commercial Space for Sale in Quintana Roo'}
+        schemaDescription={
+          isEs
+            ? 'Locales comerciales en preventa en plazas premium de Cancún. Alto retorno, ubicaciones estratégicas y desarrolladores con trayectoria comprobada.'
+            : 'Retail and commercial space for sale in premium Cancún shopping plazas. Strategic high-traffic locations from developers with a proven track record.'
+        }
+        breadcrumbLabel={isEs ? 'Locales Comerciales' : 'Commercial Spaces'}
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
 
       {/* Enlace jerárquico hub → ciudad, mismo patrón que /departamentos →

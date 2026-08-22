@@ -67,6 +67,15 @@ export default async function LiveDesarrollosPage({ params }: { params: Promise<
         title={isEs ? <>Proyectos de <span className="text-ink-3">{dev.name}</span></> : <>{dev.name} <span className="text-ink-3">Projects</span></>}
         developments={developments}
         showDeveloperFilter={false}
+        schemaUrl={isEs ? 'https://www.tresor.mx/live-desarrollos' : 'https://www.tresor.mx/en/live-desarrollos'}
+        schemaName={isEs ? `Desarrollos de ${dev.name}` : `${dev.name} Developments`}
+        schemaDescription={
+          isEs
+            ? (dev.credentials?.es ?? `Proyectos desarrollados por ${dev.name}.`)
+            : (dev.credentials?.en ?? dev.credentials?.es ?? `Projects developed by ${dev.name}.`)
+        }
+        breadcrumbLabel={dev.name}
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
     </>
   );

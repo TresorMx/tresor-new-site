@@ -140,6 +140,15 @@ export default async function DesarrollosPage({ params }: { params: Promise<{ lo
         showTypeFilter
         showDeveloperFilter
         showStatusFilter
+        schemaUrl={isEs ? URL_ES : URL_EN}
+        schemaName={isEs ? 'Desarrollos en Venta en Cancún y Quintana Roo' : 'Real Estate Developments in Cancún and Quintana Roo'}
+        schemaDescription={
+          isEs
+            ? 'Portafolio completo de desarrollos en venta en Cancún, Puerto Cancún, Playa del Carmen y Tulum: departamentos, locales comerciales y lotes residenciales, en preventa y entrega inmediata, de las desarrolladoras más sólidas de Quintana Roo.'
+            : 'The full portfolio of real estate developments for sale in Cancún, Puerto Cancún, Playa del Carmen and Tulum: condos, commercial units and residential lots, pre-construction and move-in ready, from the most established developers in Quintana Roo.'
+        }
+        breadcrumbLabel={isEs ? 'Desarrollos' : 'Developments'}
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
 
       {/* Por desarrolladora — además de repartir autoridad a las 3 páginas de

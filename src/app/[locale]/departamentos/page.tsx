@@ -66,6 +66,15 @@ export default async function DepartamentosPage({ params }: { params: Promise<{ 
         eyebrow={isEs ? 'Departamentos' : 'Condos'}
         title={isEs ? <>Encuentra tu <span className="text-ink-3">próximo hogar o inversión</span></> : <>Find your <span className="text-ink-3">next home or investment</span></>}
         developments={developments}
+        schemaUrl={isEs ? 'https://www.tresor.mx/departamentos' : 'https://www.tresor.mx/en/departamentos'}
+        schemaName={isEs ? 'Departamentos en Venta en la Riviera Maya y Quintana Roo' : 'Condos for Sale in the Riviera Maya and Quintana Roo'}
+        schemaDescription={
+          isEs
+            ? 'Departamentos en preventa y entrega inmediata en Cancún, Tulum, Playa del Carmen y Puerto Cancún. Inversión inmobiliaria con las desarrolladoras más sólidas de Quintana Roo.'
+            : "Browse condos for sale in Cancún, Tulum, Playa del Carmen and Puerto Cancún — pre-construction and move-in ready. Beachfront, marina and golf communities from Quintana Roo's most established developers."
+        }
+        breadcrumbLabel={isEs ? 'Departamentos' : 'Condos'}
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
 
       {/* Enlace jerárquico hub → ciudad. Es la mitad que faltaba del esquema

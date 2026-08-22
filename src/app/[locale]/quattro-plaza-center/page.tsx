@@ -74,6 +74,15 @@ export default async function QuattroPlazaCenterPage({ params }: { params: Promi
         title={isEs ? <>Proyectos de <span className="text-ink-3">Quattro Plaza Center</span></> : <>Quattro Plaza Center <span className="text-ink-3">Projects</span></>}
         developments={developments}
         showDeveloperFilter={false}
+        schemaUrl={isEs ? 'https://www.tresor.mx/quattro-plaza-center' : 'https://www.tresor.mx/en/quattro-plaza-center'}
+        schemaName={isEs ? 'Quattro Plaza Center — Locales Comerciales en Cancún' : 'Quattro Plaza Center — Commercial Spaces in Cancún'}
+        schemaDescription={
+          isEs
+            ? 'Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en Cancún: locales en preventa y entrega inmediata en zonas de alto crecimiento.'
+            : "Quattro Plaza Center, Tresor Real Estate's commercial plaza line in Cancún: pre-sale and immediate-delivery spaces in high-growth areas."
+        }
+        breadcrumbLabel="Quattro Plaza Center"
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
     </>
   );

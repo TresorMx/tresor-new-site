@@ -63,6 +63,15 @@ export default async function PlayaDelCarmenPage({ params }: { params: Promise<{
         eyebrow="Playa del Carmen"
         title={isEs ? <>Propiedades en <span className="text-ink-3">Playa del Carmen</span></> : <>Properties in <span className="text-ink-3">Playa del Carmen</span></>}
         developments={developments}
+        schemaUrl={isEs ? 'https://www.tresor.mx/playa-del-carmen' : 'https://www.tresor.mx/en/playa-del-carmen'}
+        schemaName={isEs ? 'Propiedades en Venta en Playa del Carmen' : 'Real Estate in Playa del Carmen, Mexico'}
+        schemaDescription={
+          isEs
+            ? 'Departamentos en preventa y entrega inmediata en Playa del Carmen, a pasos de la Quinta Avenida y el mar Caribe.'
+            : 'Pre-construction and move-in ready condos for sale in Playa del Carmen, steps from Fifth Avenue and the Caribbean Sea.'
+        }
+        breadcrumbLabel="Playa del Carmen"
+        locale={isEs ? 'es_MX' : 'en_US'}
       />
 
       {/* Enlace jerárquico hub → keyword específica. Esta página cubre TODOS
