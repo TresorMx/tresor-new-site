@@ -43,7 +43,7 @@ export default function AsesorDrive({
   gate?: ComponentType<{ children: ReactNode }>;
   fileEndpoint?: string;
 }) {
-  const mainItems = getDriveLayout(dev.developer, dev.type).filter((item) => dev.available[item.key]);
+  const mainItems = getDriveLayout(dev.developer, dev.type, dev.slug).filter((item) => dev.available[item.key]);
   const adminItems = dev.showAdmin ? getDriveAdminLayout(dev.developer).filter((item) => dev.available[item.key]) : [];
 
   return (

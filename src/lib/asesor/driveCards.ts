@@ -21,6 +21,7 @@ export interface DriveCard {
 export const DRIVE_CATALOG: Record<string, DriveCard> = {
   presentation:  { key: 'presentation',  label: 'Presentación',  desc: 'Pitch deck completo del proyecto', icon: FileText },
   priceList:     { key: 'priceList',     label: 'Lista de Precios', desc: 'Precios actualizados por nivel', icon: ClipboardList },
+  priceList2:    { key: 'priceList2',    label: 'Lista de Precios (2)', desc: 'Precios actualizados por nivel', icon: ClipboardList },
   masterPlan:    { key: 'masterPlan',    label: 'Master Plan',   desc: 'Distribución con cotas', icon: Layers },
   bankAccounts:  { key: 'bankAccounts',  label: 'Cuentas Bancarias', desc: 'Datos para depósito y SPEI', icon: Banknote },
   location:      { key: 'location',      label: 'Ubicación',     desc: 'Coordenadas, KML y entorno', icon: MapPin },
@@ -134,7 +135,45 @@ export const DRIVE_ADMIN_LAYOUTS: Record<string, DriveLayoutItem[]> = {
   ],
 };
 
-export function getDriveLayout(developerId: string, devType?: string): DriveLayoutItem[] {
+// Override por DESARROLLO (slug), no por desarrollador — para el caso raro
+// de un layout que no aplica a toda la línea de un Sales Partner, solo a un
+// proyecto puntual. Hoy solo Villalta: es el único desarrollo del catálogo
+// con dos torres (4 y 5) que manejan listas de precios distintas, así que
+// necesita DOS tiles de "Lista de Precios" en vez de uno. Se revisa ANTES
+// que DRIVE_LAYOUTS/ALL_ITEMS_LAYOUT en getDriveLayout, así que agregar una
+// entrada aquí no afecta a ningún otro desarrollo de Onix (Koa, Zienna,
+// Bardenna siguen cayendo en ALL_ITEMS_LAYOUT sin cambios). Si el día de
+// mañana otro desarrollo necesita algo similar, agrega su propia entrada acá
+// — no generalices esto a un mecanismo nuevo hasta que haga falta de verdad.
+const DRIVE_LAYOUT_OVERRIDES: Record<string, DriveLayoutItem[]> = {
+  'villalta-onix': [
+    { key: 'presentation' },
+    { key: 'priceList', label: 'Lista de Precios — Torre 4' },
+    { key: 'priceList2', label: 'Lista de Precios — Torre 5' },
+    { key: 'masterPlan' },
+    { key: 'bankAccounts' },
+    { key: 'location' },
+    { key: 'marketing' },
+    { key: 'developer' },
+    { key: 'renders' },
+    { key: 'amenities' },
+    { key: 'virtualTour' },
+    { key: 'floorPlans' },
+    { key: 'constructionProgress' },
+    { key: 'brochure' },
+    { key: 'prototypes' },
+    { key: 'individualFloorPlans' },
+    { key: 'multimedia' },
+    { key: 'finishesCatalog' },
+    { key: 'showUnit', excludeTypes: ['Lotes'] },
+    { key: 'videos' },
+    { key: 'quoter', fullWidth: true },
+  ],
+};
+
+export function getDriveLayout(developerId: string, devType?: string, slug?: string): DriveLayoutItem[] {
+  const override = slug ? DRIVE_LAYOUT_OVERRIDES[slug] : undefined;
+  if (override) return override.filter((item) => !item.excludeTypes?.includes(devType ?? ''));
   if (developerId === 'Tresor') return DRIVE_LAYOUTS.default;
   const base = DRIVE_LAYOUTS[developerId] ?? ALL_ITEMS_LAYOUT;
   const extra = UNIVERSAL_ITEMS.filter((u) => !base.some((b) => b.key === u.key));

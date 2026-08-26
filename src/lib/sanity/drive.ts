@@ -7,7 +7,7 @@ import { sanityClient } from './client';
 // amenidades de la ficha, 'floorPlans' es el array de tipologías) — se
 // traducen aquí, una sola vez.
 const DRIVE_DOC_KEYS = [
-  'presentation', 'priceList', 'masterPlan', 'bankAccounts', 'location',
+  'presentation', 'priceList', 'priceList2', 'masterPlan', 'bankAccounts', 'location',
   'marketing', 'developer', 'renders', 'receiptPay', 'receiptReserve',
   'checklist', 'offerLetter',
   'amenities', 'virtualTour', 'floorPlans', 'constructionProgress', 'quoter',

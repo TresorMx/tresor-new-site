@@ -10,6 +10,13 @@ import { defineField } from 'sanity';
 export const driveFields = [
   defineField({ name: 'presentation', title: 'Presentación', type: 'driveAsset', group: 'drive', description: 'Pitch deck completo del proyecto (PDF o liga).' }),
   defineField({ name: 'priceList', title: 'Lista de Precios', type: 'driveAsset', group: 'drive', description: 'Precios actualizados por nivel (PDF o liga).' }),
+  // Segunda lista de precios — hoy solo la usa Villalta (Torre 4 / Torre 5,
+  // cada torre con su propia lista). Campo genérico y compartido por el
+  // mismo motivo que el resto del schema: solo aparece en el Drive de un
+  // desarrollo si el layout de ESE desarrollo lo referencia (ver
+  // DRIVE_LAYOUT_OVERRIDES en src/lib/asesor/driveCards.ts) — para cualquier
+  // otro desarrollo, este campo puede quedar vacío sin que nada cambie.
+  defineField({ name: 'priceList2', title: 'Lista de Precios (2)', type: 'driveAsset', group: 'drive', description: 'Segunda lista de precios, para desarrollos con más de una torre/etapa con precios distintos (ej. Villalta). Déjalo vacío si el desarrollo tiene una sola lista.' }),
   defineField({ name: 'masterPlan', title: 'Master Plan', type: 'driveAsset', group: 'drive', description: 'Distribución con cotas (PDF o liga).' }),
   defineField({ name: 'bankAccounts', title: 'Cuentas Bancarias', type: 'driveAsset', group: 'drive', description: 'Datos para depósito y SPEI (PDF o liga). Sensible — solo asesores logueados pueden verlo.' }),
   defineField({ name: 'locationFile', title: 'Ubicación', type: 'driveAsset', group: 'drive', description: 'Coordenadas, KML, mapa del entorno o liga (ej. Google Maps).' }),
