@@ -77,6 +77,7 @@ const DATES = {
   blogBestAreasToBuyInCancun: '2026-08-07',
   blogClosingCosts: '2026-08-20',
   blogPreConstructionVsMoveInReady: '2026-08-20',
+  blogIsCancunGoodInvestment: '2026-08-28',
   // developments.ts es la fuente de TODO el catálogo estático (Tresor, Sales
   // Partner) — se usa como fecha de todas las fichas por igual. Es menos
   // preciso que una fecha por proyecto (no distingue "cambié el precio de
@@ -228,6 +229,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ['best-areas-to-buy-in-cancun', DATES.blogBestAreasToBuyInCancun],
     ['closing-costs-when-buying-property-in-mexico', DATES.blogClosingCosts],
     ['pre-construction-vs-move-in-ready-cancun', DATES.blogPreConstructionVsMoveInReady],
+    ['is-cancun-real-estate-a-good-investment', DATES.blogIsCancunGoodInvestment],
   ] as const;
 
   const blogRoutes: MetadataRoute.Sitemap = [

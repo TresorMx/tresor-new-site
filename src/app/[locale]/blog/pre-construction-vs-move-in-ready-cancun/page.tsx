@@ -73,7 +73,7 @@ const FAQS: EnFaq[] = [
 const RELATED: EnRelated[] = [
   { slug: 'buying-property-in-mexico-as-a-foreigner', title: 'Can Foreigners Buy Property in Mexico? The Complete 2026 Guide', img: '/desarrollos/Blume/BLUME-Drone-1.jpg' },
   { slug: 'closing-costs-when-buying-property-in-mexico', title: 'Closing Costs When Buying Property in Mexico: What to Budget For', img: '/blog/AdobeStock_887006964.jpeg' },
-  { slug: 'best-areas-to-buy-in-cancun', title: 'The Best Areas to Buy in Cancún: An Honest Comparison', img: '/desarrollos/villalta/portada3.jpg' },
+  { slug: 'is-cancun-real-estate-a-good-investment', title: 'Is Cancún Real Estate a Good Investment? Rental Yields, ROI and the Real Numbers', img: '/blog/AdobeStock_656227413.jpeg' },
 ];
 
 export default async function Page({ params }: { params: Promise<{ locale: string }> }) {
