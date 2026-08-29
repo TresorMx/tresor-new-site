@@ -22,7 +22,13 @@ const URL = `https://www.tresor.mx/en/blog/${SLUG}`;
 const TITLE = 'Is Cancún Real Estate a Good Investment? Rental Yields, ROI and the Real Numbers (2026)';
 const DESCRIPTION =
   'Public sources on Cancún rental yields disagree by a wide margin — occupancy estimates range from 36% to 57%, daily rates from $70 to $320. Here is why they diverge, and the actual formula to calculate your own return.';
-const HERO = '/blog/AdobeStock_656227413.jpeg';
+// Foto real de Blume (Puerto Cancún), no stock — las dos imágenes "sin usar"
+// de public/blog/ resultaron ser una farmacia y una cafetería genéricas al
+// verlas de verdad (nunca las había abierto, solo tomé el nombre de archivo
+// de una lista). Landscape real (1639×1092) para que la vista previa de
+// WhatsApp/Facebook no salga recortada rara, a diferencia de las aéreas de
+// Valmira disponibles, que son verticales.
+const HERO = '/desarrollos/Blume/BLUME-Drone-3.jpg';
 const DATE_ISO = '2026-08-28';
 const DATE_LABEL = 'August 28, 2026';
 
@@ -46,7 +52,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'article',
       publishedTime: DATE_ISO,
       locale: 'en_US',
-      images: [{ url: `https://www.tresor.mx${HERO}`, width: 1920, height: 1080 }],
+      images: [{ url: `https://www.tresor.mx${HERO}`, width: 1639, height: 1092 }],
     },
     twitter: { card: 'summary_large_image', title: TITLE, description: DESCRIPTION, images: [`https://www.tresor.mx${HERO}`] },
     robots: { index: true, follow: true },
@@ -98,7 +104,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
       description={DESCRIPTION}
       eyebrow="Investor's Guide"
       heroImage={HERO}
-      heroAlt="Beachfront condo towers in Cancún"
+      heroAlt="Aerial view of a marina residence and private marina in Puerto Cancún"
       dateIso={DATE_ISO}
       dateLabel={DATE_LABEL}
       readTime="9 min"

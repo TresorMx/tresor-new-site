@@ -73,7 +73,7 @@ export default function BlogArticlesGrid({
                 <div className="flex items-center gap-2 text-xs text-ink-3">
                   <span>{article.date}</span>
                   <span>·</span>
-                  <span>{article.readTime} de lectura</span>
+                  <span>{article.readTime} {isEs ? 'de lectura' : 'read'}</span>
                 </div>
                 <h2 className="mt-3 font-sans text-[clamp(18px,1.8vw,28px)] font-medium leading-[1.15] text-ink">
                   <Link href={`${basePath}/${article.slug}`} className="hover:text-accent transition-colors">

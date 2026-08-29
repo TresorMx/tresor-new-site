@@ -176,6 +176,15 @@ const articlesEs = [
 // extranjero, que son otras.
 const articlesEn = [
   {
+    slug: 'is-cancun-real-estate-a-good-investment',
+    title: 'Is Cancún Real Estate a Good Investment? Rental Yields, ROI and the Real Numbers (2026)',
+    description:
+      'Public sources on Cancún rental yields disagree by a wide margin. Here is why they diverge, and the actual formula to calculate your own return.',
+    image: '/desarrollos/Blume/BLUME-Drone-3.jpg',
+    readTime: '9 min',
+    date: 'August 28, 2026',
+  },
+  {
     slug: 'buying-property-in-mexico-as-a-foreigner',
     title: 'Can Foreigners Buy Property in Mexico? The Complete 2026 Guide',
     description:
