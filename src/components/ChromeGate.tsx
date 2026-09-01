@@ -18,6 +18,7 @@ const LANDINGS = [
   '/departamentos-en-cancun-loreta', // Loreta Wow Condos (Meta + Google Ads)
   '/lausana-residencial-cancun',   // Olivia + Loreta juntos (Meta + Google Ads)
   '/locales-quattro-plaza-center', // Quattro Gardens + Long Island juntos (Google Ads)
+  '/departamentos-en-cancun-koa',  // Koa (Onix) — entrega inmediata (Google Ads)
 ];
 
 export default function ChromeGate({
