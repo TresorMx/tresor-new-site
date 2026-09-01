@@ -5,7 +5,7 @@ const OG = '/renders/long-island/02.jpg';
 
 const TITLE = 'Quattro Plaza Center — Locales Comerciales en Cancún';
 const DESCRIPTION =
-  'Locales comerciales en preventa desde $1,968,600 MXN + IVA en Av. Huayacán, Cancún. Quattro Gardens y Quattro Long Island, las dos plazas comerciales de Tresor Real Estate.';
+  'Locales comerciales en preventa desde $1,968,600 MXN + IVA en las mejores ubicaciones de Cancún. Quattro Gardens y Quattro Long Island, las dos plazas comerciales de Tresor Real Estate.';
 
 // noindex a propósito, mismo criterio que las demás landings de campaña
 // (Lausana, Portafolio, Loreta, Valmira): esta página es para tráfico

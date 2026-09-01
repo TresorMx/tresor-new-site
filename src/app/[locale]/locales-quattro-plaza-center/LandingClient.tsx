@@ -80,14 +80,16 @@ export default function QuattroPlazaCenterLanding({ gardens, longIsland }: { gar
 
   // Cifras reales del catálogo — nada inventado (sin promo de enganche/
   // descuento ni monto de apartado: Quattro no tiene ninguno confirmado hoy,
-  // a diferencia de Lausana). 3 columnas, no 4, por la misma razón: no hay
-  // un cuarto dato real que agregar sin forzarlo.
+  // a diferencia de Lausana). Sin cifra de zona/ubicación a propósito: el
+  // usuario reportó que el campo `zone` del catálogo ("Av. Huayacán") NO es
+  // la ubicación real de Gardens/Long Island — se retiró de toda la landing
+  // en vez de mostrar un dato incorrecto. Ver nota en page.tsx.
   const primeraEntrega = [gardens.deliveryWindow, longIsland.deliveryWindow]
     .filter((d): d is string => Boolean(d))
     .sort()[0];
   const CIFRAS = [
     { value: '2', label: 'Plazas en preventa' },
-    { value: gardens.zone ?? 'Cancún', label: 'Misma zona, dos plazas' },
+    { value: 'Cancún', label: 'Mejores ubicaciones de la ciudad' },
     ...(primeraEntrega ? [{ value: primeraEntrega, label: 'Primera entrega' }] : []),
   ];
 
@@ -151,17 +153,17 @@ export default function QuattroPlazaCenterLanding({ gardens, longIsland }: { gar
             </p>
 
             <h1 className="mt-5 h-display text-[clamp(30px,4.6vw,58px)] text-white">
-              Invierte en locales comerciales <span className="italic text-accent">en la zona de mayor crecimiento</span> de Cancún
+              Invierte en locales comerciales <span className="italic text-accent">en las mejores ubicaciones</span> de Cancún
             </h1>
 
             <p className="mx-auto mt-6 max-w-xl text-[15px] font-light leading-relaxed text-white/75 lg:mx-0 lg:text-[16px]">
-              Quattro Gardens y Quattro Long Island, dos plazas comerciales en preventa sobre
-              Av. Huayacán — locales para negocio propio o para renta, con las marcas y servicios
-              que ya buscan los vecinos de la zona.
+              Quattro Gardens y Quattro Long Island, dos plazas comerciales en preventa en las
+              zonas de mayor dinamismo y crecimiento de la ciudad — locales para negocio propio o
+              para renta, con las marcas y servicios que ya buscan los vecinos de cada zona.
             </p>
 
             <div className="mt-7 flex flex-wrap justify-center gap-2 lg:justify-start">
-              {['Av. Huayacán, Cancún', 'Tresor Real Estate', '2 plazas en preventa'].map((g) => (
+              {['Mejores ubicaciones de Cancún', 'Tresor Real Estate', '2 plazas en preventa'].map((g) => (
                 <span key={g} className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-white/15 bg-white/[0.07] px-3.5 py-1.5 text-[11px] font-medium text-white/90 backdrop-blur-md lg:text-[12px]">
                   <Check size={12} strokeWidth={3} className="text-accent" /> {g}
                 </span>
@@ -205,12 +207,11 @@ export default function QuattroPlazaCenterLanding({ gardens, longIsland }: { gar
           <RevealOnScroll className="max-w-2xl">
             <span className="eyebrow eyebrow-accent font-bold">— Las plazas</span>
             <h2 className="mt-4 font-sans text-[clamp(24px,3.2vw,48px)] font-normal leading-[1.05] tracking-tight text-ink">
-              Dos preventas <span className="text-ink-3">sobre Av. Huayacán</span>
+              Dos preventas <span className="text-ink-3">en las mejores ubicaciones de Cancún</span>
             </h2>
             <p className="mt-5 text-[15px] font-light leading-relaxed text-ink-2">
-              Mismo desarrollador, misma zona, dos plazas con marcas y giros distintos. Elige la
-              que te interese y un asesor te contacta con locales disponibles y planes de pago
-              reales.
+              Mismo desarrollador, dos plazas con marcas y giros distintos. Elige la que te
+              interese y un asesor te contacta con locales disponibles y planes de pago reales.
             </p>
           </RevealOnScroll>
 
@@ -317,7 +318,10 @@ export default function QuattroPlazaCenterLanding({ gardens, longIsland }: { gar
    Island no tienen esos campos cargados en el catálogo, y `phases` sí
    describe algo real y verificable (las marcas/etapas de cada plaza). */
 function ProjectCard({ dev, image, onPick }: { dev: Development; image: string; onPick: () => void }) {
-  const location = `${dev.zone ? `${dev.zone}, ` : ''}${dev.city}`;
+  // Sin `dev.zone` a propósito: el usuario reportó que ese campo del
+  // catálogo ("Av. Huayacán") no es la ubicación real — solo se muestra la
+  // ciudad, que sí es correcta.
+  const location = dev.city;
 
   return (
     <div className="flex h-full flex-col gap-3 rounded-[28px] bg-white p-3">
