@@ -177,7 +177,11 @@ export default function MasterPlan({ plaza, showAgendaWidget = false, isAsesor =
                   {renderDynamicSpecs(plaza.unitSpecsTemplate, selected.specs)}
                   <Spec label={t('level')} value={`${t('level')} ${selected.level}`} />
                   {selected.delivery && <Spec label="Entrega" value={selected.delivery} />}
-                  {selected.price && (
+                  {/* Solo se muestra el precio si el local sigue disponible —
+                      un local apartado/vendido/bloqueado no debe mostrar un
+                      precio que ya no aplica (bug reportado: seguía
+                      apareciendo el precio de locales apartados). */}
+                  {selected.status === 'disponible' && selected.price && (
                     <Spec label="Precio + IVA" value={formatMXN(selected.price)} highlight />
                   )}
                 </div>
@@ -254,7 +258,9 @@ export default function MasterPlan({ plaza, showAgendaWidget = false, isAsesor =
                         <span className="text-[12px] text-ink-3">{primarySpec(plaza.unitSpecsTemplate, u.specs)}</span>
                       </div>
                       <div className="flex items-center gap-3">
-                        {u.price && (
+                        {/* Mismo criterio que el panel de detalle: sin precio
+                            si el local no está disponible. */}
+                        {u.status === 'disponible' && u.price && (
                           <span className="text-[12px] tabular-nums text-ink-2">
                             {formatMXN(u.price)}
                           </span>
