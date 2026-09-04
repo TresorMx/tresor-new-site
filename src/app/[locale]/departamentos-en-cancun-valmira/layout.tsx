@@ -14,7 +14,7 @@ const URL = 'https://www.tresor.mx/departamentos-en-cancun-valmira';
 export const metadata: Metadata = {
   title: { absolute: 'Valmira — Departamentos con Entrega Inmediata en Cancún' },
   description:
-    'Departamentos equipados de 2 y 3 recámaras en Cancún con entrega inmediata y 0% de enganche. Desde $2,595,000 MXN sobre Av. Huayacán, en la comunidad Gran Vía. Agenda tu visita.',
+    'Departamentos equipados de 2 y 3 recámaras en Cancún con entrega inmediata y 0% de enganche. Desde $2,690,000 MXN sobre Av. Huayacán, en la comunidad Gran Vía. Agenda tu visita.',
   keywords: [
     'valmira urban homes',
     'departamentos en cancun entrega inmediata',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Valmira — Departamentos con Entrega Inmediata en Cancún',
     description:
-      'Departamentos equipados de 2 y 3 recámaras en Cancún. Entrega inmediata, 0% de enganche, desde $2,595,000 MXN. Urban Homes en Gran Vía, Av. Huayacán.',
+      'Departamentos equipados de 2 y 3 recámaras en Cancún. Entrega inmediata, 0% de enganche, desde $2,690,000 MXN. Urban Homes en Gran Vía, Av. Huayacán.',
     url: URL,
     images: [{ url: '/og/valmira.jpg', width: 1200, height: 630 }],
     locale: 'es_MX',
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Valmira — Departamentos con Entrega Inmediata en Cancún',
     description:
-      'Departamentos equipados de 2 y 3 recámaras en Cancún. Entrega inmediata, 0% de enganche, desde $2,595,000 MXN.',
+      'Departamentos equipados de 2 y 3 recámaras en Cancún. Entrega inmediata, 0% de enganche, desde $2,690,000 MXN.',
     images: ['/og/valmira.jpg'],
   },
 };

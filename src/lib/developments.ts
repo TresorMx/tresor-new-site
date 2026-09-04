@@ -1623,8 +1623,8 @@ export const developments: Development[] = [
     logo: '/desarrollos/Valmira/logovalmira.svg',
     badge: 'Entrega inmediata',
     propertyType: 'Departamento',
-    priceLabel: 'Desde $2,595,000 MXN',
-    priceLabelEn: 'From $2,595,000 MXN',
+    priceLabel: 'Desde $2,690,000 MXN',
+    priceLabelEn: 'From $2,690,000 MXN',
     description:
       'Departamentos de lujo de 2 y 3 recámaras sobre Av. Huayacán, dentro de la exclusiva comunidad Gran Vía, en una zona de alta plusvalía de Cancún.',
     descriptionEn:

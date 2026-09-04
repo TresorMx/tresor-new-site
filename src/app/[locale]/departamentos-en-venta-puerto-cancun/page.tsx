@@ -96,7 +96,7 @@ const ZONAS: DeptosZona[] = [
 const FAQS: DeptosFaq[] = [
   {
     q: '¿Cuánto cuesta un departamento en Puerto Cancún?',
-    a: 'Es el segmento más alto de la ciudad. En nuestro portafolio actual las residencias en Puerto Cancún arrancan en $15,289,000 MXN y superan los $19,000,000 MXN según el desarrollo, la torre, el piso y la superficie. Para dimensionarlo: un departamento en un corredor residencial de Cancún arranca alrededor de $2,595,000 MXN. Precios sujetos a cambio sin previo aviso.',
+    a: 'Es el segmento más alto de la ciudad. En nuestro portafolio actual las residencias en Puerto Cancún arrancan en $15,289,000 MXN y superan los $19,000,000 MXN según el desarrollo, la torre, el piso y la superficie. Para dimensionarlo: un departamento en un corredor residencial de Cancún arranca alrededor de $2,690,000 MXN. Precios sujetos a cambio sin previo aviso.',
   },
   {
     q: '¿Por qué Puerto Cancún es más caro que el resto de Cancún?',
@@ -166,7 +166,7 @@ export default async function DepartamentosEnVentaPuertoCancunPage({
       introTitleMuted="alrededor de una marina y un campo de golf"
       introBody={[
         'Puerto Cancún no es una colonia más ni un fraccionamiento cerrado: es un polígono de 327 hectáreas planeado desde cero por FONATUR, entre el centro de la ciudad y el arranque de la Zona Hotelera. Marina privada, campo de golf de 18 hoyos, club de playa y plaza comercial detrás de un solo acceso controlado.',
-        'El costo de eso es el precio. Es el segmento premium del mercado local: las residencias aquí arrancan alrededor de $15,289,000 MXN, contra unos $2,595,000 MXN por un departamento en uno de los corredores en crecimiento de la ciudad. Estás pagando el enclave, el frente de agua y la escasez de suelo dentro de él.',
+        'El costo de eso es el precio. Es el segmento premium del mercado local: las residencias aquí arrancan alrededor de $15,289,000 MXN, contra unos $2,690,000 MXN por un departamento en uno de los corredores en crecimiento de la ciudad. Estás pagando el enclave, el frente de agua y la escasez de suelo dentro de él.',
         'Como el inventario es reducido y está concentrado en pocas torres, la disponibilidad por tipología cambia rápido. Lo que ves abajo es lo que está realmente abierto hoy: si un plano no aparece, es porque ya se vendió.',
       ]}
       zonas={ZONAS}

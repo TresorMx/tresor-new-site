@@ -34,7 +34,7 @@ const TIPOLOGIAS = [
   {
     id: '2rec',
     label: '2 Recámaras',
-    price: 'Desde $2,595,000 MXN',
+    price: 'Desde $2,690,000 MXN',
     image: '/desarrollos/Valmira/floor-plans/2rec.webp',
     matterport: 'https://my.matterport.com/show/?m=nVe4hfX2hZw',
     specs: [
@@ -74,7 +74,7 @@ const UBICACION = [
 ];
 
 const FAQS = [
-  { q: '¿Cuánto cuesta un departamento en Valmira, Cancún?', a: 'Los departamentos en Valmira tienen precio desde $2,595,000 MXN para la tipología de 2 recámaras (87 m²). La tipología de 3 recámaras es de 109 m². Precios y condiciones de pago sujetos a cambio sin previo aviso; un asesor te confirma el precio y plan de pago vigente.' },
+  { q: '¿Cuánto cuesta un departamento en Valmira, Cancún?', a: 'Los departamentos en Valmira tienen precio desde $2,690,000 MXN para la tipología de 2 recámaras (87 m²). La tipología de 3 recámaras es de 109 m². Precios y condiciones de pago sujetos a cambio sin previo aviso; un asesor te confirma el precio y plan de pago vigente.' },
   { q: '¿Los departamentos son de entrega inmediata?', a: 'Sí. Valmira es un desarrollo de entrega inmediata: los departamentos están listos para habitar o rentar desde el primer día, sin esperar a que termine la construcción.' },
   { q: '¿Los departamentos vienen equipados?', a: 'Sí. Cada departamento incluye cocina integral equipada, walk-in closet y acabados premium importados, pensados para mudarte o rentar de inmediato.' },
   { q: '¿Dónde está ubicado Valmira?', a: 'Valmira está sobre Av. Huayacán, dentro de la comunidad privada Gran Vía, una de las zonas de mayor plusvalía de Cancún — a 12 minutos del aeropuerto y a 9 minutos de la estación del Tren Maya.' },
@@ -97,7 +97,7 @@ const JSONLD = {
     {
       '@type': 'Offer',
       name: 'Departamentos en venta en Cancún — Valmira',
-      price: 2595000,
+      price: 2690000,
       priceCurrency: 'MXN',
       availability: 'https://schema.org/InStock',
       url: 'https://www.tresor.mx/departamentos-en-cancun-valmira',
@@ -210,7 +210,7 @@ export default function ValmiraLanding() {
 
             <div className="mt-6 flex items-end justify-center gap-3 md:mt-7 md:justify-start">
               <span className="text-[12px] font-medium uppercase tracking-caps text-white/60 md:text-[13px]">Desde</span>
-              <span className="h-display text-[clamp(24px,3.4vw,40px)] text-white leading-none">$2,595,000 MXN</span>
+              <span className="h-display text-[clamp(24px,3.4vw,40px)] text-white leading-none">$2,690,000 MXN</span>
             </div>
             <p className="mt-2 text-[13px] font-light text-white/70 md:text-[14px]">
               2 y 3 recámaras · desde 87 m²

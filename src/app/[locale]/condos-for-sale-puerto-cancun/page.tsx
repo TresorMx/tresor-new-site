@@ -118,7 +118,7 @@ export default async function CondosForSalePuertoCancunPage({ params }: { params
       introTitleMuted="wrapped around a marina and a golf course"
       introBody={[
         'Puerto Cancún is the closest thing Cancún has to a self-contained address. Built by FONATUR on 808 acres between downtown and the Hotel Zone, it puts an 18-hole golf course, a working marina, a beach club and a luxury mall behind one controlled entrance — which is why it attracts second-home buyers rather than short-stay tourists.',
-        'The trade-off is price. This is the premium tier of the local market: residences here start around $15,289,000 MXN, against roughly $2,595,000 MXN for a condo in one of the city\'s growing inland corridors. You are paying for the enclave, the water frontage and the scarcity of land inside it.',
+        'The trade-off is price. This is the premium tier of the local market: residences here start around $15,289,000 MXN, against roughly $2,690,000 MXN for a condo in one of the city\'s growing inland corridors. You are paying for the enclave, the water frontage and the scarcity of land inside it.',
         'Because inventory is small and concentrated in a handful of towers, availability by floor plan changes quickly. The list below is what is actually open right now — if a layout is not showing, it is because it is gone.',
       ]}
       faqs={FAQS}

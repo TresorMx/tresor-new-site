@@ -24,7 +24,7 @@ const URL_ES = 'https://www.tresor.mx/departamentos-en-venta-cancun';
 
 const TITLE = 'Condos for Sale in Cancún, Mexico — Prices & Availability';
 const DESCRIPTION =
-  'Browse condos for sale in Cancún from $2,595,000 MXN. Pre-construction and move-in ready units from established developers, plus a plain-English guide to how foreigners buy property in Mexico.';
+  'Browse condos for sale in Cancún from $2,690,000 MXN. Pre-construction and move-in ready units from established developers, plus a plain-English guide to how foreigners buy property in Mexico.';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -67,7 +67,7 @@ const FAQS: CondosFaq[] = [
   },
   {
     q: 'How much does a condo in Cancún cost?',
-    a: 'In our current portfolio, condos in Cancún start at $2,595,000 MXN and run up to well over $19,000,000 MXN for marina-front residences in Puerto Cancún. Price depends mostly on zone, size and delivery date. The USD equivalent moves with the exchange rate, so ask an advisor for the figure on the day you are comparing.',
+    a: 'In our current portfolio, condos in Cancún start at $2,690,000 MXN and run up to well over $19,000,000 MXN for marina-front residences in Puerto Cancún. Price depends mostly on zone, size and delivery date. The USD equivalent moves with the exchange rate, so ask an advisor for the figure on the day you are comparing.',
   },
   {
     q: 'What are the closing costs when buying in Mexico?',
@@ -128,7 +128,7 @@ export default async function CondosForSaleCancunPage({ params }: { params: Prom
       introTitleMuted="keep choosing Cancún"
       introBody={[
         'Cancún is not a single market. The Hotel Zone lives off tourism and short-term rental demand; Puerto Cancún is a gated golf-and-marina community aimed at second homes; and inland corridors like Av. Huayacán and Vía Cumbres are where the city itself is actually growing, with schools, hospitals and shopping following the new housing.',
-        'That mix is what makes the city work for very different budgets. In our current portfolio a condo in a growing residential corridor starts around $2,595,000 MXN, while marina-front residences in Puerto Cancún run into the tens of millions. Same city, very different products.',
+        'That mix is what makes the city work for very different budgets. In our current portfolio a condo in a growing residential corridor starts around $2,690,000 MXN, while marina-front residences in Puerto Cancún run into the tens of millions. Same city, very different products.',
         'What almost every foreign buyer underestimates is the process, not the price. Owning near the coast in Mexico means a bank trust, a notary, and a closing that looks nothing like a US escrow. That is the part we walk you through below — and the part an advisor should be able to explain before you put money down.',
       ]}
       faqs={FAQS}

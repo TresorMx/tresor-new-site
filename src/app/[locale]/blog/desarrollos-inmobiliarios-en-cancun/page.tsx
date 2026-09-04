@@ -131,7 +131,7 @@ const featured = [
     img: '/desarrollos/Valmira/portadaValmira.jpg',
     developer: 'Urban Homes',
     tag: 'Residencial · Entrega inmediata',
-    price: 'Desde $2,595,000 MXN',
+    price: 'Desde $2,690,000 MXN',
     detail: 'Vivienda de entrega inmediata de Urban Homes en Cancún, lista para escriturar',
   },
   {

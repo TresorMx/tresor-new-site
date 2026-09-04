@@ -220,7 +220,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         </table>
       </div>
       <p className={P}>
-        Against a current entry-tier Cancún condo — Valmira, from $2,595,000 MXN — that is roughly a 3.7x
+        Against a current entry-tier Cancún condo — Valmira, from $2,690,000 MXN — that is roughly a 3.7x
         difference in implied gross income depending on which published source you happened to read,
         before a single dollar of management fees or HOA is subtracted. That gap is the whole point: it
         is why we are not going to hand you a single percentage and ask you to trust it. Run the math on

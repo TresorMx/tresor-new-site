@@ -51,7 +51,7 @@ const FAQS: EnFaq[] = [
   },
   {
     q: 'Which area is cheapest to buy into?',
-    a: 'The inland residential corridors. In our current portfolio, condos on Av. Huayacán start around $2,595,000 MXN and in Lausana around $2,613,000 MXN, against roughly $15,289,000 MXN for the entry point in Puerto Cancún.',
+    a: 'The inland residential corridors. In our current portfolio, condos on Av. Huayacán start around $2,690,000 MXN and in Lausana around $2,613,000 MXN, against roughly $15,289,000 MXN for the entry point in Puerto Cancún.',
   },
   {
     q: 'Which area is best for rental income?',
@@ -127,7 +127,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
             {[
               ['Puerto Cancún', 'from ~$15,289,000 MXN', 'Second home, marina and golf lifestyle, scarcity'],
               ['Hotel Zone', 'from ~$5,000,000 MXN', 'Beach access and vacation-rental demand'],
-              ['Av. Huayacán', 'from ~$2,595,000 MXN', 'Lowest entry price, city growth corridor'],
+              ['Av. Huayacán', 'from ~$2,690,000 MXN', 'Lowest entry price, city growth corridor'],
               ['Vía Cumbres', 'from ~$3,500,000 MXN', 'Planned community, families, airport access'],
               ['Lausana', 'from ~$2,613,000 MXN', 'Golf-course views at a mid-market price'],
             ].map(([area, price, best]) => (
@@ -193,7 +193,7 @@ export default async function Page({ params }: { params: Promise<{ locale: strin
         is what turns a corridor into a neighbourhood.
       </p>
       <p className={P}>
-        This is where entry prices are lowest — condos start around $2,595,000 MXN in our current
+        This is where entry prices are lowest — condos start around $2,690,000 MXN in our current
         portfolio. You are not buying beach proximity here; you are buying into the part of the city
         that is being built out.
       </p>

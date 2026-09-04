@@ -132,7 +132,7 @@ export default function ArticlePage() {
                 </tr>
                 <tr>
                   <td className="py-3 pr-4 font-semibold text-ink">Av. Huayacán</td>
-                  <td className="py-3 pr-4">Desde $2,595,000 MXN</td>
+                  <td className="py-3 pr-4">Desde $2,690,000 MXN</td>
                   <td className="py-3 pr-4">Vivienda propia, renta de largo plazo, primer patrimonio</td>
                   <td className="py-3">La zona de mayor crecimiento y oferta de la ciudad</td>
                 </tr>
@@ -190,7 +190,7 @@ export default function ArticlePage() {
               <p className="text-sm text-ink-2 mb-2">Urban Homes · Entrega inmediata</p>
               <ul className="space-y-1 text-sm text-ink-2">
                 <li>Departamentos de lujo de 2 y 3 recámaras</li>
-                <li>Desde $2,595,000 MXN</li>
+                <li>Desde $2,690,000 MXN</li>
                 <li>Dentro de la comunidad Gran Vía</li>
               </ul>
             </div>
@@ -252,7 +252,7 @@ export default function ArticlePage() {
           <div className="space-y-4 mb-10">
             {[
               { q: '¿Cuál zona de Cancún tiene mejor plusvalía?', a: 'Puerto Cancún tiene la plusvalía histórica más alta por su acceso restringido y oferta limitada. La Zona Hotelera le sigue de cerca por la misma razón: terreno disponible casi nulo. Av. Huayacán tiene menor precio base pero mayor proyección de crecimiento porcentual, al ser una zona todavía en expansión.' },
-              { q: '¿Es más barato comprar departamento en Av. Huayacán que en la Zona Hotelera?', a: 'Sí, considerablemente. El precio de entrada en Av. Huayacán arranca desde $2,595,000 MXN, frente a $5,000,000 MXN en la Zona Hotelera y $15,289,000 MXN en Puerto Cancún.' },
+              { q: '¿Es más barato comprar departamento en Av. Huayacán que en la Zona Hotelera?', a: 'Sí, considerablemente. El precio de entrada en Av. Huayacán arranca desde $2,690,000 MXN, frente a $5,000,000 MXN en la Zona Hotelera y $15,289,000 MXN en Puerto Cancún.' },
               { q: '¿Qué zona conviene más para renta vacacional en plataformas como Airbnb?', a: 'La Zona Hotelera y Puerto Cancún tienen la demanda turística más consistente por cercanía directa a playa. Av. Huayacán funciona mejor para renta residencial de largo plazo que para renta vacacional de corto plazo.' },
             ].map((item, i) => (
               <div key={i} className="p-4 bg-bg-soft rounded-xl border border-line">

@@ -30,7 +30,7 @@ const URL_ES = `https://www.tresor.mx${PATH}`;
 
 const TITLE = 'Departamentos en Venta en Cancún — Precios y Disponibilidad';
 const DESCRIPTION =
-  'Departamentos en venta en Cancún desde $2,595,000 MXN. Preventa y entrega inmediata en Av. Huayacán, Vía Cumbres, Lausana, Zona Hotelera y Puerto Cancún — precio directo del desarrollador.';
+  'Departamentos en venta en Cancún desde $2,690,000 MXN. Preventa y entrega inmediata en Av. Huayacán, Vía Cumbres, Lausana, Zona Hotelera y Puerto Cancún — precio directo del desarrollador.';
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -106,7 +106,7 @@ const ZONAS: DeptosZona[] = [
 const FAQS: DeptosFaq[] = [
   {
     q: '¿Cuánto cuesta un departamento en Cancún?',
-    a: 'En nuestro portafolio actual los departamentos en Cancún van desde $2,595,000 MXN, sobre Av. Huayacán, hasta más de $19,000,000 MXN para residencias frente a la marina en Puerto Cancún. El precio depende sobre todo de la zona, la superficie y la fecha de entrega. Precios sujetos a cambio sin previo aviso; un asesor te confirma el vigente.',
+    a: 'En nuestro portafolio actual los departamentos en Cancún van desde $2,690,000 MXN, sobre Av. Huayacán, hasta más de $19,000,000 MXN para residencias frente a la marina en Puerto Cancún. El precio depende sobre todo de la zona, la superficie y la fecha de entrega. Precios sujetos a cambio sin previo aviso; un asesor te confirma el vigente.',
   },
   {
     q: '¿Cuál es el enganche para comprar en preventa?',
@@ -179,7 +179,7 @@ export default async function DepartamentosEnVentaCancunPage({
       introTitleMuted="y el precio lo demuestra"
       introBody={[
         'La Zona Hotelera vive del turismo y de la renta vacacional; Puerto Cancún es una comunidad privada con marina y golf pensada como segunda casa; y los corredores tierra adentro —Av. Huayacán, Vía Cumbres, Lausana— son donde la ciudad realmente está creciendo, con escuelas, hospitales y plazas siguiendo a la vivienda nueva.',
-        'Esa mezcla es lo que hace que la misma ciudad funcione para presupuestos muy distintos. En nuestro portafolio actual un departamento en un corredor residencial en crecimiento arranca en $2,595,000 MXN, mientras que una residencia frente a la marina en Puerto Cancún supera los $19,000,000 MXN. Misma ciudad, productos completamente distintos.',
+        'Esa mezcla es lo que hace que la misma ciudad funcione para presupuestos muy distintos. En nuestro portafolio actual un departamento en un corredor residencial en crecimiento arranca en $2,690,000 MXN, mientras que una residencia frente a la marina en Puerto Cancún supera los $19,000,000 MXN. Misma ciudad, productos completamente distintos.',
         'Lo que casi nadie compara bien no es el precio por metro cuadrado, sino qué tan avanzado está el desarrollo y quién lo construye. Por eso aquí solo listamos desarrollos activos de desarrolladoras que ya entregaron proyectos en Quintana Roo, con disponibilidad real: si una unidad ya se vendió, no aparece.',
       ]}
       zonas={ZONAS}
