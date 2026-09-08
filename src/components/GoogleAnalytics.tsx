@@ -1,5 +1,11 @@
 const GA_ID  = 'G-14BFY19YM5';
 const ADS_ID = 'AW-17453917774';
+// Cuenta nueva de Google Ads del usuario, separada de ADS_ID (la de
+// siempre). Mismo patrón: un config más sobre el MISMO gtag.js ya cargado,
+// no un segundo <script src="gtag/js?id=...">. Cargar gtag.js dos veces
+// duplicaría el problema de ancho de banda que ya arreglamos en el LCP
+// móvil (ver el comentario de fetchPriority más abajo).
+const ADS_ID_2 = 'AW-10881048611';
 
 // SIN next/script: `strategy="afterInteractive"` inyecta el <script> vía JS
 // después de hidratar — nunca aparece como <script> literal en el HTML que
@@ -29,6 +35,7 @@ export default function GoogleAnalytics() {
             gtag('js', new Date());
             gtag('config', '${GA_ID}');
             gtag('config', '${ADS_ID}');
+            gtag('config', '${ADS_ID_2}');
           `,
         }}
       />
