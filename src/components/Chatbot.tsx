@@ -94,7 +94,7 @@ export default function Chatbot({ devSlug, landing = false }: { devSlug?: string
       const data = await res.json().catch(() => ({}));
       if (data.contactId) setContactId(data.contactId);
       if (typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'conversion', { send_to: 'AW-17453917774/wazACPXDnMQcEM7M1oJB' });
+        (window as any).gtag('event', 'conversion', { send_to: 'AW-10881048611/VmRlCN-1_PAcEKPAvsQo' });
       }
     } catch {}
     const firstName = leadForm.fullName.split(' ')[0];

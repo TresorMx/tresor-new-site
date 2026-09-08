@@ -12,7 +12,7 @@ export default function ValmiraGracias() {
   // esta página (a la que solo se llega tras enviar el formulario).
   useEffect(() => {
     if (typeof (window as any).gtag === 'function') {
-      (window as any).gtag('event', 'conversion', { send_to: 'AW-17453917774/wazACPXDnMQcEM7M1oJB' });
+      (window as any).gtag('event', 'conversion', { send_to: 'AW-10881048611/VmRlCN-1_PAcEKPAvsQo' });
     }
     if (typeof (window as any).fbq === 'function') {
       (window as any).fbq('track', 'Lead', { content_name: 'Valmira Landing', content_category: 'ads' });

@@ -74,7 +74,7 @@ export default function AgendaPage() {
       if (!res.ok) throw new Error(t('errorMsg'));
       const { id } = await res.json();
       if (typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'conversion', { send_to: 'AW-17453917774/wazACPXDnMQcEM7M1oJB' });
+        (window as any).gtag('event', 'conversion', { send_to: 'AW-10881048611/VmRlCN-1_PAcEKPAvsQo' });
       }
       router.push(`/agenda/gracias?id=${id}&mode=${form.mode}&date=${form.date}&time=${form.time}&name=${encodeURIComponent(form.firstName)}&interest=${form.interest}`);
     } catch (e: any) {

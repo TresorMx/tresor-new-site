@@ -17,7 +17,7 @@ export default function LausanaGracias() {
   // label aquí — no se puede hacer desde el código.
   useEffect(() => {
     if (typeof (window as any).gtag === 'function') {
-      (window as any).gtag('event', 'conversion', { send_to: 'AW-17453917774/wazACPXDnMQcEM7M1oJB' });
+      (window as any).gtag('event', 'conversion', { send_to: 'AW-10881048611/VmRlCN-1_PAcEKPAvsQo' });
     }
     if (typeof (window as any).fbq === 'function') {
       (window as any).fbq('track', 'Lead', { content_name: 'Lausana Residencial Landing', content_category: 'ads' });

@@ -132,7 +132,7 @@ export default function InvertirEnCancun() {
       });
       if (!res.ok) throw new Error('Error');
       if (typeof (window as any).gtag === 'function') {
-        (window as any).gtag('event', 'conversion', { send_to: 'AW-17453917774/wazACPXDnMQcEM7M1oJB' });
+        (window as any).gtag('event', 'conversion', { send_to: 'AW-10881048611/VmRlCN-1_PAcEKPAvsQo' });
       }
       if (typeof window.fbq === 'function') {
         window.fbq('track', 'Lead', { content_name: 'Invertir en Cancún', content_category: 'seo' });
