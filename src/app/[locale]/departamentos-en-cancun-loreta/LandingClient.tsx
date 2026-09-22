@@ -58,7 +58,7 @@ const TOUR_URL = 'https://s3.us-east-2.amazonaws.com/live.vt/LORETA+VT/index.htm
 const FAQS = [
   {
     q: '¿Cuánto cuesta un departamento en Loreta?',
-    a: 'Loreta tiene precio desde $3,800,000 MXN. Hay tipologías de 1 a 3 recámaras, además de Garden Houses y Penthouses de doble altura — el precio final depende de la superficie y la vista. Precios y planes de pago sujetos a cambio sin previo aviso; un asesor te confirma el vigente.',
+    a: 'Loreta tiene precio desde $4,000,000 MXN. Hay tipologías de 1 a 3 recámaras, además de Garden Houses y Penthouses de doble altura — el precio final depende de la superficie y la vista. Precios y planes de pago sujetos a cambio sin previo aviso; un asesor te confirma el vigente.',
   },
   {
     q: '¿Con cuánto puedo apartar mi unidad?',

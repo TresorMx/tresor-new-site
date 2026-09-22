@@ -761,8 +761,8 @@ export const developments: Development[] = [
     logoScale: 0.8,
     badge: 'Preventa',
     propertyType: 'Departamento',
-    priceLabel: 'Desde $3,800,000 MXN',
-    priceLabelEn: 'From $3,800,000 MXN',
+    priceLabel: 'Desde $4,000,000 MXN',
+    priceLabelEn: 'From $4,000,000 MXN',
     description:
       'Preventa de departamentos desde 76 m² con vistas abiertas al paseo Lausana y al campo de golf, dentro del exclusivo Lausana Residencial en Cancún.',
     descriptionEn:

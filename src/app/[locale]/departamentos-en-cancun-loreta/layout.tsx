@@ -10,7 +10,7 @@ const OG = '/desarrollos/loreta/7.-Piscina-Infinity_.jpg';
 export const metadata: Metadata = {
   title: { absolute: 'Loreta Wow Condos — Preventa en Lausana Residencial, Cancún' },
   description:
-    'Departamentos en preventa desde $3,800,000 MXN dentro de Lausana Residencial, la primera Smart City de Cancún. Vistas al golf y al lago, alberca infinity, spa y kids club. Aparta con $25,000.',
+    'Departamentos en preventa desde $4,000,000 MXN dentro de Lausana Residencial, la primera Smart City de Cancún. Vistas al golf y al lago, alberca infinity, spa y kids club. Aparta con $25,000.',
   keywords: [
     'loreta wow condos',
     'departamentos en preventa cancun',
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Loreta Wow Condos — Preventa en Lausana Residencial, Cancún',
     description:
-      'Departamentos de 1 a 3 recámaras y Garden Houses con vistas al golf y al lago, dentro de la primera Smart City de Cancún. Desde $3,800,000 MXN.',
+      'Departamentos de 1 a 3 recámaras y Garden Houses con vistas al golf y al lago, dentro de la primera Smart City de Cancún. Desde $4,000,000 MXN.',
     url: URL,
     images: [{ url: OG, width: 1920, height: 1080 }],
     locale: 'es_MX',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Loreta Wow Condos — Preventa en Lausana Residencial, Cancún',
     description:
-      'Departamentos de 1 a 3 recámaras con vistas al golf y al lago. Desde $3,800,000 MXN.',
+      'Departamentos de 1 a 3 recámaras con vistas al golf y al lago. Desde $4,000,000 MXN.',
     images: [OG],
   },
   // noindex (sep/2026): landing solo para tráfico pagado/mailing. La ficha

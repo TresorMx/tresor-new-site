@@ -28,7 +28,7 @@ export const BLOG_DATES: Record<string, { published: string; modified: string }>
   // 14 ago: párrafo de interlinking hacia /departamentos-en-venta-cancun.
   'local-comercial-vs-departamento-cancun':         { published: '2026-06-23', modified: '2026-08-14' },
   // 14 ago: interlinking. 4 sep: precio de Valmira.
-  'desarrollos-inmobiliarios-en-cancun':            { published: '2026-07-18', modified: '2026-09-04' },
+  'desarrollos-inmobiliarios-en-cancun':            { published: '2026-07-18', modified: '2026-09-22' },
   // 7 ago: precio de Puerto Cancún. 14 ago: interlinking. 4 sep: precio de Valmira.
   'donde-comprar-departamento-en-cancun':           { published: '2026-07-19', modified: '2026-09-04' },
   // 14 ago: interlinking hacia /departamentos-en-venta-puerto-cancun.

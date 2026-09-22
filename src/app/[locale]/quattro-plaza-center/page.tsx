@@ -12,8 +12,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const isEs = locale !== 'en';
   const title = isEs ? 'Quattro Plaza Center — Locales Comerciales en Cancún' : 'Quattro Plaza Center — Commercial Spaces in Cancún';
   const description = isEs
-    ? 'Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en Cancún: locales en preventa y entrega inmediata en zonas de alto crecimiento.'
-    : "Quattro Plaza Center, Tresor Real Estate's commercial plaza line in Cancún: pre-sale and immediate-delivery spaces in high-growth areas.";
+    ? 'Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en Cancún: locales en preventa en zonas de alto crecimiento.'
+    : "Quattro Plaza Center, Tresor Real Estate's commercial plaza line in Cancún: pre-sale commercial spaces in high-growth areas.";
   return {
     title,
     description,
@@ -80,8 +80,8 @@ export default async function QuattroPlazaCenterPage({ params }: { params: Promi
         schemaName={isEs ? 'Quattro Plaza Center — Locales Comerciales en Cancún' : 'Quattro Plaza Center — Commercial Spaces in Cancún'}
         schemaDescription={
           isEs
-            ? 'Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en Cancún: locales en preventa y entrega inmediata en zonas de alto crecimiento.'
-            : "Quattro Plaza Center, Tresor Real Estate's commercial plaza line in Cancún: pre-sale and immediate-delivery spaces in high-growth areas."
+            ? 'Quattro Plaza Center, la línea de plazas comerciales de Tresor Real Estate en Cancún: locales en preventa en zonas de alto crecimiento.'
+            : "Quattro Plaza Center, Tresor Real Estate's commercial plaza line in Cancún: pre-sale commercial spaces in high-growth areas."
         }
         breadcrumbLabel="Quattro Plaza Center"
         locale={isEs ? 'es_MX' : 'en_US'}

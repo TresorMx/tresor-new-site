@@ -87,7 +87,7 @@ const featured = [
     img: '/desarrollos/loreta/5.-Vista-Drone.jpg',
     developer: 'Live Desarrollos',
     tag: 'Residencial · Preventa',
-    price: 'Desde $3,800,000 MXN',
+    price: 'Desde $4,000,000 MXN',
     detail: 'El proyecto más reciente de la línea Wow Condos, con tipologías de 1 a 3 recámaras',
   },
   {

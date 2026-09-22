@@ -20,11 +20,11 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   // catálogo que ahora atiende /desarrollos. Esta página no es un catálogo:
   // es la trayectoria de Tresor COMO desarrollador, y el número es su gancho.
   const title = isEs
-    ? 'Trayectoria de Tresor Real Estate — +3,000 Unidades Entregadas'
-    : 'Tresor Real Estate Track Record — 3,000+ Units Delivered';
+    ? 'Trayectoria de Tresor Real Estate — +2,000 Unidades Entregadas'
+    : 'Tresor Real Estate Track Record — 2,000+ Units Delivered';
   const description = isEs
-    ? 'Más de 3,000 unidades entregadas en Cancún y Tulum. Conoce los proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate.'
-    : 'Over 3,000 units delivered in Cancún and Tulum. Discover the luxury, residential, commercial, vacation, and master plan projects developed by Tresor Real Estate.';
+    ? 'Más de 2,000 unidades entregadas en Cancún y Tulum. Conoce los proyectos de lujo, residenciales, comerciales, vacacionales y master plans desarrollados por Tresor Real Estate.'
+    : 'Over 2,000 units delivered in Cancún and Tulum. Discover the luxury, residential, commercial, vacation, and master plan projects developed by Tresor Real Estate.';
   return {
     title,
     description,

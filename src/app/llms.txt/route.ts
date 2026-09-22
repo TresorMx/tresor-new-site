@@ -19,9 +19,6 @@ import { SOCIAL_PROFILES } from '@/lib/social';
 //   - La zona de cada desarrollo: el campo `zone` del catálogo tiene datos
 //     incorrectos confirmados (Quattro Gardens/Long Island NO están sobre
 //     Av. Huayacán). Solo se usa la ciudad, que sí es correcta.
-//   - Cifras de trayectoria ("+2,000" vs "+3,000" unidades): el sitio hoy se
-//     contradice entre el footer y /desarrollo — no se repite ninguna hasta
-//     confirmar cuál es la correcta.
 //
 // El middleware de idiomas ignora rutas con punto (ver matcher en
 // src/middleware.ts), así que esta ruta no se redirige a /es o /en.
@@ -80,6 +77,7 @@ export async function GET() {
 > Desarrollador y comercializador inmobiliario en Cancún y la Riviera Maya (Quintana Roo, México). Departamentos, locales comerciales y lotes residenciales en preventa y entrega inmediata, en Cancún, Puerto Cancún, Playa del Carmen y Tulum. Desarrolla sus propias plazas comerciales (Quattro Plaza Center) y comercializa proyectos de desarrolladoras como Urban Homes, Onix Living y Live Desarrollos.
 
 - Sitio: ${SITE} (español) y ${SITE}/en (inglés)
+- Trayectoria: más de 20 años, más de 2,000 casas y departamentos entregados.
 - Contacto: hello@tresor.mx · +52 998 404 5602 · Cancún, Quintana Roo, México
 - Perfiles oficiales: ${SOCIAL_PROFILES.map((p) => `${p.name} ${p.url}`).join(' · ')}
 - Precios en pesos mexicanos (MXN), sujetos a cambio sin previo aviso; confirma disponibilidad con un asesor. Lista generada del inventario actual el ${today}.
