@@ -33,6 +33,11 @@ export const metadata: Metadata = {
       '98 residencias exclusivas de 169 a 714 m² frente a la marina de Puerto Cancún. Desde $15,289,000 MXN.',
     images: [OG],
   },
+  // noindex (sep/2026): landing solo para tráfico pagado/mailing. La ficha
+  // del desarrollo ya es la página indexable con el mismo inventario; dos
+  // páginas indexables casi iguales se canibalizan. Search Console: 0 clics
+  // orgánicos. Mismo criterio que Koa y Quattro Plaza Center.
+  robots: { index: false, follow: true },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

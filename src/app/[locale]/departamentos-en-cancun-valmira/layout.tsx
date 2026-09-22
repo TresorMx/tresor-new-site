@@ -40,6 +40,11 @@ export const metadata: Metadata = {
       'Departamentos equipados de 2 y 3 recámaras en Cancún. Entrega inmediata, 0% de enganche, desde $2,690,000 MXN.',
     images: ['/og/valmira.jpg'],
   },
+  // noindex (sep/2026): landing solo para tráfico pagado/mailing. La ficha
+  // del desarrollo ya es la página indexable con el mismo inventario; dos
+  // páginas indexables casi iguales se canibalizan. Search Console: 0 clics
+  // orgánicos. Mismo criterio que Koa y Quattro Plaza Center.
+  robots: { index: false, follow: true },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

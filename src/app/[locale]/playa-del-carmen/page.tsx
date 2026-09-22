@@ -96,6 +96,14 @@ export default async function PlayaDelCarmenPage({ params }: { params: Promise<{
             {isEs ? 'Ver departamentos en Playa del Carmen' : 'View condos in Playa del Carmen'}
             <ArrowRight size={14} strokeWidth={2.2} />
           </Link>
+          {/* Enlace a la guía del blog — los posts recibían ~2 enlaces
+              internos cada uno (auditoría sep/2026). */}
+          <p className="mt-8 text-[15px] font-light leading-relaxed text-ink-2">
+            {isEs ? '¿Primero quieres conocer la ciudad? Lee nuestra guía ' : 'Still deciding between cities? Read '}
+            <Link href={isEs ? '/blog/vivir-en-playa-del-carmen' : '/blog/cancun-vs-playa-del-carmen-vs-tulum'} className="text-ink underline underline-offset-4 hover:text-accent transition-colors">
+              {isEs ? 'Vivir en Playa del Carmen' : 'Cancún vs. Playa del Carmen vs. Tulum'}
+            </Link>
+          </p>
         </div>
       </section>
     </>

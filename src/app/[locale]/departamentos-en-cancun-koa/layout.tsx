@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 const URL = 'https://www.tresor.mx/departamentos-en-cancun-koa';
 
-// noindex a propósito — a diferencia de Valmira (que sí es indexable), Koa
+// noindex a propósito — Koa
 // YA tiene su propia ficha indexable en /desarrollos/koa-onix con el mismo
 // inventario y casi el mismo copy. Una segunda página indexable con
 // contenido tan parecido se canibalizaría con esa ficha en vez de sumar.

@@ -58,10 +58,6 @@ const DATES = {
   rewards: '2026-07-03',
   privacidad: '2026-08-13',
   localesComercialesCancun: '2026-07-24',
-  valmiraLanding: '2026-08-10',
-  vellmariLanding: '2026-07-24',
-  loretaLanding: '2026-08-07',
-  vellmariEnLanding: '2026-08-05',
   // developments.ts es la fuente de TODO el catálogo estático (Tresor, Sales
   // Partner) — se usa como fecha de todas las fichas por igual. Es menos
   // preciso que una fecha por proyecto (no distingue "cambié el precio de
@@ -108,12 +104,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE}/en/agenda`,  lastModified: new Date(DATES.agenda),      changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE}/desarrollo`, lastModified: new Date(DATES.desarrollo),  changeFrequency: 'monthly', priority: 0.6 },
     { url: `${SITE}/locales-comerciales-cancun`, lastModified: new Date(DATES.localesComercialesCancun), changeFrequency: 'weekly', priority: 0.98 },
-    { url: `${SITE}/departamentos-en-cancun-valmira`, lastModified: new Date(DATES.valmiraLanding), changeFrequency: 'weekly', priority: 0.95 },
-    { url: `${SITE}/departamentos-en-puerto-cancun-vellmari`, lastModified: new Date(DATES.vellmariLanding), changeFrequency: 'weekly', priority: 0.95 },
-    { url: `${SITE}/departamentos-en-cancun-loreta`, lastModified: new Date(DATES.loretaLanding), changeFrequency: 'weekly', priority: 0.95 },
-    // Versión en inglés de la landing de Vellmari (Google Ads US/CA). Sin
-    // /en/ a propósito: es su URL canónica, ver el layout de esa ruta.
-    { url: `${SITE}/luxury-condos-puerto-cancun`, lastModified: new Date(DATES.vellmariEnLanding), changeFrequency: 'weekly', priority: 0.95 },
     // Páginas de contenido en inglés que atacan "condos for sale in {ciudad}".
     // Solo la variante /en/: la ruta sin prefijo redirige ahí (contenido
     // únicamente en inglés), así que listar ambas sería listar un redirect.

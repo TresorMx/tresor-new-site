@@ -10,13 +10,15 @@ export const dynamic = 'force-dynamic';
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const isEs = locale !== 'en';
-  // Todo el inventario de Puerto Cancún es departamento, así que "Condos for
-  // Sale in Puerto Cancún" es literal, no un estiramiento — y es la búsqueda
-  // exacta del comprador extranjero para esta zona.
-  const title = isEs ? 'Propiedades en Venta en Puerto Cancún' : 'Condos for Sale in Puerto Cancún — Marina & Golf';
+  // Título EN antes era "Condos for Sale in Puerto Cancún — Marina & Golf",
+  // casi idéntico al de /en/condos-for-sale-puerto-cancun ("… Marina & Golf
+  // Community") — dos páginas propias peleando la misma frase exacta. Mismo
+  // arreglo ya aplicado en /playa-del-carmen: esta es el hub de la zona; la
+  // dedicada es la dueña de "condos for sale".
+  const title = isEs ? 'Propiedades en Venta en Puerto Cancún' : 'Real Estate in Puerto Cancún, Mexico';
   const description = isEs
     ? 'Departamentos de lujo en Puerto Cancún, el enclave residencial más exclusivo de la ciudad, frente al mar Caribe y la marina.'
-    : "Luxury condos for sale in Puerto Cancún, the city's most exclusive gated community — an 18-hole golf course, private marina, beach club and the Caribbean Sea at your door.";
+    : "Real estate in Puerto Cancún, the city's most exclusive gated community — an 18-hole golf course, private marina, beach club and the Caribbean Sea at your door.";
   return {
     title,
     description,
@@ -62,11 +64,11 @@ export default async function PuertoCancunPage({ params }: { params: Promise<{ l
         title={isEs ? <>Propiedades en <span className="text-ink-3">Puerto Cancún</span></> : <>Properties in <span className="text-ink-3">Puerto Cancún</span></>}
         developments={developments}
         schemaUrl={isEs ? 'https://www.tresor.mx/puerto-cancun' : 'https://www.tresor.mx/en/puerto-cancun'}
-        schemaName={isEs ? 'Propiedades en Venta en Puerto Cancún' : 'Condos for Sale in Puerto Cancún — Marina & Golf'}
+        schemaName={isEs ? 'Propiedades en Venta en Puerto Cancún' : 'Real Estate in Puerto Cancún, Mexico'}
         schemaDescription={
           isEs
             ? 'Departamentos de lujo en Puerto Cancún, el enclave residencial más exclusivo de la ciudad, frente al mar Caribe y la marina.'
-            : "Luxury condos for sale in Puerto Cancún, the city's most exclusive gated community — an 18-hole golf course, private marina, beach club and the Caribbean Sea at your door."
+            : "Real estate in Puerto Cancún, the city's most exclusive gated community — an 18-hole golf course, private marina, beach club and the Caribbean Sea at your door."
         }
         breadcrumbLabel="Puerto Cancún"
         locale={isEs ? 'es_MX' : 'en_US'}
@@ -94,6 +96,14 @@ export default async function PuertoCancunPage({ params }: { params: Promise<{ l
             {isEs ? 'Ver departamentos en Puerto Cancún' : 'View condos in Puerto Cancún'}
             <ArrowRight size={14} strokeWidth={2.2} />
           </Link>
+          {/* Enlace a la guía del blog — los posts recibían ~2 enlaces
+              internos cada uno (auditoría sep/2026). */}
+          <p className="mt-8 text-[15px] font-light leading-relaxed text-ink-2">
+            {isEs ? '¿Primero quieres conocer la zona? Lee nuestra guía ' : 'Comparing it with the rest of the city? Read '}
+            <Link href={isEs ? '/blog/vivir-en-puerto-cancun' : '/blog/best-areas-to-buy-in-cancun'} className="text-ink underline underline-offset-4 hover:text-accent transition-colors">
+              {isEs ? 'Vivir en Puerto Cancún' : 'the best areas to buy in Cancún'}
+            </Link>
+          </p>
         </div>
       </section>
     </>

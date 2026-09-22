@@ -36,6 +36,11 @@ export const metadata: Metadata = {
       'Departamentos de 1 a 3 recámaras con vistas al golf y al lago. Desde $3,800,000 MXN.',
     images: [OG],
   },
+  // noindex (sep/2026): landing solo para tráfico pagado/mailing. La ficha
+  // del desarrollo ya es la página indexable con el mismo inventario; dos
+  // páginas indexables casi iguales se canibalizan. Search Console: 0 clics
+  // orgánicos. Mismo criterio que Koa y Quattro Plaza Center.
+  robots: { index: false, follow: true },
 };
 
 // Pixel adicional solo para esta landing (además del pixel base del sitio,

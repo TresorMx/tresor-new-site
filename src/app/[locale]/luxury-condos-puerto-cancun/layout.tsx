@@ -4,9 +4,8 @@ import type { Metadata } from 'next';
 // Slug en inglés a propósito: el tráfico frío busca "luxury condos puerto
 // cancun", no la marca — un slug con la keyword sube el Quality Score y la
 // relevancia del anuncio. La versión en español vive aparte, en
-// /departamentos-en-puerto-cancun-vellmari, y se enlazan por hreflang.
+// /departamentos-en-puerto-cancun-vellmari.
 const URL_EN = 'https://www.tresor.mx/luxury-condos-puerto-cancun';
-const URL_ES = 'https://www.tresor.mx/departamentos-en-puerto-cancun-vellmari';
 const OG = 'https://www.tresor.mx/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AEREA03.jpg';
 
 // `absolute` a propósito: el layout raíz aplica el template
@@ -31,10 +30,9 @@ export const metadata: Metadata = {
     'vellmari puerto cancun',
     'buy property in cancun',
   ],
-  alternates: {
-    canonical: URL_EN,
-    languages: { en: URL_EN, es: URL_ES, 'x-default': URL_EN },
-  },
+  // Sin hreflang: la versión ES (/departamentos-en-puerto-cancun-vellmari)
+  // nunca lo devolvía (no era recíproco) y ambas son noindex ahora.
+  alternates: { canonical: URL_EN },
   openGraph: {
     title: 'Luxury Condos in Puerto Cancún — from $900,000 USD',
     description:
@@ -52,7 +50,11 @@ export const metadata: Metadata = {
       '98 exclusive marina-front residences from 1,819 to 7,686 sq ft in Puerto Cancún.',
     images: [OG],
   },
-  robots: { index: true, follow: true },
+  // noindex (sep/2026): landing solo para tráfico pagado/mailing. La ficha
+  // del desarrollo ya es la página indexable con el mismo inventario; dos
+  // páginas indexables casi iguales se canibalizan. Search Console: 0 clics
+  // orgánicos. Mismo criterio que Koa y Quattro Plaza Center.
+  robots: { index: false, follow: true },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
