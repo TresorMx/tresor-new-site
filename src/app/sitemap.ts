@@ -193,6 +193,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const blogSlugs = [
+    'mercado-inmobiliario-cancun-2026',
     'vivir-en-playa-del-carmen',
     'terrenos-en-venta-cancun',
     'vivir-en-puerto-cancun',
@@ -214,6 +215,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     'closing-costs-when-buying-property-in-mexico',
     'pre-construction-vs-move-in-ready-cancun',
     'is-cancun-real-estate-a-good-investment',
+    'cancun-vs-playa-del-carmen-vs-tulum',
   ] as const;
 
   // Fechas de artículos: fuente única en lib/blogDates (la misma que usa el

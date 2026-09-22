@@ -6,6 +6,15 @@
 // Al publicar un artículo nuevo: agrégalo aquí Y en lib/blogDates.ts.
 export const articlesEs = [
   {
+    slug: 'mercado-inmobiliario-cancun-2026',
+    title: 'Mercado Inmobiliario en Cancún 2026: Qué Está Pasando y Cómo Comprar',
+    description:
+      'El mercado se enfrió en 2026. Qué dicen AMPI y la prensa local, por qué eso cambia la negociación a favor del comprador y qué revisar antes de comprar.',
+    image: '/desarrollos/Blume/BLUME-Drone-5.jpg',
+    readTime: '8 min',
+    date: '22 de septiembre de 2026',
+  },
+  {
     slug: 'vivir-en-playa-del-carmen',
     title: 'Vivir en Playa del Carmen: Guía Completa de la Riviera Maya (2026)',
     description:
@@ -112,6 +121,15 @@ export const articlesEs = [
 // No son traducciones de los de español: atacan las búsquedas del comprador
 // extranjero, que son otras.
 export const articlesEn = [
+  {
+    slug: 'cancun-vs-playa-del-carmen-vs-tulum',
+    title: 'Cancún vs. Playa del Carmen vs. Tulum: Where to Buy a Condo in 2026',
+    description:
+      'An honest side-by-side of the three markets foreign buyers compare most: entry prices from live inventory, airport access, lifestyle and the risks of each.',
+    image: '/desarrollos/Vellmari/ENTREGAFINAL_CADU_VELMARI_AEREA03.jpg',
+    readTime: '8 min',
+    date: 'September 22, 2026',
+  },
   {
     slug: 'is-cancun-real-estate-a-good-investment',
     title: 'Is Cancún Real Estate a Good Investment? Rental Yields, ROI and the Real Numbers (2026)',

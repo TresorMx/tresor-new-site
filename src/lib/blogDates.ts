@@ -47,6 +47,8 @@ export const BLOG_DATES: Record<string, { published: string; modified: string }>
   'best-areas-to-buy-in-cancun':                    { published: '2026-08-06', modified: '2026-09-04' },
   // 4 sep: precio de Valmira.
   'is-cancun-real-estate-a-good-investment':        { published: '2026-08-28', modified: '2026-09-04' },
+  'mercado-inmobiliario-cancun-2026':               { published: '2026-09-22', modified: '2026-09-22' },
+  'cancun-vs-playa-del-carmen-vs-tulum':            { published: '2026-09-22', modified: '2026-09-22' },
 };
 
 /** dateModified del artículo; cae a `fallback` (su fecha de publicación) si no está en el mapa. */

@@ -93,7 +93,13 @@ export async function generateFichaMetadata({
   const description = isEs
     ? (plaza?.seoDescription ?? dev.seoDescription?.es ?? dev.description ??
         `${name} en ${city}. ${dev.propertyType ?? 'Desarrollo'} por ${dev.brand ?? developers[dev.developer]?.name ?? dev.developer}${fromText}.`)
-    : (plaza?.seoDescriptionEn ?? dev.seoDescription?.en ?? dev.seoDescription?.es ?? dev.description ??
+    // `dev.descriptionEn` va ANTES de cualquier texto en español: la cadena
+    // anterior se lo saltaba y caía a seoDescription.es / description, así
+    // que /en/desarrollos/vellmari-puerto-cancun y los 3 listings servían su
+    // meta description en español (detectado en la auditoría SEO de
+    // sept 2026). Los respaldos en español quedan solo como último recurso.
+    : (plaza?.seoDescriptionEn ?? dev.seoDescription?.en ?? dev.descriptionEn ??
+        dev.seoDescription?.es ?? dev.description ??
         `${name} in ${city}${fromText}.`);
 
   const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tresor.mx';
