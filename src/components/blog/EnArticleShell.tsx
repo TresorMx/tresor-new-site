@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import BlogCTA from '@/components/BlogCTA';
+import { blogModified } from '@/lib/blogDates';
 
 // Envoltura compartida de los artículos del blog en INGLÉS.
 //
@@ -88,7 +89,8 @@ export default function EnArticleShell({
         description,
         inLanguage: 'en-US',
         datePublished: dateIso,
-        dateModified: dateIso,
+        // Fecha real de la última modificación de contenido (lib/blogDates).
+        dateModified: blogModified(slug, dateIso),
         author: { '@type': 'Organization', name: 'Tresor Real Estate', url: SITE },
         publisher: {
           '@type': 'Organization',

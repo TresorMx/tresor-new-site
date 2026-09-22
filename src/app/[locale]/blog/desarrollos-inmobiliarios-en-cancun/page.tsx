@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { blogModified } from '@/lib/blogDates';
 import Image from 'next/image';
 import Link from 'next/link';
 import BlogCTA from '@/components/BlogCTA';
@@ -32,7 +33,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'Desarrollos Inmobiliarios en Cancún 2026: Guía Completa y Proyectos Destacados',
   datePublished: '2026-07-18',
-  dateModified: '2026-07-18',
+  dateModified: blogModified('desarrollos-inmobiliarios-en-cancun', '2026-07-18'),
   author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',

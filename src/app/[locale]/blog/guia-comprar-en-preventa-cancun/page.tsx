@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { blogModified } from '@/lib/blogDates';
 import Image from 'next/image';
 import Link from 'next/link';
 import BlogCTA from '@/components/BlogCTA';
@@ -30,7 +31,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'Guía para Comprar en Preventa en Cancún: Todo lo que Debes Saber',
   datePublished: '2026-06-23',
-  dateModified: '2026-06-23',
+  dateModified: blogModified('guia-comprar-en-preventa-cancun', '2026-06-23'),
   author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',

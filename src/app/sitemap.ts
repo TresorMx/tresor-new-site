@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { getActivePlazasAsync } from '@/lib/data';
 import { getMergedDevelopmentsAsync } from '@/lib/developments';
+import { BLOG_DATES } from '@/lib/blogDates';
 
 const SITE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.tresor.mx';
 
@@ -61,23 +62,6 @@ const DATES = {
   vellmariLanding: '2026-07-24',
   loretaLanding: '2026-08-07',
   vellmariEnLanding: '2026-08-05',
-  blog: '2026-08-13',
-  blogVivirEnPlayaDelCarmen: '2026-08-14',
-  blogTerrenosEnVentaCancun: '2026-08-14',
-  blogVivirEnPuertoCancun: '2026-08-14',
-  blogDondeComprarDepartamentoEnCancun: '2026-08-14',
-  blogDesarrollosInmobiliariosEnCancun: '2026-08-14',
-  blogComoInvertirEnLocalesComercialesEnCancun: '2026-07-24',
-  blogCuantoCuestaUnLocalComercialEnCancun: '2026-07-24',
-  blogMejoresZonasParaNegocioEnCancun: '2026-07-24',
-  blogLocalComercialVsDepartamentoCancun: '2026-08-14',
-  blogGuiaComprarEnPreventaCancun: '2026-07-24',
-  blogInvertirEnCancunDesdeMonterreyCdmx: '2026-07-24',
-  blogBuyingPropertyInMexicoAsAForeigner: '2026-08-20',
-  blogBestAreasToBuyInCancun: '2026-08-07',
-  blogClosingCosts: '2026-08-20',
-  blogPreConstructionVsMoveInReady: '2026-08-20',
-  blogIsCancunGoodInvestment: '2026-08-28',
   // developments.ts es la fuente de TODO el catálogo estático (Tresor, Sales
   // Partner) — se usa como fecha de todas las fichas por igual. Es menos
   // preciso que una fecha por proyecto (no distingue "cambié el precio de
@@ -209,41 +193,49 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]);
 
   const blogSlugs = [
-    ['vivir-en-playa-del-carmen', DATES.blogVivirEnPlayaDelCarmen],
-    ['terrenos-en-venta-cancun', DATES.blogTerrenosEnVentaCancun],
-    ['vivir-en-puerto-cancun', DATES.blogVivirEnPuertoCancun],
-    ['donde-comprar-departamento-en-cancun', DATES.blogDondeComprarDepartamentoEnCancun],
-    ['desarrollos-inmobiliarios-en-cancun', DATES.blogDesarrollosInmobiliariosEnCancun],
-    ['como-invertir-en-locales-comerciales-en-cancun', DATES.blogComoInvertirEnLocalesComercialesEnCancun],
-    ['cuanto-cuesta-un-local-comercial-en-cancun', DATES.blogCuantoCuestaUnLocalComercialEnCancun],
-    ['mejores-zonas-para-negocio-en-cancun', DATES.blogMejoresZonasParaNegocioEnCancun],
-    ['local-comercial-vs-departamento-cancun', DATES.blogLocalComercialVsDepartamentoCancun],
-    ['guia-comprar-en-preventa-cancun', DATES.blogGuiaComprarEnPreventaCancun],
-    ['invertir-en-cancun-desde-monterrey-cdmx', DATES.blogInvertirEnCancunDesdeMonterreyCdmx],
+    'vivir-en-playa-del-carmen',
+    'terrenos-en-venta-cancun',
+    'vivir-en-puerto-cancun',
+    'donde-comprar-departamento-en-cancun',
+    'desarrollos-inmobiliarios-en-cancun',
+    'como-invertir-en-locales-comerciales-en-cancun',
+    'cuanto-cuesta-un-local-comercial-en-cancun',
+    'mejores-zonas-para-negocio-en-cancun',
+    'local-comercial-vs-departamento-cancun',
+    'guia-comprar-en-preventa-cancun',
+    'invertir-en-cancun-desde-monterrey-cdmx',
   ] as const;
 
   // Artículos en inglés — solo bajo /en/, igual que /en/condos-for-sale-*:
   // la ruta sin prefijo redirige ahí, así que listarla sería listar un redirect.
   const blogSlugsEn = [
-    ['buying-property-in-mexico-as-a-foreigner', DATES.blogBuyingPropertyInMexicoAsAForeigner],
-    ['best-areas-to-buy-in-cancun', DATES.blogBestAreasToBuyInCancun],
-    ['closing-costs-when-buying-property-in-mexico', DATES.blogClosingCosts],
-    ['pre-construction-vs-move-in-ready-cancun', DATES.blogPreConstructionVsMoveInReady],
-    ['is-cancun-real-estate-a-good-investment', DATES.blogIsCancunGoodInvestment],
+    'buying-property-in-mexico-as-a-foreigner',
+    'best-areas-to-buy-in-cancun',
+    'closing-costs-when-buying-property-in-mexico',
+    'pre-construction-vs-move-in-ready-cancun',
+    'is-cancun-real-estate-a-good-investment',
   ] as const;
 
+  // Fechas de artículos: fuente única en lib/blogDates (la misma que usa el
+  // dateModified del schema de cada artículo). El índice de cada idioma solo
+  // cambia cuando entra un post nuevo, así que su lastmod es la fecha de
+  // publicación más reciente de ese idioma — antes /blog y /en/blog
+  // compartían una sola fecha y /en/blog quedaba desfasado.
+  const latestPublished = (slugs: readonly string[]) =>
+    new Date(slugs.map((s) => BLOG_DATES[s].published).sort().at(-1)!);
+
   const blogRoutes: MetadataRoute.Sitemap = [
-    { url: `${SITE}/blog`, lastModified: new Date(DATES.blog), changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${SITE}/en/blog`, lastModified: new Date(DATES.blog), changeFrequency: 'weekly', priority: 0.8 },
-    ...blogSlugs.map(([slug, date]) => ({
+    { url: `${SITE}/blog`, lastModified: latestPublished(blogSlugs), changeFrequency: 'weekly', priority: 0.85 },
+    { url: `${SITE}/en/blog`, lastModified: latestPublished(blogSlugsEn), changeFrequency: 'weekly', priority: 0.8 },
+    ...blogSlugs.map((slug) => ({
       url: `${SITE}/blog/${slug}`,
-      lastModified: new Date(date),
+      lastModified: new Date(BLOG_DATES[slug].modified),
       changeFrequency: 'monthly' as const,
       priority: 0.85,
     })),
-    ...blogSlugsEn.map(([slug, date]) => ({
+    ...blogSlugsEn.map((slug) => ({
       url: `${SITE}/en/blog/${slug}`,
-      lastModified: new Date(date),
+      lastModified: new Date(BLOG_DATES[slug].modified),
       changeFrequency: 'monthly' as const,
       priority: 0.85,
     })),

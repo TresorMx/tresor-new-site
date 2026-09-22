@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { blogModified } from '@/lib/blogDates';
 import Image from 'next/image';
 import Link from 'next/link';
 import BlogCTA from '@/components/BlogCTA';
@@ -31,7 +32,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'Cómo Invertir en Locales Comerciales en Cancún: Guía Completa 2026',
   datePublished: '2026-06-23',
-  dateModified: '2026-06-23',
+  dateModified: blogModified('como-invertir-en-locales-comerciales-en-cancun', '2026-06-23'),
   author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',

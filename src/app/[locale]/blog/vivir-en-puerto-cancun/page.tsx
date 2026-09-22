@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { blogModified } from '@/lib/blogDates';
 import Image from 'next/image';
 import Link from 'next/link';
 import BlogCTA from '@/components/BlogCTA';
@@ -87,7 +88,7 @@ const jsonLd = {
       headline: TITLE,
       description: DESCRIPTION,
       datePublished: FECHA_ISO,
-      dateModified: FECHA_ISO,
+      dateModified: blogModified('vivir-en-puerto-cancun', FECHA_ISO),
       author: { '@type': 'Organization', name: 'Tresor Real Estate', url: 'https://www.tresor.mx' },
       publisher: {
         '@type': 'Organization',

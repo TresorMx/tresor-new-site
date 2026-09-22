@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { blogModified } from '@/lib/blogDates';
 import Image from 'next/image';
 import Link from 'next/link';
 import BlogCTA from '@/components/BlogCTA';
@@ -32,7 +33,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: 'Zona Hotelera vs. Puerto Cancún vs. Av. Huayacán: ¿Dónde Comprar Departamento en Cancún?',
   datePublished: '2026-07-19',
-  dateModified: '2026-07-19',
+  dateModified: blogModified('donde-comprar-departamento-en-cancun', '2026-07-19'),
   author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',

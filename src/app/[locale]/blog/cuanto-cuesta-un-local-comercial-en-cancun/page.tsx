@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { blogModified } from '@/lib/blogDates';
 import Image from 'next/image';
 import Link from 'next/link';
 import BlogCTA from '@/components/BlogCTA';
@@ -29,7 +30,7 @@ const jsonLd = {
   '@type': 'Article',
   headline: '¿Cuánto Cuesta un Local Comercial en Cancún en 2026?',
   datePublished: '2026-06-23',
-  dateModified: '2026-06-23',
+  dateModified: blogModified('cuanto-cuesta-un-local-comercial-en-cancun', '2026-06-23'),
   author: { '@type': 'Organization', name: 'Tresor Real Estate' },
   publisher: {
     '@type': 'Organization',
