@@ -24,6 +24,7 @@ import GoogleAnalytics from '@/components/GoogleAnalytics';
 import { locales, type Locale } from '@/i18n';
 import { getPlazasAsync, getSiteSettings } from '@/lib/data';
 import { getMergedDevelopmentsAsync } from '@/lib/developments';
+import { SOCIAL_PROFILES } from '@/lib/social';
 import '@/styles/globals.css';
 
 // force-dynamic: cada visita hace un fetch fresco a Sanity.
@@ -225,10 +226,12 @@ export default async function LocaleLayout({
       { '@type': 'City', name: 'Tulum' },
       { '@type': 'City', name: 'Playa del Carmen' },
     ],
-    sameAs: [
-      'https://www.instagram.com/quattroplazacenter',
-      `${SITE_URL}`,
-    ],
+    // Perfiles propios de Tresor (fuente única en lib/social, la misma que usa
+    // el footer). Antes apuntaba al Instagram de Quattro Plaza Center — una
+    // sub-marca, no la misma entidad — y al propio tresor.mx, que no aporta
+    // nada: `sameAs` es para decirle a Google y a los motores de IA "estos
+    // perfiles externos son esta empresa".
+    sameAs: SOCIAL_PROFILES.map((p) => p.url),
     hasOfferCatalog: {
       '@type': 'OfferCatalog',
       name: isEsLd ? 'Propiedades en Venta en Cancún y Riviera Maya' : 'Properties for Sale in Cancún and the Riviera Maya',

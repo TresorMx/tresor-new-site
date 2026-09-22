@@ -2,6 +2,7 @@ import { Link } from '@/navigation';
 import Image from 'next/image';
 import { getTranslations, getLocale } from 'next-intl/server';
 import { ArrowRight } from 'lucide-react';
+import { SOCIAL_PROFILES } from '@/lib/social';
 
 export default async function Footer() {
   const t = await getTranslations('footer');
@@ -44,6 +45,23 @@ export default async function Footer() {
               <li><a href="mailto:hello@tresor.mx" className="hover:text-accent transition-colors">hello@tresor.mx</a></li>
               <li><a href="tel:+529984045602" className="hover:text-accent transition-colors">+52 998 404 5602</a></li>
               <li className="text-white/50">{t('address')}</li>
+            </ul>
+            {/* Redes — sutiles: mismo white/50 que la dirección, acento solo
+                en hover. Misma lista que el `sameAs` del schema (lib/social). */}
+            <ul className="mt-5 flex items-center justify-center gap-4 md:justify-start">
+              {SOCIAL_PROFILES.map(({ name, url, Icon }) => (
+                <li key={name}>
+                  <a
+                    href={url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`Tresor Real Estate ${isEn ? 'on' : 'en'} ${name}`}
+                    className="text-white/50 transition-colors hover:text-accent"
+                  >
+                    <Icon size={17} />
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
