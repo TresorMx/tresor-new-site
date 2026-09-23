@@ -28,7 +28,11 @@ export const dynamic = 'force-dynamic';
 const PATH = '/departamentos-en-venta-cancun';
 const URL_ES = `https://www.tresor.mx${PATH}`;
 
-const TITLE = 'Departamentos en Venta en Cancún — Precios y Disponibilidad';
+// Antes: "— Precios y Disponibilidad". La cabeza ("departamentos en venta
+// cancún") sigue al inicio; el remate ahora nombra las dos variantes que sí
+// rankean o están cerca: "departamentos entrega inmediata cancún" (página 1
+// en sep/2026) y "preventa departamentos cancún".
+const TITLE = 'Departamentos en Venta en Cancún — Entrega Inmediata y Preventa';
 const DESCRIPTION =
   'Departamentos en venta en Cancún desde $2,690,000 MXN. Preventa y entrega inmediata en Av. Huayacán, Vía Cumbres, Lausana, Zona Hotelera y Puerto Cancún — precio directo del desarrollador.';
 
@@ -164,6 +168,32 @@ export default async function DepartamentosEnVentaCancunPage({
       !isListingRelationship(d.relationship),
   );
 
+  // FAQ con la frase exacta de la búsqueda que ya está en página 1, armada
+  // del catálogo en vivo — se actualiza sola cuando cambia un precio o un
+  // desarrollo pasa a entrega inmediata. Va también al FAQPage del schema.
+  const precioNum = (d: (typeof developments)[number]) =>
+    Number((d.priceLabel?.match(/\$\s*([\d,]+)/)?.[1] ?? '').replace(/,/g, '')) || Infinity;
+  const ready = developments
+    .filter((d) => d.status === 'Entrega inmediata' && d.href !== '#')
+    .sort((a, b) => precioNum(a) - precioNum(b));
+  const readyItems = ready.map((d) => {
+    const zona = d.city === 'Puerto Cancún' ? ' en Puerto Cancún' : '';
+    const precio = d.priceLabel ? ` (${d.priceLabel.replace(/^Desde/, 'desde')})` : '';
+    return `${d.name}${zona}${precio}`;
+  });
+  const readyText =
+    readyItems.length > 1 ? `${readyItems.slice(0, -1).join(', ')} y ${readyItems.at(-1)}` : readyItems.join('');
+  const faqs: DeptosFaq[] = ready.length
+    ? [
+        ...FAQS.slice(0, 5),
+        {
+          q: '¿Qué departamentos hay con entrega inmediata en Cancún?',
+          a: `Hoy en nuestro portafolio hay ${ready.length === 1 ? 'un desarrollo' : `${ready.length} desarrollos`} con departamentos de entrega inmediata en Cancún: ${readyText}. Son unidades terminadas: visitas la unidad exacta antes de firmar y puedes habitarla o rentarla desde la escrituración. La disponibilidad cambia rápido; un asesor te confirma qué unidades siguen libres y su precio vigente.`,
+        },
+        ...FAQS.slice(5),
+      ]
+    : FAQS;
+
   return (
     <DeptosSeoPageEs
       canonicalPath={PATH}
@@ -185,7 +215,7 @@ export default async function DepartamentosEnVentaCancunPage({
       zonas={ZONAS}
       zonasTitle="Dónde comprar"
       zonasTitleMuted="departamento en Cancún"
-      faqs={FAQS}
+      faqs={faqs}
       relatedLinks={RELATED}
       breadcrumbCity="Cancún"
       breadcrumbCityHref="/cancun"

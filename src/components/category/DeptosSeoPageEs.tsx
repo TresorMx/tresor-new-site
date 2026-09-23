@@ -61,6 +61,33 @@ const PASOS_COMPRA = [
   },
 ];
 
+// Lista de desarrollos por etapa con su precio de entrada (priceLabel del
+// catálogo, Sanity gana). Antes eran solo nombres separados por coma; quien
+// busca "departamentos entrega inmediata cancún" (página 1 en sep/2026)
+// quiere ver qué está listo Y cuánto cuesta sin abrir cada ficha.
+function StageList({ items }: { items: Development[] }) {
+  // De menor a mayor precio de entrada; sin precio legible, al final.
+  const price = (d: Development) =>
+    Number((d.priceLabel?.match(/\$\s*([\d,]+)/)?.[1] ?? '').replace(/,/g, '')) || Infinity;
+  const sorted = [...items].sort((a, b) => price(a) - price(b));
+  return (
+    <ul className="mt-5 space-y-2 text-[14px] font-light leading-relaxed text-ink-2">
+      {sorted.map((d) => (
+        <li key={d.name} className="flex flex-wrap items-baseline justify-between gap-x-4 border-b border-line pb-2 last:border-0">
+          {d.href === '#' ? (
+            <span className="text-ink">{d.name}</span>
+          ) : (
+            <Link href={d.href} className="text-accent hover:underline">
+              {d.name}
+            </Link>
+          )}
+          {d.priceLabel && <span className="text-ink-3">{d.priceLabel.replace(/^Desde/, 'desde')}</span>}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 export default function DeptosSeoPageEs({
   canonicalPath,
   heroImage,
@@ -253,21 +280,7 @@ export default function DeptosSeoPageEs({
                     primer mes. Cuesta más que la preventa, y eso es justo lo que
                     estás comprando: certeza y flujo desde el día uno.
                   </p>
-                  <p className="mt-5 text-[14px] font-light leading-relaxed text-ink-2">
-                    {readyNow.map((d, i) => (
-                      <span key={d.name}>
-                        {i > 0 && ', '}
-                        {d.href === '#' ? (
-                          <span className="text-ink">{d.name}</span>
-                        ) : (
-                          <Link href={d.href} className="text-accent hover:underline">
-                            {d.name}
-                          </Link>
-                        )}
-                      </span>
-                    ))}
-                    .
-                  </p>
+                  <StageList items={readyNow} />
                 </div>
               )}
 
@@ -283,21 +296,7 @@ export default function DeptosSeoPageEs({
                     de ejecución. Aquí el historial del desarrollador importa
                     más que el render.
                   </p>
-                  <p className="mt-5 text-[14px] font-light leading-relaxed text-ink-2">
-                    {preSale.map((d, i) => (
-                      <span key={d.name}>
-                        {i > 0 && ', '}
-                        {d.href === '#' ? (
-                          <span className="text-ink">{d.name}</span>
-                        ) : (
-                          <Link href={d.href} className="text-accent hover:underline">
-                            {d.name}
-                          </Link>
-                        )}
-                      </span>
-                    ))}
-                    .
-                  </p>
+                  <StageList items={preSale} />
                 </div>
               )}
             </div>
